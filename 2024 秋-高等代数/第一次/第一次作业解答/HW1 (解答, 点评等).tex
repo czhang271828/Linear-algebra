@@ -1,0 +1,435 @@
+\documentclass[11pt]{ctexart}
+\usepackage[margin=2cm,a4paper]{geometry}
+\usepackage{amsthm, amsfonts, amsmath, amssymb, mathrsfs, newclude, tikz-cd, tikz, ctex, mathtools, stmaryrd, datetime}
+
+%\setmainfont{Caladea}
+
+%% 也可以选用其它字库:
+% \setCJKmainfont[%
+%   ItalicFont=AR PL KaitiM GB,
+%   BoldFont=Noto Sans CJK SC,
+% ]{Noto Serif CJK SC}
+% \setCJKsansfont{Noto Sans CJK SC}
+% \renewcommand{\kaishu}{\CJKfontspec{AR PL KaitiM GB}}
+
+
+
+\usepackage[colorlinks = true,
+linkcolor = blue,
+urlcolor  = blue,
+citecolor = blue,
+anchorcolor = blue]{hyperref}
+
+% Include the x-color package for color support
+\usepackage{xcolor}
+
+% Define a new environment for red comments
+\usepackage{verbatim} % Required for the comment environment
+\usepackage{environ}
+
+\usepackage{mdframed} % Include mdframed for creating framed environments
+
+\definecolor{pinked}{RGB}{255,231,229} % Define a base color 
+% Define a new environment with a background color
+\newmdenv[
+  backgroundcolor=pinked, % Set the desired background color
+  linecolor=white, % Optional: Set the border line color
+  linewidth=1pt, % Optional: Set the border line width
+  roundcorner=5pt, % Optional: Set rounded corners
+  nobreak=true % Optional: Prevent page breaks within the environment
+]{pinked}
+
+\theoremstyle{definition}
+\newtheorem{qqq}{问题}[section]
+
+\newcommand{\ExternalLink}{%
+    \tikz[x=1.2ex, y=1.2ex, baseline=-0.05ex]{% 
+        \begin{scope}[x=1ex, y=1ex]
+            \clip (-0.1,-0.1) 
+                --++ (-0, 1.2) 
+                --++ (0.6, 0) 
+                --++ (0, -0.6) 
+                --++ (0.6, 0) 
+                --++ (0, -1);
+            \path[draw, 
+                line width = 0.5, 
+                rounded corners=0.5] 
+                (0,0) rectangle (1,1);
+        \end{scope}
+        \path[draw, line width = 0.5] (0.5, 0.5) 
+            -- (1, 1);
+        \path[draw, line width = 0.5] (0.6, 1) 
+            -- (1, 1) -- (1, 0.6);
+        }
+    }
+
+\NewEnviron{aaa}{~\\
+    \noindent {\textcolor{teal}{\textbf{解答}} \BODY }
+}
+
+\NewEnviron{llll}{
+    \noindent {~\\$\ExternalLink$ 外部链接 $\,\,\,$ \color{blue}\url{\BODY} }
+}
+
+\renewcommand{\proofname}{证明}
+\renewcommand\qedsymbol{${\boxed{\substack{\textit{完证}\\\textit{毕明}}}}$}
+
+% Change equation numbering to include the section number
+\usepackage{cleveref}
+\renewcommand{\theequation}{\thesection.\thesubsection.\arabic{equation}}
+\numberwithin{equation}{section}
+
+\usepackage{listings}
+% Define listings style
+\lstset{
+  frame=tb,
+  language=TeX,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+\theoremstyle{definition}
+\newtheorem*{definition}{定义}
+\newtheorem*{proposition}{命题}
+\newtheorem*{theorem}{定理}
+\newtheorem*{notation}{记号}
+\newtheorem*{example}{例子}
+\newtheorem*{exercise}{习题}
+\theoremstyle{remark}
+\newtheorem*{remark}{备注}
+\newtheorem*{lemma}{引理}
+\newtheorem*{corollary}{推论}
+
+\title{第一次作业反馈: 答案, 重要问题详解, 点评等}
+\author{(2024-2025-1)-MATH1405H-02}
+
+\setcounter{page}{0}
+
+\setlength\parindent{0pt}
+
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{\LaTeX 排版问题}
+
+\subsection{中文写作的标点, 空格等}
+
+中文写作没有固定的规范. 以下是三种常见的范例. 
+\begin{enumerate}
+    \item \textbf{(半角标点写作) 继承英文写作的所有规范. 在此之上, 将一个数学公式, 以及一串不带标点的中文字符视作一个英文单词.} 
+    \item (全角标点写作) 常见于早期苏俄教材的中译版本. 
+    \item (全角标点写作, 但将句号换作全角或半角的点号) 常见于中学数学课本. 
+\end{enumerate}
+
+\begin{pinked}
+    \textbf{重要提示}: 若使用半角标点写作, 请端详\href{https://oc.sjtu.edu.cn/courses/72790/assignments/302404}{此处}所列的例句. 
+\end{pinked}
+
+\begin{example}[行间公式]
+    行间公式的标点通常加在相应数学环境中, 例如 
+    \begin{equation}
+        a=\left\lfloor\frac{-b+ \sqrt {b^2-4ac}}{2a}\right\rfloor. 
+    \end{equation}
+\end{example}
+
+\begin{example}[Cases 环境]
+    若使用 cases 环境 (单边大括号), 其标点规范如下: 
+    \begin{equation}
+        f_a(x)=\begin{cases}
+            a+1,&\text{若}\,x>1, \\[6pt]
+            a^2+\frac 1a,&\text{若}\,0<x\leq 1, \\[6pt]
+            \sqrt[3]a,&\text{若}\,x\geq 0. 
+        \end{cases}
+    \end{equation}
+\end{example}
+
+\begin{example}[图表模式]
+    若句子以图片收尾, 则可以省略句号. 仅从排版结果来看, 行间公式与 tikz 作图并无明确的界限. 此时的标点安排见仁见智. 
+\end{example}
+
+\subsection{留白问题}
+
+为阅读方便, 需要给长公式与排比语段等保留必要之留白. 总结下来, 是四``勤''. 
+\begin{enumerate}
+    \item 勤使用行间公式 (文段间的居中公式). 以经验看, 若公式长度大于行宽的 $\frac 13$, 则需要置于行间. 
+    \item 勤拓宽多行行间公式的行间距. 若行间公式涉及矩阵等过高的公式, 建议在 \verb|\\| 后接上 \verb|[6pt]|. 
+    \item 勤使用 \verb|\quad| 等分隔行间公式, 常见的使用情境是映射的表述
+    \begin{equation}
+        \mathrm{Re}:\mathbb C\to \mathbb R,\quad (a+ib)\mapsto a. 
+    \end{equation}
+    \item 勤使用 enumerate 环境 (有编号列举) 与 itemize 环境 (无编号列举). 凡涉及复杂的分类讨论, 充要性证明等, ``排比的论证语段''更利于阅读. 
+\end{enumerate}
+
+\begin{remark}
+    过窄的公式不应置于行间. 例如,
+\begin{equation}
+    \begin{cases}
+        a=1,\\b=2,\\c=3,
+    \end{cases}
+\end{equation}
+应当换做 
+\begin{equation}
+    a=1,\quad b=2,\quad c=3. 
+\end{equation}
+相应地, 过高的列矩阵宜写作行矩阵的转置. 
+\end{remark}
+
+\subsection{数学符号问题}
+
+\begin{example}[Operatorname]
+    正体函数用 \verb|$\operatorname{ }$| 定义, 例如 \verb|$\operatorname{sin}$| 等效于 \verb|\sin|. 若正体函数后接括号, 则使用 \verb|$\mathrm{ }$| 无区别. 
+\end{example}
+
+\begin{example}[数学环境的省略号]
+    请注意 $1+2+\cdots+100$, $x\in \{1,2,\ldots, 100\}$ 的省略号位置. 使用数学环境的省略号时, 省略号左右必须是分隔符或运算符 (省略 $\cdot$ 的连乘除外). 
+\end{example}
+
+\begin{example}[粗体的使用]
+    假若你能熟练区分向量与标量, 则可以使用通常字体表示向量, 矩阵等, 无需特意加粗. 自行比对 \verb|\boldsymbol{ }| 与 \verb|\mathbf{ }| 的区别 (尝试希腊字母). 
+\end{example}
+
+\subsection{中英文表述}
+
+\begin{example}[推荐的列举语句]
+    凡列举若干对象, 中英文共用的表述如下. 
+    \begin{enumerate}
+        \item (两个对象) 我们有甲与乙. 
+        \item (Two objects) We have A and B. 
+        \item (多个对象) 我们有甲, 乙 (,) 与丙. 
+        \item (Several objects) We have $u=(1,0)$, $v=(0,1)$ (,) and $w=(1,1)$. 
+        \item (两个短句) 我们有 $z=\lfloor x+x^2+\cdots +x^{2024}\rfloor$, 以及 $y=1$. 
+        \item (Two phrases) We have $A+B+C+D=0$, and $E=1$.
+        \item (可数无穷多个对象) 我们归纳地求出 $a_0$, $a_1$, $a_2$, 等等. 
+        \item (Countably infinite many objects) We systematically find $a_0$, $a_1$, $a_2$, and so on. 
+    \end{enumerate}
+\end{example}
+
+\begin{example}[``显然''的用法]
+    \textbf{答题时}不推荐使用``显然''一词, 因为省略``显然''一词可以让表述更加显然. 
+\end{example}
+
+\begin{example}[衔接词]
+    适当使用 however, otherwise, consequently, hence, therefore, whence, thenceforth, subsequently, amid 等词汇, 或是 as a result, for this reason, a priori, in light of, it suffices to, to illustrate, given that, in the sense of 等短语. 不建议千篇一律地使用 because, so, but, then.
+    \begin{pinked}
+        无论如何, 禁止使用衔接词缝合多个句子. 一句话中不要出现 $20$ 个以上的单词...
+    \end{pinked}
+\end{example} 
+
+
+\newpage
+
+\section{参考答案}
+
+\subsection{答案一览}
+
+\begin{exercise}[来自 Gilbert's textbook]
+    作业内容: \S 1.1 (27, 30, 31); \S 1.2 (30, 31); \S 1.3 (3, 5, 6). 
+    \begin{aaa}
+\begin{itemize}
+    \item (1.1.27) $n$ 维单位正方体的点集为 Cartesian 积 $V_n:= \{0,1\}^n=\{\text{长度为 $n$ 的 $(0,1)$-数列}\}$. 称两点 ($p, q\in V_n$) 相邻, 当且仅当 $(p-q)$ 是仅一项非零的数列. 简单的组合性质表明, $k$ 维面的数量是 $(2+x)^n$ 中 $x^k$ 的系数. 对 $n=4$, 
+    \begin{equation}
+        (2+x)^4 = 16 + 32x + 24x^2 + 8x^3 + x^4. 
+    \end{equation}
+    综上, $(|\text{点}|, |\text{边}|, |\text{面}|, |\text{体}|)=(16,32,24,8)$. 
+    \item (1.1.30) ..., unless $ad=bc$. 不妨设 $b_i=e_i$.
+    \item (1.1.31) 解方程组 
+    \begin{equation}
+        \left\{\begin{matrix}
+            +2\ c & -1\ d & +0\ e & = & 1,\\
+            -1\ c & +2\ d & -1\ e & = & 0,\\
+            +0\ c & -1\ d & +2\ e & = & 0.
+            \end{matrix}\right.
+    \end{equation}
+    解得 $(c,d,e)=(3/4, 1/2, 1/4)$. 
+    \item (1.2.30) 考虑 $(1,0)$, $(-1,2)$ 以及 $(-1,-2)$. 
+    \begin{pinked}
+        \begin{proposition}
+            $3$ 维空间中不存在单位列向量 $\{q_1,q_2,q_3,q_4,q_5\}$, 使得 $q_i^Tq_j<0$ 对 $i\neq j$ 均成立. 
+        \begin{proof}
+            (反证法) 若存在, 取过原点且与 $q_5$ 垂直的平面 $\Gamma$. 记 $q_k$ 在 $\Gamma$ 上的投射像为 $q_k'$. 此时``$\{q_i\}_{i=1}^4$ 两两内积为负''的必要条件是``$\{q_i'\}_{i=1}^4$ 两两内积为负''. 故数学归纳法有效. 
+        \end{proof}
+        \end{proposition}
+    \end{pinked}
+    \item (1.2.31) 不妨设 $x^2+y^2+z^2=1$. 夹角的余弦值是
+    \begin{equation}
+        v^Tw=xz+yx+zy=\frac{1}{2}((x+y+z)^2-x^2-y^2-z^2)=-\frac{1}{2}. 
+    \end{equation}
+    \item (1.3.3) 直接地, 
+    \begin{equation}
+        \begin{pmatrix}
+            1 & 0 & 0\\
+            1 & 1 & 0\\
+            1 & 1 & 1
+            \end{pmatrix}^{-1} =\begin{pmatrix}
+            1 & 0 & 0\\
+            -1 & 1 & 0\\
+            0 & -1 & 1
+            \end{pmatrix}.
+    \end{equation}
+    记原矩阵为 $A$, 下证明 $A$ 列线性无关. $A$ 列线性相关的充要条件是存在非零向量 $v$ 使得 $Av=0$. 由于 $A^{-1}$ 存在, 且 $A^{-1}Av=v\neq 0$, 故 $A$ 列线性无关. 
+    \item (1.3.5) 行可逆变换不改变答案. 考虑变换
+    \begin{equation}
+        \begin{pmatrix}
+            1 & 2 & 3\\
+            4 & 5 & 6\\
+            7 & 8 & 9
+            \end{pmatrix}\xrightarrow[r_{3} \ \mapsto \ r_{3} -7r_{1}]{r_{2} \ \mapsto \ r_{2} -4r_{1}}\begin{pmatrix}
+            1 & 2 & 3\\
+            0 & -3 & -6\\
+            0 & -6 & -12
+            \end{pmatrix}\xrightarrow[r_{3} \ \mapsto \ -r_{3} /6]{r_{2} \ \mapsto \ -r_{2} /3}\begin{pmatrix}
+            1 & 2 & 3\\
+            0 & 1 & 2\\
+            0 & 1 & 2
+            \end{pmatrix}\xrightarrow[r_{3} \ \mapsto \ r_{3} -r_{2}]{r_{1} \ \mapsto \ r_{1} -2r_{2}}\begin{pmatrix}
+            1 & 0 & -1\\
+            0 & 1 & 2\\
+            0 & 0 & 0
+            \end{pmatrix}.
+    \end{equation}
+    得 $y_3=-y_1+2y_2$. (若经验充足, 可以一眼看出向量组的秩为 $2$, 从而零空间维数为 $1$. 因此, 答案是一个形如 $ay_1+by_2+cy_3=0$ 的式子.)
+    \item (3.3.6) 一个技巧: 方阵行线性无关当且仅当其可逆, 即行列式非零. 对称地, 行线性无关当且仅当列线性无关. 
+    \begin{enumerate}
+        \item 作列变换 $c_2\mapsto c_2-c_1$, 观察右下角 $2\times 2$ 方阵的行列式. 线性相关当且仅当 $c=3$.
+        \item 作列变换 $c_3\mapsto c_3-c\cdot c_1$, 观察右下角 $2\times 2$ 方阵行列式, 线性相关当且仅当 $c=-1$. 
+        \item 作列变换
+        \begin{equation}
+            \begin{pmatrix}
+                c & c & c\\
+                2 & 1 & 5\\
+                3 & 3 & 6
+                \end{pmatrix}\xrightarrow[c_{3} \ \mapsto \ c_{3} -c_{1}]{c_{2} \ \mapsto \ c_{2} -c_{1}}\begin{pmatrix}
+                c & 0 & 0\\
+                2 & -1 & 3\\
+                3 & 0 & 3
+                \end{pmatrix}.
+        \end{equation}
+        行列式 $-3c$. 线性相关当且仅当 $c=0$. 
+    \end{enumerate}
+\end{itemize}
+\end{aaa}
+\end{exercise}
+
+\begin{exercise}[来自第一节习题课, Exercise 1]
+    \begin{aaa}
+    这是 Strassen 算法. 有同学在几年前帮我们验证过了, 见
+    \begin{llll}
+        https://www.luogu.com/article/he12usoo
+    \end{llll} 
+
+    等价的问题: 证明 $\mathbb R^{2\times 2}\otimes \mathbb R^{2\times 2}\otimes \mathbb R^{2\times 2}$ 上张量 $\sum_{1\leq i,j,k\leq 2}E_{i,j}\otimes E_{j,k}\otimes E_{i,k}$ 的秩为 $7$. 我们将在下一学期利用张量的秩证明如下问题: 复数乘法的一般算法将不可避免地使用 $3$ 次实数乘法. 
+\end{aaa}
+\end{exercise}
+
+\begin{exercise}[来自第一节习题课, Exercise 2]
+    前两问总结了二维逆矩阵公式. 
+    \begin{pinked}
+        请务必熟练背诵: $\begin{pmatrix}
+            a & b\\
+            c & d
+            \end{pmatrix}^{-1} =( ad-bc)^{-1} \cdotp \begin{pmatrix}
+            d & -b\\
+            -c & a
+            \end{pmatrix}$. 
+    \end{pinked}
+    第三问直接计算即可 (结果是特征根). 后半学期的特征空间理论可以帮助我们解决反问题: 如何不经提示地直接找到 $S$ 与 $\{\lambda_1,\lambda_2\}$? 对角化的好处之一: 对多项式函数 $f$, 总有
+    \begin{equation}
+        f\left(\begin{pmatrix}
+            1&1\\1&0
+        \end{pmatrix}\right)= S\cdot \begin{pmatrix}
+            f(\lambda_1)&0\\0&f(\lambda_2)
+        \end{pmatrix}\cdot T.
+    \end{equation}
+    将 $f$ 换做绝对收敛的幂级数 (如 $\sin x$), 类似的等式仍成立. 
+\end{exercise}
+
+\begin{exercise}[来自第一节习题课, Exercise 3]
+    \begin{aaa}
+    依次解答如下.
+    \begin{enumerate}
+        \item 对应关系如下: 
+        \begin{equation}
+            \begin{array}{ c | c c c c c }
+                \text{矩阵} & \text{加法} & \text{乘法} & \text{转置} & \text{行列式} & \text{迹}\\\hline
+                \text{复数} & \text{加法} & \text{乘法} & \text{共轭} & \text{长度平方} & \text{实部两倍}
+                \end{array}.
+        \end{equation}
+        \item 依照 $e^{i\theta}\cdot e^{i\varphi}=e^{i(\theta+\varphi)}$, 得熟知的和差化积公式
+        \begin{equation}
+            \begin{pmatrix}
+                \cos \theta  & \sin \theta \\
+                -\sin \theta  & \cos \theta 
+                \end{pmatrix} \cdotp \begin{pmatrix}
+                \cos \varphi  & \sin \varphi \\
+                -\sin \varphi  & \cos \varphi 
+                \end{pmatrix} =\begin{pmatrix}
+                \cos \ ( \theta +\varphi ) & \sin \ ( \theta +\varphi )\\
+                -\sin \ ( \theta +\varphi ) & \cos \ ( \theta +\varphi )
+                \end{pmatrix}.
+        \end{equation} 
+        因此, $e^{2\pi i/2023}$ 对应的矩阵即为所求.
+        \item 此处, 矩阵的指数就是级数求和, 没有``节外生枝''的运算律. 
+        \begin{pinked}
+             对矩阵而言, 没有 $e^{S+T}=e^S\cdot e^T$: 问题出在交换律 $ST\neq TS$. 若 $ST=TS$, 证明同实数者. 
+        \end{pinked}
+       受 $z=r\cdot e^{i\theta}$ 启发, 必然存在 $r$ 与 $\theta$ 使得
+       \begin{equation}
+        \begin{pmatrix}
+            a & b\\
+            -b & a
+            \end{pmatrix} =\begin{pmatrix}
+            r\cos \theta  & r\sin \theta \\
+            -r\sin \theta  & r\cos \theta 
+            \end{pmatrix}.
+       \end{equation} 
+       此时, 级数的第 $k$ 项是 
+       \begin{equation}
+        \frac{1}{k!} \cdot \begin{pmatrix}
+            a & b\\
+            -b & a
+            \end{pmatrix}^{k} =\frac{r^{k}}{k!} \cdot \begin{pmatrix}
+            \cos k\theta  & \sin k\theta \\
+            -\sin k\theta  & \cos k\theta 
+            \end{pmatrix}.
+       \end{equation}
+       证明级数和各项收敛, 即证明
+       \begin{equation}
+        \sum_{k\geq 0}\frac{r^k}{k!}\cos k\theta\quad \text{与}\quad \sum_{k\geq 0}\frac{r^k}{k!}\sin k\theta
+       \end{equation}
+       收敛. 依照 $\cos \theta = \frac12(e^{i\theta}+e^{-i\theta})$, 以及收敛数列的差是收敛数列, 只需计算
+       \begin{equation}
+        \sum_{k\geq 0}\frac{r^k}{k!}\cdot e^{ik\theta}=\sum_{k\geq 0}\frac{(r\cdot e^{i\theta})^k}{k!}=\exp ({re^{i\theta}}). 
+       \end{equation}
+       因此, $\exp\left(\begin{pmatrix}
+        a&b\\-b&a
+       \end{pmatrix}\right)$ 的左上角为 
+       \begin{equation}
+        \frac{1}{2}(\exp ({re^{i\theta}})+\exp ({re^{i\theta}}))=\mathrm{Re}(\exp(re^{i\theta}))=\mathrm{Re}(e^{a+bi}). 
+       \end{equation}
+       类似的计算表明矩阵幂的右上项为 $\mathrm{Im}(e^{a+bi})$. 这表明矩阵的幂对应复数的幂. 
+       \begin{itemize}
+        \item 注: 按照以上方法, 需要使用 $\varepsilon$-$\delta$ 语言的地方只有两处: 证明 $e^{i\theta}=\cos \theta + i\sin \theta$ 良定义, 以及证明收敛数列的差是收敛数列. 
+       \end{itemize}
+       \item 假如你求出一族两两交换的矩阵, 那自然是错的. 这也是学习近世代数时经常出现的误区: 四元数 $\mathbb H$ 能借助复矩阵定义, 但 $\mathbb H$ 不是 $\mathbb C$ 上的代数! 
+       \begin{llll}
+        https://en.wikipedia.org/wiki/Quaternion\#Matrix\_representations
+       \end{llll}
+    \end{enumerate}
+\end{aaa}
+\end{exercise}
+
+\end{document}

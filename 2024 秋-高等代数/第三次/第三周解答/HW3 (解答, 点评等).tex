@@ -1,0 +1,439 @@
+\documentclass[11pt]{ctexart}
+\usepackage[margin=2cm,a4paper]{geometry}
+\usepackage{amsthm, amsfonts, amsmath, amssymb, mathrsfs, newclude, tikz-cd, tikz, ctex, mathtools, stmaryrd, datetime}
+
+%\setmainfont{Caladea}
+
+%% 也可以选用其它字库:
+% \setCJKmainfont[%
+%   ItalicFont=AR PL KaitiM GB,
+%   BoldFont=Noto Sans CJK SC,
+% ]{Noto Serif CJK SC}
+% \setCJKsansfont{Noto Sans CJK SC}
+% \renewcommand{\kaishu}{\CJKfontspec{AR PL KaitiM GB}}
+
+
+
+\usepackage[colorlinks = true,
+linkcolor = blue,
+urlcolor  = blue,
+citecolor = blue,
+anchorcolor = blue]{hyperref}
+
+% Include the x-color package for color support
+\usepackage{xcolor}
+
+% Define a new environment for red comments
+\usepackage{verbatim} % Required for the comment environment
+\usepackage{environ}
+
+\usepackage{mdframed} % Include mdframed for creating framed environments
+
+\definecolor{pinked}{RGB}{255,231,229} % Define a base color 
+% Define a new environment with a background color
+\newmdenv[
+  backgroundcolor=pinked, % Set the desired background color
+  linecolor=white, % Optional: Set the border line color
+  linewidth=1pt, % Optional: Set the border line width
+  roundcorner=5pt, % Optional: Set rounded corners
+  nobreak=true % Optional: Prevent page breaks within the environment
+]{pinked}
+
+\theoremstyle{definition}
+\newtheorem{qqq}{问题}[section]
+
+\newcommand{\ExternalLink}{%
+    \tikz[x=1.2ex, y=1.2ex, baseline=-0.05ex]{% 
+        \begin{scope}[x=1ex, y=1ex]
+            \clip (-0.1,-0.1) 
+                --++ (-0, 1.2) 
+                --++ (0.6, 0) 
+                --++ (0, -0.6) 
+                --++ (0.6, 0) 
+                --++ (0, -1);
+            \path[draw, 
+                line width = 0.5, 
+                rounded corners=0.5] 
+                (0,0) rectangle (1,1);
+        \end{scope}
+        \path[draw, line width = 0.5] (0.5, 0.5) 
+            -- (1, 1);
+        \path[draw, line width = 0.5] (0.6, 1) 
+            -- (1, 1) -- (1, 0.6);
+        }
+    }
+
+\NewEnviron{aaa}{~\\
+    \noindent {\textcolor{teal}{\textbf{解答}} \BODY }
+}
+
+\NewEnviron{llll}{
+    \noindent {~\\$\ExternalLink$ 外部链接 $\,\,\,$ \color{blue}\url{\BODY} }
+}
+
+\renewcommand{\proofname}{证明}
+\renewcommand\qedsymbol{${\boxed{\substack{\textit{完证}\\\textit{毕明}}}}$}
+
+% Change equation numbering to include the section number
+\usepackage{cleveref}
+\renewcommand{\theequation}{\thesection.\thesubsection.\arabic{equation}}
+\numberwithin{equation}{section}
+
+\usepackage{listings}
+% Define listings style
+\lstset{
+  frame=tb,
+  language=TeX,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+\theoremstyle{definition}
+\newtheorem*{definition}{定义}
+\newtheorem*{proposition}{命题}
+\newtheorem*{theorem}{定理}
+\newtheorem*{notation}{记号}
+\newtheorem*{example}{例子}
+\newtheorem*{exercise}{习题}
+\theoremstyle{remark}
+\newtheorem*{remark}{备注}
+\newtheorem*{lemma}{引理}
+\newtheorem*{corollary}{推论}
+
+\title{第三次作业反馈}
+\author{(2024-2025-1)-MATH1405H-02}
+
+\setcounter{page}{0}
+
+\setlength\parindent{0pt}
+
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{第一题解答}
+
+\begin{pinked}
+    矩阵的零空间, 解空间, 秩, 以及相抵等性质与域的选取无关.
+\end{pinked}
+
+\begin{remark}
+    一个常见的错误是出现 $\frac 12$. 在一般的域中, 能否定义 $\frac 12$? 
+\end{remark}
+
+\begin{qqq}
+    交换 $A$ 的 $[i,j]$ 两行, 等价于左乘一个矩阵 $S_{i,j}$. 写出该矩阵. 
+    \begin{aaa}
+        假定 $i<j$. 以下斜逗号 $\ddots$ 处为 $1$, 空白处为 $0$. 
+\begin{equation}
+    \begin{matrix}
+        \\[-6pt]
+       \text{行 }\, i\rightarrow \\[-6pt]
+        \\[-6pt]
+       \text{行 }\, j\rightarrow \\[-6pt]
+        \\[-6pt]
+       \end{matrix} \ \begin{pmatrix}
+       1 &  &  &  &  &  & \\[-6pt]
+        & \ddots  &  &  &  &  & \\[-6pt]
+        &  & 0 &  & 1 &  & \\[-6pt]
+        &  &  & \ddots  &  &  & \\[-6pt]
+        &  & 1 &  & 0 &  & \\[-6pt]
+        &  &  &  &  & \ddots  & \\[-6pt]
+        &  &  &  &  &  & 1
+       \end{pmatrix}.
+\end{equation}
+简化地, $S_{i,j}=I-E_{i,i}-E_{j,j}+E_{i,j}+E_{j,i}$. 
+    \end{aaa}
+\end{qqq}
+
+\begin{qqq}
+    将 $A$ 第 $k$ 行的各项同时乘上一个非零常数 $\lambda$, 等价于左乘一个矩阵 $D_k^{\lambda}$. 写出该矩阵.
+    \begin{aaa}
+        以下斜逗号 $\ddots$ 处为 $1$, 空白处为 $0$. 
+\begin{equation}
+    \begin{matrix}
+        \\[-6pt]
+       \text{行 } k\rightarrow \\[-6pt]
+        \\[-6pt]
+       \end{matrix} \ \begin{pmatrix}
+       1 &  &  &  & \\[-6pt]
+        & \ddots  &  &  & \\[-6pt]
+        &  & \lambda  &  & \\[-6pt]
+        &  &  & \ddots  & \\[-6pt]
+        &  &  &  & 1
+       \end{pmatrix}.
+\end{equation}
+简化地, $D_k^\lambda=I+(\lambda -1)E_{k,k}$. 
+    \end{aaa}
+\end{qqq}
+
+\begin{qqq}
+    向 $A$ 的第 $j$ 行加上其第 $i$ 行的 $\lambda$ 倍 (这一过程仅改变第 $j$ 行, 其他行不变), 等价于左乘一个矩阵 $T_{i,j}^\lambda$. 写出该矩阵.
+    \begin{aaa}
+        不妨设 $i<j$. 以下斜逗号 $\ddots$ 处为 $1$, 空白处为 $0$. 
+\begin{equation}
+    \begin{matrix}
+        \\[-6pt]
+       \text{行 } i\rightarrow \\[-6pt]
+        \\[-6pt]
+       \text{行 } j\rightarrow \\[-6pt]
+        \\[-6pt]
+       \end{matrix} \ \begin{pmatrix}
+       1 &  &  &  &  &  & \\[-6pt]
+        & \ddots  &  &  &  &  & \\[-6pt]
+        &  & 1 &  &  &  & \\[-6pt]
+        &  &  & \ddots  &  &  & \\[-6pt]
+        &  & \lambda &  & 1 &  & \\[-6pt]
+        &  &  &  &  & \ddots  & \\[-6pt]
+        &  &  &  &  &  & 1
+       \end{pmatrix}.
+\end{equation}
+简化地, $T_{i,j}^\lambda =I+\lambda E_{j,i}$. 
+    \end{aaa}
+\end{qqq}
+
+\begin{qqq}
+    求逆变换 (逆矩阵) $S_{i,j}^{-1}$, $(D_k^\lambda)^{-1}$, 以及 $(T_{i,j}^\lambda)^{-1}$. 
+    \begin{aaa}
+        依次解答如下. 
+        \begin{enumerate}
+            \item 注意到 $(S_{i,j})^2=I$, 故 $S_{i,j}^{-1}=S_{i,j}$.
+            \item 注意到 $(D_k^\lambda)^{-1}=D_k^{1/\lambda}$.
+            \item 注意到 $(T_{i,j}^\lambda)^{-1}=T_{i,j}^{-\lambda}$. 
+        \end{enumerate}
+    \end{aaa}
+\end{qqq}
+
+\begin{qqq}
+    使用自然语言描述这三类逆变换. 
+    \begin{aaa}
+        依次回答如下. 
+        \begin{enumerate}
+            \item $S_{i,j}^{-1}$ 的定义: 换回 $[i,j]$ 两行, 也就是交换矩阵的 $[i,j]$ 两行.
+            \item $(D_k^\lambda)^{-1}$ 的定义: 将矩阵的第 $k$ 行由数乘后的结果复原, 也就是在第 $k$ 行各项同时乘上非零常数 $1/\lambda$. 
+            \item $(T_{i,j}^\lambda)^{-1}$ 的定义: 在矩阵的第 $j$ 行中剔除第 $i$ 行的 $\lambda$ 倍, 也就是向 $A$ 的第 $j$ 行加上其第 $i$ 行的 $-\lambda$ 倍 (这一过程仅改变第 $j$ 行, 其他行不变).
+        \end{enumerate}
+    \end{aaa}
+\end{qqq}
+
+\begin{qqq}
+    求 $S_{i,j}S_{k,l}=S_{k,l}S_{i,j}$ 的充要条件. 
+    \begin{aaa}
+        由构造, $S_{i,j}$ 与 $S_{j,i}$ 无区别, $S_{i,i}=I$. 为找到以上两个矩阵乘积不交换的充要条件, 只需讨论 $i\neq j$ 且 $k\neq l$ 的三种情形. 
+        \begin{enumerate}
+            \item $(i,j,k,l)$ 两两不等. 
+            \item $(i,j,k)$ 两两不等, $i=l$. 
+            \item $i=k$ 且 $j=l$. 
+        \end{enumerate}
+只有第二种情形是非交换的. 记 $|S|$ 为有限集的大小, 则第二种情况等价于
+\begin{equation}
+    |\{i,j\}|=2\,\text{ 且 } \,|\{k,l\}|=2\,\text{ 且 }\, |\{i,j,k,l\}|=3.
+\end{equation}
+换言之, 以上乘积可交换的充要条件是
+\begin{itemize}
+    \item 两个矩阵的``作用范围''全不交, 或一者包含另一者. 
+\end{itemize}
+    \end{aaa}
+\end{qqq}
+
+\begin{qqq}
+    求 $T_{i,j}^\lambda T_{k,l}^\mu=T_{k,l}^\mu T_{i,j}^\lambda$ 的充要条件. 
+    \begin{aaa}
+        依照 $T_{i,j}^\lambda =I+\lambda E_{j,i}$, 得
+    \begin{align}
+        T_{i,j}^\lambda T_{k,l}^\mu-T_{k,l}^\mu T_{i,j}^\lambda&=(I+\lambda E_{j,i})(I+\mu E_{l,k})-(I+\mu E_{l,k})(I+\lambda E_{j,i})\\[6pt]
+        &=\lambda\mu (E_{j,i}E_{l,k}-E_{l,k}E_{j,i}).
+        \end{align}
+上式为 $0$ 的充要条件是以下任意一者成立:
+\begin{enumerate}
+    \item $\lambda \mu=0$; 
+    \item $i\neq j$ 且 $k\neq j$ (两处 $0$ 相减); 
+    \item $i=j=k=l$ (两处 $1$ 相减). 
+\end{enumerate}
+    \end{aaa}
+\end{qqq}
+
+\begin{qqq}
+    以上给出了三类矩阵. 能否通过某两类矩阵得到第三类? 请讨论这三种情况 (构造或给出反例). 
+    \begin{itemize}
+        \item 另注: ``给出反例''的本质还是证明. 原问题表述欠妥. 
+    \end{itemize}
+    \begin{aaa}
+        $S$ 类能通过 $T$ 类与 $D$ 类得到, 其机理类似赋值 $(a,b):=(b,a)$. 记 
+\begin{equation}
+    A:=D_i^{-1}\cdot T_{i,j}^1\cdot T_{j,i}^{-1}\cdot T_{i,j}^1,
+\end{equation}
+   此时 $A$ 的左乘表现为以下的映射的合成: 
+\begin{equation}
+    (x_i,y_j)\xrightarrow{T_{i,j}^1} (x_i,x_i+y_j)\xrightarrow{T_{j,i}^{-1}}(-y_j,x_i+y_j)\xrightarrow{T_{i,j}^1}(-y_j,x_i)\xrightarrow{D_{i}^{-1}}(y_j,x_i).
+\end{equation}
+    \end{aaa}
+
+    $T$ 类不能通过 $S$ 类与 $D$ 类得到. 因为 $S$ 类矩阵与 $D$ 类矩阵的任意乘积都至少有 $n^2-n$ 个零. 
+
+    若假定 $T_{i,i}^\lambda$ 是合法的, 则 $D$ 类矩阵能通过 $S$ 类与 $T$ 类得到. 因为 $D_{i}^\lambda=T_{i,i}^{\lambda-1}$. 
+
+    若假定 $T_{i,i}^\lambda$ 是非法的 (假定 $n\geq 2$), 则有且仅有行列式为 $\pm 1$ 的 $D$ 类矩阵能被其余两类矩阵表示. 对行列式为 $-1$ 的 $D$ 类矩阵进行如下 $S$-类与 $T$-类的初等行变换即可: 
+    \begin{equation}
+        \begin{pmatrix}
+            1 & 0\\
+            0 & -1
+            \end{pmatrix} \rightsquigarrow \begin{pmatrix}
+            0 & -1\\
+            1 & 0
+            \end{pmatrix} \rightsquigarrow \begin{pmatrix}
+            0 & -1\\
+            1 & 1
+            \end{pmatrix} \rightsquigarrow \begin{pmatrix}
+            1 & 0\\
+            1 & 1
+            \end{pmatrix} \rightsquigarrow \begin{pmatrix}
+            1 & 0\\
+            0 & 1
+            \end{pmatrix}.
+    \end{equation}
+    若 $D$ 类矩阵的行列式不为 $\pm 1$, 则其无法通过 $S$ 类与 $T$ 类矩阵的乘积得到. 因为 $\det (AB)=\det (A)\det (B)$. 
+    \begin{itemize}
+        \item 对于二元域或三元域上的矩阵, $D$ 类矩阵可以通过其他两类矩阵得到. 
+    \end{itemize}
+\end{qqq}
+
+\begin{qqq}
+    假定 $A$ 是方阵. 将以上 $S_{i,j}$, $T_{i,j}$ 与 $D_k$ 乘在 $A$ 的右侧, 效果如何? 
+    \begin{aaa}
+        解答如下. 
+        \begin{enumerate}
+            \item $S_{i,j}$ 右乘: 交换 $A$ 的 $i$ 列与 $j$ 列; 
+            \item $T_{i,j}^\lambda$ 右乘: 将 $i$ 列的 $\lambda$ 倍加至 $j$ 列; 
+            \item $D_k^{\lambda}$ 右乘: 将第 $k$ 列乘以 $\lambda$. 
+        \end{enumerate}
+    \end{aaa}
+\end{qqq}
+
+\section{第二题解答}
+
+\begin{qqq}
+    给定矩阵 $A$, 其最简行阶梯形 $R$ 为何唯一? 
+    \begin{aaa}
+        见下一问. 
+    \end{aaa}
+\end{qqq}
+
+\begin{qqq}
+    (接上一小问) 尝试给出一个不用计算的证明 (无字证明). 
+    \begin{aaa}
+        从 $A$ 到 $\mathrm{rref}(A)$ 可通过``改写矩阵各列''实现, 无需进行复杂的初等行变换.
+
+        以下算法从左往右地读取 $A$ 的各列, 并逐列给出 $\mathrm{rref}(A)$. 记 $A$ 共有 $n$ 列, 且第 $k$ 列为向量 $v_k$. 
+\begin{quote}
+    输入: 矩阵 $A$ 各列 $\{v_1,v_2,\ldots, v_n\}$; 
+
+    输出: 最简行阶梯形 $\mathrm{rref}(A)$ 各列 $\{c_1,c_2,\ldots, c_n\}$. 
+
+    对于 $k=1,2,\ldots, (A \text{ 的列数})$.
+
+若 $v_k\in \mathrm{Span}(\{v_k\}_{t<k})$, 则 $c_k$ 的坐标由 $\{c_t\}_{t<k}$ 唯一确定. 
+
+若不然, 则取 $c_k$ 是为 $\{0,1\}$-向量 $e_{t+1}$, 其中 $t=\dim \mathrm{Span}(\{v_k\}_{t<k})$. 
+\end{quote}
+    \end{aaa}
+    注: 请回忆 $\mathrm{Span}(\varnothing)=0$, 从而以上算法是精简且统一的. 空集起到了 \verb|void| 的效果. 
+\end{qqq}
+
+\begin{qqq}
+    转置矩阵 $R^T$ 的最简行阶梯形是什么? 
+    \begin{aaa}
+        这等价于说, 先在 $R$ 中消去所有 $1$ (阶梯拐角) 右侧的项, 再将所有零向量移至非零向量的右侧. 因此, $R^T$ 的最简阶梯型是
+\begin{equation}
+    \begin{pmatrix}I_r&O\\O&O\end{pmatrix}.
+\end{equation}
+    \end{aaa}
+\end{qqq}
+
+\begin{qqq}
+    证明相抵标准型的存在性: 对任意矩阵 $A$, 存在可逆矩阵 $P$ 和 $Q$ 使得
+\begin{equation}
+    A=P\begin{pmatrix}I_r&O\\O&O\end{pmatrix}Q.
+\end{equation}
+以上, $I_r$ 是 $r$ 阶单位矩阵, $O$ 表示数字 $0$ 出现的位置. 
+
+注意: 中间的 $(0,1)$-矩阵兼并了以下三类退化矩阵
+\begin{equation}
+    \begin{pmatrix}I_r&O\end{pmatrix},\quad \begin{pmatrix}I_r\\O\end{pmatrix},\quad \begin{pmatrix}I_r\end{pmatrix}.
+\end{equation}
+\begin{aaa}
+    上一问已给出答案. 
+\end{aaa}
+\end{qqq}
+
+\begin{qqq}
+    证明以上的 $r$ 由 $A$ 唯一决定. 作为推论, 矩阵的行秩等于列秩. 往后统一称作秩. 
+    \begin{pinked}
+        此类分解不必来自矩阵的初等行列变换, 从而不能使用消元法的唯一性证明. 
+        
+        在证明相抵标准型的唯一性之前, 使用各类``秩不等式''或有循环论证之嫌. 
+        
+        最好的方法是反证法. 
+    \end{pinked}
+    \begin{aaa}
+        若存在可逆的 $P_1,P_2,Q_1,Q_2$ 使得
+\begin{equation}
+    A=P_1\begin{pmatrix}I_r&O\\O&O\end{pmatrix}Q_1=P_2\begin{pmatrix}I_s&O\\O&O\end{pmatrix}Q_2.
+\end{equation}
+若 $r<s$, 改写等式得
+\begin{equation}
+    P_2^{-1}P_1\begin{pmatrix}I_r&O\\O&O\end{pmatrix}Q_1Q_2^{-1}=\begin{pmatrix}I_s&O\\O&O\end{pmatrix}.
+\end{equation}
+考虑 $\begin{pmatrix}I_r&O\\O&O\end{pmatrix}=\begin{pmatrix}I_r\\O\end{pmatrix}\cdot \begin{pmatrix}I_r&O\end{pmatrix}$, 则上式改写作
+\begin{equation}
+    M\cdot N=\begin{pmatrix}I_s&O\\O&O\end{pmatrix}\quad (M\in \mathbb F^{m\times r},\, N\in \mathbb F^{r\times n}).
+\end{equation}
+将矩阵左乘视作 $\mathbb F^n$ 至 $\mathbb F^m$ 的线性映射, 则
+\begin{itemize}
+    \item 左乘 $M\cdot N$ 必然将 $s$ 个线性无关的行向量映作线性相关组 (因为 $N$ 总共仅有 $r$ 行); 
+    \item 考虑 $\{e_1,\ldots, e_s\}$, 则左乘 $\begin{pmatrix}I_s&O\\O&O\end{pmatrix}$ 保持这一线性无关组.
+\end{itemize}
+综上, 原等式矛盾. 因此 $r\geq s$. 类似的论证给出 $r\leq s$, 从而 $r=s$. 
+    \end{aaa}
+\end{qqq}
+
+\section{``挑战题''解答}
+
+\begin{qqq}
+    若整数矩阵 $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ 满足 $ad-bc=1$, 则 $A$ 是以下几类矩阵的有限乘积
+\begin{equation}
+    S = \begin{pmatrix}0 & 1 \\ -1 & 0\end{pmatrix}, \qquad  T = \begin{pmatrix}1 & 1 \\ 0 & 1\end{pmatrix},\qquad T^{-1} = \begin{pmatrix}1 & -1 \\ 0 & 1\end{pmatrix}.
+\end{equation}
+\begin{aaa}
+    依题设, 直接得到 $T^k$ ($k\in \mathbb Z$). 因此可以将 $A$ 第二行的任意倍数加至第一行. 计算得
+\begin{equation}
+    STS= \begin{pmatrix}1 & 0 \\ 1 & 1\end{pmatrix},\qquad ST^{-1}S= \begin{pmatrix}1 & 0 \\ -1 & 1\end{pmatrix}.
+\end{equation}
+因此可以将 $A$ 第一行的任意倍数加至第二行. 若考虑右乘, 则可以将 $A$ 某列的任意倍数加至另一列. 同时, $S$ 起到了行置换与列置换的作用. 
+\begin{itemize}
+    \item 若 $A$ 不存在 $0$, 则不妨设 $A$ 的第一列非零. 依照行列式, 该列的两数互质. 通过上述变换, 可将 $A$ 中某项消作 $0$. 
+    \item 若 $A$ 中存在一个 $0$, 则可以通过上述变换将 $A$ 变作上三角矩阵. 依照行列式, 两个对角元只能是 $\pm 1$. 依照初等变换, 可以将 $A$ 变作对角矩阵. 
+    \item 若 $A$ 中存在两个零, 则 $S$ 或 $SA$ 是对角矩阵. 最后依照 $S^2=-I$, 明所欲证. 
+\end{itemize}
+\end{aaa}
+\end{qqq}
+
+
+
+
+
+
+\end{document}

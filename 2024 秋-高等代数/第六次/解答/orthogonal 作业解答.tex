@@ -1,0 +1,249 @@
+\documentclass[11pt]{ctexart}
+
+\usepackage[margin=2cm,a4paper]{geometry}
+\usepackage{amsthm, amsfonts, amsmath, amssymb, mathrsfs, newclude, tikz-cd, tikz, ctex, mathtools, stmaryrd, datetime}
+
+
+\usepackage{braket}
+
+%\setmainfont{Caladea}
+
+%% 也可以选用其它字库:
+% \setCJKmainfont[%
+%   ItalicFont=AR PL KaitiM GB,
+%   BoldFont=Noto Sans CJK SC,
+% ]{Noto Serif CJK SC}
+% \setCJKsansfont{Noto Sans CJK SC}
+% \renewcommand{\kaishu}{\CJKfontspec{AR PL KaitiM GB}}
+
+
+
+\usepackage[colorlinks = true,
+linkcolor = blue,
+urlcolor  = blue,
+citecolor = blue,
+anchorcolor = blue]{hyperref}
+
+% Include the x-color package for color support
+\usepackage{xcolor}
+
+% Define a new environment for red comments
+\usepackage{verbatim} % Required for the comment environment
+\usepackage{environ}
+
+\usepackage{mdframed} % Include mdframed for creating framed environments
+
+\definecolor{pinked}{RGB}{255,231,229} % Define a base color 
+% Define a new environment with a background color
+\newmdenv[
+  backgroundcolor=pinked, % Set the desired background color
+  linecolor=white, % Optional: Set the border line color
+  linewidth=1pt, % Optional: Set the border line width
+  roundcorner=5pt, % Optional: Set rounded corners
+  nobreak=true % Optional: Prevent page breaks within the environment
+]{pinked}
+
+\theoremstyle{definition}
+\newtheorem{qqq}{问题}[section]
+
+\newcommand{\ExternalLink}{%
+    \tikz[x=1.2ex, y=1.2ex, baseline=-0.05ex]{% 
+        \begin{scope}[x=1ex, y=1ex]
+            \clip (-0.1,-0.1) 
+                --++ (-0, 1.2) 
+                --++ (0.6, 0) 
+                --++ (0, -0.6) 
+                --++ (0.6, 0) 
+                --++ (0, -1);
+            \path[draw, 
+                line width = 0.5, 
+                rounded corners=0.5] 
+                (0,0) rectangle (1,1);
+        \end{scope}
+        \path[draw, line width = 0.5] (0.5, 0.5) 
+            -- (1, 1);
+        \path[draw, line width = 0.5] (0.6, 1) 
+            -- (1, 1) -- (1, 0.6);
+        }
+    }
+
+\NewEnviron{aaa}{~\\
+    \noindent {\textcolor{teal}{\textbf{解答}} \BODY }
+}
+
+\NewEnviron{llll}{
+    \noindent {~\\$\ExternalLink$ 外部链接 $\,\,\,$ \color{blue}\url{\BODY} }
+}
+
+\renewcommand{\proofname}{证明}
+\renewcommand\qedsymbol{${\boxed{\substack{\textit{完证}\\\textit{毕明}}}}$}
+\let\oldproof\proof
+\renewcommand{\proof}{\color{blue}\oldproof}
+
+% Change equation numbering to include the section number
+\usepackage{cleveref}
+\renewcommand{\theequation}{\thesection.\thesubsection.\arabic{equation}}
+\numberwithin{equation}{section}
+
+
+% 创建适合 python 语言的公式环境. 
+\usepackage{pythonhighlight}
+
+
+
+\theoremstyle{definition}
+\newtheorem*{definition}{定义}
+\newtheorem*{proposition}{命题}
+\newtheorem*{theorem}{定理}
+\newtheorem*{notation}{记号}
+\newtheorem*{example}{例子}
+\newtheorem{exercise}{\textcolor{blue}{习题}}
+\theoremstyle{remark}
+\newtheorem*{remark}{备注}
+\newtheorem*{lemma}{引理}
+\newtheorem*{corollary}{推论}
+
+\title{第六次作业解答}
+\author{(2024-2025-1)-MATH1405H-02}
+
+\setcounter{page}{0}
+
+\setlength\parindent{0pt}
+
+\begin{document}
+
+\maketitle
+
+\vspace{5cm}
+
+\newpage
+
+\section{第一题解答}
+
+\begin{exercise}
+    给定 $\|u\|\leq 1$ 与 $\|v\|\leq 1$, 证明: $\sqrt{1-\|u\|^2}\cdot \sqrt{1-\|v\|^2}\leq 1-\braket{u,v}$.
+    \begin{proof}
+        只需证明 $\sqrt{1-\|u\|^2}\cdot \sqrt{1-\|v\|^2}\leq 1-\|u\|\cdot \|v\|$. 平方得 $-\|u\|^2-\|v\|^2\leq -2\|u\|\cdot \|v\|$, 即 $0\leq (\|u\|-\|v\|)^2$. 
+    \end{proof}
+\end{exercise}  
+
+\begin{exercise}
+    证明: $\|u+v\|\cdot \|u-v\|\leq \|u\|^2+\|v\|^2$.
+    \begin{proof}
+        对两侧平方, 得 $(\|u\|^2+\|v\|^2)^2-4\braket{u,v}^2\leq(\|u\|^2+\|v\|^2)^2$. 
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}
+    证明: $\braket{u,v}=0$, 当且仅当 $\|u\|\leq \|u+c \cdot v\|$ 对一切 $c\in \mathbb R$ 成立.
+    \begin{proof}
+        ($\to$ 方向) 若 $\braket{u,v}=0$, 往证 $\|u\|\leq \|u+c \cdot v\|$. 等价地, 对待证式两侧平方得
+        \begin{equation}
+            \|u\|^2\leq \|u\|^2+2c\braket{u,v}+c^2\|v\|^2.
+        \end{equation} 
+        消元, 并代入正交条件, 上式对一切 $c\in \mathbb R$ 取等. 
+
+        ($\gets$ 方向) 若不等式对一切 $c\in \mathbb R$ 取等, 则右式平方的一次项系数为零, 即 $\braket{u,v}=0$. 
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}
+    证明: 任意给定 $u\neq \mathbf 0$, 则对一切 $\|v\|=1$ 均有 $\|u-(\|u\|^{-1}\cdot u)\|\leq \|u-v\|$. 换言之, 球面上距 $u$ 最近处恰是 $u$ 的单位化向量.
+    \begin{proof}
+        若空间是 $0$ 维或一维的, 则结论平凡. 不妨假定空间维数不小于 $2$. 以下使用反证法: 
+        \begin{itemize}
+            \item 若存在 $v\neq \|u\|^{-1}u$ 使得 $\|u-(\|u\|^{-1}\cdot u)\|\leq \|u-v\|$, 则只需要球面与二维空间 $V:=\mathrm{span}(u,v)$ 的交中找到矛盾即可.  
+        \end{itemize}
+        取 $V$ 的单位正交基 $e_1=\|u\|^{-1}\cdot u$ 与 $e_2$, 则 $v$ 位于圆周 ($V$ 与球面的交). 圆周上的点 $w$ 具有一般形式 $\cos\theta e_1+\sin \theta e_2$, 此时 
+        \begin{equation}
+            \|u-w\|^2= 1 + \|u\|^{-2}(1-2\cos\theta). 
+        \end{equation}
+        当 $\|u-w\|$ 取最小值时, 必有 $\cos\theta =1$. 此时 $w=e_1=\|u\|^{-1}u$, 与 $v$ 的选取矛盾. 
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}
+    表述并证明高中所学的极化恒等式.
+    \begin{proof}
+        图形描述见\href{https://linear.axler.net/LADR4e.pdf#page=209}{教材 LADR 的 195 页}. 这是半侧平行四边形法则. 
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}
+    表述并证明高中所学的平行四边形恒等式.
+    \begin{proof}
+        记 $u$ 与 $v$ 是内积空间的向量, 则
+        \begin{equation}
+            2(\|u\|^2+\|v\|^2)=\|u+v\|^2+\|u-v\|^2. 
+        \end{equation}
+        依定义展开得
+        \begin{itemize}
+            \item $\|u+v\|^2=\braket{u+v,u+v}=\braket{u,u}+ \braket{u,v}+\braket{v,u}+\braket{v,v}=\|u\|^2+2\braket{u,v}+\|v\|^2$,
+            \item $\|u-v\|^2=\braket{u-v,u-v}=\braket{u,u}- \braket{u,v}-\braket{v,u}+\braket{v,v}=\|u\|^2-2\braket{u,v}+\|v\|^2$. 
+        \end{itemize}
+        相加即可. 
+    \end{proof}
+\end{exercise}
+
+\section{第二题解答}
+
+\begin{definition}[投影矩阵]
+    假定 $n\geq 1$. 称 $P\in \mathbb R^{n\times n}$ 是 $\mathbb R^n$ 上的一个投影矩阵, 当且仅当 $P^2=P=P^T$.
+\end{definition}
+
+\begin{exercise}
+    使用相抵标准型证明, 若 $P$ 是投影矩阵, 当且仅当存在正交矩阵 $Q$ 使得 $Q^{-1}PQ = \begin{pmatrix}I_r&O\\O&O\end{pmatrix}$. (如果不清楚正交矩阵, 此题可以略过.) 
+    \begin{proof}
+        使用相抵标准型, 
+    \end{proof}
+\end{exercise}
+
+2. 证明: 投影矩阵和子空间双射对应, 具体的对应方式可以是列空间 $P\xleftrightarrow {1:1} C(P)$.
+3. 证明: 投影矩阵和子空间双射对应, 具体的对应方式可以是零空间 $P\xleftrightarrow {1:1} N(P)$.
+4. 任意给定 $v\neq \mathbf 0$, 找到 $P$ 使得 $C(P)=\mathrm{span}(v)$.
+5. 任意给定 $v\neq \mathbf 0$, 找到 $P$ 使得 $N(P)=\mathrm{span}(v)$.
+6. 给定 $\mathbb R^5$ 中的列向量 $S=\{(4,3,3,1,1),(6,2,2,2,1)\}$, 找到 $P\in \mathbb R^{5\times 5}$ 使得 $C(P)=\mathrm{span}(S)$.
+7. 给定 $\mathbb R^5$ 中的列向量 $S=\{(4,3,3,1,1),(6,2,2,2,1)\}$, 找到 $P\in \mathbb R^{5\times 5}$ 使得 $N(P)=\mathrm{span}(S)$.
+
+备注: 计算得 $\|(4,3,3,1,1)\|=6$, 以及 $\|(6,2,2,2,1)\|=7$.
+
+
+
+**Challenge** 投影矩阵的和与积都不必是投影矩阵 (实际上, 任何不可逆方阵都是有限个投影矩阵的乘积). 能否优雅地定义投影矩阵间的二元运算 $\sqcap$ 与 $\sqcup$, 使得
+$$
+C(P_1\sqcup P_2)=C(P_1)+C(P_2),\quad C(P_1\sqcap P_2)=C(P_1)\cap C(P_2).
+$$
+
+
+
+**Problem 3** 计算示例 (最小平方法).
+
+
+1. 给定 $A=(a_{i,j})\in \mathbb R^{m\times n}$ 与 $b=(b_j)\in \mathbb R^{n}$. 记 $x=(x_i)\in \mathbb R^m$, 则
+    $$
+    F=\|Ax-b\|^2=\sum_{i=1}^m\left(\sum_{j=1}^na_{i,j}x_j-b_i\right)^2.
+    $$
+    任给定指标 $1\leq j_0\leq n$, 假设所有 $x_j$ ($j\neq j_0$) 均是常量, 仅 $x_{j_0}$ 是变量. 通过下式计算二次函数 $F=F(x_{j_0})$ 导数为零的点
+    $$
+    \frac{\operatorname d F}{\operatorname d x_{j_0}} =\frac{\operatorname d }{\operatorname d x_{j_0}}\left[\sum_{i=1}^m\left(\sum_{j=1}^na_{i,j}x_j-b_i\right)^2\right] =0.
+    $$
+    * $F$ 何时是二次函数? 我们需要排除一些平凡情形, 请稍作说明.
+2. 假设上一问中 $F(x_{j_0})=0$ 的解是 $x_{j_0}=X_{j_0}$. 记解向量 $X=(X_i)\in \mathbb R^m$. 证明 $A^TAX=A^Tb$.
+3. (自主思考, 这不是一个问题) 上式合并了有唯一解, 有无穷解, 以及无解这三种情况. 请区分, 讨论这些情况.
+4. 使用最小平方法找到一条抛物线 $y=a+bx+cx^2$, 使得该抛物线可以尽可能地拟合以下所有点:
+    $$
+    \{(-2,4),(-1,2),(0,1),(2,1),(3,1)\}.
+    $$
+    提示: 可以考虑方程
+    $$
+    \begin{pmatrix}1&x_1&x_1^2\\1&x_2&x_1^2\\\vdots &\vdots& \vdots \\1&x_n&x_n^2\end{pmatrix}\cdot \begin{pmatrix}a\\ b\\ c\end{pmatrix} =\begin{pmatrix}y_1\\ y_2\\ \vdots \\ y_n\end{pmatrix}.
+    $$
+    请用严谨的数学语言解释这一所谓的拟合 (应当先定义点到抛物线的距离.).
+
+
+
+**Challenge** 先前有一道证明题: $\mathbb R^n$ 的任意有限个真子空间之并不是全空间. 此处有一道类似的问题:
+* 任取 $\mathbb R^n$ 中有限个真子空间 $\{V_i\}_{i=1}^m$, 则必存在补集中的向量组 $\{f_i\}_{i=1}^n\subset \left(\bigcup_{i=1}^m V_i\right)^c$, 使得 $\braket{f_i,f_j}=\delta_{i,j}$ (单位正交关系).
+* 以上 $\{f_i\}_{i=1}^n$ 有无穷多种取法 (这或许是一句废话.).
+
+\end{document}

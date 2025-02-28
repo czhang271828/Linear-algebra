@@ -1,0 +1,673 @@
+\documentclass[11pt]{ctexart}
+\usepackage[margin=2cm,a4paper]{geometry}
+\usepackage{amsthm, amsfonts, amsmath, amssymb, mathrsfs, newclude, tikz-cd, tikz, ctex, mathtools, stmaryrd, datetime}
+
+%\setmainfont{Caladea}
+
+%% 也可以选用其它字库:
+% \setCJKmainfont[%
+%   ItalicFont=AR PL KaitiM GB,
+%   BoldFont=Noto Sans CJK SC,
+% ]{Noto Serif CJK SC}
+% \setCJKsansfont{Noto Sans CJK SC}
+% \renewcommand{\kaishu}{\CJKfontspec{AR PL KaitiM GB}}
+
+
+
+\usepackage[colorlinks = true,
+linkcolor = blue,
+urlcolor  = blue,
+citecolor = blue,
+anchorcolor = blue]{hyperref}
+
+% Include the x-color package for color support
+\usepackage{xcolor}
+
+% Define a new environment for red comments
+\usepackage{verbatim} % Required for the comment environment
+\usepackage{environ}
+
+\usepackage{mdframed} % Include mdframed for creating framed environments
+
+\definecolor{pinked}{RGB}{255,231,229} % Define a base color 
+% Define a new environment with a background color
+\newmdenv[
+  backgroundcolor=pinked, % Set the desired background color
+  linecolor=white, % Optional: Set the border line color
+  linewidth=1pt, % Optional: Set the border line width
+  roundcorner=5pt, % Optional: Set rounded corners
+  nobreak=true % Optional: Prevent page breaks within the environment
+]{pinked}
+
+\theoremstyle{definition}
+\newtheorem{qqq}{问题}[section]
+
+\newcommand{\ExternalLink}{%
+    \tikz[x=1.2ex, y=1.2ex, baseline=-0.05ex]{% 
+        \begin{scope}[x=1ex, y=1ex]
+            \clip (-0.1,-0.1) 
+                --++ (-0, 1.2) 
+                --++ (0.6, 0) 
+                --++ (0, -0.6) 
+                --++ (0.6, 0) 
+                --++ (0, -1);
+            \path[draw, 
+                line width = 0.5, 
+                rounded corners=0.5] 
+                (0,0) rectangle (1,1);
+        \end{scope}
+        \path[draw, line width = 0.5] (0.5, 0.5) 
+            -- (1, 1);
+        \path[draw, line width = 0.5] (0.6, 1) 
+            -- (1, 1) -- (1, 0.6);
+        }
+    }
+
+\NewEnviron{aaa}{~\\
+    \noindent {\textcolor{teal}{\textbf{解答}} \BODY }
+}
+
+\NewEnviron{llll}{
+    \noindent {~\\$\ExternalLink$ 外部链接 $\,\,\,$ \color{blue}\url{\BODY} }
+}
+
+\renewcommand{\proofname}{证明}
+\renewcommand\qedsymbol{${\boxed{\substack{\textit{完证}\\\textit{毕明}}}}$}
+\let\oldproof\proof
+\renewcommand{\proof}{\color{blue}\oldproof}
+
+% Change equation numbering to include the section number
+\usepackage{cleveref}
+\renewcommand{\theequation}{\thesection.\thesubsection.\arabic{equation}}
+\numberwithin{equation}{section}
+
+\usepackage{listings}
+% Define listings style
+\lstset{
+  frame=tb,
+  language=TeX,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\theoremstyle{definition}
+\newtheorem*{definition}{定义}
+\newtheorem*{proposition}{命题}
+\newtheorem*{theorem}{定理}
+\newtheorem*{notation}{记号}
+\newtheorem*{example}{例子}
+\newtheorem{exercise}{\textcolor{blue}{习题}}
+\theoremstyle{remark}
+\newtheorem*{remark}{备注}
+\newtheorem*{lemma}{引理}
+\newtheorem*{corollary}{推论}
+
+\title{习题: 矩阵的秩}
+\author{(2024-2025-1)-MATH1405H-02}
+
+\setcounter{page}{0}
+
+\setlength\parindent{0pt}
+
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\subsection{行满秩, 列满射}
+
+\begin{theorem}
+    将矩阵视作线性映射, 则秩是像的维数. 换言之, 
+    \begin{equation}
+        r(A)=\dim (C(A))=\dim (C(A^T)). 
+    \end{equation}
+\end{theorem}
+
+\begin{definition}[行满秩]
+    称 $A$ 是行满秩的, $A$ 的所有行线性无关. 
+\end{definition}
+
+\begin{exercise}[行满秩的等价定义]
+    使用相抵标准型之类的技巧, 证明以下关于矩阵 $A$ 的命题等价. 
+    \begin{enumerate}
+        \item $A$ 是行满秩的, 即, $A$ 的所有行线性无关. 
+        \item 存在 $B$ 使得 $AB$ 是单位矩阵. 此时, $B$ 称作右逆元. 
+        \item 对任意同规格且允许右乘 $A$ 的矩阵 $X$ 与 $Y$, 总有 $XA=YA$ 当且仅当 $X=Y$. 
+        \item 对任意可乘的向量 $x$, $x^TA=0$ 当且仅当 $x=0$. 
+        \item 存在矩阵 $B$ (有时 $B=\varnothing$) 使得 $\binom{A}{B}$ 是可逆矩阵. 
+    \end{enumerate}
+    \begin{proof}
+        证明顺序 
+        \begin{equation}
+            1\implies 2\implies 3\implies 4\implies 5\implies 1.
+        \end{equation}
+        \begin{enumerate}
+            \item ($1\implies 2$) 假定 $A$ 行满秩. 依照阶梯形主元分布, 存在列变换 $C$ 使得 $AC$ 能写作分块矩阵
+            \begin{equation}
+                AC = (S \quad T)\quad S\,\text{可逆}. 
+            \end{equation} 
+            此时取 $B=C\cdot \binom{S^{-1}}{O}$ 即可. 
+            \item ($2\implies 3$) 假定 $A$ 有右逆元 $B$, 则有推导链: 
+            \begin{equation}
+                (X=Y)\implies (XA=YA)\implies (XAB=YAB). 
+            \end{equation}
+            从而 $X=Y$ 当且仅当 $XA=YA$.
+            \item ($3\implies 4$) 直接地, $x^T A= 0^T A$ 当且仅当 $x^T=0^T$.  
+            \item ($4\implies 5$) 翻译 $4$ 为自然语言: 行线性组合为零当切记当线性组合系数为 $0$. 此时 $A$ 行线性无关. $A$ 能补全作可逆矩阵, 当且仅当其行阶梯形亦然. 
+            \item ($5\implies 1$) 直接的. 
+        \end{enumerate}
+    \end{proof}
+\end{exercise}
+
+\begin{example}
+    假定所有的矩阵乘法式与分块矩阵是合法的. 证明以下问题. 
+    \begin{enumerate}
+        \item 若 $A$ 与 $B$ 行满秩, 则 $AB$ 亦然. 
+        \item 若 $AB$ 行满秩, 则 $A$ 亦然. 
+        \item 若 $A$ 行满秩, 则 $(A\quad B)$ 亦然. 
+        \item 若 $\binom{A}{B}$ 行满秩, 则 $A$ 与 $B$ 亦然. 
+        \item 分块阵 $\binom{A\,\,O}{O\,\,B}$ 行满秩, 当且仅当 $A$ 与 $B$ 均行满秩. 
+    \end{enumerate}
+    对列满秩矩阵, 上述结论如何变化? (自行检验即可.)
+\end{example}
+
+\begin{remark}
+    左乘行满秩矩阵类似满射. 此处的满射是对集合, 交换群, 群, 线性空间等而言的. 
+    \begin{enumerate}
+        \item 若 $f$ 与 $g$ 是满射, 则 $f\circ g$ 亦然. 
+        \item 若 $f\circ g$ 满射, 则 $f$ 亦然. 
+        \item 若 $f_1:X_1\to Y$ 是满射, 则对任意 $f_2:X_2\to Y$, 复合 $X_1\sqcup X_2\xrightarrow{(f_1,f_2)} Y$ 亦然. 
+        \item 若 $\binom{f_1}{f_2}:X\to Y_1\times Y_2$ 是满射, 则 $f_1$ 与 $f_2$ 亦然. 
+        \item 略. 
+    \end{enumerate}
+    类似地, 右乘行满秩矩阵类似单射. 细节从略. 
+\end{remark}
+
+\newpage
+
+\subsection{常用技巧: 完全平方}
+
+\begin{example}
+    此例假定 $\mathbb Q\subset \mathbb F\subset \mathbb C$, 定义 $A^H=(\overline{a_{j,i}})$ 是矩阵的共轭转置. 则 
+    \begin{equation}
+        N(A)=N(A^HA)=N(AA^HA)=N(A^HAA^HA)=\cdots. 
+    \end{equation}
+    第一个等式的证明如下: 
+    \begin{enumerate}
+        \item 若 $Ax=0$, 则 $A^HAx=0$; 反之, 
+        \item 若 $A^HAx=0$, 则 $x^HA^HAx=\|Ax\|^2=0$, 从而 $Ax=0$. 
+    \end{enumerate}
+    每处等式都能归纳地得到. 
+\end{example}
+
+\begin{exercise}
+    固定数域上的矩阵 $A$. 称 $B$ 为``好矩阵'', 若 $B$ 是有限个 $A$ 与 $A^H$ 的交错积. 证明任意两个好矩阵的秩相同. 
+    \begin{proof}
+        以上例子表明 $r(A)=r(AA^H)=r((AA^H)^2)= \cdots$. 依照事实 $r(XY)\leq r(X)$ 与 $r(A)=r(A^H)$, 任何好矩阵的秩介于 $r(A)$ 与某一 $r((AA^H)^{2^k})$ 间. 从而好矩阵的秩恒等于 $r(A)$. 
+    \end{proof}
+\end{exercise}
+
+\begin{remark}
+    $A(A-A^H)=O$ 当且仅当 $A=A^H$. 这是另一份文件的习题, 也是 2023 年的第一次小测题. 
+    \begin{proof}
+        转化条件为 $\mathrm{tr}(A^2)=\mathrm{tr}(AA^H)$. 此时 
+        \begin{equation}
+            \sum_{i,j=1}^n a_{i,j}a_{j,i}=\sum_{i,j=1}^n |a_{i,j}|^2. 
+        \end{equation}
+        相减得完全平方式 $0=|a_{i,j}-\overline{a_{j,i}}|^2$, 即, $A=A^H$. 
+    \end{proof}
+\end{remark}
+
+\begin{proposition}
+    左乘矩阵不降低零空间的维数, 从而不增加秩. 
+\end{proposition}
+
+\begin{proposition}
+    若数域上的矩阵满足 $M^2=O$, 则 $r(M+M^T)=2\cdot r(M)$. 
+    \begin{itemize}
+        \item 我们将这一原理及其推广留至内积空间的重要应用: Hodge 分解. 
+    \end{itemize}
+    这一结论是``几何的'', 毕竟有限域上处处存在反例. 
+    \begin{proof}
+        考虑初等变换 
+        \begin{equation}
+            \begin{pmatrix}
+                A+A^{T} & O\\
+                O & O
+                \end{pmatrix} \rightsquigarrow \begin{pmatrix}
+                A+A^{T} & O\\
+                A\left( A^{T} +A\right) & O
+                \end{pmatrix} =\begin{pmatrix}
+                A+Q^T & O\\
+                AA^{T} & O
+                \end{pmatrix} \overset{\star}\rightsquigarrow \begin{pmatrix}
+                A+A^T & AA^{T}\\
+                AA^{T} & O
+                \end{pmatrix},
+        \end{equation}
+        以上 $\star$ 处的初等变换是``将第一列右乘 $A^T$ 再加之第二列''. 
+\begin{itemize}
+    \item 依照不等式 $r\begin{pmatrix}
+        A&O\\B&C
+    \end{pmatrix}\geq r(A)+r(C)$, 得 $r(A+A^T)\geq 2r(AA^T)$; 
+    \item 直接地, $r(A+A^T)\leq r(A)+r(A^T)$. 
+\end{itemize}
+数域的条件表明 $r(A^TA)=r(A)$, 以上两式即 $r(A+A^T)=2r(A)$. 
+        \begin{itemize}
+            \item \href{https://mp.weixin.qq.com/s/3UI9ahZTcZlr9gRF2Rg3Vw}{\underline{听豌豆说}}, 这是复旦这几天的考试题. 
+        \end{itemize}
+    \end{proof}
+\end{proposition}
+
+\newpage
+
+\subsection{秩不等式}
+
+\begin{exercise}
+    \textcolor{blue}{(Bonus)} 以下是秩的比较, 每一箭头朝向秩更大者. 哪些箭头是缺失的? 我没能看出更多. 
+    \begin{equation}
+        % https://q.uiver.app/#q=WzAsMTMsWzUsMSwicihBKStyKEIpIl0sWzAsMSwicihBQikiXSxbNCwwLCJyKChBXFxxdWFkIEIpKSJdLFs0LDEsInJcXGxlZnQoXFxiaW5vbXtBfXtCfVxccmlnaHQpIl0sWzMsMSwiXFxtYXgocihBKSxyKEIpKSJdLFszLDAsInIoQStCKSJdLFs1LDIsInJcXGxlZnQoXFxiaW5vbXtBXFwsXFwsIE99e09cXCxcXCxCfVxccmlnaHQpIl0sWzYsMSwiclxcbGVmdChcXGJpbm9te0FcXCxcXCwgT317Q1xcLFxcLEJ9XFxyaWdodCkiXSxbNiwyLCJyXFxsZWZ0KFxcYmlub217QVxcLFxcLCBEfXtPXFwsXFwsQn1cXHJpZ2h0KSJdLFsyLDIsInIoQSkiXSxbMiwxLCJyKEIpIl0sWzEsMSwiXFxtaW4gKHIoQSkscihCKSkiXSxbMywyLCJyXFxsZWZ0KFxcYmlub217QVxcLFxcLCBEfXtDXFwsXFwsQn1cXHJpZ2h0KSJdLFsyLDBdLFszLDBdLFs1LDJdLFs1LDNdLFswLDYsIiIsMix7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzQsMl0sWzQsM10sWzYsN10sWzYsOF0sWzEwLDRdLFs5LDRdLFsxMSwxMF0sWzExLDldLFsxLDExXSxbMTAsMTJdLFs5LDEyXV0=
+\begin{tikzcd}[ampersand replacement=\&, sep = small]
+	\&\&\& {r(A+B)} \& {r((A\quad B))} \\
+	{r(AB)} \& {\min (r(A),r(B))} \& {r(B)} \& {\max(r(A),r(B))} \& {r\left(\binom{A}{B}\right)} \& {r(A)+r(B)} \& {r\left(\binom{A\,\, O}{C\,\,B}\right)} \\
+	\&\& {r(A)} \& {r\left(\binom{A\,\, D}{C\,\,B}\right)} \&\& {r\left(\binom{A\,\, O}{O\,\,B}\right)} \& {r\left(\binom{A\,\, D}{O\,\,B}\right)}
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-4, to=2-5]
+	\arrow[from=1-5, to=2-6]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-2, to=3-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-3, to=3-4]
+	\arrow[from=2-4, to=1-5]
+	\arrow[from=2-4, to=2-5]
+	\arrow[from=2-5, to=2-6]
+	\arrow[Rightarrow, no head, from=2-6, to=3-6]
+	\arrow[from=3-3, to=2-4]
+	\arrow[from=3-3, to=3-4]
+	\arrow[from=3-6, to=2-7]
+	\arrow[from=3-6, to=3-7]
+\end{tikzcd}.
+    \end{equation}
+    注: 可以在另一份练习题中找到部分箭头的取等的充要条件. 如有兴趣, 可以继续总结探究. 
+    \begin{proof}
+        略. 
+    \end{proof}
+\end{exercise}
+
+\begin{proposition}[同时相抵化]
+    假定矩阵可加, 则 $r(A)+r(B)=r(A+B)$ 的充要条件是 $A$ 与 $B$ 能同时相抵化. 
+    \begin{itemize}
+        \item 假若熟悉线性映射的语言, 则可直接断言存在可逆矩阵 $P$ 与 $Q$ 使得
+        \begin{equation}
+            PAQ=\begin{pmatrix}I_{r(A)}&O\\O&O\end{pmatrix},\quad PBQ=\begin{pmatrix}O&O\\O&I_{r(B)}\end{pmatrix}. 
+        \end{equation}
+    \end{itemize}
+\end{proposition}
+
+\begin{exercise}
+    设 $A\in \mathbb F^{n\times m}$, $B\in \mathbb F^{m\times n}$, 则 $AB=O$ 且 $BA=O$ 的充要条件是
+    \begin{itemize}
+        \item 存在可逆矩阵 $P$ 与 $Q$, 使得 
+        \begin{equation}
+            PAQ=\begin{pmatrix}I_{r(A)}&O\\O&O\end{pmatrix},\quad Q^{-1}BP^{-1}=\begin{pmatrix}O&O\\O&I_{r(B)}\end{pmatrix}.
+        \end{equation}
+    \end{itemize}
+    \begin{proof}
+        只证明必要性. 若 $AB$ 与 $BA$ 是零方阵, 取 $P_0AQ_0$ 为 $A$ 的相抵化, 记同规格的分块矩阵
+        \begin{equation}
+            P_0AQ_0=\begin{pmatrix}
+            I&O\\O&O
+            \end{pmatrix},\quad Q_0^{-1}BP_0^{-1}=\begin{pmatrix}
+                B_1&B_2\\B_3&B_4
+            \end{pmatrix}. 
+        \end{equation}
+        此时 $AB=O$ 等价于 $B_1=O$ 且 $B_2=O$; $BA=O$ 等价于 $B_1=O$ 且 $B_3=O$. 再取
+        \begin{equation}
+            SB_4T=\begin{pmatrix}O&O\\O&I\end{pmatrix}. 
+        \end{equation}
+        以下相抵化即为所求: 
+        \begin{align}
+            \begin{pmatrix}I&O\\O&T^{-1}\end{pmatrix}\cdot P_0\cdot A\cdot Q_0\cdot \begin{pmatrix}I&O\\O&S^{-1}\end{pmatrix}& =\begin{pmatrix}
+                I_{r(A)}&O\\O&O
+                \end{pmatrix},\\[6pt]
+                \begin{pmatrix}I&O\\O&S\end{pmatrix}\cdot Q_0^{-1}\cdot B\cdot P_0^{-1}\cdot \begin{pmatrix}I&O\\O&T\end{pmatrix}&=\begin{pmatrix}
+                    O&O\\O&I_{r(B)}
+                \end{pmatrix}.
+        \end{align}
+    \end{proof}
+\end{exercise}
+
+\begin{definition}[广义逆]
+    记 $A$ 的一个相抵标准型是 $P\cdot \widetilde I\cdot Q$. 该相抵标准型对应的广义逆是 $Q^{-1}\cdot \widetilde I^T\cdot P^{-1}$. 
+    \begin{pinked}
+        此处谈论的不是 Moore-Penrose 逆 (有时这也叫广义逆). 
+    \end{pinked}
+\end{definition}
+
+\begin{remark}
+    既然相抵分解中的 $P$ 与 $Q$ 不唯一 , 容易见得广义逆亦不唯一. 
+\end{remark}
+
+\begin{example}
+    若 $AB=O$ 且 $BA=O$, 则 $A$ 存在一个广义逆 $A'$, 满足 $r(A'+B)=r(A)+r(B)$. 
+\end{example}
+
+\begin{exercise}
+    $A$ 与 $B$ 互为广义逆, 当且仅当 $ABA=A$ 且 $BAB=B$. 
+    \begin{proof}
+        只需证明 $\gets$ 方向. 假定 $A=P\cdot \widetilde I\cdot Q$ 是相抵标准型, 则考虑分块
+        \begin{equation}
+            B=Q^{-1}\cdot \begin{pmatrix}B_{11}&B_{12}\\B_{21}&B_{22}\end{pmatrix}\cdot P^{-1}. 
+        \end{equation}
+        由题设, $ABA=A$ 且 $BAB=B$. 
+        \begin{enumerate}
+            \item 依分块矩阵计算 $ABA=A$, 得 $B_{11}=O$; 
+            \item 依分块矩阵计算 $BAB=B$, 得 
+            \begin{equation}
+                \begin{pmatrix}
+                    B_{11}^2& B_{11}B_{12}\\B_{21}B_{11}&B_{21}B_{12}
+                \end{pmatrix}=\begin{pmatrix}
+                    B_{11}& B_{12}\\B_{21}&B_{22}
+                \end{pmatrix}. 
+            \end{equation}
+            此时为 $B$ 追加一次相抵标准化, 得 
+            \begin{equation}
+                \begin{pmatrix}
+                    I& O\\ -B_{21}& I
+                \end{pmatrix}\cdot Q\cdot B\cdot P\cdot \begin{pmatrix}
+                    I& -B_{12}\\ O& I
+                \end{pmatrix}. 
+            \end{equation}
+            对 $A$ 使用新的相抵化, $\widetilde I$ 不改变. 检验略. 
+        \end{enumerate}
+    \end{proof}
+\end{exercise}
+
+\begin{proposition}
+    广义逆在求解线性方程组中的应用 (假定 $Z$ 是 $A$ 的任意一个广义逆): 
+\begin{itemize}
+    \item $Ax=b$ 有解, 当且仅当 $Zb$ 是一个解; 此时, 线性方程组的所有解是 
+    \begin{equation}
+        Zb+\mathrm{im}(I-ZA)=\{Zb+(I-ZA)y\mid y\, \text{取遍所有可乘的向量}\}. 
+    \end{equation}
+\end{itemize}
+\end{proposition}
+
+\begin{exercise}
+    给定 $A\in \mathbb F^{m\times n}$, $B\in \mathbb F^{p\times q}$, 以及 $C\in \mathbb F^{m\times q}$. 若 $AY=C$ 与 $ZB=C$ 有解, 则 $AXB=C$ 有解. 
+    \begin{proof}
+        考虑 $C$ 的相抵标准型为 $P\widetilde IQ$. 此时
+        \begin{equation}
+            AY=P\begin{pmatrix}I_r&O\\O&O\end{pmatrix}Q=ZB.
+        \end{equation}
+        因此有 
+        \begin{equation}
+            A\left(YQ^{-1}\begin{pmatrix}I_r&O\\O&O\end{pmatrix}P^{-1}Z\right)B=P\begin{pmatrix}I_r&O\\O&O\end{pmatrix}^3Q=P\begin{pmatrix}I_r&O\\O&O\end{pmatrix}Q.
+        \end{equation}
+        本质上, 此处使用广义逆进行了类似 $MM^{(-1)}M=M$ 的操作. 
+    \end{proof}
+\end{exercise}
+
+\newpage
+
+\subsection{Schur 打洞 (Schur 补) 及其推广}
+
+\begin{pinked}
+    USTC 数学系曾有一句戏言: 龙生龙, 凤生凤, \href{www.mathgenealogy.org/id.php?id=4784}{华罗庚的学生}会打洞. 
+\end{pinked}
+
+\begin{definition}[传统的 Schur 补]
+    假定 $M:=\begin{pmatrix}
+        A & B\\
+        C & D
+        \end{pmatrix}$ 是分块矩阵, 其中 $A$ 是可逆方阵. 则有初等变换
+        \begin{equation}
+            \begin{pmatrix}
+                A & B\\
+                C & D
+                \end{pmatrix} \rightsquigarrow \begin{pmatrix}
+                A & B-A\left( A^{-1} B\right)\\
+                C & D-C\left( A^{-1} B\right)
+                \end{pmatrix} =\begin{pmatrix}
+                A & O\\
+                C & D-C\left( A^{-1} B\right)
+                \end{pmatrix} \rightsquigarrow \begin{pmatrix}
+                A & O\\
+                O & D-C A^{-1} B
+                \end{pmatrix}.
+        \end{equation}
+特别地, 定义 Schur 补为 $M/A:=D-C A^{-1} B$. 这一记号非常顺手, 因为 $\det (M/A)=\det M/\det A$. 
+\end{definition}
+
+\begin{example}
+    实际操作中, $A$ 与 $M$ 未必是方阵. 假若 $C(B)\subset C(A)$ 且 $C(C^T)\subset C(A^T)$, 则可以采用广义逆的方法定义 $M/A$. 细节从略. 
+\end{example}
+
+\begin{proposition}
+    以下是广义逆加上 Schur 打洞的一则应用: 给定分块矩阵 (不必是方阵) $M=\begin{pmatrix}
+        A&B\\C&D
+    \end{pmatrix}$, 其中 $r(M)=r(A)$; 若已知 $(A,B,C)$, 则 $D$ 可以唯一确定. 
+    \begin{proof}
+        求解 Schur 补的每一步都可以进行, 最后 $r(M)=r(A)+r(D-CA^{\dagger}B^{-1})$. 此处 $A^\dagger$ 是 $A$ 的任意广义逆. 依照题设, $r(D-CA^{\dagger}B^{-1})=0$ 是恒成立的, $D=CA^{\dagger}B^{-1}$ 也与 $A^\dagger$ 的取值无关, 自然是唯一确定的. 
+    \end{proof}
+\end{proposition}
+
+\begin{example}
+    (以上命题的推论) 若 $r(M)=r(F)$, 且 $(B,D,F,G,K)$ 固定, 则 $M$ 唯一决定. 此处
+    \begin{equation}
+        M:=\begin{pmatrix}
+            A & B & C\\
+            D & F & G\\
+            H & K & L 
+            \end{pmatrix}. 
+    \end{equation}
+\end{example}
+
+\begin{remark}
+    借用以上``十字引理'', 可以编出更多``好玩的问题''. 
+\end{remark}
+
+\begin{example}[Toy-``snake lemma'']
+    考虑以下分块矩阵: 
+    \begin{equation}
+        % https://q.uiver.app/#q=WzAsMzAsWzEsMSwiXFxzcXVhcmUiXSxbMiwxLCJcXCMiXSxbMywxLCIzIl0sWzQsMSwiMyJdLFs1LDEsIjUiXSxbMiwyLCJcXHNxdWFyZSJdLFszLDIsIjMiXSxbNCwyLCIzIl0sWzUsMiwiNSJdLFsxLDMsIjIiXSxbMiwzLCJcXCMiXSxbMywzLCJcXHNxdWFyZSJdLFs0LDMsIlxcIyJdLFs1LDMsIjUiXSxbNSw0LCJcXHNxdWFyZSJdLFs0LDQsIlxcIyJdLFszLDQsIjQiXSxbMiw0LCI0Il0sWzEsNCwiNCJdLFswLDQsIjQiXSxbMCwzLCIyIl0sWzAsMiwiMiJdLFswLDEsIlxcIyJdLFsxLDIsIjIiXSxbMCwwLCJcXHNxdWFyZSJdLFsxLDAsIjEiXSxbMiwwLCIxIl0sWzMsMCwiMyJdLFs0LDAsIjMiXSxbNSwwLCI1Il0sWzUsMTBdLFsxMCwxMV0sWzExLDEyXSxbMjIsMF0sWzE1LDE0XSxbMCwxXSxbMSw1XSxbMjQsMjJdLFsxMiwxNV1d
+\begin{tikzcd}[ampersand replacement=\&]
+	\square \& 1 \& 1 \& 3 \& 3 \& 5 \\
+	{\#} \& \square \& {\#} \& 3 \& 3 \& 5 \\
+	2 \& 2 \& \square \& 3 \& 3 \& 5 \\
+	2 \& 2 \& {\#} \& \square \& {\#} \& 5 \\
+	4 \& 4 \& 4 \& 4 \& {\#} \& \square
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=3-3]
+	\arrow[from=3-3, to=4-3]
+	\arrow[from=4-3, to=4-4]
+	\arrow[from=4-4, to=4-5]
+	\arrow[from=4-5, to=5-5]
+	\arrow[from=5-5, to=5-6]
+\end{tikzcd}.
+    \end{equation}
+    假定 $\square $ 与 $\#$ 是给定的, 数字处是未知的, 且所有 $\#$ 的秩与大矩阵相同, 则大矩阵唯一确定. 
+    \begin{proof}
+        使用上述引理依次补全 $1\to 2\to 3\to 4 \to 5$ 即可. 
+    \end{proof}
+\end{example}
+
+\begin{proposition}
+    四个 Toy-``snake lemma'' 可以拼成一个强形式的十字引理.  
+\end{proposition}
+
+\begin{example}
+    若 $A$ 与 $M/A$ 均是可逆方阵, 则
+    \begin{equation}
+        M^{-1}={\begin{pmatrix}A^{-1}+A^{-1}B(M/A)^{-1}CA^{-1}&-A^{-1}B(M/A)^{-1}\\-(M/A)^{-1}CA^{-1}&(M/A)^{-1}\end{pmatrix}}. 
+    \end{equation}
+    \begin{itemize}
+        \item 以上与 Sherman-Morrison-Woodbury 逆公式 (见\href{https://oc.sjtu.edu.cn/courses/72790/files/9615737?module_item_id=1272886}{习题课}) 有何异同之处? 
+    \end{itemize}
+\end{example}
+
+\begin{example}[``同构定理-丙'']
+    若遇到好的代数结构, 第一任务是检验四个同构定理 (日后将借用线性空间描述). Schur 补没有很好的乘法结构, 其在形式上仅满足同构定理-丙: 对矩阵
+    \begin{equation}
+        M=\begin{pmatrix}
+            A & B\\
+            C & D
+            \end{pmatrix} =\begin{pmatrix}
+            \begin{pmatrix}
+            E & F\\
+            G & H
+            \end{pmatrix} & B\\
+            C & D
+            \end{pmatrix},
+    \end{equation}
+    总有 $(M/A)=(M/E)/(A/E)$. 
+\end{example}
+
+\begin{exercise}
+    证明: 若 $A$ 是可逆方阵, 则 $A+BC$ 是可逆方阵当且仅当 $I+CA^{-1}B$ 是可逆方阵. 
+    \begin{itemize}
+        \item 此时能否求出 $A+BC$ 的逆? 可以类比\href{https://oc.sjtu.edu.cn/courses/72790/files/9615737?module_item_id=1272886}{第三次习题课第二题}. 
+    \end{itemize}
+    \begin{proof}
+        草稿: Taylor 展开, 错位相减. 正式证明: 先猜后证. 既然是草稿, 改用小写字母表示``矩阵'': 
+        \begin{align}
+            (a+bc)^{-1}&=a^{-1}(1+bca^{-1})^{-1}\\[6pt]
+            &=a^{-1}(1-bca^{-1}+bca^{-1}bca^{-1}-\cdots)\\[6pt]
+            &=a^{-1}-a^{-1}(bca^{-1}-bca^{-1}bca^{-1}+\cdots)\\[6pt]
+            &=a^{-1}-a^{-1}b(1-ca^{-1}b+ca^{-1}bca^{-1}b-\cdots)ca^{-1}\\[6pt]
+            &=a^{-1}-a^{-1}b(1+ca^{-1}b)^{-1}ca^{-1}.
+        \end{align}
+    此时仅需验证 $(A+BC)^{-1}=A^{-1}-A^{-1}B(I+CA^{-1}B)^{-1}CA^{-1}$. 左逆验证如下: 
+    \begin{align}
+        &\quad \,\,(A+BC)(A^{-1}-A^{-1}B(I+CA^{-1}B)^{-1}CA^{-1})\\[6pt]
+        &=I+BCA^{-1}-B(I+CA^{-1}B)^{-1}CA^{-1}+BCA^{-1}B(I+CA^{-1}B)^{-1}CA^{-1}\\[6pt]
+        &=I+BCA^{-1}-B(I-CA^{-1}B)(I+CA^{-1}B)^{-1}CA^{-1}\\[6pt]
+        &=I+BCA^{-1}-BCA^{-1}\qquad =I.
+    \end{align}
+    后略. 
+    \end{proof}
+\end{exercise}
+
+\begin{remark}
+    矩阵的行, 列可逆变换足以解决相当多的问题, 一般不会大动干戈地使用 Schur 补. 
+\end{remark}
+
+\subsection{初等变换与秩}
+
+\begin{example}
+    行列初等变换 (或可逆变换) 给出 
+        \begin{equation}
+            \begin{pmatrix}
+                O & AB\\
+                BC & B
+                \end{pmatrix}\quad \rightsquigarrow \quad \cdots \quad \rightsquigarrow \quad\begin{pmatrix}
+                ABC & O\\
+                O & B
+                \end{pmatrix}.
+    \end{equation}
+    从而 $r(AB)+r(BC)\leq r(B)+r(ABC)$. 试问取等的充要条件? (\href{https://oc.sjtu.edu.cn/courses/72790/assignments/305307?module_item_id=1271981}{相抵标准型的习题}中可找). 
+    \begin{enumerate}
+        \item 若 $B=I_n$, 则 $r(A)+r(C)\leq n+r(AC)$. 这是最为经典的 Silverster-秩不等式. 
+        \item 若 $B\in \mathbb F^{m\times n}$, $ABC=O$, 则 $r(A)+r(B)+r(C)\leq m+n$. 
+        \item 若 $A=C$, $B=A^k$, 则 $\left\{r(A^{k+1})-r(A^{k})\right\}_{k\in \mathbb N}$ 是单调递减的数列. 
+        \item 作为推论, 秩序列 $\{r(A^k)\}_{k\in \mathbb N}$ 的任意阶差分都是单调不增的数列. 
+    \end{enumerate}
+\end{example}
+
+\begin{exercise}
+    证明 $r\left(\begin{pmatrix}
+        A&B\\B&A
+    \end{pmatrix}\right)=r(A+B)+r(A-B)$. 此处 $A,B\in \mathbb F^{m\times n}$.  
+    \begin{proof}
+        (假定域的特征不为 $2$, 也就是存在 $x\in \mathbb F$ 使得 $x+x=1$.) 考虑初等变换
+        \begin{align*}
+            &\begin{pmatrix}
+                A&B\\B&A
+            \end{pmatrix}\rightsquigarrow\begin{pmatrix}
+                A+B&B+A\\B&A
+            \end{pmatrix}\overset{2\neq 0}\rightsquigarrow\begin{pmatrix}
+                A+B&A+B\\2B&2A
+            \end{pmatrix}\rightsquigarrow\\[6pt]
+            &\begin{pmatrix}
+                A+B&A+B\\-(A-B)&A-B
+            \end{pmatrix}\rightsquigarrow\begin{pmatrix}
+                2(A+B)&A+B\\O&A-B
+            \end{pmatrix}\overset{2\neq 0}\rightsquigarrow\begin{pmatrix}
+                2(A+B)&O\\O&A-B
+            \end{pmatrix}. 
+        \end{align*}     
+        若域的特征为 $2$, 则 $\begin{pmatrix}
+            A&B\\B&A
+        \end{pmatrix}\rightsquigarrow\begin{pmatrix}
+            A+B&O\\B&A-B
+        \end{pmatrix}$. 因此, 左式大于 $r(A+B)+r(A-B)$. 取 $A=B=1$ 为 $1$-阶方阵, 则左式为 $1$, 右式为 $0$. 
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}
+    证明 $r(AD-BC)\leq r(A-B)+r(C-D)$. 其中 $A,B\in \mathbb F^{m\times n}$, 以及 $C,D\in \mathbb F^{n\times l}$. 
+    \begin{proof}
+        直接使用秩不等式: 
+        \begin{equation}
+            r(AD-BC)=r((A-B)D-B(C-D))\leq r((A-B)D)+r(B(C-D))\leq r(A-B)+r(C-D).
+        \end{equation}  
+    \end{proof}
+\end{exercise}
+
+\begin{example}
+    给定 $A\in \mathbb F^{n\times m}$ 与 $B\in \mathbb F^{m\times n}$. 对 $\begin{pmatrix}
+        I_m&B\\A&I_n
+    \end{pmatrix}$ 使用初等变换, 得
+    \begin{equation}
+        r(I_m-BA)-m=r(I_n-AB)-n. 
+    \end{equation}
+    \begin{itemize}
+        \item (如果你学过特征多项式) 将 $I_m$ 换作 $xI_m$, 则 $x^{m}\cdot \det (xI_n-AB)=x^{n}\cdot \det (xI_m-BA)$. 
+    \end{itemize}
+    \begin{pinked}
+        日后经常遇见 $m=1$ 的情况. 
+    \end{pinked}
+\end{example}
+
+\begin{exercise}
+    若 $A^2=A$ 且 $B^2=B$, 则 $r(A-B)=r(A-AB)+r(B-AB)$. 
+    \begin{itemize}
+        \item 提示: 考虑 $A-B=A(A-B)-(B-A)B$, 并对 $A(A-B)B=O$ 使用 Silverster-秩不等式. 
+    \end{itemize}
+    \begin{proof}
+        一方面, $r(A-AB)+r(AB-B)\geq r(A-B)$. 另一方面, 考虑 $A(A-B)B=O$, 则有
+        \begin{equation}
+            0+r(A-B)\geq r(A(A-B))+r((A-B)B)=r(A-AB))+r(AB-B)
+        \end{equation}
+        结合 $A^2=A$ 与 $B^2=B$, 
+    \end{proof}
+\end{exercise}
+
+\begin{example}[特征为 $2$ 的``魔咒'']
+    称域的特征为 $2$, 当且仅当 $1+1=0$. 例如二元域. 
+    \begin{itemize}
+        \item 在\href{https://oc.sjtu.edu.cn/courses/72790/assignments/305307?module_item_id=1271981}{相抵标准型的习题}中, 对合矩阵 ($A^2=I$) 的相似标准型一般是 $\binom{I\quad }{\quad -I}$; 在特征为 $2$ 的域上, 总有 $(A-I)^2=O$, 因此相似标准型需要做出``适当的调整''. 
+    \end{itemize}
+    秩理论的普适性是一把双刃剑: 一方面, 由秩决定的定理无关域的选取; 另一方面, 请思考以下命题. 
+\begin{enumerate}
+    \item 假定 $A^2=I_n$, 则 $r(A-I)+r(A+I)\leq n$. 
+    \item 假定 $A^3=I_n$, 则 $r(A-I)+r(A)+r(A+I)\leq 2n$. 
+\end{enumerate}
+以上不等式取等, 当且仅当域的特征不为 $2$ (特别地, 数域). 
+\end{example}
+
+\end{document}

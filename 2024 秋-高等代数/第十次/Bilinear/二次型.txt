@@ -1,0 +1,473 @@
+**Ex 1** (消歧义问题) 假定 $U$ 是 $\mathbb F$ 上的有限维线性空间. 
+
+**(1)** 称 $f:U\times U\to \mathbb F$ 是双线性的, 当且仅当对任意向量与常数, 
+$$
+f(au+v,bx+y)=abf(u,x)+af(u,y)+bf(v,x)+f(v,y).\tag{$\star$}
+$$
+试证明: $\{f\mid f:U\times U\to \mathbb F\ \text{是双线性映射}\}$ 是一个 $\mathbb F$​-线性空间, 其对象是一些二元函数. 求其维度与基. 
+
+> 答: 先验证以上双线性函数构成线性空间. 零映射是双线性的. 定义 $(\lambda f+g)(u,v)=\lambda f(u,v)+g(u,v)$​, 对 $(\lambda f+g)$ 检验题干中式子 ($\star$​) 即可. 
+>
+> * 以下证明一个双线性映射对应一个矩阵, 且这一对应是单射. 给定一个双线性映射 $f$, 则 $f$ 是零映射当且仅当 $(f(e_i,e_j))_{1\leq i,j\leq n}$ 是全 $0$-矩阵. 这说明: 若 $f\neq g$, 则 $(f(e_i,e_j))_{1\leq i,j\leq n}\neq (g(e_i,e_j))_{1\leq i,j\leq n}$​. 
+>
+> * 以上对应是也是线性映射. 因为
+>   $$
+>   \lambda (f(e_i,e_j))_{1\leq i,j\leq n}+ (g(e_i,e_j))_{1\leq i,j\leq n}=((\lambda f+g)(e_i,e_j))_{1\leq i,j\leq n}. 
+>   $$
+>
+> * 最后证明以上对应是满射. 换言之, 对任一矩阵 $A\in \mathrm M_{n}(\mathbb F)$, 构造相应的双线性型. 记 $A=(a_{i,j})_{n\times n}$, 则 
+>   $$
+>   f_A:U\times U\to \mathbb F,\quad \left(\sum_i c_ie_i,\sum _j d_ie_j\right)\mapsto \sum_{i,j}c_id_ia_{i,j}
+>   $$
+>   即为所求. 可以直接验证, $f_A$ 是双线性映射, 且其对应的矩阵就是 $A$​. 
+>
+> 以上的线性双射由下表描述: 
+> $$
+> \begin{matrix}
+> \mathrm M_n(\mathbb F)&\longleftrightarrow &[U\times U\to \mathbb F]\\[6pt]
+> (f(e_i,e_j))_{n\times n}&\longleftarrow & f\\[6pt]
+> A=(a_{i,j})_{n\times n}&\longrightarrow & \underbracket{\{(e_i,e_j)\mapsto a_{i,j}\}_{1\leq i,j\leq n}} \limits_{\text{生成的双线性映射}}
+> \end{matrix}
+> $$
+> 由于 $\mathrm M_n(\mathbb F)$ 是 $n^2$ 维空间, 基是 $(E_{i,j})_{1\leq i,j\leq n}$; 依照同构, 全体双线性映射也是 $n^2$ 维空间, 基底 (作为集合) 中的元素恰好是所有 $E_{i,j}$ 在上述线性双射下的像:  
+> $$
+> E_{i,j}\quad \longrightarrow \quad \{(e_i,e_j)\mapsto \delta_{i,j}\}_{1\leq i,j\leq n}.
+> $$
+> 此处 $\delta_{i,j}=1$ 当且仅当 $i=j$, 反之 $\delta_{i,j}=0$. 
+
+**(2)** 依照集合的 Cartesian 积, 定义新的集合 $U\times U=\{(u_1,u_2)\mid u_1,u_2\in U\}$. 试证明 $U\times U$​ 也是线性空间, 并求其维度与基. 
+
+> 答: $U\times U$ 的维度是 $2\cdot \dim U$. 一种合理的看法: 将 $U\times U$ 视作大线性空间, 则 $U_\text{左}=\{(u,0)\mid u\in U\}$ 与右 $U_{\text{右}}=\{(0,u)\mid u\in U\}$ 都是 $U\times U$ 的子空间, 此时
+> $$
+> U\times U=U_{\text{左}}\oplus U_{\text{右}}.
+> $$
+> 只需解决以下问题: 若 $V$ 是 $2n$-维线性空间, 求证: 
+>
+> * 全体 $(V\to \mathbb F)$-类型的线性映射构成的线性空间, 求其维度和基. 
+>
+> 验证以下线性双射对应即可: 
+> $$
+> \begin{matrix}
+> \mathbb F^{2n}&\longleftrightarrow & [\mathbb F^{2n}\to \mathbb F] \ \text{类型的线性映射}\\[6pt]
+> \sum_{i=1}^{2n} c_i e_i&\longrightarrow & \underbracket{\{e_i\mapsto c_i\}_{1\leq i\leq 2n}}\limits_{\text{生成的线性映射}} \\[6pt]
+> \sum_{i=1}^{2n} f(e_i)e_i&\longleftarrow & f
+> \end{matrix}.
+> $$
+
+**(3)** 试证明: $\{f\mid f:U\times U\to \mathbb F\ \text{是线性映射}\}$ 是一个 $\mathbb F$-线性空间, 其对象是一些一元函数. 求其维度与基. 
+
+> 为避免记号上的混乱, 往后使用 $f:U\ \&\ U \to \mathbb F$​​ 表示双线性映射. 
+
+****
+
+<div style="page-break-after: always;"></div>
+
+**Ex 2** 二次型的最值问题.
+
+> 实对称矩阵的结构定理: $A$ 是实对称矩阵, 当且仅当以下等价命题成立: 
+>
+> * $A$ 可对角化且特征空间两两垂直, 
+> * 存在正交矩阵 $Q$ 使得 $Q^TAQ$​ 是对角矩阵. 
+>
+> 默认大家会证明这一命题. 
+
+**(1)** 记 $A$ 是实对称矩阵, 证明 $A$ 的最大特征值是 $\sup_{x\neq \mathbf 0}\frac{x^TAx}{x^Tx}$, 并考虑取达最大值的充要条件. 同时, 这也说明 $\sup$ 可以改成 $\max$​. 
+
+> 答: 记 $(v_i,\lambda_i)_{i=1}^n$ 是 $A$ 的所有特征对 (不合并重数), 满足 $\lambda_1\geq \lambda_2\geq\cdots \geq \lambda_n$, 以及 $\|v_i\|=1$. 任意 $x$ 都写作标准正交基的线性组合式
+> $$
+> x=\sum _i c_i v_i.
+> $$
+> 此时 $\sup_{x\neq \mathbf 0}\frac{x^TAx}{x^Tx}=\sup_{\mathbf c\neq \mathbf 0}\frac{\sum \lambda_i c_i^2}{\sum c_i^2}=\lambda_1$. 取等当且仅当 $x\in \mathrm{Span}_{\lambda_k=\lambda_1}(v_1,\ldots, v_k)\setminus \{\mathbf 0\}$. 
+
+**(2)** 记 $A$ 是实对称矩阵, 记最大特征值 $\lambda_1$ 的重数为 $1$, 相应的特征向量是 $Av=\lambda_1 v$. 证明 $A$ 的第二大特征值是 $\sup_{x\perp x_1, x\neq \mathbf 0}\frac{x^T Ax}{x^Tx}$. 此处, $x_1$ 是使得上一问取达最大值的任意向量. 
+
+> 答: 相当于给上一问的 $\sup$-条件中多加上 $k=1$ 与 $c_1=0$ 的两个限制. 答案自然是第二大特征值. 
+
+**(3)** 假定 $A$ 是实对称正定矩阵, 证明 $\inf_{x\neq \mathbf 0}\frac{x^TA^{-1}x}{x^Tx}$ 和 $\sup_{x\neq \mathbf 0}\frac{x^T Ax}{x^Tx}$ 互为倒数.
+
+> 答: 记 $A=Q^T\Lambda Q$, 则 $A^{-1}=Q^T\Lambda^{-1}Q$. 因此 $A$ 的最大特征值与 $A^{-1}$ 的最小特征值互为倒数. 
+
+**(4)** 记 $\{x_i\}_{i=1}^n$ 是实数, 满足 $x_1^2+\cdots +x_n^2=1$ 与 $x_1+\cdots +x_n=0$. 求
+$$
+x_1x_2+x_2x_3+\cdots +x_{n-1}x_n+x_nx_1
+$$
+的最大值. 可以使用 **(2)** 的结论. 
+
+> 答: 相当于求 $\begin{pmatrix}
+>  & 1 &  &  & 1\\
+> 1 &  & 1 &  & \\
+>  & 1 &  & \ddots  & \\
+>  &  & \ddots  &  & 1\\
+> 1 &  &  & 1 & 
+> \end{pmatrix}$ 的第二大特征值 (的一半). 这一矩阵的特征多项式是循环矩阵的行列式, 第二大特征值为 $2\cos \frac {2\pi } n$. 
+
+****
+
+<div style="page-break-after: always;"></div>
+
+**Ex 3** 中学时有个定理: 记 $R$ 与 $S$ 是两个三维空间的几何体. 定义
+$$
+R+S:=\{(x_1+x_2,y_1+y_2,z_1+z_2)\mid (x_1,y_1,z_1)\in R, (x_2,y_2,z_2)\in S\}. 
+$$
+记 $|\cdot|$ 是体积, 则 $\sqrt[3]{|R|}+\sqrt[3]{|S|}\leq \sqrt[3]{|R+S|}$​ (无需证明这一命题). 
+
+> 我们可以将实对称正定矩阵 $A$ 看作旋转后的长方体, 作为线性映射, 其功效是沿坐标轴的正向拉伸. 这一长方体的各边长即 $Q^TAQ=\Lambda$ 的对角元, 体积即 $\det A$. 
+
+假定 $A$ 与 $B$ 是 $n$-阶实对称正定矩阵, 试证明:
+$$
+(\det A)^{1/n}+(\det B)^{1/n}\leq (\det (A+B))^{1/n}.
+$$
+
+> Proof. Consider $A=R^TR$. Without the loss of generality, set $A=I$. It suffices to show that 
+> $$
+> 1+\det (R^{T,-1}BR^{-1})^{1/n}\leq \det (I+R^{T,-1}BR^{-1})^{1/n}.
+> $$
+> Since $R^{T,-1}BR^{-1}$ is positive definite, there exists $Q\in O(n)$ such that $Q^T (R^{T,-1}BR^{-1})Q=\mathrm{diag}(\lambda_1,\ldots, \lambda_n)$. Hence, it suffices to prove that 
+> $$
+> 1+\prod_{i=1}^n \lambda_i^{1/n}\leq \prod_{i=1}^n(1+\lambda_i)^{1/n}. 
+> $$
+> Consider AM-GM inequality, or Holder inequality, ....
+
+****
+
+<div style="page-break-after: always;"></div>
+
+**Ex 4** 正定与减法. 
+
+**(1)** 记 $A\in \mathrm M_n(\mathbb R)$ 是实对称正定矩阵, $Q\in \mathbb R^{n\times m}$ 有标准正交的列向量. 证明 $Q^TA^{-1}Q-(Q^TAQ)^{-1}$ 半正定. 
+
+> 提示: 不失一般性地, 记 $Q=\begin{pmatrix}I_m\\O\end{pmatrix}$, $A=\begin{pmatrix}S&R\\R^T&T\end{pmatrix}$, 其中 $S$ 与 $T$ 对称. 右乘 $Q$ 零化最后 $(n-m)$ 列, 左乘 $Q^T$ 零化最后 $(n-m)$ 行, 因此再不妨设 $T=I$. 计算初等变换
+> $$
+> \begin{array}{c}
+> \begin{pmatrix}
+> S & R & I & O\\
+> R^{T} & I & O & I
+> \end{pmatrix}\\
+> \downarrow \\
+> \begin{pmatrix}
+> S-RR^{T} & O & I & -R\\
+> R^{T} & I & O & I
+> \end{pmatrix}\\
+> \downarrow \\
+> \begin{pmatrix}
+> S-RR^{T} & O & I & -R\\
+> O & I & * & I
+> \end{pmatrix}
+> \end{array}.
+> $$
+> 因此 $Q^TA^{-1}Q=(S-RR^T)^{-1}$. 故只需证明 $(S-RR^T)^{-1}-S^{-1}$ 半正定. 两侧同乘对称正定矩阵 $(S-RR^T)$, 得
+> $$
+> S-RR^T-(S-RR^T)S^{-1}(S-RR^T)=R(I-R^TS^{-1}R)R^T. 
+> $$
+> 为证明以上矩阵是半正定的, 只需证明 $I-R^TS^{-1}R$ 正定: 可使用初等变换证明, 或是发现该矩阵是正定阵的 Schur 补. 
+
+**(2)** 记 $A\in \mathrm M_n(\mathbb R)$ 是正定矩阵, 的矩阵 $H\in \mathbb R^{m\times n}$. 证明: $A-H^TH$ 正定等价于 $I-HA^{-1}H^T$ 正定.
+
+> 答: 若 $A=R^TR$ 对称正定, 则 $R^TR-H^TH$ 正定等价于 $I-R^{T,-1}H^THR^{-1}$ 正定. 
+>
+> * 回忆依照熟知结论: $AB$ 与 $BA$ 的特征值仅相差若干个 $0$​. 因为 $\lambda^m \det (\lambda I_n-AB)=\lambda^n\det(\lambda I_m-BA)$. 
+>
+> 因此 $I-(HR^{-1})^T(HR^{-1})$ 与 $I-(HR^{-1})(HR^{-1})^T$ 的特征值相差若干 $1$, 从而两者正定性相同. 此时
+> $$
+> I-(HR^{-1})(HR^{-1})^T=I-H(R^TR)^{-1}H^T=I-HA^{-1}H^T.
+> $$
+> 若 $A$ 亚正定 (不必对称但 $x^T Ax>0$​​), 试给反例. 
+> $$
+> \begin{align*}
+> A-H^TH&=
+> \begin{pmatrix}
+> 1&0\\1&1
+> \end{pmatrix}
+> -
+> \begin{pmatrix}
+> \sqrt{7/8}\\\sqrt{7/8}
+> \end{pmatrix}
+> \cdot
+> \begin{pmatrix}
+> \sqrt{7/8}\\\sqrt{7/8}
+> \end{pmatrix}^T
+> =
+> \dfrac{1}{8}\begin{pmatrix}
+> 1&-7\\1&1
+> \end{pmatrix},\\[10pt]
+> I-HA^{-1}H^T&=1-\begin{pmatrix}
+> \sqrt{7/8}\\\sqrt{7/8}
+> \end{pmatrix}^T
+> \cdot
+> \begin{pmatrix}
+> 1&0\\-1&1
+> \end{pmatrix}
+> \cdot
+> \begin{pmatrix}
+> \sqrt{7/8}\\\sqrt{7/8}
+> \end{pmatrix}
+> =\dfrac 18.
+> \end{align*}
+> $$
+
+**(3)** (谢启鸿白皮书上的亚正定矩阵) 称实矩阵 $A$ 是亚正定的, 当且仅当 $x^TAx>0$ 对一切 $x\neq \mathbf 0$ 成立. 简单地看, 亚正定是少了对称约束的正定. 若 $A$ 亚正定, $B$ 对称, 且 $A-B$ 亚正定, 试证明 $B^{-1}-A^{-1}$​​ 也是亚正定的.  
+
+> 答: 使用 $B^{-1}-A^{-1}=(B+B(A-B)^{-1}B)^{-1}$. 
+>
+> 亚正定矩阵 (包括亚半定矩阵) 的一般结论见谢启鸿博客 [2015S12](https://www.cnblogs.com/torsor/p/12272213.html) 与 [2020S15](https://www.cnblogs.com/torsor/p/12389147.html). 
+>
+> 亚正定矩阵的特征值实部为正, 故有且仅有一个平方根, 其特征根实部为正. 试问: 上述平方根仍是亚正定的吗? 
+
+****
+
+<div style="page-break-after: always;"></div>
+
+**Ex 5** (极分解) 以下仅谈论对称半正定实方阵. 
+
+**(1)** 若 $A$ 是对称半正定矩阵, 则存在唯一的对称半正定矩阵 $\sqrt A$ 使得 $\sqrt A^2=A$​. 
+
+> 答: 存在性由 $Q^T\sqrt {\Lambda }Q$ 构造地证明. 下证明唯一性. 若 $B^2=A$, 则
+>
+> * $B$ 的特征根都是实数, 同时可对角化. 
+> * $B$ 与 $A$ 是可交换的可对角化的矩阵, 因此 $A$ 与 $B$​ 可同时对角化. 
+>
+> 基于以上, 只需证明半正定对角矩阵有唯一的半正定对角平方根. 这是显然的. 
+
+**(2)** 任何矩阵 $A$ 都是对称半正定矩阵与正交矩阵的乘积 (不妨假设 $A=SQ$). 若 $A$​ 对称正定, 则这一分解唯一. 
+
+> 答: 由奇异值分解 $A=U^T\Sigma V=U^T\Sigma U\cdot (U^TV)$, 得存在性. 若 $A=S_1Q_1=S_2Q_2$ 对称正定, 则
+> $$
+> S_1^2=S_1S_1^T=AA^T=S_2S_2^T=S_2^2. 
+> $$
+> 由于正定矩阵有唯一的正定平方根, 得 $S_1=S_2$. 左乘 $S_1^{-1}$ 得 $Q_1=Q_2$. 
+
+**(3)** 假定 $S$ 实半正定, $Q$ 正交. 若 $\det(xI-SQ)=\det(xI-S)$, 则 $S=SQ$​. 
+
+> 答: $SQ$ 的所有特征值在 $\mathbb R$ 中, 从而存在正交矩阵使得 $U^TSQU=T$ 是三角的, 其对角元即 $S$ 的特征值. 依照题设, 得 $\mathrm{tr}(TT^T)=\mathrm{tr}(SS^T)$. 故
+> $$
+> \text{$T$ 中所有元素平方和}=\mathrm{tr}(TT^T)=\mathrm{tr}(S^2)=\sum \lambda_S^2=\text{$T$ 中所有对角元的平方和}.
+> $$
+> 因此 $T$ 是对角矩阵. 由于 $T^2=TT^T=U^TS^2U$, 依照半定矩阵有唯一的半定平方根, 得 $U^TSU=T=U^TSQU$, 即, $S=SQ$.  
+
+**(4)** 证明两个半正定矩阵的乘积是可对角化的. 
+
+> 答: 假定 $A$ 与 $B$ 是半正定矩阵. 存在可逆矩阵 $R$, 使得 $R^TAR=\mathbb I_r$​ 是相抵标准型. 此时
+> $$
+> R^TAB R^{-1,T}=\mathbb I_r\cdot R^{-1}BR^{-1,T}. 
+> $$
+> 是两个半正定矩阵的乘积. 据此, 不妨假设 $A=\mathbb I_r=\begin{pmatrix}I&O\\O&O\end{pmatrix}$. 记 $B=\begin{pmatrix}S&R\\R^T&T\end{pmatrix}$. 计算得 $AB=\begin{pmatrix}S&R\\O&O\end{pmatrix}$. 依照 $r(S\quad R)=r(S)$ (比较左零空间), $AB$ 相似于分块对角矩阵 $\begin{pmatrix}S\\&O\end{pmatrix}$, 此处 $S$ 可对角化. 
+
+****
+
+<div style="page-break-after: always;"></div>
+
+**Ex 6** (正交相似的判定准则) 称矩阵对 $(A,B)$ 与 $(C,D)$ 同时相似, 当且仅当存在可逆矩阵 $P$ 使得 
+$$
+P^{-1}AP=C,\quad P^{-1}BP=D.
+$$
+**(1)** 若 $(A,A^T)$ 与 $(B,B^T)$ 同时相似, 当且仅当 $A$ 与 $B$ 正交相似. 
+
+> 答: 若 $A$ 与 $B$ 正交相似, 即 $Q^TAQ=B$, 则 $Q^TA^TQ=B^T$. 若存在 $P$ 使得
+> $$
+> PAP^{-1}=B,\quad PA^TP^{-1}=B^T,
+> $$
+> 代入过渡矩阵做极分解, $P=QS$, 得 
+> $$
+> QSAS^{-1}Q^T=B,\quad QSA^TS^{-1}Q^T=B^T. 
+> $$
+> 对右式取转置并消 $B$, 发现 $S^TS=S^2$ 与 $A$ 乘积可交换. 考虑对称半正定矩阵 $S$ 与 $S^2$ 的同时对角化, 可以发现 $S$ 是 $S^2$ 的多项式. 因此 $A$ 与 $S$ 交换. 
+>
+> * 这告诉我们, 正交相似的过渡矩阵, 必然是通常相似中过渡矩阵之极分解中的正交矩阵. 
+
+**(2)** 对复矩阵而言, $(A,A^H)$ 与 $(B,B^H)$ 通过复矩阵同时相似, 当且仅当 $A$ 与 $B$​ 酉相似. 
+
+> 同上. 
+
+**(3)** 证明: 实矩阵 $A$ 与 $B$ 通过酉矩阵相似, 当且仅当 $A$ 与 $B$ 通过正交矩阵相似. 
+
+> 类似的问题: $A$ 与 $B$​​ 相似, 当且仅当他们在某个扩域上相似. 试回忆: $A\sim B$ 当且仅当 $(\lambda I-A)$ 与 $(\lambda I-B)$ 相抵. 
+>
+> 答: 若 $(\lambda I-A, \lambda I-A^T)$ 与 $(\lambda I- B,\lambda I-B^T)$ 在复数域上同时相抵, 则其在实数域上同时相抵. (同时相抵通过零空间刻画, 零空间维数由标准阶梯形决定, 也就是由线性相关性决定; 线性相关性与扩域无关). 
+>
+> 这一处理将复杂的正交相似变成简单的零空间问题. 
+>
+> 思考: 假设两个 $2\times 2$ 的实矩阵通过行列式为 $1$ 的复矩阵相似, 那么它们一定通过某个行列式为 $1$​ 的实矩阵相似吗? 
+>
+> 答: 不是. 反例自寻. 
+
+**(4)** 若 $\begin{pmatrix}A&O\\O&A\end{pmatrix}$ 与 $\begin{pmatrix}B&O\\O&B\end{pmatrix}$ 正交相似, 证明 $A$ 与 $B$​​ 正交相似. 
+
+> 结论正确. 初等方法不详. 
+>
+> 如果有人学习了近世代数中的 Krull-Schmidt 定理, 并且觉得该定理近乎显然, 则可以想想如何用该定理解决此题. 
+
+**(5)** 若 $A$ 和 $B$ 既相似, 又合同, 则是否一定正交相似? 
+
+> Hint: 王子涵会写, 可以问他. 
+
+****
+
+<div style="page-break-after: always;"></div>
+
+**Challenging Problems** 
+
+**(1)** Assume $A,B\in \mathrm M_n(\mathbb R)$ are symmetric and positive definite. Prove that 
+$$
+\underbracket{A\circ B}\limits_{\text{Hadamard Product}}:=(a_{i,j}\cdot b_{i,j})_{n\times n}
+$$
+ is also positive definite. ($A\circ B$ is also known as Stupid Matrix Product.)
+
+> Real Challenge: Prove it within 20 words. Hint: Kronecker product. 
+>
+> 详细的解答: 若 $A=Q^T\Lambda Q$, 且 $B=P^T\Mu P$, 则其 Kronecker 积也是正定的, 参考
+> $$
+> A\otimes B=(Q\otimes P)^T(\Lambda\otimes \Mu) (Q\otimes P).
+> $$
+> 由于 $A\circ B$ 是 Kronecker 积的某个主子式, 故正定. 
+
+**(2)** Find the largest real number $C_n$​ for each positive integer $n$​, such that for any real numbers $x_1, x_2, \ldots, x_n$​, the following inequality holds:
+$$
+\sum_{i=1}^n \sum_{j=1}^n(n-|j-i|) x_i x_j \geq C_n \sum_{i=1}^n x_i^2.
+$$
+
+> 有同学发现这是 2023 CMO, 那可以问之前做过的同学. 
+
+**(3)** Find the largest real number $C$ such that for any real numbers $x_1, x_2, \ldots, x_{2^{2024}}$ with $\sum_{i=1}^{2^{2024}}x_i=0$, the following inequality holds:
+$$
+\sum_{1\leq i<j\leq n}\delta_{(j-i)}\cdot x_ix_j\leq C\sum_{i=1}^n x_i^2.
+$$
+Here $\delta_{2^k}=1$, otherwise $\delta=0$​​. 
+
+> 答: 记 $(0,1)$-对称矩阵 $A_{2024}$ 是仅保留点与边的 $n=2^{2024}$-维超立方体图 (见第八次作业中的图论部分). 由于 $\mathbf 1$ 是最大特征值的特征向量, 故此题答案自然是 $1+\frac{\lambda_2(A_{2024})}2$. 计算特征值及其重数: 
+>
+> 1. $\mathrm{eigen}(A_1)=(1^{(1)},-1^{(1)})$; 
+> 2. $\mathrm{eigen}(A_2)=(2^{(1)}, 0^{(2)}, -2^{(1)})$; 
+> 3. $\mathrm{eigen}(A_3)=(3^{(1)}, 1^{(3)}, -1^{(3)}, -3^{(1)})$; 
+> 4. $A_{n+1}=\begin{pmatrix}A_n&I\\I&A_n\end{pmatrix}$, 不难验证 $\mathrm{eigen}(A_{n+1})=\{\pm 1\}+\mathrm{eigen}(A_n)$​. 
+>
+> 第二大特征值是 $2022$, 故上式最大值是 $1012$. 
+
+**(4)** Prove that
+$$
+\sum_{i=1}^n\ \sum_{j=1}^n \frac{a_ia_j}{{(p_i+p_j)}^c}\ge 0
+$$
+holds for arbitrary reals $a_1,a_2,\ldots, a_n$, and positive numbers $c$, $p_1, p_2,\ldots,p_n$. 
+
+> Hint: Let $A(t)$ be symmetric positive definite with variable $t$, then so is $\int_I A(t)\operatorname dt$​​. 
+>
+> 答: 凑出积分式
+> $$
+> \begin{align*}
+> &\quad \ \int_0^\infty \left( \sum_{i=1}^n a_i e^{-p_it} \right)^2 t^{c-1}
+>   \,\mathrm{d}t\\[6pt]
+> &=\int_0^\infty \left( \sum_{i=1}^n \sum_{j=1}^n a_ia_j
+>     e^{-(p_i+p_j)t} \right) t^{c-1} \,\mathrm{d}t
+>   = \sum_{i=1}^n \sum_{j=1}^n a_ia_j 
+>   \int_0^\infty t^{c-1} e^{-(p_i+p_j)t} \,\mathrm{d}t\\[6pt]
+>   &= \sum_{i=1}^n \sum_{j=1}^n \frac{a_ia_j}{(p_i+p_j)^c}
+>   \int_0^\infty \big((p_i+p_j)t\big)^{c-1} e^{-(p_i+p_j)t}
+>   (p_i+p_j)\,\mathrm{d}t\\[6pt]
+>   &= \sum_{i=1}^n\ \sum_{j=1}^n \frac{a_ia_j}{{(p_i+p_j)}^c}\cdot \Gamma (c).
+> \end{align*}
+> $$
+> 也可以置 $a_i=1$, 使用 Challenge problem 1 的做法. 
+
+**(5)** Let $f$ be continuous in $[0,+\infty)$, such that $\int_0^\infty (f(x))^2\operatorname dx<\infty$. Suppose 
+$$
+\int_0^\infty e^{-kx}f(x)\operatorname dx =1\quad (\forall k=1,2,\ldots, n). 
+$$
+Find $\inf\int _0^\infty (f(x))^2\operatorname dx$. (Neither $\varepsilon$ nor $\delta$ appears in the solution.)
+
+> Hint: Use $\int_0^\infty fg\leq \sqrt{\int_0^\infty f^2}\cdot \sqrt{\int_0^\infty g^2}$ (CS inequality). Set $g=\sum_{1\leq k\leq n} c_ke^{-kx}$​. 
+>
+> 答: 对如上 $g$, 计算得 
+> $$
+> \sum_{1\leq k\leq n}c_k =\int_0^\infty fg\operatorname  dx\leq \sqrt{\int_0^\infty f^2\operatorname dx}\cdot \sqrt{\int_0^\infty g^2\operatorname dx}.
+> $$
+> 计算得 
+> $$
+> \int_0^\infty g^2\operatorname dx=\sum_{1\leq i,j\leq n}\frac{c_ic_j}{i+j}.
+> $$
+> 从而对一切 $c=(c_1,c_2,\ldots, c_n)$ 都有
+> $$
+> \int_0^\infty f^2\operatorname dx\geq \frac{\sum_{1\leq i,j\leq n}c_ic_j}{\sum_{1\leq i,j\leq n}\frac{c_ic_j}{i+j}}=\frac{x^T \cdot J\cdot x}{x^T\cdot H \cdot x}.
+> $$
+> 其中, $H$ 是 Hilbert 矩阵, $J$ 是全 $1$ 矩阵. 记 $H=L^TL$, 则上式为 $\frac{x^TL^{-1, T}JL^{-1}x}{x^Tx}$ 的最大值, 即 $L^{-1, T}\mathbf 1\cdot \mathbf 1^T L^{-1}$ 的最大特征值. 依照 Ex 4.2 中的技巧, 只需求 $\mathbf 1^T H^{-1}\mathbf 1$​ 的最大特征值, 也就是这个常数本身. 
+>
+> * 以下计算 Cauchy 矩阵 $C:=(\frac{1}{x_i+y_j})_{n\times n}$ 的逆矩阵的所有元素和. 这个结果可以照[此处](https://proofwiki.org/wiki/Sum_of_Elements_in_Inverse_of_Cauchy_Matrix)暴算, 也可以观察以下恒等式: 对任意矩阵 $D$, 总有
+>   $$
+>   \begin{align*}
+>   \sum_{1\leq i,j\leq n}(x_i+y_j)\cdot C_{i,j}\cdot D_{j,i} &= \sum_{1\leq i, j\leq n} x_i C_{i,j}D_{j,i}+\sum_{1\leq i, j\leq n} y_j D_{j,i}C_{i,j}\\[6pt]
+>   &= \sum_{1\leq i\leq n} x_i (CD)_{i,i}+\sum_{1\leq i, j\leq n} y_j (DC)_{j,j}. 
+>   \end{align*}
+>   $$
+>   代入 $D=D^T=C^{-1}$, 左式即 $\mathbf 1^TC^{-1}\mathbf 1$, 右式为 $\sum_{1\leq k\leq n} (x_k+y_k)$. 
+>
+> 原答案为 $n(n+1)$. 取等条件略, 因为特征向量的存在性表明等号能取到. 
+
+****
+
+<div style="page-break-after: always;"></div>
+
+**Fun Exercise: $2$-Distance Set Problem** 
+
+以下谈论的距离 (度量) 都是 $\mathbb R^n$ 上的通常距离 (度量), 即, $\|x-y\|=\sqrt{\sum(x_i-y_i)^2}$​. 
+
+1. 最多能在 $\mathbb R^n$ 中找到几个点, 使得这些点是等距的? 
+
+   > 换言之, 求极大的子集 $\{v_i\}_{i=1}^N\subset \mathbb R^n$, 使得对任意 $i\neq j$, 模长 $\|v_i-v_j\|$​ 是非零常数. 
+
+2. 称有限点集 $S\subset \mathbb R^n$ 是巧妙的, 当且仅当存在正数 $p,q>0$, 使得
+   $$
+   \|x-y\|\in \{p,q\}\quad (\forall x,y\in S, x\neq y).
+   $$
+   以下证明 $|S|\leq \frac{(n+1)(n+4)}{2}$. 在证明之前, 可以先自行尝试. 
+
+3. 记 $\mathbb R[t_1,t_2\ldots,t_n]$ 是全体 $n$ 元多项式. 记 $\|t\|^2=t_1^2+\cdots +t_n^2$, 试证明以下 $\frac{(n+1)(n+4)}{2}$ 个多项式是 $\mathbb R$-线性无关的: 
+   $$
+   \{(\|t\|^2)^2\}\cup \{t_i\cdot \|t\|^2\}_{i=1}^n\cup \{t_i\cdot t_j\}_{1\leq i<j\leq n}\cup \{t_i\}_{i=1}^n\cup \{1\}.
+   $$
+
+4. 记巧妙集 $S=\{v_1,\ldots , v_m\}\subset \mathbb R^n$. 定义函数
+   $$
+   f: \mathbb R^{2n}\to\mathbb R ,\quad (x,y)\mapsto (\|x-y\|^2-p^2)\cdot (\|x-y\|^2-q^2).
+   $$
+   写出矩阵 $(f(v_i,v_j))_{1\leq i,j\leq m}\in \mathrm M_m(\mathbb R)$.  
+
+5. 给定形如 $g(x,y)=g_1(x)\cdot g_2(y)$ 的函数, 证明 $(g(v_i,v_j))_{1\leq i,j\leq m}$ 的秩是 $1$. 
+
+6. 使用 3., 4., 以及 5. 以证明 2.. 
+
+****
+
+<div style="page-break-after: always;"></div>
+
+**Elementary Exercise: The Geometry of Hadamard Matrix** 
+
+给定实向量空间 $\mathbb R^n$ 及其有限子集 $S=\{v_i\}_{i=1}^k\subset \mathbb R^n$. 定义 Gram 矩阵
+$$
+G(v_1,v_2,\ldots, v_k):=(x_i^T\cdot x_j)_{k\times k}\in \mathrm M_k(\mathbb R).
+$$
+Gram 行列式 $\det (G(S))$ 是良定义的, 因为交换向量次序不改变行列式的值. 以下采用简便记号 $|S|_G:=\det (G(S))$. 
+
+1. 证明 $|S|_G=0$ 当且仅当 $S$ 是线性相关组. 
+
+2. 证明向量 $v$ 到子空间 $\mathrm{Span}(S)$ 的距离是 $\sqrt{\frac{|S\cup \{v\}|_G}{|S|_G}}$​. 
+
+   > Hint: 使用唯一分解 $v=v_{\text{平行于 $\mathrm{Span}(S)$}}+v_{\text{垂直于 $\mathrm{Span}(S)$}}$. 
+
+3. 使用 Gram 行列式定义向量组的模长, 以及子空间之间的夹角. 
+
+   > 其结果应当与向量的模长, 以及方向之间的夹角统一. 
+
+4. 定义 $\sin _G(v,S):=\frac{\text{$v$ 到 $\mathrm{Span}(S)$ 的距离}}{\|v\|}=\sqrt{\frac{|S\cup \{v\}|_G}{|S|_G\cdot |\{v\}|_G}}$. 若 $S_1\subset S_2$, 试证明
+   $$
+   \sin_G(v,S_1)\geq \sin _G(v,S_2).
+   $$
+
+5. 记 $S$ 是 $A\in \mathrm M_n(\mathbb R)$ 的 $n$ 个列向量, 记 $S_{\leq i}=\{v_1, v_2,\ldots, v_i\}$. 证明, 
+   $$
+   |\det A|=\sqrt{|S|_G}=\underbracket{\|v_1\|\cdot \|v_2\|\cdots \|v_n\|}\limits_{\text{模长}}\cdot \underbracket{\sin _G(S_1,v_2)\cdot \sin _G(S_2,v_3)\cdots \sin _G(S_{n-1},v_n)}\limits_{\text{夹角部分}}.
+   $$
+
+6. 证明 Hadamard 不等式
+   $$
+   |\det A|\leq \left(\prod_{i=1}^n\|v_i\|\right)\cdot \left(\prod_{1\leq i<j\leq n}\sin^2 (v_i,v_j)\right). 
+   $$
+   并说明取等条件. 
+

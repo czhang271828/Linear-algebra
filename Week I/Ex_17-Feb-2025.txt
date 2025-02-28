@@ -1,0 +1,30 @@
+**Problem Set for 17-Feb-2025** 
+
+**Suggestions for self-study in advance** 
+1. Review the fundamental definitions of Abelian groups, fields, vector spaces (linear spaces), linear subspaces, linear maps, and related concepts.
+2. It is highly recommended to summarise the linear maps encountered in *mathematical analysis*. For instance, the integral
+    $$
+    \int_0 ^1 (-) \operatorname d x : R([0,1]) \to \mathbb R,\quad f \mapsto \int_0^1 f(x) \operatorname d x
+    $$
+    is a well-defined $\mathbb R$-linear map. In your textbook on mathematical analysis, propositions such as *$\int (f + g) = \int f + \int g$* demonstrate (a part of) the linearity property.
+
+**Problem 1.** Let $\mathbb{F}$ be an arbitrary ground field, and let $\mathbb{F}[x]$ denote the polynomial ring (algebra) in one indeterminate. For the sake of convention, assume that $x^0 = 1$.
+
+1. Demonstrate that $\mathbb{F}[x]$ forms a vector space over $\mathbb{F}$ with the basis $\{x^n\}_{n \geq 0}$. 
+2. Determine whether the set $\{x^n + 2 \cdot x^{n-1}\}_{n \geq 1}$ constitutes a basis for $\mathbb{F}[x]$, and provide your reasoning.
+3. Investigate whether the series $e^x = 1 + \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots$ belongs to $\mathbb{F}[x]$, and provide your reasoning.
+4. (Optional) Let $\mathbb{F}\langle x \rangle$ denote the linear space of *formal power series*, which takes the form
+    $$
+    \mathbb{F}\langle x \rangle = \left\{ \sum_{k=0}^{\infty} a_k x^k \mid a_k \in \mathbb{F} \right\}. 
+    $$
+    One can identify $\mathbb{F}[x]$ as a proper linear subspace of $\mathbb{F}\langle x \rangle$. Let
+    $$
+    \ell : \mathbb{F}[x] \to \mathbb{F}, \quad \sum_{k=0}^{n} a_k x^k \mapsto \sum_{k=0}^{n} a_k
+    $$
+    be a linear map which sends a polynomial to the sum of its coefficients. 
+
+    Is it possible to define a linear map $\mathcal{L} : \mathbb{F}\langle x \rangle \to \mathbb{F}$ such that $\mathcal{L}(f) = \ell(f)$ for any $f \in \mathbb{F}[x]$?
+5. Let $U \subseteq V$ be an inclusion of a proper linear subspace (potentially infinite-dimensional), and let $\ell : U \to W$ be a linear map. Is it always possible to find a linear map $\mathscr{L} : V \to W$ such that $\mathscr{L} = \ell$ when restricted to $U$? A related question (though not exactly requires same system of axioms) is whether it is always possible to construct a direct sum $U \oplus W = V$ provided that $U \subseteq V$. 
+
+    You may either offer a simple response, such as *it is quite difficult*, or provide a more detailed reflection of your thoughts. It is also recommended to finish *this subproblem* with the assistance of AI models. 
+

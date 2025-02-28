@@ -1,0 +1,59 @@
+#### 第三周习题
+
+![Reduced Row-Echelon Form (RREF): Definition, Steps & Examples](https://cdn.jsdelivr.net/gh/czhang271828/imgs/test/Reduced-Row-Echelon-Form.webp)
+
+<center><a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.geeksforgeeks.org%2Freduced-row-echelon-form%2F&psig=AOvVaw1LHJDEF70g5Yrhw533YA0l&ust=1729078315724000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCIjmv-2kkIkDFQAAAAAdAAAAABAZ">图片地址</a></center>
+
+**注 1: 最简行阶梯形: 拐角处是 $1$; 拐角的上, 左, 下方均是 $0$.**
+
+**注 2: 所有习题与域的选取无关. 切勿做出 $\mathbb F=\mathbb R$​ 之类的假定.** 
+
+<div style="page-break-after: always;"></div>
+
+**Problem 1** (基础巩固-矩阵的初等变换) 约定一切行是横行 (row). 给定 $n$ 行的矩阵 $A$. 
+
+1. 交换 $A$ 的 $[i,j]$ 两行, 等价于左乘一个矩阵 $S_{i,j}$. 写出该矩阵.
+2. 将 $A$ 第 $k$ 行的各项同时乘上一个非零常数 $\lambda$, 等价于左乘一个矩阵 $D_k^{\lambda}$. 写出该矩阵.
+3. 向 $A$ 的第 $j$ 行加上其第 $i$ 行的 $\lambda$ 倍 (这一过程仅改变第 $j$ 行, 其他行不变), 等价于左乘一个矩阵 $T_{i,j}^\lambda$. 写出该矩阵.
+4. 求逆变换 (逆矩阵) $S_{i,j}^{-1}$, $(D_k^\lambda)^{-1}$, 以及 $(T_{i,j}^\lambda)^{-1}$. 
+5. 使用自然语言描述这三类逆变换. 
+6. 求 $S_{i,j}S_{k,l}=S_{k,l}S_{i,j}$ 的充要条件. 
+7. 求 $T_{i,j}^\lambda T_{k,l}^\mu=T_{k,l}^\mu T_{i,j}^\lambda$ 的充要条件. 
+8. 以上给出了三类矩阵. 能否通过某两类矩阵得到第三类? 请讨论这三种情况 (构造或给出反例). 
+9. 假定 $A$ 是方阵. 将以上 $S_{i,j}$, $T_{i,j}$ 与 $D_k$ 乘在 $A$ 的右侧, 效果如何? 
+
+****
+
+<div style="page-break-after: always;"></div>
+
+**Problem 2** (温故知新-相抵标准型) 矩阵的最简行阶梯形  (*reduced row échelon form*). 
+
+1. 给定矩阵 $A$, 其最简行阶梯形 $R$ 为何唯一? 
+
+2. (接上一小问) 尝试给出一个不用计算的证明 (无字证明). 
+
+   * 提示: 行变换不改变各列的线性相关性. 
+
+3. 转置矩阵 $R^T$ 的最简行阶梯形是什么? 
+
+4. 证明相抵标准型的存在性: 对任意矩阵 $A$, 存在可逆矩阵 $P$ 和 $Q$ 使得
+   $$
+   A=P\begin{pmatrix}I_r&O\\O&O\end{pmatrix}Q.
+   $$
+   以上, $I_r$ 是 $r$ 阶单位矩阵, $O$ 表示数字 $0$ 出现的位置. 
+
+   注意: 中间的 $(0,1)$-矩阵兼并了以下三类退化矩阵
+   $$
+   \begin{pmatrix}I_r&O\end{pmatrix},\quad \begin{pmatrix}I_r\\O\end{pmatrix},\quad \begin{pmatrix}I_r\end{pmatrix}.
+   $$
+   
+5. 证明以上的 $r$ 由 $A$ 唯一决定.  作为推论, 矩阵的行秩等于列秩. 往后统一称作秩. 
+
+****
+
+<div style="page-break-after: always;"></div>
+
+**Challenging Problem 1** 若整数矩阵 $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ 满足 $ad-bc=1$, 则 $A$ 是以下几类矩阵的有限乘积
+$$
+S = \begin{pmatrix}0 & 1 \\ -1 & 0\end{pmatrix}, \qquad  T = \begin{pmatrix}1 & 1 \\ 0 & 1\end{pmatrix},\qquad T^{-1} = \begin{pmatrix}1 & -1 \\ 0 & 1\end{pmatrix}.
+$$

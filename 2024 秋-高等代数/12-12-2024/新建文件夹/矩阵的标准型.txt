@@ -1,0 +1,66 @@
+### 12-Dec-2024 习题课
+
+* 10:00-11:40, 东中院 3-406. 
+
+****
+
+[TOC]
+
+#### 线性映射与矩阵表达
+
+**约定** 所有线性空间都是有限维的. 
+
+**引入** 给定线性映射 $\varphi: U\to V$. 
+
+> 这一线性映射已经唯一确定. 其本质与基的选取无关. 
+
+如果将 $U$ 与 $V$ 赋予一组的基底 $(u_1\mid \cdots \mid u_m)$ 与 $(v_1\mid \cdots \mid v_n)$, 则线性映射通过以下 $m$ 个等式描述: 
+$$
+\varphi(u_i)=\sum_{j=1}^n a_{j,i}\cdot v_j\quad (a_{j,i}\in \mathbb F).
+$$
+换言之, 每个 $\varphi(u_i)$ 唯一地表示做 $v_j$-向量的线性组合. 从矩阵的视角看, 
+$$
+\varphi (u_1\mid \cdots \mid u_m) = (v_1\mid \cdots \mid v_n)\cdot A_{n\times m}. 
+$$
+
+> 将系数 $a_{j,i}$ 直白地描述如下: $\varphi (u_i)$ 中 $v_j$ 的分量. 
+
+**例子** (相抵标准型) 给定线性映射 $\varphi:U\to V$ 与矩阵表述 $\varphi(u_\bullet)=v_\bullet\cdot A$​. 今考虑
+
+1. 对 $u_\bullet$ 右乘可逆方阵 $P$, 功效是 $U$ 上的基变换 $u_\bullet \mapsto u_\bullet\cdot P=\overline u_\bullet $; 
+2. 对 $v_\bullet$ 右乘可逆方阵 $Q$, 功效是 $V$ 上的基变换 $v_\bullet \mapsto v_\bullet\cdot Q=\overline v_\bullet$. 
+
+计算得 $\varphi (\overline u_\bullet)=\varphi (u_\bullet)\cdot P=v_\bullet \cdot A\cdot P=\overline v_\bullet \cdot Q^{-1}\cdot A\cdot P$​. 试比较
+
+* 线性映射在原基下矩阵表达: $\varphi(u_\bullet)=v_\bullet\cdot A$; 
+
+* 线性映射在新基下的矩阵表达: $\varphi(\overline u_\bullet)=\overline v_\bullet \cdot (Q^{-1}AP)$. 
+
+> 这一转换 $A\mapsto Q^{-1}AP$​ 称作相抵变换. 
+
+<img src="https://cdn.jsdelivr.net/gh/czhang271828/imgs/test/image-20241211190553843.png" alt="image-20241211190553843" style="zoom:33%;" />
+
+**命题** (秩是相抵变换的轨道) 给定矩阵 $M\in \mathbb F^{m\times n}$, 定义 $M$ 的轨道是子集
+$$
+t_M:=\{PMQ\mid P\in \mathrm{GL}_m(\mathbb F),Q\in \mathrm{GL}_n(\mathbb F)\}\subset \mathbb F^{m\times n}
+$$
+直观地, $t_M=t_N$ 当且仅当 $M$ 与 $N$ 相抵, 当且仅当 $r(M)=r(N)$, 从而
+$$
+t_M=\{N\mid r(N)=r(M)\}.
+$$
+**SLOGAN** 标准型是轨道中的代表元, 其一一对应于轨道. 
+
+
+
+
+
+****
+
+#### 相抵标准型的两则例题
+
+
+
+
+
+
+

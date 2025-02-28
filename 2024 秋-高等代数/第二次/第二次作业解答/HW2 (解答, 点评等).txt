@@ -1,0 +1,335 @@
+\documentclass[11pt]{ctexart}
+\usepackage[margin=2cm,a4paper]{geometry}
+\usepackage{amsthm, amsfonts, amsmath, amssymb, mathrsfs, newclude, tikz-cd, tikz, ctex, mathtools, stmaryrd, datetime}
+
+%\setmainfont{Caladea}
+
+%% 也可以选用其它字库:
+% \setCJKmainfont[%
+%   ItalicFont=AR PL KaitiM GB,
+%   BoldFont=Noto Sans CJK SC,
+% ]{Noto Serif CJK SC}
+% \setCJKsansfont{Noto Sans CJK SC}
+% \renewcommand{\kaishu}{\CJKfontspec{AR PL KaitiM GB}}
+
+
+
+\usepackage[colorlinks = true,
+linkcolor = blue,
+urlcolor  = blue,
+citecolor = blue,
+anchorcolor = blue]{hyperref}
+
+% Include the x-color package for color support
+\usepackage{xcolor}
+
+% Define a new environment for red comments
+\usepackage{verbatim} % Required for the comment environment
+\usepackage{environ}
+
+\usepackage{mdframed} % Include mdframed for creating framed environments
+
+\definecolor{pinked}{RGB}{255,231,229} % Define a base color 
+% Define a new environment with a background color
+\newmdenv[
+  backgroundcolor=pinked, % Set the desired background color
+  linecolor=white, % Optional: Set the border line color
+  linewidth=1pt, % Optional: Set the border line width
+  roundcorner=5pt, % Optional: Set rounded corners
+  nobreak=true % Optional: Prevent page breaks within the environment
+]{pinked}
+
+\theoremstyle{definition}
+\newtheorem{qqq}{问题}[section]
+
+\newcommand{\ExternalLink}{%
+    \tikz[x=1.2ex, y=1.2ex, baseline=-0.05ex]{% 
+        \begin{scope}[x=1ex, y=1ex]
+            \clip (-0.1,-0.1) 
+                --++ (-0, 1.2) 
+                --++ (0.6, 0) 
+                --++ (0, -0.6) 
+                --++ (0.6, 0) 
+                --++ (0, -1);
+            \path[draw, 
+                line width = 0.5, 
+                rounded corners=0.5] 
+                (0,0) rectangle (1,1);
+        \end{scope}
+        \path[draw, line width = 0.5] (0.5, 0.5) 
+            -- (1, 1);
+        \path[draw, line width = 0.5] (0.6, 1) 
+            -- (1, 1) -- (1, 0.6);
+        }
+    }
+
+\NewEnviron{aaa}{~\\
+    \noindent {\textcolor{teal}{\textbf{解答}} \BODY }
+}
+
+\NewEnviron{llll}{
+    \noindent {~\\$\ExternalLink$ 外部链接 $\,\,\,$ \color{blue}\url{\BODY} }
+}
+
+\renewcommand{\proofname}{证明}
+\renewcommand\qedsymbol{${\boxed{\substack{\textit{完证}\\\textit{毕明}}}}$}
+
+% Change equation numbering to include the section number
+\usepackage{cleveref}
+\renewcommand{\theequation}{\thesection.\thesubsection.\arabic{equation}}
+\numberwithin{equation}{section}
+
+\usepackage{listings}
+% Define listings style
+\lstset{
+  frame=tb,
+  language=TeX,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+\theoremstyle{definition}
+\newtheorem*{definition}{定义}
+\newtheorem*{proposition}{命题}
+\newtheorem*{theorem}{定理}
+\newtheorem*{notation}{记号}
+\newtheorem*{example}{例子}
+\newtheorem*{exercise}{习题}
+\theoremstyle{remark}
+\newtheorem*{remark}{备注}
+\newtheorem*{lemma}{引理}
+\newtheorem*{corollary}{推论}
+
+\title{第二次作业反馈: \textbf{四元数不是域!}}
+\author{(2024-2025-1)-MATH1405H-02}
+
+\setcounter{page}{0}
+
+\setlength\parindent{0pt}
+
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{符号说明}
+
+以下是几点符号说明. 
+
+    \begin{enumerate}
+        \item 向量直接写作 $v$, 不必使用粗体或上加箭头. 
+        \item 我们不区分以下记号 $\subset$, $\subseteq$, $\subseteqq$与 $\sqsubset$, 但推荐使用前两者; 若想表示真包含, 请用 $\subsetneq$ 或 $\subsetneqq$. 
+        \item 禁止使用 $\because$ 与 $\therefore$ (这是某种简便记号, 不应出现在正式写作中), 请直接用``因为''与``所以''. 
+        \item 禁止使用 $\div$, 请使用分数或 $(-)^{-1}$. 
+        \item 禁止使用 $C_n^p$ 表示组合数, 统一写作 $\binom np$. 
+        \item 禁止使用 $\times$ 表示矩阵乘法, 请使用 $\cdot$ 或直接省略.  
+        \item 禁止使用 $0$ 表示零矩阵 $O$; 但 $0$ 可以表示常数, 零向量, 以及零线性空间. 
+    \end{enumerate}
+
+\section{第二次作业 (自学任务)}
+
+\subsection{第一个自学任务} 
+
+\begin{exercise}
+    结合以上定义, 
+    \begin{enumerate}
+        \item 若 $\varnothing_V$ 是 $V$ 的空子集, 则 $\mathrm{Span}_{(\mathbb F,V)}(\varnothing_V)$ 是什么? 
+        \item 若 $S$ 是有限集, 请说明以上定义的 $\mathrm{Span}_{(\mathbb F,V)}(S)$ 与课堂中的表述一致. 
+        \item 若 $S$ 是无限集, 则 $\mathrm{Span}_{(\mathbb F,V)}$ 是什么? 
+    \end{enumerate}
+    \begin{proof}
+        如下. 
+        \begin{enumerate}
+            \item $\mathrm{Span}_{(\mathbb F,V)}(\varnothing_V)$ 是包含 $\varnothing$ 的最小的 $V$-线性子空间. 线性空间有 $0$, 容易检查 $\mathrm{Span}_{(\mathbb F,V)}(\varnothing_V)=0$. 
+            \item 不妨设 $S=\{v_i\}_{i=1}^k$. 需要证明: 包含 $S$ 的最小线性子空间是
+            \begin{equation}
+                \left\{\sum_{i=1}^n c_i v_i\mid c_i\in \mathbb F\right\}.
+            \end{equation}
+            以上集合是线性子空间 (关于线性运算封闭), 且与 $\mathrm{Span}_{(\mathbb F,V)}(\varnothing _V)$ 互相包含. 
+            \item 作为集合, $\mathrm{Span}_{(\mathbb F,V)}(S)=\bigcup_{S_0\subset S}\mathrm{Span}_{(\mathbb F,V)}(S_0)$, 其中 $S_0$ 取遍所有 $S$ 的有限子集. 
+            \begin{pinked}
+                注意: 线性空间没有 $\cup$ 这类运算, 但以上集合确实``自动是线性空间''. 由于检验线性空间``八条公理''的每一步骤都是对有限个对象进行的, 从而是在某一有限维线性子空间中进行的, 因此成立. 
+            \end{pinked}
+            此处的普适性原理: $\mathbb F$-线性空间向集合范畴的遗忘函子\href{https://ncatlab.org/nlab/show/created+limit}{生 (create)} 一切\href{https://ncatlab.org/nlab/show/inverse+limit}{极限 (inverse limit)} 与\href{https://ncatlab.org/nlab/show/filtered+colimit}{滤过余极限 (filtered co-limit)}, 类似的结论不胜列举. 简单地说, 
+            \begin{pinked}
+                (SLOGAN) 对线性空间考虑零点集, 无穷交, 以及建立等价关系等操作时, 只需在集合层面上操作, 得到的东西 (若存在) 自动是线性空间 (且唯一). 不需额外地进行验证.  
+            \end{pinked}
+            若无法理解, 那就认真写证明过程吧. 可以把这个 SLOGAN 看成 coincidence 而非 theorem. 
+        \end{enumerate}
+    \end{proof}
+\end{exercise}
+
+\subsection{习题课相关}
+
+\begin{exercise}[1]
+    State the definition of a number field, and prove that number fields are $\mathbb Q$-linear spaces. 
+    \begin{proof}
+        实际上, 但凡一个域包含 $\mathbb Q$ (严谨地说, 存在一个同构于 $\mathbb Q$ 的子域), 则该域是 $\mathbb Q$-线性空间. 直接验证即可. 借由此题, 我们将数域的定义统一如下: 
+        \begin{pinked}
+            \begin{definition}[数域]
+                称 $K$ 是数域, 当且仅当 $K$ 是有限维 $\mathbb Q$-线性空间, 且 $K$ 是域. 
+            \end{definition}
+        \end{pinked}
+    \end{proof}
+\end{exercise}
+
+\begin{remark}
+    按照惯例, 今后作业 (或试题) 会在必要时标注
+    \begin{pinked}
+        Throughout, $\mathbb Q\subset \mathbb F\subset \mathbb C$. 
+    \end{pinked}
+以下是今后不多考虑的两类域. 二元域 (有限域) 必不是数域, 因为数域中 $(x\neq 0)\to (x+x\neq 0)$. 有理函数域 $\mathbb C(x)=\{p(x)/q(x)\}$ 看似比 $\mathbb C$ ``严格大'', 但在承认选择公理时仍能视作 $\mathbb C$ 的子域. 
+\end{remark}
+
+\begin{exercise}[2]
+    Prove that the $3$-dimensional $\mathbb Q$-linear space
+\begin{equation}
+    V=\{a+b\cdot 2^{1/3}+c\cdot 2^{2/3}\mid a,b,c\in \mathbb Q\}
+\end{equation}
+ is a number field.  
+ \begin{proof}
+    不平凡的地方是构造分母有理化, 从而证明 $(a+b\sqrt[3]2+c\sqrt[3]4)^{-1}\in V$. 似乎可以在``谢书''上找到本题的原题 (解法也是暴力的分母有理化). ``聪明''的解法是证明有理化的存在性, 而非直接构造. 
+    \begin{lemma}
+        取 $x=a+b\sqrt[3]2+c\sqrt[3]4$, 存在一个次数不超过 $3$ 的非零多项式 $f$, 使得 $f(x)=0$. 
+        \begin{proof}
+            题中的记号 $V$ 引导我们将 $x$ 视作有理数的向量 $(a,b,c)\in \mathbb Q^3$. 此时, $x^2\in V$ 也有对应的有理数的向量形式. 由于 $V$ 是三维的, 从而四元集 $\{1,x,x^2,x^3\}$ 关于域 $\mathbb Q$ 线性相关. 考虑``表出其线性相关性''的系数, 得 $f$ 的系数. 
+        \end{proof}
+    \end{lemma}
+    不妨设 $f$ 无法分解成真因子的乘积. 对 $x\neq 0$, 总有 $f(0)\neq 0$. 记 $f(t)=a_0+a_1t+a_2t^2+a_3t^3$, 那么
+    \begin{equation}
+        x^{-1}=\frac{a_1+a_2x^1+a_3x^2}{-a_0}\in V. 
+    \end{equation}
+ \end{proof}
+\end{exercise}
+
+\begin{remark}
+    Challenge: generalise \& prove. 依照以上解法, 显然. 
+\end{remark}
+
+\begin{exercise}[3]
+    Find a field $K$ such that $\mathbb C$ is a proper subfield of $K$. 
+    \begin{proof}
+        找到 $\mathbb C(x)$ 就足够了. \textbf{特别注意: 四元数不是域, 因为域的乘法需要交换!}
+        \begin{itemize}
+            \item 如果要求 ``$K$ 无法以任何形式视作 $\mathbb C$ 的子域'', 那就构造一个比 $\mathbb C$ 还大的集合 $S$ (例如 $\mathbb C$ 的幂集, 由理发师悖论). 最后构造 $\mathbb C$ 关于 $S$ 的自由扩张 (所有有限扩张的并集, 依照此文档 2.1.3 的``注意'', 这是一个域). 
+        \end{itemize}
+         
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}[4]
+    Prove that $(1,e^x,e^{2x},\ldots, e^{2024 x})$ are linearly independent real-valued functions. 
+    \begin{proof}
+        (实值函数的) 积分和求导都是 (域 $\mathbb R$ 上的) 线性映射, 试在高中课本上寻找并补全相关定义. 
+        \begin{pinked}
+            对给定的线性映射 $T$, 则 $\{v_i\}_{i=1}^n$ 线性无关是 $\{T(v_i)\}_{i=1}^n$ 线性无关的必要条件. 
+        \end{pinked}
+        依逆否命题, 若存在非零系数的组合式使得 $\sum c_k e^{kx}=0$, 则对任意阶求导都有 $\sum c_k \frac{\operatorname{d}^n}{\operatorname{d} x^n} e^{kx}=0$. 换言之, 对 $n=0,1,2,\ldots, 2024$ 都有
+        \begin{equation}
+            \sum_{k=0}^{2024} k^n c_ke^{kx}=0\quad (n=0,1,\ldots, 2024). 
+        \end{equation}
+        采用矩阵表示, 即 
+        \begin{equation}
+            \begin{pmatrix}
+                0^{0} & 1^{0} & 2^{0} & \cdots  & 2024^{0}\\
+                0^{1} & 1^{1} & 2^{1} & \cdots  & 2024^{1}\\
+                0^{2} & 1^{2} & 2^{2} & \cdots  & 2024^{2}\\
+                \vdots  & \vdots  & \vdots  & \ddots  & \vdots \\
+                0^{2024} & 1^{2024} & 2^{2024} & \cdots  & 2024^{2024}
+                \end{pmatrix} \cdot \begin{pmatrix}
+                c_{0} e^{0x}\\
+                c_{1} e^{1x}\\
+                c_{2} e^{2x}\\
+                \vdots \\
+                c_{2024} e^{2024x}
+                \end{pmatrix} =\begin{pmatrix}
+                0\\
+                0\\
+                0\\
+                0\\
+                0
+                \end{pmatrix} .
+        \end{equation}
+        记上式为 $A\cdot b=0$. 依照 \href{https://en.wikipedia.org/wiki/Vandermonde_matrix}{Vandermonde matrix}, $A$ 可逆. 从而 $b=0$. 
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}[5]
+    Find $n$ such that $\left(\sin \frac{\pi}{2n},\sin \frac{2\pi}{2n},\ldots, \sin \frac{(n-1)\pi}{2n}\right)$ are linearly dependent (over $\mathbb Q$). 
+    \begin{proof}
+        反例可以由``和差化积''公式以及 $2\cdot \cos\frac{\pi}{3}=1$ 轻易给出. 
+    \end{proof}
+\end{exercise}
+
+\subsection{线性子空间}
+
+\begin{example}[线性空间的``分配律'']
+    观察子空间的式子 $(U_1\cap U_3)+(U_2\cap U_3)\subset (U_1+U_2)\cap U_3$. 
+    \begin{itemize}
+        \item (包含关系成立) 原理: 若 $A\subset B$ 与 $C\subset B$, 则有 $(A+C)\subset B$. 
+        \item (不必取等) 以下所有 $U_i$ 都是 $\mathbb R^2$ 的一维子空间. 取 
+        \begin{equation}
+            U_1=\mathrm{Span}(\{(1,0)\}),\quad  U_2=\mathrm{Span}(\{(0,1)\}),\quad  U_3=\mathrm{Span}(\{(1,1)\}). 
+        \end{equation} 
+    \end{itemize}
+\end{example}
+
+
+\begin{example}[线性空间的``分配律'']
+    观察子空间的式子 $(U_1+ U_3)\cap (U_2+ U_3)\supset (U_1\cap U_2)+ U_3$. 
+    \begin{itemize}
+        \item (反包含关系成立) 原理: 若 $A\supset B$ 与 $C\supset B$, 则有 $(A\cap C)\supset B$. 
+        \item (不必取等) 以下所有 $U_i$ 都是 $\mathbb R^2$ 的一维子空间. 取 
+        \begin{equation}
+            U_1=\mathrm{Span}(\{(1,0)\}),\quad  U_2=\mathrm{Span}(\{(0,1)\}),\quad  U_3=\mathrm{Span}(\{(1,1)\}). 
+        \end{equation} 
+    \end{itemize}
+\end{example}
+
+\begin{remark}
+    线性空间的全体子空间具有某种``前所未见的代数结构'': 对选定的 $\star\in \{\cap ,+\}$, 总有``零元'', 结合律, 以及交换律等; 但令人惊奇的是分配律不再成立. 刻画此类代数结构的``普适性框架''可以是\href{https://en.wikipedia.org/wiki/Lattice_(order)}{格}. 
+\end{remark}
+
+\begin{proposition}[子空间的模恒等式]
+    对 $U_-\subset U_+$, 证明 $(U_-+V)\cap U_+\subset U_-+(V\cap U_+)$. 
+    \begin{proof}
+        一侧包含关系不依赖线性结构, 因此是普遍的. 下式中, $\text{任意字母}>\text{任意数字}$: 
+        \begin{equation}
+            \underset{A}{\underbracket{(U_-+V)}}\quad \cap\quad \underset{B}{\underbracket{U_+}}\quad \supset \quad \underset{1}{\underbracket{U_-}}\quad +\quad \underset{2}{\underbracket{(V\cap U_+)}}. 
+        \end{equation}
+        另一侧包含关系证明如下. 任取 $x\in (U_-+V)\cap U_+$, 则存在 $a\in U_-$ 与 $b\in V$ 使得 $x=a+b$. 
+        \begin{itemize}
+            \item 断言 $(x-a)\in V$, 因为 $(x-a)=b\in V$. 
+            \item 断言 $(x-a)\in U_+$, 因为 $x\in U_+$ 且 $a\in U_+$.
+        \end{itemize}
+因此 $x=a+(x-a)\in U_- + (V\cap U_+)$. 
+    \end{proof}
+\end{proposition}
+
+\begin{remark}
+    线性空间具有\href{https://en.wikipedia.org/wiki/Modular_lattice}{模格结构}, 即某种二维的保守场. 今后的线性同态基本定理, 子空间对应定理, Noether 同构定理, Zassenhaus 引理, 以及谱序列的计算均基于此. 这一性质对全体加群, 模等 (良幂的) Abel 范畴均成立. 
+\end{remark}
+
+\begin{remark}
+    本次思考题比较宽泛, 就不统一给出``答案''了. 感兴趣的同学可以自行询问.
+\end{remark}
+
+\section{\textbf{重要: 四元数不是域!}}
+
+\begin{pinked}
+    \textbf{重要: 四元数不是域! 域的乘法需要是交换的!} 
+\end{pinked}
+
+\end{document}

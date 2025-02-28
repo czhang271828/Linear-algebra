@@ -1,0 +1,119 @@
+**Problem 1** (10pts) 对 $n\in \mathbb N_+$ 定义 $n\times n$ 矩阵 $A_n$​, 其中
+$$
+A_n=\begin{pmatrix}\alpha&\beta\\\gamma&\alpha&\beta\\&\gamma&\alpha&\beta\\&&\ddots&\ddots &\ddots \end{pmatrix}. 
+$$
+找到递推关系. 
+
+> 解答: 使用 Laplace 展开即可, 得
+> $$
+> \det A_n=\alpha \det A_{n-1}-\beta\gamma \det A_{n-2}. 
+> $$
+>
+> * 评分标准: 写出上式即得 $10$ 分; 符号错误得 $5$ 分. 
+
+**Problem 2** 给定分块矩阵 
+$$
+S:=\begin{pmatrix}A_{m\times m}&B\\C&D_{n\times n}\end{pmatrix}.
+$$
+**(a)** (5pts) 若 $m=n$, $AC=cA$, 证明
+$$
+\det \begin{pmatrix}A&B\\C&D\end{pmatrix}=\det (AD-BC).
+$$
+
+> 解答: 将第一行左乘 $-CA^{-1}$, 加至第二行. 
+>
+> * 评分标准: 写对即满分. 若出现 $C^{-1}$ 或 $\frac{\cdots }{\det C}$ 之类的]未定义的记号, 酌情扣分. 
+
+**(b)** (5pts) 若 $A$ 与 $D$ 均可逆, 证明 Schur 补: 
+$$
+\det (A)\cdot \det (S/A)=\det S=\det (D\backslash S)\cdot  \det (D).
+$$
+
+> 解答: 多数人作对了. 这也是往期作业题. 
+>
+> * 评分标准: 写对即满分. 若出现 $C^{-1}$ 或 $\frac{\cdots }{\det C}$ 之类的]未定义的记号, 酌情扣分. 
+
+**(c)** (10pts) 记 $B=\begin{pmatrix}1&1&\cdots &1\\b_1&b_2&\cdots &b_n\end{pmatrix}$, 计算 $\det (BB^T-I)$. 
+
+> 解答: 提取符号 $(-1)^n$, 只需求解 $\det (I-B^TB)$. 依照初等变换, 或作业题结论
+> $$
+> \lambda^m \det (\lambda I_n-AB)=\lambda ^n\det (\lambda I_m-BA),
+> $$
+> 得
+> $$
+> \det (I-B^TB)=\det (I-BB^T)=\text{某 $2\times 2$ 矩阵行列式}. 
+> $$
+>
+> * 评分标准: 写出答案满分, 仅符号错误扣 $2$​, 其余情况酌情给分. 
+
+**Problem 3** 
+
+**(a)** (10pts) 若 $Q_1$ 由某一正交矩阵去掉某些列向量所得, $Q_2$ 亦然, 且 $Q_1$ 与 $Q_2$ 大小相同. 若 $Q_1=Q_2 S$, 试证明 $S$ 是正交矩阵. 
+
+> 解答: 方阵 $S$ 满足 $S^TS=S^TQ_2^TQ_2S=Q_1^TQ_1=I$, 从而是正交矩阵. 
+>
+> * 常见错误: 认为 $Q_i$​​ 是方阵, 看不懂 orthonormal 使得答案差一个数乘, 认为列正交的矩阵都是正交矩阵. 
+> * 评分标准: 酌情给分. 
+
+**(b)** (10pts) 若 QR 分解 $M=QR$ 中, $Q$ 形如上一问的矩阵, $R$ 是对角元非负的上三角矩阵. 证明: 若 $r(M)$ 是 $Q$ 的列数, 则 $QR$ 分解唯一. 
+
+> 解答: 
+>
+> 1. (方法一) 若不唯一, 记 $M=Q_1R_1=Q_2R_2$ 均满足题设. 此时上三角矩阵 $R_2R_1^{-1}$ 是上述的 $S$, 从而也是正交矩阵. 依照习题课内容: 上三角的正交矩阵必是对角为 $\pm 1$ 的矩阵. 比较 $R_2=SR_1$ 的对角元, 只能有 $S=I$​. 
+> 2. (方法二) 先说明任意乘积 $QR$ 都通过 QR 分解实现 (这个显然); 再说明 QR 分解的每一步唯一决定了 $Q$ 与 $R$ 的各行各列. 需要说理准确, 且务必提及 $r(M)$ 的条件用在何处. 
+> 3. (方法三) 略. 
+
+**Problem 4** 记 $J=\begin{pmatrix}O&I\\-I&O\end{pmatrix}$ 是 $2n$-阶方阵, 定义 Hamilton 矩阵为 $\mathrm M_{2n}(\mathbb R)$ 的子集
+$$
+\mathrm{sp}_{2n}(\mathbb R)=\{A\in \mathrm M_{2n}(\mathbb R)\mid A^TJ+JA=O\}.
+$$
+**(a)** 证明子集 $\mathrm{sp}_{2n}(\mathbb R)$ 是 $\mathrm M_{2n}(\mathbb R)$ 的线性子空间. 
+
+> 解答: 为证明 $U$ 是 $V$ 的线性子空间, 当且仅当 $U$ 关于 $V$ 中的线性组合式封闭. 所有线性组合式可以通过三种运算归纳: 
+>
+> 1. 依照关系 $\emptyset$ 进行线性组合, 应有 $\mathbf 0\in U$; 
+> 2. 依照加法进行线性组合, 应有 $x\in U\to  y\in U\to (x+y)\in U$; 
+> 3. 依照数乘进行线性组合, 应有 $x\in U\to \lambda\in \mathbb F\to \lambda x\in U$. 
+>
+> 简单地, 需要检验以下三条 (等价于八条公理)
+>
+> 1. $U$ 非空集 (对简单的问题, 可省略此条); 
+> 2. $U$ 对二元加法封闭; 
+> 3. $U$​ 对域中数乘封闭. 
+>
+> * 评分标准: 加法 $5$ 分, 数乘 $5$ 分. 酌情给分. 
+
+**(b)** 求 $\mathrm{sp}_{2n}(\mathbb R)$ 的维度, 并给出一组基. 
+
+> 解答: 注意到 $AJ$ 是对称矩阵, 从而维度是 $\binom{2n}{2}$. 依照作业, 先写出对称矩阵空间的基, 再考虑这组基在线性映射 $X\mapsto XJ^{-1}$​ 下的像即可, 
+>
+> * 评分标准: 酌情给分. 
+
+**Problem 5** 
+
+**(a)** $A$ 是 $n$ 阶矩阵. 证明 $A$ 是幂等矩阵当且仅当 $r(A)+r(I-A)=n$. 
+
+> 解答: 使用初等变换, 或考虑 $r(AB)+r(BC)=r(ABC)+r(B)$ 的取等条件, 得
+> $$
+> r(A)+r(I-A)=n+r(A-A^2). 
+> $$
+> 对一般的多项式, 
+> $$
+> r(f(A))+r(g(A))=r(\gcd (f,g)(A))+r(\mathrm{lcm}(f,g)(A)). 
+> $$
+> 总之, 左式为 $n$ 当且仅当 $A-A^2=O$. 
+>
+> * 评分标准: 充分性, 必要性各 $5$ 分. 其余情况酌情给分. 
+
+**(b)** 若 $(A+B)$ 幂等, 且 $r(A+B)=r(A)+r(B)$. 证明: 
+
+* $A$ 和 $B$ 幂等, 且 $AB=BA=O$. 
+
+> 解答: 使用初等变换, 考虑 $r(I-A-B)+r(A)+r(B)=n$: 
+> $$
+> \begin{pmatrix}A\\&B\\&&I-A-B\end{pmatrix}\to\cdots\to   \begin{pmatrix}A^2-A&AB\\BA&B^2-B\\&&I\end{pmatrix}. 
+> $$
+> 从而 $A^2=A$, $B^2=B$, 且 $AB=BA=O$. 
+>
+> * 评分标准: 酌情给分. 
+

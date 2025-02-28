@@ -1,0 +1,239 @@
+\documentclass[12pt, reqno]{amsart}
+\usepackage{amsthm, graphicx, color, tikz-cd, mathrsfs, stackrel, float}
+\usepackage[bookmarksnumbered, colorlinks, plainpages]{hyperref}
+
+\usepackage{fontspec}
+
+\usepackage{unicode-math} % Modern font handling (requires XeLaTeX or LuaLaTeX)
+
+\usepackage{amsthm}
+
+\fontsize{7}{8}\selectfont
+
+% \setmathfont{XITS Math}
+
+\usepackage{parskip}
+
+
+\textheight 22.5truecm \textwidth 14.5truecm
+\setlength{\oddsidemargin}{0.35in}\setlength{\evensidemargin}{0.35in}
+
+\setlength{\topmargin}{-.5cm}
+
+\theoremstyle{plain}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{exercise}{Exercise}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{summary}[theorem]{Summary}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{problem}[theorem]{Problem}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+
+\newtheorem*{solution}{Solution}
+
+\setlength\parindent{0pt} % Set Noindent for the Entire Document. 
+
+\begin{document}
+\setcounter{page}{1}
+
+
+\noindent {\small MATH 1405(H), Qiang Ji.}\hfill  {\small }\\
+{\small \today}\hfill  {\small }
+
+\centerline{}
+
+\centerline{}
+
+\title{Calculation Problems in Linear Algebra}
+
+\author{Chencheng Zhang}
+
+%In case of 3 or more authors use below format
+%\author[F. Author, S. Author, T. Author]{First Author$^1$, Second Author$^2$$^{*}$ \MakeLowercase {and} Third Author$^3$}
+
+\address{School of mathematics, Shanghai Jiao Tong University, Shanghai, PRC.}
+\email{\textcolor[rgb]{0.00,0.00,0.84}{zhangchencheng@sjtu.edu.cn}}
+
+\makeatletter
+\@namedef{subjclassname@2020}{\textup{2020} Mathematics Subject Classification}
+\makeatother
+
+%\dedicatory{This paper is dedicated to Professor ABCD}
+
+\subjclass[2020]{Primary 20J06}
+
+\keywords{linear algebra, linear system, matrix decompositions}
+
+\begin{abstract}
+    This document enumerates the types of calculation questions that may appear in the examination, serving as a reference for identifying potential knowledge gaps.
+
+    The document is (partly) written in Unicode-math.
+\end{abstract} \maketitle
+
+
+
+
+
+
+
+
+\section{Linear Systems}
+
+\begin{example}\label{Quadratic forms}
+    Let
+    \begin{equation}
+        x_1^2+x_2^2+5x_3^2+2tx_1x_2-2x_1x_3+4x_2x_3
+    \end{equation}
+    be a real quadratic form. Please give the value of $t$ so that $f(x)$ is positive definite.
+\end{example}
+
+\begin{example}\label{echelon}
+    Find the reduced row échelon form of the following matrix,
+    \begin{equation}
+        \begin{pmatrix}
+            0 & 3  & −6 & 6  & 4 & −5 \\
+            3 & −7 & 8  & −5 & 8 & 9  \\
+            3 & −9 & 12 & −9 & 6 & 15
+        \end{pmatrix}.
+    \end{equation}
+    and prove that the reduced row échelon form is always unique.
+\end{example}
+
+
+
+
+\section{Linear Maps}
+
+
+
+
+
+
+\section{Matrix Calculations}
+
+\subsection{Determinants}
+
+\begin{example}\label{det_quick_glance}
+    Find the coefficient of $x^3$ in the following determinant
+    \begin{equation}
+        f(x) = \det  \begin{pmatrix}
+            4x & 3x & 2  & 1  \\
+            1  & x  & 1  & -1 \\
+            3  & 2  & 2x & 1  \\
+            1  & 0  & 1  & x
+        \end{pmatrix}.
+    \end{equation}
+\end{example}
+
+\begin{example}\label{methodologies}
+    Summarise the techniques in HW7 (\href{https://oc.sjtu.edu.cn/courses/72790/assignments/312156?module_item_id=1294252}{Canvas Page}).
+\end{example}
+
+
+
+
+
+\section{Matrix Decompositions}
+
+\subsection{Polar, \texorpdfstring{$ℝ$}{PDFstring}-symmetric}
+
+\begin{example}\label{Cholesky}
+    Find a $3×3$ real upper triangular matrix $T$ with positive diagonal entries, such that
+    \begin{equation}
+        T^T ⋅ T =
+        \begin{pmatrix}
+            16 & 8  & -4 \\
+            8  & 5  & -4 \\
+            -4 & -4 & 14
+        \end{pmatrix}.
+    \end{equation}
+    It is also worthwhile to prove the uniqueness of $T$.
+\end{example}
+
+
+
+
+
+
+\section{Answers}
+
+\begin{solution}\ref{Quadratic forms}
+    $(-∞, -⅘) ∪ (0, +∞)$.
+\end{solution}
+
+\begin{solution}\ref{Cholesky}
+    The desired matrix is
+    \begin{equation}
+        \begin{pmatrix}
+            4 & 2 & -1 \\0&1&2\\0&0&3
+        \end{pmatrix}.
+    \end{equation}
+    The uniqueness: if there is another $L′$, then there exists some orthogonal matrix $Q$ such that $L = Q ⋅ L′$. Since $Q = L ⋅ (L′)⁻¹$ is upper triangular with all positive eigenvalues, $Q = I$.
+    \begin{remark}
+        What if $T^T ⋅ T$ is not a square matrix? To what extent the decomposition is unique? Hint: a priori examination.
+    \end{remark}
+\end{solution}
+
+\begin{solution}\ref{det_quick_glance}
+    $-6$. One should recognise it ``efficiently''.
+\end{solution}
+
+\begin{solution}\ref{methodologies}
+    Some feasible techniques:
+    \begin{enumerate}
+        \item Inductions.
+        \item Eigenvalues.
+        \item $λ^m ⋅ \det (λ I_n - AB) = λ^n ⋅ \det (λ I_m - BA)$, wherein the corollary
+              \begin{equation}
+                  \det(I-AB) = \det(I-BA)
+              \end{equation}
+              is more used.
+        \item add-one-line trick: $\det \begin{pmatrix}
+                      1 & ∗ \\ 0 & A
+                  \end{pmatrix} = \det A$.
+        \item Schur complement. when $\det\begin{pmatrix}
+                      A & B \\C&D
+                  \end{pmatrix}=\det(AD-BC)$?
+        \item Laplace expansion, cofactor expansion, and neglect the linearly dependent sets when necessary:
+              \begin{enumerate}
+                  \item for instance, $\det (A + u ⋅ v^T) = \det A + ∑\limits_{\text{$n$-terms}} + ∑ \limits_\text{$2^n - n - 1$-zeros}$;
+                  \item another example: $\det (\cos (i⋅ θ_j)) = \det (2^{1-i}⋅ \cos^i (θ_j))$.
+              \end{enumerate}
+        \item Cauchy-Binet formula. An distinguished example:
+              \begin{equation}
+                  \det (R^TR + S^TS) = \det (R\quad S)^T ⋅ (R\quad S) \overset{\text{CB}}{ = }  \cdots ≥ (\det R)^2,
+              \end{equation}
+              equality holds whence $S=O$.
+        \item By factors (e.g., Bi-Vandermonde determinant).
+        \item ...
+    \end{enumerate}
+\end{solution}
+
+\begin{solution}\ref{echelon}
+    Ans:
+    \begin{equation}
+        \begin{pmatrix}
+            1 & 0 & −2 & 3 & 0 & −24 \\
+            0 & 1 & −2 & 2 & 0 & −7  \\
+            0 & 0 & 0  & 0 & 1 & 4
+        \end{pmatrix}.
+    \end{equation}
+    See HW2 for the proof of uniqueness.
+\end{solution}
+
+
+
+\end{document}
+
+

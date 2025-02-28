@@ -1,0 +1,119 @@
+\documentclass{MainStyle}
+
+\usepackage{amsthm, amsfonts, amsmath, amssymb, quiver, mathrsfs, newclude, tikz-cd, ctex, mathtools}
+
+% Customise href Colours.
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+
+\newcommand{\changeurlcolor}[1]{\hypersetup{urlcolor=#1}}       
+
+\newcommand*{\name}{\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+\newcommand*{\id}{\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+\newcommand*{\course}{Mock Final Exam (高等代数 (荣誉) II)}
+\newcommand*{\assignment}{考试时间: $\mathsf{15:40-17:40}$,\quad DD/June/2024}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\allowdisplaybreaks
+
+\begin{document}\large
+\maketitle
+
+
+
+\begin{center}
+    \begin{tabular}{|| c | c | c | c | c | c | c ||}
+        \hline
+        得分表    & (1)      & (2)      & (3)      & (4)      & (5)      & Problem 总得分 \\ [0.5ex]
+        \hline\hline
+        Problem 1 & $\qquad$ & $\qquad$ & $\qquad$ & $\qquad$ & $\qquad$ &                \\[1em]
+        \hline
+        Problem 2 &          &          &          &          &          &                \\[1em]
+        \hline
+        Problem 3 &          &          &          &          &          &                \\[1em]
+        \hline
+    \end{tabular}
+\end{center}
+
+\vspace{4cm}
+
+\begin{itemize}
+    \item Throughout, $k$ is an arbitrary field, and $V$ be a vector space (not necessarily finite-dimensional).
+    \item Feel free to answer the following questions in either 中文 or English; it is FORBIDDEN to mix both languages within a single sentence.
+\end{itemize}
+
+\newpage
+
+\begin{problem}[35pt]
+The following questions are about the ring of algebraic integers.
+\begin{enumerate}
+    \item (8pt) Say $r\in \mathbb C$ is integral over $\mathbb Z$, whenever there exists some polynomial $f\in \mathbb Z[x]$ with leading coefficient $1$ such that $f(r)=0$. Let $\mathbb Q(r)$ be the smallest number field containing $r$. Prove that $\mathbb Q(r)$ is a finite dimensional $\mathbb Q$-vector space with basis $\{1,r,r^2,\ldots, r^{d-1}\}$. Here $d=\dim_{\mathbb Q}\mathbb Q(r)-1$.
+    \item (8pt) Let $r\in \mathbb C$ be integral over $\mathbb Z$. Write down the matrix form of the $\mathbb Q$-linear endomorphism
+          \begin{equation}
+              m_r:\mathbb Q(r)\to \mathbb Q(r),\quad x\mapsto rx
+          \end{equation}
+          with basis $\{1,r,\ldots, r^{d-1}\}$. Also write down the characteristic polynomial of $m_r$.
+    \item (4pt) Give an example: $m_r$ has no Jordan canonical form over $\mathbb Q(r)$.
+    \item (5pt) If $r,s\in \mathbb C$ are integral over $\mathbb Z$, then so are $r+s$ and $r\cdot s$. Hint:
+          \begin{itemize}
+              \item use the matrix forms of $m_r$ and $m_s$;
+              \item show that $m_r\cdot m_s=m_{rs}$, $m_r+m_s=m_{r+s}$, which identifies $\mathbb C$ with $\{m_z\}_{z\in \mathbb C}$.
+          \end{itemize}
+    \item (10pt) Set $g(x)=x^{2024}+x+1$. For any $f\in \mathbb Z[x]$ with leading coefficient $1$, one has the factorisation
+          \begin{equation}
+              f(x)=(x-z_1)(x-z_2)\cdots (x-z_n)\quad (\text{over }\mathbb C).
+          \end{equation}
+          Deduce that
+          \begin{equation}
+              (x-g(z_1))(x-g(z_2))\cdots (x-g(z_n))\in \mathbb Z[x].
+          \end{equation}
+          Hint: consider the upper-triangulated form of the companion matrix of $f$.
+\end{enumerate}
+\end{problem}
+
+\newpage
+
+\begin{problem}[30pt]
+The following problems are about real inner product space $V$ (not necessary of finite dimension!). Suppose that $\varphi \in \mathrm{Hom}_{\mathbb R}(V,V)$ is invertible, and $\varphi^\ast$ exists.
+\begin{enumerate}
+    \item (5pt) Prove that $\varphi ^\ast$ is injective, and $(\mathrm{im}(\varphi^\ast ))^\perp=0$. Hence $\varphi^\ast$ is surjective $\leftrightarrow$ $\varphi^\ast$ is invertible.
+    \item (5pt) Prove that, if $\varphi^\ast$ is surjective, then $(\varphi^{-1})^{\ast}$ exists and $(\varphi^{-1})^\ast=(\varphi^\ast)^{-1}$.
+    \item (5pt) Prove that, if $(\varphi^{-1})^\ast$ exists, then $\varphi^\ast$ is invertible and $(\varphi^{-1})^\ast=(\varphi^\ast)^{-1}$.
+    \item (10pt) Let $V$ be the space of real sequences with finitely many non-zero entries, which is isomorphic to $\mathbb R[x]$. The inner product is defined as the following pointwise product
+          \begin{equation}
+              V\times V\to \mathbb R,\quad (a_i)_{i\geq 1},(b_i)_{i\geq 1}\mapsto \sum_{i\geq 1}a_ib_i.
+          \end{equation}
+          Now set $L:V\to V,\quad (a_i)_{i\geq 1}\mapsto (a_{i+1})_{i\geq 1}$. Find the adjoint of $(\mathrm{id}+L)$.
+    \item (5pt) Give an example that $\varphi^{-1}$ has no adjoint.
+\end{enumerate}
+\end{problem}
+
+\newpage
+
+
+\begin{problem}[35pt]
+We shall find the tensor rank of multiplication of complex numbers with following steps.
+\begin{enumerate}
+    \item (5pt) Prove that $\mathbb C\otimes _{\mathbb R}\mathbb C$ is a $\mathbb C$-linear vector space. Find $\dim_{\mathbb C}(\mathbb C\otimes _{\mathbb R}\mathbb C)$.
+    \item (8pt) Prove that the following linear map is well-defined
+          \begin{equation}
+              \Phi: V\otimes U^\ast\to \mathrm{Hom}_k(U,V),\quad v\otimes f\mapsto [u\mapsto v\cdot f(u)].
+          \end{equation}
+    \item (8pt) Prove that $\Phi$ is an isomorphism if either $U$ or $V$ is finite dimensional. Then use tensor-hom adjunction to show the isomorphism $\theta: V^\ast \otimes_k U^\ast \cong (V\otimes_k U)^\ast$. Describe the image of simple tensor $f\otimes g$ under $\theta$.
+    \item (10pt) We know that the multiplication operator $\mathbb C\times \mathbb C\to \mathbb C$ is non-generated symmetric $\mathbb R$-bilinear. Explain how you identify such multiplication operator as a tensor in $(\mathbb C\otimes _{\mathbb R}\mathbb C)^\ast\otimes _{\mathbb R}\mathbb C$, which is isomorphic to $\mathbb C^{\otimes_{\mathbb R} 3}$. Hint:
+          \begin{itemize}
+              \item the multiplication identifies $(1\otimes 1\otimes 1+1\otimes i\otimes i+i\otimes 1\otimes i+i\otimes i\otimes (-1))\in \mathbb C^{\otimes_{\mathbb R}^3}$.
+          \end{itemize}
+    \item (4pt) Find the rank $r$ of the above tensor. Show that, in general, any algorithm costs at least $3$ steps of $\mathbb R$-multiplications when computing $\mathbb C\times \mathbb C\to \mathbb C$.
+\end{enumerate}
+\end{problem}
+
+
+
+
+\end{document}

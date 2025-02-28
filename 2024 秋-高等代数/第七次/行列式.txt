@@ -1,0 +1,199 @@
+**Ex 1.** 直接写出以下矩阵的行列式, 或简要说明其行列式的求解方式. 
+> $\lambda\in \mathbb F$ 是给定的常数, $A\in \mathbb F^{n\times n}$ 是矩阵. 
+
+1. 置换矩阵. 
+2. 初等变换矩阵 $D^\lambda_i$, $T^\lambda_{j,i}$, 以及 $S_{i,j}$. 
+3. 若 $A$ 是对角矩阵, 求 $\det A$. 
+4. 若 $A$ 是上三角矩阵, 求 $\det A$. 
+5. 若 $A=\begin{pmatrix}X&O\\Y&Z\end{pmatrix}$, 其中 $X$ 与 $Z$ 是方阵, 求 $\det A$. 
+6. $A^{-1}$ (若存在) 的行列式. 
+7. 方阵乘积的行列式. 
+8. 若 $\mathrm{rank}(A)<n$, 求 $\det A$. 
+9. $\lambda A$ 的行列式 (用 $\det A$ 表示). 
+10. $A^T$ 的行列式 (用 $\det A$ 表示). 
+11. 将 $A$ 顺时针旋转 $\pi/2$ 后的行列式 (用 $\det A$ 表示). 
+12. $f$ 是 $\mathbb F$ 上的多项式, 求 $\det (f(A))$. 
+13. 求 $\det e^A$.
+
+<div style="page-break-after: always;"></div>
+
+**Ex 2.** 试比较以下.
+
+1. 举出 $\det (A-B)=0$ 但 $\det (A^2-B^2)=1$ 的例子. 
+2. 举出 $\det (A-B)=1$ 但 $\det (A^2-B^2)=0$ 的例子. 
+3. 假设 $AB=BA$, 则 $\det (A^2-B^2)=\det (A-B)\det (A+B)$. 
+
+记 $M=\begin{pmatrix}A&B\\C&D\end{pmatrix}$, 其中 $A,B,C,D\in \mathbb R^{2\times 2}$. 记 $N=DA-CB$. 
+1. 举出 $\det M=0$ 但 $\det N\neq 0$ 的例子.
+2. 举出 $\det M\neq 0$ 但 $\det N=0$ 的例子.
+3. 假设 $AB=BA$, 则 $\det M = \det N$. 对称的命题略. 
+4. 计算 $\det \begin{pmatrix}I&B\\C&D\end{pmatrix}$. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 3.** 使用矩阵初等变换, 证明对任意 $A\in \mathbb F^{m\times n}$, $B\in \mathbb F^{n\times m}$, 以及 $\lambda\in \mathbb F$, 总有
+$$
+\lambda^n\cdot \det (\lambda I_m-AB)=\lambda^m\cdot \det (\lambda I_n-BA).
+$$
+* 推广: 对方阵 $A$, $B$ 与 $C$ (未必可逆), 总有 $\det (A+B+ACB)=\det (A+B+BCA)$. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 4.** 求以下矩阵行列式 
+$$
+\begin{pmatrix}
+0 &  &  &  & a_{n}\\
+1 & 0 &  &  & a_{n-1}\\
+ & 1 & \ddots  &  & \vdots \\
+ &  & \ddots  & 0 & a_{2}\\
+ &  &  & 1 & a_{1}
+\end{pmatrix}.
+$$
+
+<div style="page-break-after: always;"></div>
+
+**Ex 5.** 以下是三对角矩阵的行列式问题. 
+1. 求以下三对角矩阵的行列式  
+    $$
+    \begin{pmatrix}
+    a & b &  &  & \\
+    c & a & b &  & \\
+    & c & \ddots  & \ddots  & \\
+    &  & \ddots  & a & b\\
+    &  &  & c & a
+    \end{pmatrix}.
+    $$
+    提示: 使用归纳法, 需讨论 $a^2=4bc$ 与否. 
+
+2. 证明
+    $$
+    \det\begin{pmatrix}
+    a_{1} & 1 &  &  & \\
+    -1 & a_{2} & 1 &  & \\
+    & -1 & \ddots  & \ddots  & \\
+    &  & \ddots  & a_{n-1} & 1\\
+    &  &  & -1 & a_{n}
+    \end{pmatrix} =a_{1} +\frac{1}{a_{2} +\frac{1}{\ddots \ +\frac{1}{a_{n-1} +\frac{1}{a_{n}}}}}
+    $$
+    特别地, 若 $a_i\equiv 1$, 则所得结果是 Fibonacci 数. 
+
+3. 证明 
+    $$
+    \det\begin{pmatrix}
+    a_{1} & b_{1} &  &  & \\
+    c_{1} & a_{2} & b_{2} &  & \\
+    & c_{2} & \ddots  & \ddots  & \\
+    &  & \ddots  & a_{n-1} & b_{n-1}\\
+    &  &  & c_{n-1} & a_{n}
+    \end{pmatrix} =\begin{pmatrix}
+    a_{1} & b_{1}
+    \end{pmatrix}\begin{pmatrix}
+    a_{2} & b_{2}\\
+    -c_{1} & 0
+    \end{pmatrix} \cdots \begin{pmatrix}
+    a_{n-1} & b_{n-1}\\
+    -c_{n-2} & 0
+    \end{pmatrix}\begin{pmatrix}
+    a_{n}\\
+    -c_{n-1}
+    \end{pmatrix}
+    $$
+
+<div style="page-break-after: always;"></div>
+
+**Ex 6.** Vandermonde 矩阵的行列式. 
+1. 记 $V:=(x_i^j)\in \mathbb F^{n\times n}$, 直接写出 $\det V$. 
+2. 将 $V$ 删去 $k$ 行与 $k$ 列, 得 $V'$. 求 $\det V'$. 
+3. 将 $V$ 的各项 (共 $n^2$ 项) 加上 $1$, 求新矩阵的行列式. 
+4. 记 $\{x_i\}_{i=1}^n$ 是整数, 证明 $\prod_{1\leq i<j\leq n}\frac{x_i-x_j}{i-j}$ 是整数. 
+    > 提示: 记 $\binom{n}{k}=C_n^k$ 为组合数. 假定所有 $x_i$ 充分大, 考虑 $\det(\binom{x_i}{j})$. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 7.** 令 $P=\left(\begin{array}{cccc}a_1&a_2&\cdots& a_n\\b_1&b_2&\cdots& b_n\\\end{array}\right)$, $Q=\left(\begin{array}{cccc}c_1&c_2&\cdots& c_n\\d_1&d_2&\cdots& d_n\\\end{array}\right)$. 对 $\det (PQ^T)$ 使用 Cauchy-Binet 公式, 并与直接计算行列式所得的结果比较, 得 Lagrange 恒等式 (请验证): 
+$$
+\sum_{i=1}^n(a_ic_i)\sum_{i=1}^n(b_id_i)=\sum_{i=1}^n(a_id_i)\sum_{i=1}^n(b_ic_i)+\sum_{1\leq i_1<i_2\leq n}(a_{i_1}b_{i_2}-a_{i_2}b_{i_1})(c_{i_1}d_{i_2}-c_{i_2}d_{i_1}).
+$$
+特别地, 对向量 $\mathbf a, \mathbf b\in \mathbb R^n$, 证明
+$$
+\|\mathbf a\|^2\|\mathbf b\|^2=(\mathbf a\cdot\mathbf b)^2+\sum_{1\leq i_1<i_2\leq n}(a_{i_1}b_{i_2}-a_{i_2}b_{i_1})^2. 
+$$
+若 $n=3$, 试求 $\|\mathbf a\times \mathbf b\|$? 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 8.** 取 $(a_i)_{i\geq 1}$ 是周期为 $n$ 的 $\mathbb F$ 中的数列, 定义 $n\times n$ 矩阵的第 $(i,j)$ 项为 $a_{i+j-1}$. 计算这一循环矩阵的行列式. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 9.** 给定常数 $(c_1,\ldots, c_n)$. 试计算 $(c_{\min (i,j)})\in \mathbb F^{n\times n}$ 的行列式. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 10.** 计算 Hilbert 矩阵的行列式. 关于 Hilbert 矩阵的定义, 以及此题答案可参考逆矩阵习题. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 11.** 计算并总结以下行列式的通式
+$$
+\det \begin{pmatrix}
+1 & -1 & 0 & 0 & 0\\
+x & h & -1 & 0 & 0\\
+x^{2} & hx & h & -1 & 0\\
+x^{3} & hx^{2} & hx & h & -1\\
+x^{4} & hx^{3} & hx^{2} & hx & h
+\end{pmatrix}.
+$$
+
+<div style="page-break-after: always;"></div>
+
+**Ex 12.** 记分块矩阵 $A=\begin{pmatrix}A_1&A_2\\A_3&A_4\end{pmatrix}$ 与 $B=\begin{pmatrix}B_1&B_2\\B_3&B_4\end{pmatrix}$, 满足 $r(A)=r(A_1)$ 与 $r(B)=r(B_1)$. 此时 
+$$
+\det (A+B) \cdot \det (A_1)\cdot \det (B_4)=\det \begin{pmatrix}A_1&A_2\\B_3&B_4\end{pmatrix}\cdot \begin{pmatrix}A_1&B_2\\A_3&B_4\end{pmatrix}. 
+$$
+
+<div style="page-break-after: always;"></div>
+
+**Ex 13.** (Ptolemy 定理) 给定矩阵 $\begin{pmatrix}a_1&a_2&a_3&a_4\\b_1&b_2&b_3&b_4\end{pmatrix}$, 记 $\Delta_{i,j}=\det \begin{pmatrix}a_i&a_j\\b_i&b_j\end{pmatrix}$. 证明 
+$$
+\Delta_{1,2}\Delta_{3,4}+\Delta_{1,4}\Delta_{2,3}=\Delta_{1,3}\Delta_{2,4}. 
+$$
+
+<div style="page-break-after: always;"></div>
+
+**Ex 14.** 通常的正整数矩阵 $A\in \mathbb F^{n\times n}$ 的行列式. 其中 $a_{i,j}=\gcd (i,j)$ 是最小公倍数. 
+
+提示: 证明对任意整数都有 $m=\sum_{k\mid m}\phi (k)$. 其中 $k$ 取遍 $m$ 的所有因子, $\phi$ 是通常的 [Euler totient 函数](https://en.wikipedia.org/wiki/Euler%27s_totient_function). 此时 $a_{i,j}=\sum_{k\mid i \text{ 且 }k \mid j}\phi (k)$. 这表明 $A=X^T\cdot D\cdot X$, 其中 
+* $D=\mathrm{diag}(\phi(1),\phi(2),\ldots, \phi (n))$ 是对角矩阵, 
+* $X$ 是 $\{0,1\}$-下三角矩阵, 其中 $X_{i,j}=1$ 当且仅当 $j\mid i$. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 15.** (对任意域而言) 若 $A^T=-A$, 则 $\det A$ 是完全平方式. 这称作 Pfaffian. 
+
+* 特殊的 Pfaffian (来自 Cauchy 矩阵的基本性质): $\det \left(\frac{x_i-x_j}{x_i+x_j}\right)_{n\times n}=\left(\prod_{i<j}\frac{x_i-x_j}{x_i+x_j}\right)^2$
+
+<div style="page-break-after: always;"></div>
+
+**Ex 16.** 记 $a,b,c$ 是常数. 若矩阵 $A$ 的严格下三角部分均为 $a$, 严格上三角部分均为 $b$, 对角线上均为 $c$. 求 $\det A$. 
+
+一般地, 记多项式 $f(x)=c_0+c_1x+c_2x^2+\cdots c_{n-1}x^{n-1}$, 考虑 $n$ 阶 $\mathbb C$-方阵
+$$
+M:=\begin{pmatrix}
+c_{0} & c_{1} & c_{2} & \cdots  & c_{n-2} & c_{n-1}\\
+zc_{n-1} & c_{0} & c_{1} & \cdots  & c_{n-3} & c_{n-2}\\
+zc_{n-2} & zc_{n-1} & c_{0} & \cdots  & c_{n-4} & c_{n-3}\\
+\vdots  & \vdots  & \vdots  & \ddots  & \vdots  & \vdots \\
+zc_{2} & zc_{3} & zc_{4} & \cdots  & c_{0} & c_{1}\\
+zc_{1} & zc_{2} & zc_{3} & \cdots  & zc_{n-1} & c_{0}
+\end{pmatrix}.
+$$
+则 $\det M=\prod_{k=1}^n f(w_k)$, 其中 $w_k$ 是 $w^n=z$ 的 $n$ 个复根. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 17.** 记 $(a_i)_{i=1}^n$ 与 $(b_i)_{i=1}^n$ 是给定的常数, 且 $a_ib_j\neq 1$. 记 $m_{i,j}=\frac{1-(a_ib_j)^n}{1-a_ib_j}$, 计算 $\det (m_{i,j})$. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 18.** 假定域的特征不为 $2$. 证明: 对任意方阵 $A$, 总存在一个取值 $\{\pm 1\}$ 的对角矩阵 $D$ 使得 $\det (A+D)\neq 0$. 

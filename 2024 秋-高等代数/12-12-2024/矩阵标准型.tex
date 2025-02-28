@@ -1,0 +1,732 @@
+\documentclass[11pt]{ctexart}
+\usepackage[margin=2cm,a4paper]{geometry}
+\usepackage{amsthm, amsfonts, amsmath, amssymb, mathrsfs, newclude, tikz-cd, tikz, ctex, mathtools, stmaryrd, datetime}
+
+\usepackage{quiver}
+
+%\setmainfont{Caladea}
+
+%% 也可以选用其它字库:
+% \setCJKmainfont[%
+%   ItalicFont=AR PL KaitiM GB,
+%   BoldFont=Noto Sans CJK SC,
+% ]{Noto Serif CJK SC}
+% \setCJKsansfont{Noto Sans CJK SC}
+% \renewcommand{\kaishu}{\CJKfontspec{AR PL KaitiM GB}}
+
+
+
+\usepackage[colorlinks = true,
+linkcolor = blue,
+urlcolor  = blue,
+citecolor = blue,
+anchorcolor = blue]{hyperref}
+
+% Include the x-color package for color support
+\usepackage{xcolor}
+
+% Define a new environment for red comments
+\usepackage{verbatim} % Required for the comment environment
+\usepackage{environ}
+
+\usepackage{mdframed} % Include mdframed for creating framed environments
+
+\definecolor{pinked}{RGB}{255,231,229} % Define a base color 
+% Define a new environment with a background color
+\newmdenv[
+  backgroundcolor=pinked, % Set the desired background color
+  linecolor=white, % Optional: Set the border line color
+  linewidth=1pt, % Optional: Set the border line width
+  roundcorner=5pt, % Optional: Set rounded corners
+  nobreak=true % Optional: Prevent page breaks within the environment
+]{pinked}
+
+\theoremstyle{definition}
+\newtheorem{qqq}{问题}[section]
+
+\newcommand{\ExternalLink}{%
+    \tikz[x=1.2ex, y=1.2ex, baseline=-0.05ex]{% 
+        \begin{scope}[x=1ex, y=1ex]
+            \clip (-0.1,-0.1) 
+                --++ (-0, 1.2) 
+                --++ (0.6, 0) 
+                --++ (0, -0.6) 
+                --++ (0.6, 0) 
+                --++ (0, -1);
+            \path[draw, 
+                line width = 0.5, 
+                rounded corners=0.5] 
+                (0,0) rectangle (1,1);
+        \end{scope}
+        \path[draw, line width = 0.5] (0.5, 0.5) 
+            -- (1, 1);
+        \path[draw, line width = 0.5] (0.6, 1) 
+            -- (1, 1) -- (1, 0.6);
+        }
+    }
+
+\NewEnviron{aaa}{~\\
+    \noindent {\textcolor{teal}{\textbf{解答}} \BODY }
+}
+
+\NewEnviron{llll}{
+    \noindent {~\\$\ExternalLink$ 外部链接 $\,\,\,$ \color{blue}\url{\BODY} }
+}
+
+\renewcommand{\proofname}{证明}
+\renewcommand\qedsymbol{${\boxed{\substack{\textit{完证}\\\textit{毕明}}}}$}
+\let\oldproof\proof
+\renewcommand{\proof}{\color{blue}\oldproof}
+
+% Change equation numbering to include the section number
+\usepackage{cleveref}
+\renewcommand{\theequation}{\thesection.\thesubsection.\arabic{equation}}
+\numberwithin{equation}{section}
+
+\usepackage{listings}
+% Define listings style
+\lstset{
+  frame=tb,
+  language=TeX,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\theoremstyle{definition}
+\newtheorem*{definition}{定义}
+\newtheorem*{proposition}{命题}
+\newtheorem*{theorem}{定理}
+\newtheorem*{notation}{记号}
+\newtheorem*{example}{例子}
+\newtheorem{exercise}{\textcolor{blue}{习题}}
+\theoremstyle{remark}
+\newtheorem*{remark}{备注}
+\newtheorem*{lemma}{引理}
+\newtheorem*{corollary}{推论}
+
+\title{矩阵标准型复习}
+\author{(2024-2025-1)-MATH1405H-02}
+
+\setcounter{page}{0}
+
+\setlength\parindent{0pt}
+
+\begin{document}
+
+\maketitle
+
+\LARGE
+
+\begin{exercise}[热身前的热身]
+    若 $A$ 是 $n$-阶实方阵, $A+A^T$ 是正定的, 证明 $\det(A)>0$.
+    \begin{proof}
+        (法一) 若实矩阵 $A$ 对一切非零向量 $x$ 都有 $x^TAx>0$, 则 $A$ 在 $\mathbb C$ 上的特征根有均正的实部. 
+        
+        (法二) 记线性函数 $f(t)=2A+t(A^T-A)$, 则 $\det (f(t))$ 是 $t$ 的多项式, 从而也是连续函数. 今有 $\det (f(1))>0$. 为证明 $\det (f(0))>0$, 只需说明 $\det (f(t))$ 在 $t\in [0,1]$ 上无零点. 依照反对称矩阵的性质, 总有 $x^Tf(t)x=x^Tf(1)x$. 因此 $f(t)$ 的零空间恒为 $0$. 
+    \end{proof}
+\end{exercise}
+
+
+\begin{exercise}[课前热身]
+    若 $A$ 是 $n$-阶实方矩阵, $A+A^T=\sum_{i\neq j}E_{i,j}$, (也就是对角元为 $0$, 其余位置全为 $1$ 的矩阵). 证明 $r(A)\geq n-1$. 
+    \begin{proof}
+        记分块矩阵 $B=\begin{pmatrix}\mathbf 1^T\\A\end{pmatrix}$, 下证明 $N(B)=0$. 注意到 $Bx=0$ 当且仅当 $Ax=0$ 且 $\mathbf 1^T x=0$. 此时 
+        \begin{equation}
+            0=x^T(A+A^T)x=x^T(\mathbf 1\mathbf 1^T-I)x=-x^Tx. 
+        \end{equation}
+        因此 $x=0$. 从而 $N(A)$ 至多 $1$ 维. 
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}[举例子]
+    $A$ 与 $B$ 可同时对角化, $B$ 和 $C$ 可同时对角化, 且 $A$ 和 $C$ 可同时对角化; 但 $A$, $B$ 与 $C$ 不能同时对角化. 
+    \begin{proof}
+        其实这个命题是正确的. 需要注意: 可对角化矩阵的特征空间将全空间划分作子空间的直和, 等价地, 不同的特征向量线性无关. 记
+        \begin{equation}
+            V=\bigoplus_{\lambda_A\in \sigma(A)}N(\lambda I-A). 
+        \end{equation}
+        对 $B$ 与 $C$ 做类似的操作, 找到三个直和分解的``共同加细''即可. 
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}[举反例]
+    给定两个复方阵 $A$ 与 $B$. 若对任意 $a,b\in \mathbb C$, 方阵 $aA+bB$ 总是幂零的, 试问: $A\cdot B$ 是否是幂零的? 
+    \begin{proof}
+        考虑 $Z:=\begin{pmatrix}0&a&0\\-b&0&a\\0&b&0\end{pmatrix}$. 口算知 $\det(\lambda I-Z)=\lambda^3$, 从而 $Z^3=O$; 但是 $A\cdot B$ 是秩 $2$ 的对角矩阵, 从而不幂零. 
+    \end{proof}
+\end{exercise}
+
+\newpage
+
+\section{基变换与标准型: 以相抵变换为例}
+
+\begin{example}[线性映射的矩阵表达]
+    给定有限维线性空间间的线性映射 $\varphi: U\to V$. 如果将 $U$ 与 $V$ 赋予一组的基底 $(u_1\mid \cdots \mid u_m)$ 与 $(v_1\mid \cdots \mid v_n)$, 则线性映射通过以下 $m$ 个等式描述: 
+\begin{equation}
+    \varphi(u_i)=\sum_{j=1}^n a_{j,i}\cdot v_j\quad (a_{j,i}\in \mathbb F).
+\end{equation}
+换言之, 每个 $\varphi(u_i)$ 唯一地表示做 $v_j$-向量的线性组合. 从矩阵的视角看, 
+\begin{equation}
+    \underbracket{\varphi (u_1\mid \cdots \mid u_m)}\limits_{\text{往后记作 $\varphi(u_\bullet)$}} = \underbracket{(v_1\mid \cdots \mid v_n)}\limits_{\text{往后记作 $v_\bullet$}}\cdot A_{n\times m}. 
+\end{equation}
+\begin{pinked}
+    系数 $a_{j,i}$ 的直白地描述作: $\varphi (u_i)$ 中 $v_j$ 的分量. 
+\end{pinked}
+\end{example}
+
+\begin{example}[换基]
+    以下是几类常见的线性映射. 
+    \begin{enumerate}
+        \item $\varphi: U\to V$, 涉及相抵标准型, 奇异值分解, $QR$ 分解等. 
+        \item $\varphi: U\to U$, 涉及相似标准型等共轭变换. 
+        \item $\varphi: U \& V \to \mathbb F$, 涉及双线性型 (输入两个线性空间, 输出一个线性空间), \footnote{不建议将 $\varphi:U\& V\to \mathbb F$ 表述成 $\varphi:U\times V\to \mathbb F$. 前者的类型是 $U\to (V\to \mathbb F)$, 此类双线性映射构成 $\dim U\cdot \dim V$ 维线性空间; 后者的类型是 $(U\to \mathbb F)\wedge (U\to \mathbb F)$, 此类映射构成 $\dim U+\dim V$ 维线性空间.}
+        \item $\varphi: U\& U \to \mathbb F$, 涉及合同变换等. 
+    \end{enumerate}
+\end{example}
+
+\begin{definition}
+    给定 $\varphi:U\to V$ 与矩阵表述 $\varphi(u_\bullet)=v_\bullet\cdot A$. 今考虑
+    \begin{enumerate}
+        \item 对 $u_\bullet$ 右乘可逆方阵 $P$, 功效是 $U$ 上的基变换 $u_\bullet \mapsto u\bullet\cdot P=\overline u_\bullet $; 
+        \item 对 $v_\bullet$ 右乘可逆方阵 $Q$, 功效是 $V$ 上的基变换 $v_\bullet \mapsto v_\bullet\cdot Q=\overline v_\bullet$. 
+    \end{enumerate}
+    此时 $\varphi (\overline u_\bullet)=\varphi (u_\bullet)\cdot P=v_\bullet \cdot A\cdot P=\overline v_\bullet \cdot Q^{-1}\cdot A\cdot P$. 变换
+    \begin{equation}
+        A\mapsto Q^{-1}AP,\quad (P\in \mathrm{GL}_m(\mathbb F),\quad Q\in \mathrm{GL}_n(\mathbb F))
+    \end{equation}
+    称作相抵变换. 以交换图呈现之: 
+    \begin{equation}
+        % https://q.uiver.app/#q=WzAsNixbMiwwLCJcXHZhcnBoaSAoXFxvdmVybGluZSB1X1xcYnVsbGV0KSJdLFs0LDAsIlxcb3ZlcmxpbmUgdl9cXGJ1bGxldCJdLFs0LDEsInZfXFxidWxsZXQiXSxbMiwxLCJcXHZhcnBoaSAodV9cXGJ1bGxldCkiXSxbMCwwLCJcXG92ZXJsaW5lIHVfXFxidWxsZXQiXSxbMCwxLCJ1X1xcYnVsbGV0Il0sWzEsMCwiKClcXGNkb3QgKFFeey0xfUFQKSIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsyLDEsIigpXFxjZG90IFEiLDJdLFs1LDQsIigpXFxjZG90IFAiXSxbMywwLCIoKVxcY2RvdCBQIl0sWzIsMywiKClcXGNkb3QgQSJdXQ==
+\begin{tikzcd}[ampersand replacement=\&]
+	{\overline u_\bullet} \&\& {\varphi (\overline u_\bullet)} \&\& {\overline v_\bullet} \\
+	{u_\bullet} \&\& {\varphi (u_\bullet)} \&\& {v_\bullet}
+	\arrow["{()\cdot (Q^{-1}AP)}"', dashed, from=1-5, to=1-3]
+	\arrow["{()\cdot P}", from=2-1, to=1-1]
+	\arrow["{()\cdot P}", from=2-3, to=1-3]
+	\arrow["{()\cdot Q}"', from=2-5, to=1-5]
+	\arrow["{()\cdot A}", from=2-5, to=2-3]
+\end{tikzcd}
+    \end{equation}. 
+\end{definition}
+
+\begin{exercise}[姜皓文之问]
+    试证明: $\varphi(u_\bullet\cdot C)=\varphi(u_\bullet)\cdot C$. 
+    \begin{proof}
+        这一结论是对以下课堂特例的推广: 
+        \begin{equation}
+            % https://q.uiver.app/#q=WzAsNixbMCwxLCJcXHZhcnBoaSgodV8xXFxtaWQgdV8yKVxcY2RvdCBcXGJpbm9te1xcbGFtYmRhfXsxfSkiXSxbMCwwLCJcXHZhcnBoaSh1X1xcYnVsbGV0XFxjZG90IEMpIl0sWzAsMiwiXFx2YXJwaGkoXFxsYW1iZGEgdV8xK3VfMikiXSxbMiwyLCJcXGxhbWJkYSBcXHZhcnBoaSh1XzEpK1xcdmFycGhpICh1XzIpIl0sWzIsMCwiXFx2YXJwaGkodV9cXGJ1bGxldClcXGNkb3QgQyJdLFsyLDEsIihcXHZhcnBoaSh1XzEpXFxtaWQgXFx2YXJwaGkodV8yKSlcXGNkb3QgXFxiaW5vbSBcXGxhbWJkYSAxIl0sWzEsNCwiPyIsMSx7ImxldmVsIjoyLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFswLDIsIiIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsMywiXFx0ZXh0e+e6v+aAp+aAp30iLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDUsIiIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzAsNSwiPyIsMSx7ImxldmVsIjoyLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+\begin{tikzcd}[ampersand replacement=\&]
+	{\varphi(u_\bullet\cdot C)} \&\& {\varphi(u_\bullet)\cdot C} \\
+	{\varphi((u_1\mid u_2)\cdot \binom{\lambda}{1})} \&\& {(\varphi(u_1)\mid \varphi(u_2))\cdot \binom \lambda 1} \\
+	{\varphi(\lambda u_1+u_2)} \&\& {\lambda \varphi(u_1)+\varphi (u_2)}
+	\arrow["{?}"{description}, Rightarrow, dashed, no head, from=1-1, to=1-3]
+	\arrow["{?}"{description}, Rightarrow, dashed, no head, from=2-1, to=2-3]
+	\arrow[Rightarrow, no head, from=2-1, to=3-1]
+	\arrow["{\text{线性性}}", Rightarrow, no head, from=3-1, to=3-3]
+	\arrow[Rightarrow, no head, from=3-3, to=2-3]
+\end{tikzcd}. 
+        \end{equation}
+        一般地, $\varphi(u_\bullet \cdot C)$ 的第 $i$ 列是 $\varphi(\sum _i u_i c_{i,j})=\sum_i \varphi (u_i )c_{i,j}$, 从而就是 $\varphi(u_\bullet)\cdot C$ 的第 $i$ 列. 
+    \end{proof}
+\end{exercise}
+
+\begin{pinked}
+    \begin{remark}
+        同一线性映射在不同基下有不同的矩阵表达, \textbf{但秩不变}. 
+    \end{remark}
+\end{pinked}
+
+\begin{proposition}[相抵标准型]
+    选定上述的 $(\varphi, U, u_\bullet, V, v_\bullet, A)$, 以下命题等价. 
+    \begin{enumerate}
+        \item 存在可逆矩阵 $P$ 与 $Q$ 使得 $Q^{-1}AP=\begin{pmatrix}I_{r\times r}&O\\O&O\end{pmatrix}$; 
+        \item 存在基变换 $u_\bullet\mapsto \overline u_\bullet$ 与 $v_\bullet\mapsto \overline v_\bullet$, 使得 $\varphi:\overline u_\bullet \mapsto \overline v_\bullet$ 将 $\overline u_\bullet$ 的前 $r$ 向量分别对应作 $\overline v_\bullet$ 的前 $r$ 个向量, 将其余向量对应作 $0$. 
+    \end{enumerate}
+\end{proposition}
+
+\begin{definition}[相抵等价]
+    记 $B=Q^{-1}AP$, 则 $A$ 与 $B$ 是相抵等价. $A$ 到 $B$ 的相抵等价由
+    \begin{enumerate}
+        \item 来源位置通过右乘 $()\cdot P$-换基, 
+        \item 去向位置通过右乘 $()\cdot Q$-换基
+    \end{enumerate}
+    一齐实现. 
+\end{definition}
+
+\begin{example}[相似变换]
+    相似变换源自 $\varphi:U\to U$ 的基变换. 注意: 我们要求 $\varphi$ 来源和去向相同, 从而 $P=Q$, 进而 $B=P^{-1}AP$. 
+\end{example}
+
+\begin{proposition}[应用: 同时相抵化]
+    若 $r(A+B)=r(A)+r(B)$, 当且仅当存在可逆的 $P$ 与 $Q$ 使得 
+    \begin{equation}
+        Q^{-1}AP=\begin{pmatrix}I_{r(A)}&O&O\\O&O_{r(B)}&O\\O&O&O\end{pmatrix},\quad Q^{-1}BP=\begin{pmatrix}O_{r(A)}&O&O\\O&I_{r(B)}&O\\O&O&O\end{pmatrix}. 
+    \end{equation}
+    \begin{proof}
+        将右乘矩阵看作线性变换, 此时 $R(A)+R(B)=R(A+B)$. 找一个基变换, 使得 $()\cdot A$
+        \begin{enumerate}
+            \item 将 $\overline u_\bullet$ 的前 $r(A)$ 个向量对应至 $\overline v_\bullet$ 的前 $r(A)$ 个向量, 
+            \item 将 $\overline u_\bullet$ 的第 $r(A)+1$ 至 $r(A)+r(B)$ 个向量对应值 $\overline v_\bullet$ 者. 
+        \end{enumerate}
+        将基变换复原作相抵标变换即可. 
+    \end{proof}
+\end{proposition}
+
+\begin{proposition}[应用: $AB=O_n$, $BA=O_m$]
+    $AB=O_m$ 与 $BA=O$ 成立, 当且仅当存在可逆的 $P$ 与 $Q$ 使得
+    \begin{equation}
+        Q^{-1}AP=\begin{pmatrix}I_{r(A)}&O&O\\O&O_{r(B)}&O\\O&O&O\end{pmatrix},\quad P^{-1}BQ=\begin{pmatrix}O_{r(A)}&O&O\\O&I_{r(B)}&O\\O&O&O\end{pmatrix}. 
+    \end{equation}
+    \begin{proof}
+        若 $AB=O$ 且 $BA=O$, 则
+        \begin{enumerate}
+            \item 右乘 $B$ 将``右乘 $A$ 所得的像''映至 $0$ 子空间, 且
+            \item 右乘 $A$ 将``右乘 $B$ 所得的像''映至 $0$ 子空间. 
+        \end{enumerate}
+        依照 $A$ 的相抵标准型取 $U$ 中线性无关组 $S_1$, 则 
+        \begin{equation}
+            S_1\xrightarrow[\text{双射}]{()\cdot A}T_1\xrightarrow{()\cdot B}0. 
+        \end{equation}
+        同理, 依照 $B$ 的相抵标准型取 $U$ 中线性无关组 $T_2$, 则
+        \begin{equation}
+            T_2\xrightarrow[\text{双射}]{()\cdot B}S_2\xrightarrow{()\cdot A}0. 
+        \end{equation}
+        今断言 $S_1\cap S_2=\emptyset$. 若不然, 则 $v\in S_1$ 被 $()\cdot A$ 映作 $\mathbf 0$, 矛盾. 同理, $T_1\cap T_2=\emptyset$. 此时,
+        \begin{equation}
+            (S_1\quad S_2\quad O)\cdot A=(T_1\quad O\quad O),\quad (T_1\quad T_2\quad O)\cdot B=(O\quad T_2\quad O).
+        \end{equation}
+        \end{proof}
+\end{proposition}
+
+\begin{proposition}[应用: $A^2=O$-型矩阵的分类]
+    仍给定任意域 $k$. 若 $A^2=O$, 则存在可逆的 $P$ 使得 $P^{-1}AP=\begin{pmatrix}O&I&O\\O&O&O\end{pmatrix}$. 
+    \begin{proof}
+        $A$ 是某个线性映射 $\varphi :V\to V$ 的矩阵表达. 依照题干条件, $\varphi^2$ 是零映射, 从而有映射链 
+        \begin{equation}
+            V\xrightarrow[\text{满射}]{\varphi} \varphi (V)\xrightarrow{A}0. 
+        \end{equation}
+        在 $\varphi (V)$ 中找一组基 $u_\bullet^1$, 继而取 $u_\bullet^1$ 在 $\varphi$ 下的一组原像 $u_\bullet^2$, 将 $(u_\bullet^1\mid u_\bullet^2)$ 扩充至全空间 (取 $u_\bullet^3$ 使得 $\varphi(u_\bullet^3)$ 全零). 考虑矩阵表达
+        \begin{equation}
+            \varphi (u_\bullet^1\mid u_\bullet^2\mid u_\bullet^3)=(\mathbf 0\mid u_\bullet^1\mid \mathbf 0) = (u_\bullet^1\mid u_\bullet^2\mid u_\bullet^3)\cdot \begin{pmatrix}
+                O&I&O\\O&O&O\\O&O&O
+            \end{pmatrix}. 
+        \end{equation}
+        这一矩阵相似于 $A$. 
+    \end{proof}
+\end{proposition}
+
+\newpage 
+
+\section{标准型一览}
+
+\subsection{标准型是轨道的代表元}
+
+\begin{example}[等价关系]
+    称 $A,B\in \mathbb F^{m\times n}$ 是相抵的, 当且仅当存在 $P\in \mathrm{GL}_m(\mathbb F)$ 与 $Q\in \mathrm{GL}_n(\mathbb F)$ 使得 $PAQ=B$. 注意: \footnote{若一个集合上的关系满足下述三条, 则称之等价关系. 此处, 相抵等价是一个等价关系.} 
+    \begin{enumerate}
+        \item (自反性) $A$ 与自身相抵; 
+        \item (对称性) $A$ 与 $B$ 相抵, 当且仅当 $B$ 与 $A$ 相抵; 
+        \item (传递性) 若 $A$ 与 $B$ 相抵, 且 $B$ 与 $C$ 相抵, 则 $A$ 与 $C$ 相抵.  
+    \end{enumerate}
+    今给定矩阵 $M\in \mathbb F^{m\times n}$, 定义 $M$ 的相抵\textbf{轨道}是 $\mathbb F^{m\times n}$ 的子集 
+    \begin{equation}
+        t_M:=\{PMQ\mid P\in \mathrm{GL}_m (\mathbb F),Q\in \mathrm{GL}_n(\mathbb F)\}. 
+    \end{equation}
+    \begin{pinked}
+        换言之, 轨道 $t_M$ 是 $M$ 关于``左乘可逆矩阵''与``右乘可逆矩阵''这两个``作用''生成的最大子集. 
+    \end{pinked}
+\end{example}
+
+\begin{proposition}[轨道]
+    $N\in t_M$ 当且仅当 $t_M=t_N$, 当且仅当 $r(M)=r(N)$. 
+    \begin{itemize}
+        \item 若固定 $\mathbb F^{m\times n}$, 则 $t_M$ 与 $r(M)$ 是相同的指标. 
+    \end{itemize}
+\end{proposition}
+
+\begin{pinked}
+    \begin{remark}
+        等价关系定义了轨道. 秩就是相抵这一等价关系的给出的轨道. 依照经验 
+        \begin{equation}
+            t_M\xleftrightarrow{\text{一一对应}} \underbracket{\begin{pmatrix}I_r&O\\O&O\end{pmatrix}}\limits_{\text{轨道的代表元}}\xleftrightarrow{\text{一一对应}} r(M). 
+        \end{equation}
+        因此, 可以对映射定义 $\mathrm{rank}(\varphi)$. 
+    \end{remark}
+\end{pinked}
+
+\begin{definition}[相似变换]
+    给定 $U$ 到自身的线性映射 $\varphi:U\to U$\footnote{称 $\varphi$ 是 $U$ 上的自同态.}. 对 $\varphi$ 的来源与去向做相同的换基操作, 也就是在相抵变换中规定 $P=Q$, 对应的矩阵变换是相似变换. 
+\end{definition}
+
+\begin{example}[相似标准型]
+    相似是集合 $\mathrm M_n(\mathbb F)$ 上的等价关系. 可以依照相似关系, 将 $\mathrm M_n(\mathbb F)$ 划分作若干轨道. 例如, 可以将 $\mathrm M_n(\mathbb F)$ 划分作
+    \begin{equation}
+        \mathrm M_n(\mathbb F)=\bigcup_{i=1}^s t_i\quad (\text{这是两两无交的并}).
+    \end{equation} 
+\end{example}
+
+\begin{pinked}
+    \begin{remark}
+        为尽量精简地描述每条轨道, 可以在每个轨道中取一个代表元, 即标准型. 例如, 对复矩阵, 
+        \begin{equation}
+            t_i \xleftrightarrow{\text{一一对应}}\text{任意 $M\in t_i$ 的 Jordan 标准型}\xleftrightarrow{\text{一一对应}}\text{初等因子组}. 
+        \end{equation}
+    \end{remark}
+\end{pinked}
+
+\begin{remark}[Smith]
+    $A$ 与 $B$ 相似, 当且仅当 $(\lambda I-A)$ 与 $(\lambda I-B)$ 相抵.  
+\end{remark}
+
+\begin{definition}[合同标准型]
+    直白地看, $\mathrm M_n(\mathbb F)$ 的合同标准型来自 ``$A\sim P^T A P$ ($P$ 可逆)'' 这一等价关系的轨道划分. 从线性映射的角度看, 先对双线性型做一些技术调整 (Curry 化) 
+    \begin{equation}
+        \text{$U\& V$ 至 $\mathbb F$ 的``双''线性映射}\xleftrightarrow{\text{双射}}\text{$U$ 至 $\underbracket{\text{$V$ 至 $\mathbb F$ 的全体线性映射}}\limits_{\text{这是 $\mathbb F$-线性空间}}$}. 
+    \end{equation}
+    简单地说, $U\wedge V\to \mathbb F$ 无非 $W\to (V\to \mathbb F)$. 
+    
+    令 $U=V$, 合同源自对 $\varphi: V\to (V\to \mathbb F)$ 的换基, $V$ 的基变换与 $(V\to \mathbb F)$ 的基变换相差 $(\bullet^{-1})^T$. 
+\end{definition}
+
+\begin{remark}
+    也有一个表述粗糙的观点. 记
+    \begin{equation}
+        \varphi: u_\bullet\&u_\bullet\to \mathbb F
+    \end{equation}
+    的矩阵表述为 $u_\bullet X u_\bullet^T$. 换基 $u_\bullet\cdot P=:\overline u_\bullet$ 对应 
+    \begin{equation}
+        \varphi (\overline u_\bullet \& \overline u_\bullet)=\overline u_\bullet X \overline u_\bullet^T=u_\bullet PXP^T u_\bullet ^T. 
+    \end{equation}
+    新的矩阵即 $P^TXP$. 
+\end{remark}
+
+\begin{definition}[酉相似 (对实矩阵而言, 即正交相似)]
+    等价关系是通过酉矩阵相似. 相应地, ``正交相似的轨道''比``相似的轨道''更细. 
+\end{definition}
+
+\begin{remark}
+    等距变换 (正交) 同一了相似与合同. 
+\end{remark}
+
+\begin{remark}[思考题]
+    正交相似的轨道是否恰好是合同轨道与相似轨道的加细? 换言之,  
+    \begin{itemize}
+        \item 若两个实方阵既相似, 又合同, 则是否一定正交相似? 
+    \end{itemize}
+\end{remark}
+
+\begin{pinked}
+    \begin{remark}
+        这是一个非常重要的注释: 正交相似是确实一个等价关系, 但\textbf{找不到一个好的标准型!} 酉相似也是同理的. 我们至多只能得到 Hessenberg 形式或上三角形式, 之后就没有了. 
+
+        所谓的实矩阵的正交标准型 ($\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}$ 之类的), 其本质仍是相似标准型, 只不过将最终形式写成``几何''的样子. 
+    \end{remark}
+\end{pinked}
+
+\begin{example}[不变子空间]
+    给定 $\varphi:V\to V$. 以下仅考虑相似变换类. 
+    \begin{enumerate}
+        \item (分块上三角化) 若存在子空间 $U\subset V$ 使得 $\varphi(U)\subseteq U$, 则称 $U$ 是 $\varphi$ 的一个不变子空间. 取一组 $U$-基 $u_\bullet$, 并将之延拓到 $V$ 基 $(u_\bullet\quad v_\bullet)$, 则 $\varphi$ 具有矩阵表示 
+        \begin{equation}
+            \varphi (u_\bullet\quad v_\bullet)=(u_\bullet\quad v_\bullet) \cdot \begin{pmatrix}\ast &\ast \\O&\ast \end{pmatrix}. 
+        \end{equation}
+        换言之, 若找到了矩阵 $A$ 的一个不变子空间, 则找到了 $A$ 的分块上三角化. 
+        \item (分块对角化) $A$ 可以分块对角化作 $A_1\in \mathrm M_m$ 与 $A_2\in \mathrm M_n$, 当且仅当存在 $V=U_1\oplus U_2$ 使得 $U_1$ 与 $U_2$ 均是 $()\cdot A$ 的不变子空间, 且有 $\dim U_1=m$ 与 $\dim U_2=n$. 
+        \item (相似上三角化) $A$ 可以上三角化, 当且仅当存在一组基 $u_\bullet$, 使得所有 $\mathrm{span}(\{u_i\}_{1\leq i\leq k})$ 都是 $()\cdot A$ 的不变子空间. 
+        \item (相似对角化) $A$ 可以对角化, 当且仅当存在一组基 $u_\bullet$, 使得所有 $\mathrm{span}(u_i)$ 都是 $()\cdot A$ 的不变子空间. 
+        \item 将以上每条对多个矩阵同时进行, 例如``同时对角化''等等. 
+    \end{enumerate}
+\end{example}
+
+\begin{remark}[左乘与右乘]
+    称 $(\lambda, u_{\neq \mathbf 0})$ 是矩阵 $B$ 的特征组, 当且仅当 $Bu=\lambda u$. 若将 $B\cdot ()$ 看作线性映射, 则在上述记号下, 
+    \begin{equation}
+        (u\mid \cdots )\cdot A=B\cdot (u\mid \cdots )=(\lambda u\mid \cdots ),\quad A=\begin{pmatrix}\lambda &\ast \\\mathbf 0&\ast\end{pmatrix}. 
+    \end{equation}
+    记 $P:=(\lambda u\mid \cdots )$ 为可逆矩阵, 则 $P^{-1}BP=A$. 
+\end{remark}
+
+\begin{definition}[QR 分解]
+    给定线性映射 $\varphi:U\to V$ 及其矩阵表述 $(u_\bullet, v_\bullet, A)$. 我们希望有 $\varphi (u_\bullet)=(v_\bullet)\cdot QR$ 之类的式子. 
+    \begin{enumerate}
+        \item 若 $R$ 是上三角矩阵, $Q$ 是正交矩阵的一部分, 则... 
+        \item 若 $R$ 是上三角矩阵的一部分, $Q$ 是正交矩阵, 则... 
+        \item RQ 分解的两种. 
+        \item QL 分解 ($L$ 是下三角矩阵). 
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    正交标准型 ($\mathbb C$ 上类似): 对任意方阵 $M$, 存在正交矩阵 $Q$ 使得 $Q^TMQ=\begin{pmatrix}R&S\\O&O\end{pmatrix}$, 其中 $(R\quad S)$ 是行满秩的. 
+\end{remark}
+
+\begin{example}[正交标准型兼顾相似与合同, 是强大的技巧]
+    若复矩阵 $X$ 满足 $X^3=XX^HX$, 证明 $X=X^H$. 
+        \begin{proof}
+            记 $X=U^H\begin{pmatrix}R&S\\O&O\end{pmatrix}U$. 此时, 
+            \begin{equation}\normalsize
+                XX^HXX^H=U^H\begin{pmatrix}(RR^T+SS^T)^2&O\\O&O\end{pmatrix}U=U^H\begin{pmatrix}R^3R^H+R^2SS^H&O\\O&O\end{pmatrix}U=XXXX^H. 
+            \end{equation}
+            因此 $\det (RR^H+SS^H)^2=\det (R)^2\det (RR^H+SS^H)$. 由于 $L:=(R\quad S)$ 行满秩, 故 $LL^H=RR^H+SS^H$ 满秩. 上式化作
+            \begin{equation}
+                \det (RR^H+SS^H)=\det (RR^H). 
+            \end{equation}
+            由 Cauchy-Binet 公式知 $\det(RR^H+SS^H)\geq \det (RR^H)$, 取等当且仅当 $S=O$. 此时 $R$ 可逆且 $R^3=RR^HR$, 因此 $R$ 是对称矩阵. 故 $X$ 是对称矩阵. 
+        \end{proof}
+\end{example}
+
+\begin{definition}[奇异值分解]
+    记 $\varphi:U\to V$ 是有限维实或复线性空间的映射, 记 $e_\bullet$ 与 $f_\bullet$ 是一组标准正交基. 奇异值分解说明了以下事实: 
+    \begin{itemize}
+        \item 存在等距变换 $e_\bullet Q=\overline e_\bullet$ 与 $f_\bullet P=\overline f_\bullet$, 使得 $\varphi(\overline e_\bullet) = \overline f_\bullet\cdot \Sigma$ ($\Sigma$ 的左上分块 $\mathbb R_+$-值对角). 
+    \end{itemize}
+    换言之, 若 $\varphi (e_\bullet)=f_\bullet\cdot A$, 则 
+    \begin{equation}
+        f_\bullet\cdot  P\cdot \Sigma=\overline f_\bullet\cdot \Sigma = \varphi(\overline e_\bullet)= \varphi(e_\bullet)\cdot Q. 
+    \end{equation}
+    因此, $A=P\Sigma Q^{-1}$. 
+\end{definition}
+
+\begin{remark}
+    直观地, 线性变换 $\varphi: \mathbb R^m\to \mathbb R^n$ 可拆解作以下三项复合: 
+    \begin{equation}
+        \varphi = \underbracket{\mathcal R}\limits_{\text{去向的旋转, 对极投影}}\circ \underbracket{\mathcal L}\limits_{\text{沿坐标轴正向拉伸, 投影}}\circ \underbracket{\mathcal S}\limits_{\text{来源的旋转, 翻转}}
+    \end{equation}
+    在统计学中, $\mathcal L$ 最大径向拉伸 ($\Sigma$ 中最大值) 称作主成分. 
+\end{remark}
+
+\begin{definition}[MP 逆]
+    沿用以上记号 $\varphi (e_\bullet) = (f_\bullet)\cdot A$, 对 $A=P\Sigma Q^{-1}$ 蕴含了映射分解 
+    \begin{equation}
+        \varphi = \underbracket{\mathcal R}\limits_{\text{等距变换}}\circ \underbracket{\mathcal L}\limits_{\text{沿坐标轴正向拉伸, 投影}}\circ \underbracket{\mathcal S}\limits_{\text{等距变换}}
+    \end{equation}
+    $A$ 的 MP 逆 $A^+$ 由如下映射刻画 (从 $\varphi^+:V\to U$): 
+    \begin{equation}
+        \varphi^+ = \underbracket{\mathcal S^{-1}}\limits_{\text{等距变换}}\circ \underbracket{\mathcal L^+}\limits_{\text{沿坐标轴{\textcolor{red}{反向}}正向拉伸, 投影}}\circ \underbracket{\mathcal R^{-1}}\limits_{\text{等距变换}}
+    \end{equation}
+    例如, $\Sigma$-类型的矩阵的广义逆为 $\begin{pmatrix}2&0\\0&3\\0&0\end{pmatrix}^+:=\begin{pmatrix}1/2&0&0\\0&1/3&0\end{pmatrix}$, $A$ 的广义逆为 $Q\Sigma^+ P^{-1}$. 
+\end{definition}
+
+\begin{remark}
+    $A^+$ 与 $A^H$ 比较相似: 
+    \begin{equation}
+        A^+=Q\Sigma^+ P^{-1},\quad A^H=Q\Sigma^H P^{-1}. 
+    \end{equation}
+\end{remark}
+
+\begin{definition}[谱分解]
+    假定 $S=S^H$ (或更一般地, 正规矩阵), 由 Schur 三角化得 $U^{-1}SU=\Lambda$ 是对角矩阵. 映射层面, $\varphi:V\to V$ 在某组基下表现做沿坐标轴拉伸.  
+\end{definition}
+
+\begin{remark}
+    从线性映射的视角看, $AA^+$ 与 $A^+A$ 都是正交投影矩阵, 换言之, $\varphi\circ \varphi^+:V\to V$ 与 $\varphi^+\circ \varphi:U\to U$ 在某个``基的等距变换''下是 $(0,1)$-对角的. 类似地, $\varphi \circ \varphi ^H:V\to V$ 与 $\varphi^H \varphi:U\to U$ 在某个``基的等距变换''下是亦是对角矩阵. 
+    \begin{pinked}
+        求解奇异值分解的关键步骤是找到 $A^HA$ 与 $AA^H$ 的谱分解. 
+    \end{pinked}
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+
+
+% \section{秩, 相抵}
+
+% \subsection{线性空间的主要公式一览}
+
+
+% \begin{proposition}
+%     以下假定全空间是有限维的, 所有线性空间都是子空间. 以下是维度公式: 
+%     \begin{enumerate}
+%         \item 若 $U\subseteq V$, 则 $\dim U\leq \dim V$;
+%         \item 若 $U\subsetneqq V$, 则 $\dim U\le \dim V$;
+%         \item 若 $U\cap V=0$, 则 $\dim (U+V)=\dim U+\dim V$; 
+%         \item 一般地, $\dim (U+V)+\dim (U\cap V)=\dim U+\dim V$; 
+%     \end{enumerate}
+%     以下是子空间运算简单公式 (合乎直觉的公式): 
+%     \begin{enumerate}
+%         \item $U\cap 0=0=0\cap U$; $U+\text{全}=\text{全}=\text{全}+U$;
+%         \item $U+0=U=0$;  $U\cap \text{全}=U=\text{全}\cap U$; 
+%         \item $U\cap V=V\cap U$; $U+V=V+U$; 
+%         \item $(U\cap V)\cap W=U\cap (V+W)$; $(U+V)+W=U+(V+W)$. 
+%     \end{enumerate}
+%     以下是子空间运算的重点公式: 
+%     \begin{enumerate}
+%         \item $U\cap (V+W)\supset (U\cap V)+(U\cap W)$, 存在不取等的反例; 
+%         \item $U+ (V\cap W)\subset (U+V)\cap (U+W)$, 存在不取等的反例; 
+%         \item 假定 $U\subseteq V$, 则 $(U+W)\cap V=U+(W\cap V)$. 
+%     \end{enumerate}
+% \end{proposition}
+
+% \begin{proposition}
+%     四大基本空间的不等式均可以由秩不等式刻画. 
+    
+%     特别地: 对\textbf{数域上的矩阵}而言, 需熟练掌握如下技巧 ($(-)^H$ 是共轭转置): 
+%     \begin{enumerate}
+%         \item $Ax=0\iff A^HAx=0$ (例: $A=A^H$ 当且仅当 $A^2=A^HA$); 
+%         \item $A^HA+B^HB=\binom AB^T\binom AB$ (例: 投影矩阵 $R(P+Q)=R(P)+R(Q)$, Cauchy-Binet 公式); 
+%         \item 实矩阵的复化 (请总结作业). 
+%     \end{enumerate}
+% \end{proposition}
+
+% \begin{proposition}[秩不等式]
+%     以下 $X\to Y$ 表明 $r(X)\leq r(Y)$. 请复习所有 $\dagger$ 处的取等条件 (充要条件)
+%     \begin{equation}
+%         % https://q.uiver.app/#q=WzAsMTMsWzEsNSwicihBKStyKEIpIl0sWzEsMCwicihBQikiXSxbMCw0LCJyKChBXFxxdWFkIEIpKSJdLFsyLDQsInJcXGxlZnQoXFxiaW5vbXtBfXtCfVxccmlnaHQpIl0sWzEsMywiXFxtYXgocihBKSxyKEIpKSJdLFsxLDQsInIoQStCKSJdLFsxLDYsInJcXGxlZnQoXFxiaW5vbXtBXFwsXFwsIE99e09cXCxcXCxCfVxccmlnaHQpIl0sWzAsNiwiclxcbGVmdChcXGJpbm9te0FcXCxcXCwgT317Q1xcLFxcLEJ9XFxyaWdodCkiXSxbMiw2LCJyXFxsZWZ0KFxcYmlub217QVxcLFxcLCBEfXtPXFwsXFwsQn1cXHJpZ2h0KSJdLFsyLDIsInIoQSkiXSxbMCwyLCJyKEIpIl0sWzEsMSwiXFxtaW4gKHIoQSkscihCKSkiXSxbMSwyLCJyXFxsZWZ0KFxcYmlub217QVxcLFxcLCBEfXtDXFwsXFwsQn1cXHJpZ2h0KSJdLFsyLDAsIlxcZGFnZ2VyIiwxXSxbMywwLCJcXGRhZ2dlciIsMV0sWzUsMiwiXFxkYWdnZXIiLDFdLFs1LDMsIlxcZGFnZ2VyIiwxXSxbMCw2LCIiLDEseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs0LDJdLFs0LDNdLFs2LDcsIlxcZGFnZ2VyIiwxXSxbNiw4LCJcXGRhZ2dlciIsMV0sWzEwLDRdLFs5LDRdLFsxMSwxMF0sWzExLDldLFsxLDExXSxbMTAsMTIsIlxcZGFnZ2VyIiwxXSxbOSwxMiwiXFxkYWdnZXIiLDFdXQ==
+% \begin{tikzcd}[ampersand replacement=\&]
+% 	\& {r(AB)} \\
+% 	\& {\min (r(A),r(B))} \\
+% 	{r(B)} \& {r\left(\binom{A\,\, D}{C\,\,B}\right)} \& {r(A)} \\
+% 	\& {\max(r(A),r(B))} \\
+% 	{r((A\quad B))} \& {r(A+B)} \& {r\left(\binom{A}{B}\right)} \\
+% 	\& {r(A)+r(B)} \\
+% 	{r\left(\binom{A\,\, O}{C\,\,B}\right)} \& {r\left(\binom{A\,\, O}{O\,\,B}\right)} \& {r\left(\binom{A\,\, D}{O\,\,B}\right)}
+% 	\arrow[from=1-2, to=2-2]
+% 	\arrow[from=2-2, to=3-1]
+% 	\arrow[from=2-2, to=3-3]
+% 	\arrow["\dagger"{description}, from=3-1, to=3-2]
+% 	\arrow[from=3-1, to=4-2]
+% 	\arrow["\dagger"{description}, from=3-3, to=3-2]
+% 	\arrow[from=3-3, to=4-2]
+% 	\arrow[from=4-2, to=5-1]
+% 	\arrow[from=4-2, to=5-3]
+% 	\arrow["\dagger"{description}, from=5-1, to=6-2]
+% 	\arrow["\dagger"{description}, from=5-2, to=5-1]
+% 	\arrow["\dagger"{description}, from=5-2, to=5-3]
+% 	\arrow["\dagger"{description}, from=5-3, to=6-2]
+% 	\arrow[Rightarrow, no head, from=6-2, to=7-2]
+% 	\arrow["\dagger"{description}, from=7-2, to=7-1]
+% 	\arrow["\dagger"{description}, from=7-2, to=7-3]
+% \end{tikzcd}.
+%     \end{equation}
+% \end{proposition}
+
+% \begin{proposition}
+%     重要的秩不等式: 
+%     \begin{enumerate}
+%         \item $r(ABC)+r(B)\geq r(AB)+r(BC)$ 的取等条件, 系列例题 (请总结作业); 
+%         \item Schur 打洞与秩 (请总结作业); 
+%         \item 零空间列 $\{N(A^k)\}_{k\in \mathbb N}$ 的增长问题, 包括增长列的上凸性, 何时穷竭 (请自行总结); 
+%         \item 正交投影矩阵的秩, 迹, 以及与投影子空间的关系 (请在丘维声, 张贤科的书上找题); 
+%         \item 相似等价于 Smith 标准型相抵, 初等因子组等 (不考, 但用起来很便利). 
+%     \end{enumerate}  
+% \end{proposition}
+
+% \section{相似}
+
+% \subsection{正交投影: 正交标准型}
+
+% \begin{definition}
+%     复投影矩阵的定义: $P^2=P=P^H$. 试分别说明 $P^2=P$ 与 $P=P^H$ 的意义 (见作业). 
+% \end{definition}
+
+
+% \begin{example}[投影矩阵可交换的充要条件]
+%     以下投影矩阵都是正交投影矩阵. 记 $P$ 与 $Q$ 是规格相同的投影矩阵. 
+%     \begin{enumerate}
+%         \item 以下等价 (像不交): $P+Q$ 是投影矩阵; $PQ=QP=O$; $R(P)\cap R(Q)=0$. 
+%         \item 以下等价 (像包含): $P-Q$ 是投影矩阵; $PQ=QP=P$; $R(Q)\subseteq R(P)$; $\|Px\|\geq \|Qx\|$ 恒成立. 
+%         \item 以下等价 (可交换): $P+Q-PQ$ 是投影矩阵; $P+Q-QP$ 是投影矩阵; $PQ=QP$; $PQ$ 是投影矩阵; $QP$ 是投影矩阵. 
+%     \end{enumerate}
+% \end{example}
+
+% \begin{example}[投影矩阵与子空间一一对应]
+%     以下投影矩阵都是正交投影矩阵. 
+%     \begin{enumerate}
+%         \item 投影矩阵与子空间一一对应: 对任意 $A$, 写出唯一投影至 $C(A)$ 的投影矩阵 (见 MP 逆); 
+%         \item 若 $PQ=QP$, 则 $C(P)\cap C(Q)=C(PQ)$, $C(P)+C(Q)=C(P+Q-PQ)$; 
+%         \item $C(P+Q)=C((P\mid Q)\cdot (P\mid Q)^H)=C(P\mid Q)=C(P)+C(Q)$; 
+%         \item $C(P)\oplus C(P(I-Q))=C(P+Q)=C((I-P)Q)\oplus C(Q)$; 
+%         \item (投影矩阵的极限是投影矩阵) $C(P)\cap C(Q)=C(\lim_{n\to\infty}P(QP)^n)$; 
+%     \end{enumerate}
+% \end{example}
+
+% \begin{proposition}[常见的投影矩阵]
+%     见作业. 
+% \end{proposition}
+
+% \subsection{奇异值分解, MP 逆}
+
+% \begin{definition}[正交变换, 酉变换]
+%     称基变换矩阵 $Q$ 是正交的, 当且仅当 $Q^{-1}=Q^T$. 往后称 $Q$ 是正交矩阵. 
+%     \begin{itemize}
+%         \item 复情形下需要将转置改作共轭转置, $Q$ 改称酉矩阵. 
+%     \end{itemize}
+% \end{definition}
+
+% \begin{proposition}
+%     等距变换 (实: 正交变换; 复: 酉变换) 的几何意义是保持模长. 对复方阵 $Q$, 以下等价: 
+%     \begin{enumerate}
+%         \item $Q$ 是酉矩阵, 即, $Q^H=Q$; 
+%         \item $\|Qx\|=\|x\|$ 恒成立; 
+%         \item $(Qx)^H\cdot (Qy)=x^H\cdot y$ 恒成立. 
+%     \end{enumerate}
+% \end{proposition}
+
+% \begin{remark}
+%     例如, 记基变换 $u_\bullet \cdot Q =:\overline u_\bullet$. 按照上述结论, $Q$ 是等距变换, 当且仅当 $u_i^H\cdot u_j=\overline u_i^H\cdot \overline u_j$. 如果 $u_\bullet$ 还是标准正交基, 则 $Q$ 是等距变换当且仅当 $\overline u_\bullet$ 也是标准正交基. 
+% \end{remark}
+
+
+
+% \begin{example}
+%     奇异值分解计算 (去年考题): 计算 $AA^T$ 与 $A^TA$ 的正交对角化, 
+%     \begin{equation}
+%         AA^T=Q^T\Lambda_1Q,\  A^TA=P^T\Lambda_2 P\implies A=Q^T \Sigma P. 
+%     \end{equation}
+%     复矩阵类似. 
+% \end{example}
+
+% \begin{proposition}[MP 逆]
+%     若 $A=U\begin{pmatrix}\Lambda&O\\O&O\end{pmatrix}_{m\times n}V^H$, 定义 MP 逆
+%     \begin{equation}
+%         A^+:=V\begin{pmatrix}\Lambda^{-1}&O\\O&O\end{pmatrix}_{n\times m}U. 
+%     \end{equation}
+%     MP 逆有如下性质: 
+%     \begin{enumerate}
+%         \item 给定 $A$, 则 $A^+$ 是满足 $AA^+A=A$, $A^+AA^+=A^+$, $(AA^+)=(AA^+)^H$, 与 $(A^+A)^H=(A^+A)$ 的唯一矩阵; 
+%         \item $AA^+$ 是至 $C(A)$ 的正交投影; $A^+A$ 是至 $C(A^H)$ 的正交投影. 
+%     \end{enumerate}
+% \end{proposition}
+
+% \subsection{正交矩阵}
+
+% \begin{proposition}
+%     Given-旋转矩阵, Householder 反射子, 旋转与反射的行列式, 以及标准型. (自行找题.) 
+%     \begin{itemize}
+%         \item 实矩阵有如下相似标准型:
+%         \begin{equation}
+%             \mathrm{diag}(\cdots, J_n(\lambda), \ldots, R_{2n}(\theta)).
+%         \end{equation}
+%         其中, $J_n(\lambda)$ 就是通常的 Jordan 块, $R_2(\theta)=\begin{pmatrix}\cos\theta&\sin\theta\\-\sin\theta&\cos\theta\end{pmatrix}$, $R_{2n+2}(\theta)=\begin{pmatrix}R_{2n}(\theta)&E_{2n,1}\\O&R_2(\theta)\end{pmatrix}$, $E_{i,j}$ 是仅在 $(i,j)$ 取 $1$, 其余处取 $0$ 的矩阵. 
+
+%         一种证明方法是写出实矩阵在复数域中的 Jordan 型, 再重整回旋转反射标准型. 这一方法的困难之处是证明如下论断: 两个实矩阵在 $\mathbb C$ 上相似, 则其在 $\mathbb R$ 上相似. 解决这个困难的最简方法是引入 Smith 标准型, 将判断相似变作判断相抵, 继而使用``零空间维数与域无关''这一结论. 
+%     \end{itemize}
+% \end{proposition}
+
+% \begin{remark}[相似与对称性]
+%     实方阵是两个对称方阵的乘积, 复方阵亦然. 对任意域上的方阵 $A$, 存在对称方阵 $S$ 使得 $S^{-1}AS=A^T$. (见作业)
+% \end{remark}
+
+
+
+
+
+
+
+
+
+\end{document}

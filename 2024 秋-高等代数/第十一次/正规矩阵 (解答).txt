@@ -1,0 +1,442 @@
+**记号说明** 约定一切 $\Lambda$ 是复对角矩阵, $(-)^H$ 是共轭转置, $U$ 是酉矩阵. 以下总结一些常见矩阵的谱分解. 
+
+> 注: 两个实矩阵正交相似等价于酉相似, 见上周作业. 因此, 以下结果与实情形是统一的. 
+
+1. 正规矩阵 (normal matrix)
+
+   > $A=U^H\Lambda U$, $\Lambda$ 是对角矩阵. 
+
+2. 自伴矩阵 (self-adjoint matrix), Hermite 矩阵 (Hermitian matrix) 
+
+   > $A=U^H\Lambda U$, $\Lambda$ 是实对角矩阵. 
+
+3. 半正定 Hermite 矩阵 (Hermitian semi-positive definite matrix)
+
+   > $A=U^H\Lambda U$, $\Lambda$ 是实半正定对角矩阵. 
+
+4. 正定 Hermite 矩阵 (Hermitian positive-definite matrix)
+
+   > $A=U^H\Lambda U$, $\Lambda$ 是实正定对角矩阵. 
+
+**自主练习** 反对称 Hermite 矩阵, 复投影矩阵, 以及酉矩阵的谱分解如何? 
+
+**自主练习** 对方阵的奇异值分解 $A=U^H\Sigma V$, 定义 $A$ 的谱分解为酉矩阵与半正定厄米矩阵的乘积 $(U^HV)\cdot (V^H\Sigma V)$​. 对于上述几类矩阵, 其极分解有无特殊性质? 
+
+**注** 若术语与西文人名相关, 英文或以形容词作定语, 但**中文必然以名词作定语**. 例如
+
+* Abel 群 (Abelian group); 
+* Bool 代数 (Boolean algebra); 
+* Hermite 矩阵 (Hermitian matrix); 
+* Laplace 算符 (Laplacian); 
+* Pfaff (Pfaffian). 
+
+也有一些例外, 例如 Jacobi matrix 和 Jacobian matrix 就是两个名词. 
+
+**记号说明** 每题的相对难度用 $\star$​ 的数量描述. 
+
+$\emptyset$ 直接推论, 定义默写等. 
+
+$\star$ 考试难度的上界.
+
+$\star\star$ 值得思考, 属于不难也不简单的题目. 
+
+$\star\star\star$ 可以选择放弃.
+
+<div style="page-break-after: always;"></div>
+
+**Ex 1** 复 (半) 正定 Hermite 矩阵是**实对称 (半) 正定矩阵**在 $\mathbb C$ 上的推广. 
+
+* 称 $M$ 是复 (半) 正定 Hermite 的, 当且仅当存在酉对角化 $U^H\Lambda U=M$, 其中 $\Lambda$ 是 (半) 正定的实对角矩阵. 
+
+今假定 $M=\begin{pmatrix}S &R\\R^H&T\end{pmatrix}$ 复半正定 Hermite 矩阵. 
+
+1. ($\star$) 证明: $Mx=\mathbf 0$ 当且仅当 $x^HMx=0$​. 
+
+   > 答: 若 $Mx=\mathbf 0$, 则 $x^HMx=0$. 反之, 若 $x^HMx=0$, 记酉分解 $M=U^H \Lambda U$,其中
+   > $$
+   > \Lambda =\mathrm{diag}(\lambda _1, \lambda _2, \ldots, \lambda_r,0,\ldots,0)\quad \lambda _i >0.
+   > $$
+   > 记 $y:=Ux$, 则 $y^H\Lambda y=0$ 当且仅当 $y_1=\cdots =y_r=0$, 即, $\Lambda y=\mathbf 0$. 此时
+   > $$
+   > \mathbf 0=U^H \Lambda y=Mx. 
+   > $$
+   >
+   > * 这是照抄实对称半正定矩阵的解法. 
+2. ($\star\star$) 证明: $(S\quad R)$ 与 $S$​ 有相同的列空间 (等价地, 两个矩阵的秩相同). 
+
+   > 答: 只需证明两者零空间相同, 即, $y^H S=\mathbf 0^H$ 当且仅当 $y^H(S\quad R)=\mathbf 0^H$​. 依照上一问: 
+   > $$
+   > y^HS=\mathbf 0^H\iff y^HSy=0 \iff \binom y{\mathbf 0}^HM\binom y{\mathbf 0}=0 \iff \binom y{\mathbf 0}^HM=\mathbf 0^H\iff y^H(S\quad R)=\mathbf 0^H.
+   > $$
+3. ($\star$) 证明: $M$ 合同于某个 $\begin{pmatrix}S&O\\O&\widetilde T\end{pmatrix}$​. 
+
+   > 答: 记 $R=SL$, 则 $R^H=L^HS$. 考虑初等变换 (也就是打洞)
+   > $$
+   > \begin{pmatrix}I&O\\-L^H&I\end{pmatrix}\cdot \begin{pmatrix}S&R\\R^H&T\end{pmatrix}\cdot \begin{pmatrix}I&-L\\O&I\end{pmatrix}=\begin{pmatrix}S&O\\O&T-L^HSL\end{pmatrix}.
+   > $$
+
+<div style="page-break-after: always;"></div>
+
+**Ex 2** 取定 $\mathbb R^n$ 中的单位向量 $v_0$. 定义线性变换
+$$
+\varphi: \mathbb R^n\to \mathbb R^n ,\quad v\mapsto v- \left(2\cdot v^T\cdot v_0 \right) v_0.
+$$
+
+几何意义: 关于 $v_0$ 的镜面反射. 
+
+1. ($\star$) 任取 $\mathbb R^n$ 的单位正交基. 记 $\varphi$ 在这组基下的矩阵表示为 $A$. 证明 $A$ 是正交矩阵, 且 $A^2=I$​. 
+
+   > 答: 记 $\varphi(e_\bullet)=e_\bullet \cdot A$. 
+   >
+   > 1. 由定义, $\varphi\circ \varphi$ 是恒等映射, 因此 $A^2=I$. 
+   > 2. 由以上, $\varphi(e_\bullet)$ 是可逆矩阵. 此时 $\varphi(e_\bullet)^T\cdot \varphi(e_\bullet)=A^Te_\bullet^Te_\bullet A=A^TA$. 结合 $\varphi(u)^T\cdot \varphi(v)=u^T\cdot v$, 得 $A^TA=I$. 从而 $A$ 是正交矩阵. 
+
+2. ($\star\star\star$) 对任意正交矩阵 $Q$, 证明 $1\in\sigma (Q)\cup \sigma (AQ)$. 
+
+   > 答: 假定 $\alpha$ 是正交矩阵 $Q$ 对应的线性映射. 若 $1$ 不是 $\alpha$ 的特征值, 则 $(\alpha-\mathrm{id}):\mathbb R^n\to \mathbb R^n$ 的连续双射. 
+   >
+   > * 重要步骤: 存在 $x\in \mathbb R^n$ 使得 $\alpha(x)-x$ 与 $v_0$​ 同向. 此时有垂直关系 $v_0^T \cdot (\alpha (x)+x)=0 $​. 
+   >
+   > 因此, 
+   > $$
+   > \varphi (x)=x-2(x^Tv_0)\cdot v_0=x-(x^Tv_0)\cdot v_0+(\alpha (x)^Tv_0)v_0=\alpha(x). 
+   > $$
+   > 依照 $\varphi^2=\mathrm{id}$, 记 $x=\varphi(y)$, 则 $1$ 是 $\alpha\circ \varphi$ 的特征值. 矩阵角度看, $1$ 是 $AQ$​ 的特征值. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 3** 称 $A\in \mathrm M_n (\mathbb C)$ 是正规的, 当且仅当 $AA^H=A^HA$, 此处 $A^H$​ 是共轭转置. 以下是正规的等价条件. 
+
+* $[A,B]:=AB-BA$ 是一个惯常记号. 
+
+1. ($\emptyset$) 存在酉相似 $A=U^H\Lambda U$, $\Lambda$​ 是某一对角矩阵. 
+
+   > 答: 若 $A$ 与 $A^H$ 交换, 记 $A=U^HTH$ (Schur 上三角化). 比较 $\mathrm{tr}(TT^H)=\mathrm{tr}(TT^H)$, $T$ 是对角矩阵. 
+   >
+   > 若 $A=U^H\Lambda U$, 显然. 
+
+2. ($\star$) 存在酉矩阵 $U$ 使得 $AU=A^H$​. 
+
+   > 答: 若 $AU=A^H$, 代入 Schur 上三角化 $A=V^HTV$, 得 $TVU=T^H$. 比较 $\mathrm{tr}(\text{左}\cdot \text{左}^H)=\mathrm{tr}(\text{右}\cdot \text{右}^H)$, 得 $\mathrm{tr}(TT^H)=\mathrm{tr}(TT^H)$, 从而 $T$ 是对角矩阵. 因此 $A$ 是正规矩阵
+   >
+   > 若 $A=V^H\Lambda V$ 是正规矩阵, 则存在酉矩阵 $U$ 使得 $\Lambda U=\Lambda ^H$. 此时 $A(V^HUV)=A^H$. 
+
+3. ($\star$) $A$​ 的奇异值恰好是特征值的绝对值. 
+
+   > 答: 考虑 Schur 上三角化 $A=U^HTU$. 注意到 $\sigma(TT^H)$ 恰为 $T$ 对角元模长的平方, 当且仅当 $T$ 是对角矩阵 (取迹). 
+
+4. ($\star\star\star$) $A$ 与 $[A,A^H]$ 可交换. 
+
+   > 答: 最快捷的方式是计算 $0=\mathrm{tr}([A,[A,A^H]]\cdot A^H)=\text{下一问}$​. 
+   >
+   > * 一般结论: (假定域的特征是 $0$.) 若 $[A,[B,A]]$ 是幂零矩阵, 则 $[B,A]$​ 是幂零矩阵. 
+   >
+   > * 一般结论的证明: 固定 $B$, 定义 $D(X):=[B,X]$. 此时, 对任意多项式 $f$ 都有
+   >   $$
+   >   D(f(X))=f'(X)\cdot D(X).
+   >   $$
+   >   取 $f$ 是 $A$ 的零化多项式, 则 $f'(A)\cdot D(A)=O$. 计算二阶导数
+   >   $$
+   >   D(D(f(A)))=f''(A)\cdot D(A)^2+f'(A)\cdot D(D(A)). 
+   >   $$
+   >   右侧乘以 $D(A)$, 得 $f''(A)\cdot D(A)^3=O$. 如此往复归纳, 存在正整数 $N$ 使得 $f^{(\deg f)}(A)\cdot D(A)^N=O$. 由于域的特征是 $0$, 故 $D(A)$ 幂零. 
+   >
+   > * 使用一般结论证明此题: $[A,A^H]$ 是幂零矩阵, 但同时可以对角化, 从而只能是零矩阵. 
+
+5. ($\star\star$) $\mathrm{tr}(AAA^HA^H)=\mathrm{tr}(AA^HAA^H)$. 
+
+   > 答: 最快捷的方法是定义内积 (参考 Frobenius 范数): 
+   > $$
+   > \mathrm M_n(\mathbb C)\ \& \ \mathrm M_n(\mathbb C)\to \mathbb C, \quad (A,B)\mapsto \mathrm{tr}(A^HB). 
+   > $$
+   > 此时有恒等式 $\|AA^H-A^HA\|^2=2(\|AA^H\|-\|A^2\|^2)$. 左边取零 (正规) 当且仅当右边取零 (迹条件). 
+
+6.  ($\star\star$) 存在唯一的分解 $A=A_1+iA_2$, 使得 $A_1=A_1^H$, $A_2=A_2^H$, 且 $[A_1,A_2]=O$. 
+
+   > 答: 若右侧条件满足, 则 $A$ 与 $A^H$ 交换. 
+   >
+   > 若 $A$ 正规, 将酉对角分解的 $\Lambda$​ 写作实部与虚部即可 (存在性证毕). 下说明这一分解的唯一性. 
+   >
+   > * 若 $A_1+iA_2=B_1+iB_2$ 是另一种符合条件的分解, 取共轭转置得 $A_1-iA_2=B_1-iB_2$. 解得 $A_1=B_1$ 且 $A_2=B_2$. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 4** ($\star\star\star$) 证明: $A\in \mathrm M_n (\mathbb C)$ 是两个自伴矩阵的乘积, 当且仅当 $A$ 与 $A^H$​ 相似. 
+
+> 答: 若 $A=PQ$ 是两个自伴矩阵的乘积, 则对任意相似矩阵 $A\to F^{-1}AF$,
+> $$
+> F^{-1}PF^{-1,H}\cdot F^HQ F=F^{-1}AF
+> $$
+> 也是两个自伴矩阵的乘积. 此时不妨设 $A=\begin{pmatrix}D&O\\O&N\end{pmatrix}$, $D$ 是所有可逆 Jordan 块, $N$ 是所有幂零 Jordan 块. 
+>
+> 代入 $AP=PA^H$, 得 $P=\begin{pmatrix}P_1&O\\O&P_2\end{pmatrix}$. 类似地, $Q=\begin{pmatrix}Q_1&O\\O&Q_2\end{pmatrix}$. 
+>
+> * 先证明 $D \sim D^H$. 这是因为 $D=P_1Q_1\sim Q_1P_1\sim D^H$​. (相似 $LR\sim RL$ 对可逆矩阵成立).
+> * $N\sim N^H$ 是显然的. 因为 $N(N)$ 与 $N(N^H)$ 有相同的零空间维数序列. 
+>
+> 因此 $A\sim A^H$. 
+>
+> 反之, 若 $L^{-1}AL=A^H$, 则 $A\cdot (L+L^H)=(L+L^H)\cdot A^H$. 因此, $(L+L^H)$ 与 $A\cdot (L+L^H)$ 都是自伴矩阵. 
+> $$
+> A=(A\cdot (L+L^H))\cdot (L+L^H)^{-1}
+> $$
+> 即为所求. (此处可通过 $L\mapsto \lambda I +L$ 之类的换元, 使得 $\sigma (L)\cap \sigma (-L^H)=\emptyset$, 即, $(L+L^H)$ 可逆). 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 5** 以下 $A$ 与 $B$ 是实对称半正定矩阵.
+
+1. ($\star$) 证明: $\mathrm{tr}(AB)\geq 0$. 若 $A$ 正定, 则取等当且仅当 $B=O$. 
+
+   > 答: 使用熟知结论: 实对称半正定矩阵有唯一的实对称半正定平方根. $\mathrm{tr}(AB)=\mathrm{tr}(\sqrt BA\sqrt B)\geq 0$. 若 $A$ 正定, 则取等当且仅当 $\sqrt B=O$, 即 $B=O$. 
+2. ($\star$) 证明: $\mathrm{tr}(A)\cdot \lambda_{\min}(B)\leq \mathrm{tr}(AB)\leq \mathrm{tr}(A)\cdot \lambda_{\max}(B)$​. 
+
+   > 答: $\mathrm{tr}(\sqrt A(\lambda_\max (B)-B)\sqrt A)\geq 0$. 另一侧同理. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 6** 任取实多项式 $f(x)=(x-x_0)(x-x_1)\cdots (x-x_n)$, 以及 $g(y)=(y-y_1)\cdots (y-y_n)$. 若有
+$$
+x_0\leq y_1\leq x_1\leq y_2\leq x_2\leq \cdots \leq x_{n-1}\leq y_n\leq x_n.
+$$
+则称 $f$ 与 $g$ 的根是交错的. 
+
+1. ($\star$) 证明: 任意实线性组合 $af+bg$ 的根都在 $\mathbb R$​ 内. 
+
+   > 答: 采用微扰法, 不妨设题设中的不等号都不取等. 
+   >
+   > 对 $0\leq t\leq 1$, 记多项式 $tf+(1-t)g$ 在 $\mathbb C$ 上的所有根为 $\{x_i(t)\}_{i=1}^n$, 使得所有
+   > $$
+   > x_i:[0,1]\to \mathbb C,\quad t\mapsto x_i(t)
+   > $$
+   > 是连续函数. 直观地, $y_i=x_i(0)$, $x_i=x_i(1)$. 
+   >
+   > * 先断言对 $t_1\neq t_2$, 总有 $\{x_i(t_1)\}_{i=1}^n\cap \{x_i(t_2)\}_{i=1}^n=\emptyset$; 若不然, $f$ 与 $g$ 有相同的根, 矛盾. 
+   > * 对任意 $t$, 所有轨迹关于 $\mathbb R$ 对称. 这说明对严格单增的 $t:0\nearrow 1$, 必有严格单增的实函数 $x_i(t): y_i\nearrow x_i$. 
+
+2. ($\star\star$) 证明逆命题: 若 $f$ 与 $g$ 满足 $\deg f=\deg g+1$, 且任意实线性组合 $af+bg$ 的根全是实数, 则 $f$ 与 $g$ 的根交错. 
+
+   > 答: 见上一题的解答. 
+
+3. ($\emptyset$) 若 $n$-阶复方阵满足 $A=A^H$, 记 $B$ 是任意 $(n-1)$-阶主子式 ($B$ 有 $n$ 种取法). 证明: $A$ 与 $B$​ 的特征根交错. 
+
+   > 答: 例如取删去 $i$ 行与 $i$ 列的主子式, 在 $xI-A$ 的第 $i$ 行提取出 $x$-项即可. 注意: Hermite 矩阵的特征多项式是实系数的. 
+
+4. ($\star\star$) 这一具有组合性质的结论可以推得 Schur–Horn 定理. 
+
+   > * (Schur–Horn) 给定 $n$ 阶Hermite 矩阵 ($A=A^H$). 若 $d_1\geq d_2\geq \cdots \geq d_n$ 是 $A$ 的所有对角元, $\lambda_1\geq \lambda_2\geq \cdots \geq \lambda_n$ 是 $A$ 的所有特征值, 则对任意 $1\leq k\leq n$, 都有
+   >   $$
+   >   d_1+d_2+\cdots +d_k \leq \lambda_1+\lambda_2+\cdots + \lambda_k.
+   >   $$
+   >   特别地, $k=n$ 时取等号 (考虑迹). 
+   >
+   > 答: 不妨设 $A$ 的对角元 $d_i=a_{ii}$ 恰是由大到小排列的. 记 $\lambda^t _k$ 为 $(n-t)$-阶顺序主子式的第 $k$ 大特征值. 此时
+   > $$
+   > d_1+\cdots +d_{n-1}=\lambda^1_1+\cdots \lambda _{n-1}^1\underset{\text{上题结论}}\leq \lambda_1+\cdots +\lambda_{n-1}
+   > $$
+   > 类似地, 
+   > $$
+   > d_1+\cdots +d_{n-2}=\lambda^2_1+\cdots \lambda _{n-2}^2\underset{\text{上题结论}}\leq \lambda_1^1+\cdots +\lambda_{n-2}^1\underset{\text{上题结论}}\leq \lambda_1+\cdots +\lambda_{n-2}.
+   > $$
+   > 之后就是照例归纳. 
+
+5. ($\star$) (Courant-Fischer) 以下是谱分解的推论, 之前作业证过. Hermite 矩阵 $A\in \mathrm M_n(\mathbb C)$ 的第 $k$ 大特征值是
+   $$
+   \max_{V\subset \mathbb R^n, \dim V= k}\left( \min _{x\in V, \|x\|=1} x^H Ax\right)。 
+   $$
+   第 $k$​ 小特征值表述类似. 
+
+   > 答: 考虑 $U^HAU$, 用垂直的特征向量 ($U$ 的所有列向量) 的线性组合表示 $x$ 即可. 
+   
+6. ($\star\star$) 作为推论, 得 Hermite 矩阵的 Weyl 不等式 
+   $$
+   \lambda _{i+j-1}(A+B)\leq \lambda _{i}(A)+\lambda _{j}(B)\leq \lambda _{i+j-n}(A+B).
+   $$
+
+   > 提示: 将 $\min$, $\max$ 转化做 $\text{``先 $\forall$ 再 $\exists$''}$-式的逻辑命题. 若遇到不等号 $\leq$, 将不等号左侧的 $\lambda$ 改述作 $\max \min$, 将不等号右侧的 $\lambda$ 改述作 $\min \max$​. 最后比较子空间维数即可. 
+   >
+   > 答: 例如证明
+   > $$
+   > \lambda _{i+j-1}(A+B)\leq \lambda _{i}(A)+\lambda _{j}(B)
+   > $$
+   > 考虑
+   > $$
+   > \max_{\dim V=i+j-1}\min _{x\in V, \|x\|=1}(x^HAx+x^HBx)\leq \min _{\dim V_A=n-i}\max _{x_A\in V_A,\|x\|=1}x^HAx+\cdots B
+   > $$
+   > 也就是对任意 $\dim V=i+j-1$, 任意 $\dim V_A=n-i$, 以及任意 $\dim V_B=n-j$, 总存在 $x\in V$, $x_A\in V_A$ 与 $x_B\in V_B$ 使得 
+   > $$
+   > x^HAx+x^HBx\leq x_A^HAx_A+x_B^HBx_B. 
+   > $$
+   > 任取单位向量 $x\in V\cap V_A\cap V_B\neq 0$ 即可. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 7** 以下是一些 Cayley 变换的例子. 
+
+* 此题就是反复验证, 解答从略.
+
+> 楔: $\mathbb R^2\simeq \mathbb C$ 上的单位圆周 $S^1:=\{z\in \mathbb C\mid |z|=1\}$ 不是线性空间, 但可以舍弃一个点 $(1,0)$, 使得有双射
+> $$
+> \mathbb R\xrightarrow[\sim]{\text{双射}} (S^1\setminus \{(0,i)\}),\quad x\mapsto \frac{x-i}{x+i}
+> $$
+> 这一双射的逆映射也可以直接写出. 以上一对互逆有理映射建立了 $\mathbb R$ 与 $S^1$​ 的双有理等价. 
+>
+> 类似地, 全体正交矩阵不构成线性空间. 试问: 能否舍弃一些体积为 $0$ 的正交矩阵, 使得剩下的正交矩阵通过某个有理多项式双射对应于线性空间? 
+
+1. ($\star$) 若 $A\in \mathrm M_n(\mathbb C)$ 是自伴矩阵, 则 $(A-iI)\cdot (A+iI)^{-1}$ 是酉矩阵. 
+
+2. ($\star$) 证明以上建立了全体自伴矩阵与不以 $1$ 为特征值的酉矩阵的双射对应. 试求逆映射? 
+
+3. ($\star\star$) 正交矩阵 (实矩阵) 也是酉矩阵. 试问: 以上哪类自伴矩阵的像是正交矩阵? 
+
+   > 提示: 反对称实矩阵恰好是正规矩阵的 $i$ 倍. 
+   >
+   > 推论: 反对称矩阵与不以 $1$ 为特征值的正交矩阵双射对应. 记 $M$ 是反对称矩阵, 则 $(I+M)(I-M)^{-1}$ 是正交矩阵. 
+   >
+   > 例子: $n=2$ 时, 得半角公式: 
+   > $$
+   > \begin{pmatrix}0&\tan {\frac {\theta }{2}}\\-\tan {\frac {\theta }{2}}&0\end{pmatrix}\leftrightarrow \begin{pmatrix}\cos \theta &-\sin \theta \\\sin \theta &\cos \theta \end{pmatrix}.
+   > $$
+   > 例子: $n=3$ 时, 得某次作业的行列式计算 ($w=1$): 
+   > $$
+   > \begin{pmatrix}0&z&-y\\-z&0&x\\y&-x&0\end{pmatrix}\leftrightarrow \text{常数}\cdot {\begin{pmatrix}w^{2}+x^{2}-y^{2}-z^{2}&2(xy-wz)&2(wy+xz)\\2(xy+wz)&w^{2}-x^{2}+y^{2}-z^{2}&2(yz-wx)\\2(xz-wy)&2(wx+yz)&w^{2}-x^{2}-y^{2}+z^{2}\end{pmatrix}}.
+   > $$
+
+4. ($\star\star$) 正交矩阵的行列式是 $\pm 1$. 这表明反对称矩阵也能分作两类, 如何描述这一分类? 
+
+5. ($\star\star$) 记 $\mathrm{Sp}(2n):=\{A\in \mathrm M_{2n}(\mathbb R)\mid A^TJA=J\}$ (($\star\star$)某次作业证明了 $\det A\neq -1$), 以及 $\mathrm H(2n):=\{A\in \mathrm M_{2n}(\mathbb R)\mid A^TJ+JA=O\}$ (即考试题的 $\mathrm{sp}(2n)$). 证明: 
+   $$
+   \{X\in \mathrm{Sp}(2n)\mid 1\notin \sigma (X)\}\to \mathrm{H}(2n),\quad X\mapsto (I+X)(I-X)^{-1}
+   $$
+   是双射对应. 
+
+> 另一种将矩阵群拉直成线性空间的方法是考虑单位矩阵处的切平面. 
+>
+> 试考虑以下乘法群与加法群的对应.  
+>
+> * (乘法群) $\mathrm{GL}_n(\mathbb R)$ 为可逆 $n$-阶实矩阵全体. 
+> * (加法群) $\mathfrak {gl}_n(\mathbb R)$ 为所有 $n$​-阶矩阵全体. 
+>
+> 乘法群的切平面 (导函数空间) 是加法群. 
+>
+> 1. (乘法变加法) 定义较小的变量 $t$, 则
+>    $$
+>    (I+tA)\cdot (I+tB)\sim I+t(A+B).
+>    $$
+>    这给出导数的对应 $A+B=(A+B)$​​. 
+>
+> 2. (逆元变负元) 类似地, 乘法群的逆元对应加法群
+>    $$
+>    (I + tA)^{-1} =I+t(-A).
+>    $$
+>
+> 3. (单位元变零元) 显然 $I=I+t\cdot O$. 
+>
+> ****
+>
+> ****
+>
+> (从 $\mathrm{SL}_n$ 到 $\mathfrak {sl}_n$) 记单参数变量 $g_t=I+tX$. 将 $g_t$ 左乘在体积形式 (行列式) 上, 得
+> $$
+> \Omega_t:= g_t(e_1)\wedge g_t(e_2) \wedge \cdots \wedge g_t(e_n).
+> $$
+> 考虑 $\Omega_t$ 在 $t=0$ 处的导数, 则分步求导法则表明
+> $$
+> \begin{align*}
+> \frac{\mathrm d}{\mathrm d \ t}|_{t=0}(\Omega_t)&=\sum_{1\leq i\leq n} e_1\wedge \cdots \wedge e_{i-1}\wedge X(e_i)\wedge e_{i+1}\wedge \cdots \wedge e_n\\[6pt]
+> &=\mathrm{tr}(X)\cdot (e_1\wedge \cdots \wedge e_n ).
+> \end{align*}
+> $$
+>
+> * 简单地说, 连续的线性变换 $\varphi_t$ 连续地改变体积 $\Omega_t$, 体积瞬时增长的倍数就是 $\varphi_t$​ 导数的迹. 这解释了线性映射的迹为何与基底的选取无关. 
+>
+> 乘法群 $\mathrm{SL}_n (\mathbb R)$ 是行列式为 $1$ 的全体 $n$-阶矩阵. 相应地, 对 $X\in\mathfrak {sl}_n\mathbb R$, 应有 $\frac{\mathrm d}{\mathrm d \ t}|_{t=0}(\Omega_t)=0$. 这说明 (请尝试说服自己)
+> $$
+> \mathfrak{sl}_n(\mathbb R)=\{X\in \mathfrak{gl}_n(\mathbb R)\mid \mathrm{tr}(X)=0\}.
+> $$
+>
+> ****
+>
+> (从 $\mathrm{O}_n$ 到 $\mathfrak o_n$; $\mathrm{Sp}_{2n}$ 到 $\mathfrak {sp}_{2n}$) 对双线性型 $\mathfrak B:\mathbb R^n \ \& \  \mathbb R^n\to \mathbb R$, 称矩阵 $A$ 保持 $\mathfrak B$, 当且仅当
+> $$
+> \mathfrak B(Au, Av)=\mathfrak B(u,v)\quad (\forall u,v\in \mathbb R^n).
+> $$
+> 例如, 若 $\mathfrak B$ 是向量内积, 则 $A$ 必然是正交矩阵. 依照定义, 所有保持 $\mathfrak B$ 的矩阵构成乘法群 $\mathrm{O}_{\mathfrak B}$. 
+>
+> * 按照经验, $\mathfrak o_{\mathfrak B}$ 定义作 $\mathrm O_{\mathfrak B}$ 的某种微分. 分步求导表明 $X\in \mathfrak o_B$ 当且仅当
+>   $$
+>   \mathfrak B(Xu, v)+\mathfrak B(u,Xv)=0 \quad (\forall u,v\in \mathbb R^n).
+>   $$
+>
+> 若 $\mathfrak B$ 是通常内积, 则 $\mathfrak B(u,v)=u ^T I v$, 其中 $I\in \mathrm M_n (\mathbb R)$
+>
+> 1. $A\in \mathrm O_{\mathfrak B}$ 满足 $(Au)^T I(Av)=u^Tv$, 亦即 $A^TA=I$. 通常记此时的 $\mathrm O_{\mathfrak B}$ 为 $\mathrm {O}_{n}$, 也就是正交矩阵群 (乘法群). 
+> 2. $X\in \mathfrak o_{\mathfrak B}$ 满足 $(Xu)^T I v+u^T I (Xv)=0$, 亦即 $X^T+X=O$. 通常记此时的 $\mathfrak o_{\mathfrak B}$ 为 $\mathfrak{o}_{n}$, 也就是反对称矩阵群 (加法群). 
+>
+> 若 $\mathfrak B$ 是某种反对称的内积, 定义作 $\mathfrak B(u,v)=u ^T J v$, 其中 $J=\begin{pmatrix}O&I\\-I&O\end{pmatrix}\in \mathrm{M}_{2n}(\mathbb R)$. 
+>
+> 1. $A\in \mathrm O_{\mathfrak B}$ 满足 $(Au)^T J(Av)=u^T J v$, 亦即 $A^TJA=J$. 通常记此时的 $\mathrm O_{\mathfrak B}$ 为 $\mathrm {Sp}_{2n}$, 也就是辛矩阵群 (乘法群). 
+> 2. $X\in \mathfrak o_{\mathfrak B}$ 满足 $(Xu)^T J v+u^T J (Xv)=0$, 亦即 $X^TJ+XJ=O$. 通常记此时的 $\mathfrak o_{\mathfrak B}$ 为 $\mathfrak{sp}_{2n}$​​, 也就是 Hamilton 矩阵群 (加法群).
+>
+> 特别说明: $\mathrm {SO}_n$ 是 $\mathrm O_n$ 中行列式为 $1$ 的正交矩阵组成的乘法子群, 同时也是包含 $I$ 的连通分支. 由于切向量是局部性质, 故 $\mathfrak{so}_n=\mathfrak o_n$. 我们证明过 $\mathrm{Sp}_{2n}$ 中矩阵的行列式必为 $1$, 从而定义 $\mathrm{SSp}_{2n}$ 是多此一举的. 
+>
+> ****
+>
+> 对以上的群 $G$, 有一个自然的共轭群同态: 
+> $$
+> \mathrm{Ad}: G\to [G \ \text{的自同构群}],\quad g\mapsto \mathrm{Ad}_g:=\begin{bmatrix}G\to G\\x\mapsto gxg^{-1}\end{bmatrix}.
+> $$
+> 相应地, $G$ 的微分给出的线性空间 $\mathfrak g$ 上有一个相应的运算
+> $$
+> \mathrm{ad}: \mathfrak g\to [\mathfrak g\to \mathfrak g],\quad X\mapsto \mathrm{ad}_X:=\begin{bmatrix}\mathfrak g\to \mathfrak g\\Y\mapsto [X,Y]=XY-YX\end{bmatrix}.
+> $$
+> 双线性映射 $[-,-]:\mathfrak g \ \& \ \mathfrak g \to \mathfrak g$ 具有以下两个特点: 
+>
+> 1. (反对称) $[X,Y]=-[Y,X]$; 
+>
+> 2. (Jacobi 恒等式) $[X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]=0$. 
+>
+>    * 结合反对称性, Jacobi 恒等式说明 $\mathrm{ad}$ 和 $[,]$ 可交换: 
+>      $$
+>      \begin{align*}
+>      [\mathrm{ad}_X, \mathrm{ad}_Y](Z)&=\mathrm{ad}_X(\mathrm{ad}_Y(Z))-\mathrm{ad}_Y(\mathrm{ad}_X(Z))\\[6pt]
+>      &=[X,[Y,Z]]-[Y,[X,Z]]\\[6pt]
+>      &=[[X,Y],Z]\\[6pt]
+>      &=\mathrm{ad}_{[X,Y](Z)}.
+>      \end{align*}
+>      $$
+>
+> (Lie 括号的定义) 若类型是 $V\to V\to V$ 的双线性映射满足以上两条规则, 则称之 Lie 括号. 一个常见的例子是向量的外积
+> $$
+> (\times ): \mathbb R^3 \ \& \ \mathbb R^3\to \mathbb R^3,\quad (u,v)\mapsto u\times v. 
+> $$
+> (Lie 群与 Lie 代数) 以上具有群结构的流形 $G$ 称作 Lie 群, 我们往往要求流形与群运算是光滑的. 群单位元附近的切平面是线性空间 $\mathfrak g$, 给 $\mathfrak g$ 配上 $\mathrm{ad}$ 诱导的 Lie 括号 $[-,-]$, 则称 $(\mathfrak g, [-,-])$ 是 $G$​​ 对应的 Lie 代数. 
+
+**尾记** 如果想直观感受数学分析 (微分几何) 和复分析 (代数几何) 的区别, 不妨比对以上两种拉直乘法群的方式. Cayley 变换比较复变, Lie 群的处理方法bi'j数分. 
+
+
+<div style="page-break-after: always;"></div>
+
+**Ex 8** ($\star\star\star$) 若 $A^2+B^2=2AB$, 证明: $A$ 与 $B$ 的特征多项式相等. 
+
+> 答: 若 $A^2-2AB+B^2=0$, 则
+> $$
+> (xI-A)^2-2(xI-A)(xI-B)+(xI-B)^2=0.
+> $$
+> 从而只需证明 $\det (A)=\det (B)$. 化原式为 $A(A-B)=(A-B)B$.
+>
+> 1. $n=1$ 时, $\det A=\det B$ 是显然的.
+>
+> 2. 若 $n\leq k-1$ 时成立 ($k\geq 2$), 下证明 $n=k$ 时 $\det A=\det B$.
+>    a. 若 $A-B$ 可逆, 则显然.
+>    b. 若 $N(A-B)=:V\neq 0$, 则 $AV=BV\subseteq V$. 注意到 $A|_V=B|_V$, 从而在 $V\oplus V^\perp$ 下有矩阵表示
+>    $$
+>    A=\begin{pmatrix}C_V&A_{12}\\O&A_{22}\end{pmatrix},\quad B=\begin{pmatrix}C_V&B_{12}\\O&B_{22}\end{pmatrix}.
+>    $$
+>    带入原式得 $A_{22}^2-2A_{22}B_{22}+B_{22}^2=0$, 据归纳假设知
+>    $$
+>    \det A=\det C_V\cdot \det A_{22}=\det C_V\cdot \det B_{22}=\det B.
+>    $$
+>
+> * 同样的方法可以证明: 可交换矩阵能同时 Schur 上三角化. 
+

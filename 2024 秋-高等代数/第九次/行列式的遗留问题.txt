@@ -1,0 +1,324 @@
+**Ex 0** 复习一些行列式的计算技巧. 
+
+1. (扰动法) 本质: 若**数域**上的多项式 $f$ 有 $>\deg f$ 个零点, 则 $f=0$. 该方法的主要应用情形如下. 
+
+   > 许多时候, 我们需要从 $\det (AB)=\det (AC)$ 推导 $\det B=\det C$, 但有时出现 $\det A=0$. 此时记 $A^{(x)}:=xI+A$, 则通常能从题设推出恒等式 $\det (A^{(x)}B)=\det(A^{(x)}C)$. 多项式
+   > $$
+   > \det (A^{(x)}B)-\det(A^{(x)}C)\in \mathbb F[x]
+   > $$
+   > 存在足够多的零点, 从而是恒零多项式. 代入 $x=0$ 即可. 
+   >
+   > * 不建议使用 $x\to 0$ 这类表述. 一方面, 需要额外说明连续性; 另一方面, 这无法兼容扰动法在有限域上的推广. 
+
+2. (初等变换法) 使用矩阵的初等变换技巧. 
+
+3. (添边法) 即, 等式 $\det A=\det \begin{pmatrix}1&\\v&A\end{pmatrix}$. 这一方法也可用在分块矩阵上. 
+
+4. (逆矩阵法) 有时计算逆矩阵比计算行列式简单很多, 尤其是套用 $(A+u^Tv)^{-1}$ 之类的公式时. 
+
+5. (Laplace 展开) 由于 $\det$ 关于第 $k$ 列线性, 从而会出现 $\det A=\det A_1+\det A_2$ 之类的式子. 
+
+6. (数学归纳法)
+
+7. (特征根法) 
+
+8. ...
+
+<div style="page-break-after: always;"></div>
+
+**Ex 1** 以下给出一个函数线性无关的判别法则. 所有线性空间是 $\mathbb R$ 上的. 
+
+1. 记 $V$ 是一切 $\mathbb R\to \mathbb R$ 的函数构成的集合. 试说明 $V$ 是线性空间.
+
+   > 答: $V$ 是一个加法交换群. 定义 $V$ 的 $\mathbb R$-线性结构如下: 
+   >
+   > 1. $(f+g):\mathbb R\to \mathbb R,\quad x\mapsto f(x)+g(x)$; 
+   > 2. $\lambda f:\mathbb R\to \mathbb R,\quad x\mapsto \lambda (f(x))$. 
+
+2. 对任意 $x\in \mathbb R$, 证明以下由 $x$ 决定的映射 $\delta_x$ 是线性映射
+   $$
+   \delta_x: V\to\mathbb R,\quad f\mapsto f(x).
+   $$
+
+   > 答: 验证 $\delta_x(f+\lambda g)=(f+\lambda g)(x)=f(x)+\lambda(g(x))=\delta_x(f) +\lambda\delta_x(g)$. 
+   
+3. 给定 $V$ 中的函数 $(f_i)_{i=1}^n$. 证明: 若存在实数 $(x_j)_{j=1}^n$ 使得 $(f_i(x_j))_{n\times n}$ 是可逆矩阵, 则 $(f_i)_{i=1}^n$ 是线性无关组. 
+
+   > 答: 考虑逆否命题. 若非平凡的线性组合式 $\sum c_i f_j$ 是零, 则 $\sum c_i(f_j(x))=0$ 恒成立. 此时, 向量 $c$ 在矩阵的左零空间中. 因此矩阵不可逆. 
+
+4. 反之, 若给定 $V$ 中的线性无关组 $(f_i)_{i=1}^n$, 则存在实数 $(x_j)_{j=1}^n$ 使得 $(f_i(x_j))_{n\times n}$ 是可逆矩阵. 
+
+   > 答: 对一切 $x\in \mathbb R$, 记 $V$ 的线性子空间 $U_x:=\{f\mid \delta_x(f)=f(x)=0\}$. 
+   >
+   > * 我们断言 $\bigcap _{x\in \mathbb R}U_x=0$. 因为 $f=0$ 当且仅当 $f(x)=0$ 对一切 $x\in \mathbb R$ 成立. 
+   >
+   > 记 $V$ 的 $n$-维子空间 $W:=\mathrm{span}(\{f_i\}_{i=1}^n)$. 定义 $W_x:=W\cap U_x$. 此时 $\bigcap_{x\in \mathbb R} W_x=0$, 且 $\dim W_x\in \{n,n-1\}$. 以下给出 $x_i$'s 的构造. 
+   >
+   > 1. 取 $x_1\in \mathbb R$ 使得 $\dim W_{x_1}=n-1$. 
+   > 2. 由于 $\bigcap_{x\in \mathbb R}(W_{x_1}\cap W_x)=0$, 因此存在 $x_2\in \mathbb R$ 使得 $\dim (W_{x_2}\cap W_{x_1})=n-2$. 
+   > 3. 依照上述步骤. 对任意 $k$, 可以找到 $(x_i)_{i=1}^n$ 使得 $\dim (W_{x_k}\cap \cdots \cap W_{x_1})=n-k$. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 2** (On positivity of real matrices) Throughout, $A,B,C\in \mathbb R^{n\times n}$.  
+
+1. Show that $\det (A^2+I)\geq 0$. 
+
+   > 答: 依照 $\mathbb C$ 中的初等变换: 
+   > $$
+   > \begin{pmatrix}A&I\\-I&A\end{pmatrix}\sim \begin{pmatrix}A&I+iA\\-I&A-iI\end{pmatrix}\sim \begin{pmatrix}A+iI&O\\-I&A-iI\end{pmatrix}
+   > $$
+   > 此时 $\det (A^2+I)=\det (A+iI)\cdot \overline{\det (A+iI)}\geq 0$​. 
+
+2. Suppose $A=-A^T$. Show that $\det (-A^2+I)> 0$. 
+
+   > 答: 只需证明 $\det (I+A^TA)>0$. 记 $S=\begin{pmatrix}I\\A\end{pmatrix}$, 则 $S^T\cdot S=I+A^TA$. 考虑零空间等式 $N(S^T\cdot S)=N(S)=0$, 得 $\det (I+A^TA)>0$. 也可以对 $S^TS$ 使用 Cauchy-Binet 公式. 
+
+3. Suppose that $AB=BA$, $BC=CB$, $AC=CA$, and $ABC=O$. Show that 
+   $$
+   \det (A+B+C)\cdot \det (A^3+B^3+C^3)\geq 0. 
+   $$
+   Hint: set $\xi=\sqrt[3]1$, and consider $(x+y+z)(x+\xi y+\xi ^2z)(x+\xi ^2 y+\xi z)=?$. 
+
+   > 答: 由于 $A$, $B$ 与 $C$ 两两可交换, 则
+   > $$
+   > (A+B+C)^3-3ABC=(A+B+C)\underset{\text{共轭矩阵相乘}}{\underbracket{(A+\xi B+\xi^2C)(A+\xi^2 B+\xi C)}}.
+   > $$
+   > 代入 $ABC=0$. 此时
+   > $$
+   > \det (A+B+C)\cdot \det (A^3+B^3+C^3)=\det (A+B+C)^2\cdot \left\vert\det (A+\xi B+\xi^2C)\right\vert^2
+   > $$
+   > 非负. 
+   
+4. Suppose $AB=BA$. Show that if $\det (A+B)\geq 0$, then $\det (A^m+B^m)\geq 0$ for any $m\in \mathbb N_+$. 
+
+   > 答: 依 $A^{2m}=(A^2)^m$, 只需证明 $m$ 为奇数与 $m=2$ 的情形. 
+   >
+   > 1. 若 $m=2$, 则 $\det (A^2+B^2)=\det (A+iB)\cdot \overline{\det (A+iB)}\geq 0$. 
+   >
+   > 2. 记 $\xi$ 是 $m$-次单位根, 则
+   >    $$
+   >    (A^m+B^m)=(A+B)\cdot \prod_{l=1}^{(m-1)/2}\left((A+\xi^l B)\cdot \overline{(A+\xi^l B)}\right).
+   >    $$
+   >    两侧取 $\det$, 左式非负. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 3** (Adj 矩阵的基本性质) 记 $u$ 与 $v$ 是同阶的列向量. 必要时假设数域. 
+
+1. 写出 $\mathrm{Adj}(A+B)$,  $\mathrm{Adj}(A\cdot B)$, $\mathrm{Adj}(A^T)$, $\mathrm{Adj}(\lambda A)$, 以及 $\mathrm{Adj}(\mathrm{Adj}(A))$. 
+
+   > 答: 真有人写 $\mathrm{Adj}(A+B)=\mathrm{Adj}(A)+\mathrm{Adj}(B)$, 这是意料之中而情理之外的. 以下是后四个常用式子的表达: 
+   >
+   > 1. $\mathrm{Adj}(A\cdot B)=\mathrm{Adj}(B)\cdot \mathrm{Adj}(A)$; 
+   > 2. $\mathrm{Adj}(A^T)=\mathrm{Adj}(A)^T$; 
+   > 3. $\mathrm{Adj}(\lambda A)=\lambda^{n-1}\cdot \mathrm{Adj}(\lambda A)$; 
+   > 4. $\mathrm{Adj}(\mathrm{Adj}(A))=(\det A)^{n-2}\cdot A$; 
+
+2. 通过 $A$ 的秩讨论 $\mathrm{Adj}(A)$ 的秩. 
+
+   > 答: 使用相抵标准型 $A=P\mathbb IQ$, 则 $\mathrm{Adj}(A)=\mathrm{Adj}(Q)\cdot \mathrm{Adj}(\mathbb I)\cdot \mathrm{Adj}(P)$. 从而 $\mathrm{rank}(\mathrm{Adj}(A))=\mathrm{rank}(\mathrm{Adj}(\mathbb I))$. 
+   >
+   > 1. 若 $A$ 满秩, 则 $\mathrm{Adj}(A)$ 亦然; 
+   > 2. 若 $A$ 秩为 $n-1$, 则 $\mathrm{Adj}(A)$ 的秩为 $1$; 
+   > 3. 若 $A$ 秩 $\leq n-2$, 则 $\mathrm{Adj}(A)=O$.  
+
+3. 证明: $\mathrm{Adj}(I-u\cdot v^T)$ 是一个数量矩阵与一个秩 $1$ 矩阵的和, 并写出相应的表达式. 
+
+   > 答: (省略关于扰动法的说明) 不妨假定矩阵可逆, 则
+   > $$
+   > (\det (I-uv^T))\cdot (I-uv^T)^{-1}=(1-v^Tu)\cdot \left(I+\frac{uv^T}{1-v^Tu}\right)=(1-v^Tu)\cdot I+uv^T.
+   > $$
+
+4. 证明: $\det \begin{pmatrix}A&u\\v^T&\lambda\end{pmatrix}=\lambda\cdot \det A-v^T\cdot \mathrm{Adj}(A)\cdot u$. 
+
+   > 答: 对最后一行或最右一列使用 Laplace 展开. 
+   >
+   > 也可以使用扰动法, 假设 $A$ 可逆, 考虑初等变换
+   > $$
+   > \begin{pmatrix}A&u\\v^T&\lambda\end{pmatrix}\to \begin{pmatrix}A&0\\v^T&\lambda-v^TA^{-1}u\end{pmatrix}
+   > $$
+   > 代入 $A^{-1}=(\det (A))^{-1}\cdot \mathrm{Adj}(A)$, 后略. 
+
+5. 证明: $\det (A+uv^T)=|A|+v^T\cdot \mathrm{Adj}(A)\cdot u$. 
+
+   > 答: 使用 $\det K=\det \begin{pmatrix}1&\mathbf 0^T\\u&K\end{pmatrix}$ 化作上一题. 
+   >
+   > 也可以直接使用 Laplace 展开: 记 $\alpha_i$ 是 $A$ 的第 $i$ 列, $\beta_i$ 是秩 $1$ 矩阵 $uv^T$ 的第 $i$ 列. 依照 $\det(-)$ 关于各列线性, 得
+   > $$
+   > \det (A+uv^T)=\sum_{\gamma\in \{\alpha,\beta\}} \det (\gamma_1\mid \gamma_2\mid \cdots \mid \gamma_n). 
+   > $$
+   > 右式是 $2^n$ 个数的和. 假若 $\det (-\gamma-)$ 中出现两个 $\beta$, 则行列式为 $0$, 从而右式可化作是 $n+1$ 个数的和. 对出现 $\beta$ 的 $n$ 个式子, 对 $\beta$ 所在的列进行 Laplace 展开即可. 
+
+6. 记 $S_A$ 是所有代数余子式的和, 即, $\mathrm{Adj}(A)$ 中所有元素的和. 假定 $A$ 是 $n$ 阶的. 
+
+   1. 若 $A$ 的某一列向量 (或某一行向量) 是常数向量 $c\cdot \mathbf 1$, 求 $S_A$ 与 $\det A$ 的比值. 
+
+      > 答: 若 $A$ 的第 $k$ 列是 $c\mathbf 1$, 则 $Ae_k=c\mathbf 1$. 那么
+      > $$
+      > cS_A=\mathbf 1^T \mathrm{Adj}(A)(c\mathbf 1)=\mathbf 1^T\mathrm{Adj}(A)Ae_k=\det A.
+      > $$
+   
+   2. 若 $A$ 的每一列向量 (或每一行向量) 中各项元素的和是常数 $c$, 求 $S_A$ 与 $\det A$ 的比值. 
+   
+      > 答: 解答题干取行的情形. 此时 $A\mathbf 1=c\mathbf 1$. 
+      > $$
+      > cS_A=\mathbf 1^T \mathrm{Adj}(A)(c\mathbf 1)=\mathbf 1^T\mathrm{Adj}(A)A\mathbf 1=n\det A.
+      > $$
+   
+   3. 若 $A$ 的行空间与 $\mathbf 1$ 垂直 (即, 所有行向量的各项元素和为 $0$), 则 $\mathrm{Adj}(A)$ 的所有行向量相同. 
+   
+      > 答: 只需证明 $\dim N(A)=1$ 的情况 (不然, $\mathrm{Adj}(A)=O$). 此时, 有更一般的结论
+      > $$
+      > \ker A:=\underbracket{N(A)}\limits_{\{x\mid Ax=\mathbf 0\}}=\underbracket{C(\mathrm{Adj}(A))}\limits_{\{\mathrm{Adj}(A)\cdot y\}}=:\operatorname{im} \mathrm{Adj}(A).
+      > $$
+      > 由 $A\cdot \mathrm{Adj}(A)=O$ 知右式含于左式, 比较维数知两侧相等. 
+   
+   4. 若 $A$ 的行空间与列空间均与 $\mathbf 1$ 垂直, 则 $\mathrm{Adj}(A)$ 是全 $1$ 矩阵 $J$ 的数乘倍, 即, 
+      $$
+      \det (A+n^{-2}J) \cdot J= \mathrm{Adj}(A).
+      $$
+      > 答: 由 $\mathrm{Adj}(A^T)=\mathrm{Adj}(A)^T$, 以及上一问结论, $\mathrm{Adj}(A)$ 必然是 $J$ 的数乘倍. 下验证 $\det (A+n^{-2}J)$ 是这个常数. 记
+      > $$
+      > \begin{align*}
+      > B:=&\begin{pmatrix}
+      > a_{1,1} +\frac{1}{n^{2}} & a_{1,2} +\frac{1}{n^{2}} & \cdots  & a_{1,n} +\frac{1}{n^{2}}\\
+      > a_{2,1} +\frac{1}{n^{2}} & a_{2,2} +\frac{1}{n^{2}} & \cdots  & a_{2,n} +\frac{1}{n^{2}}\\
+      > \vdots  & \vdots  & \ddots  & \vdots \\
+      > a_{n,1} +\frac{1}{n^{2}} & a_{n,2} +\frac{1}{n^{2}} & \cdots  & a_{n,n} +\frac{1}{n^{2}}
+      > \end{pmatrix}\\[6pt]
+      > \xrightarrow{r_1\mapsto (r_1+\cdots +r_n)} \mid  &\begin{pmatrix}
+      > \frac{1}{n} & \frac{1}{n} & \cdots  & \frac{1}{n}\\
+      > a_{2,1} +\frac{1}{n^{2}} & a_{2,2} +\frac{1}{n^{2}} & \cdots  & a_{2,n} +\frac{1}{n^{2}}\\
+      > \vdots  & \vdots  & \ddots  & \vdots \\
+      > a_{n,1} +\frac{1}{n^{2}} & a_{n,2} +\frac{1}{n^{2}} & \cdots  & a_{n,n} +\frac{1}{n^{2}}
+      > \end{pmatrix}\\[6pt]
+      > \xrightarrow{\text{行变换, 细节略}} \mid  &\begin{pmatrix}
+      > \frac{1}{n} & \frac{1}{n} & \cdots  & \frac{1}{n}\\
+      > a_{2,1}  & a_{2,2} & \cdots  & a_{2,n} \\
+      > \vdots  & \vdots  & \ddots  & \vdots \\
+      > a_{n,1}& a_{n,2} & \cdots  & a_{n,n}
+      > \end{pmatrix}\\[6pt]
+      > \xrightarrow{c_1\mapsto (c_1+\cdots +c_n)} \mid  &\begin{pmatrix}
+      > 1 & \frac{1}{n} & \cdots  & \frac{1}{n}\\
+      > 0  & a_{2,2} & \cdots  & a_{2,n} \\
+      > \vdots  & \vdots  & \ddots  & \vdots \\
+      > 0& a_{n,2} & \cdots  & a_{n,n}
+      > \end{pmatrix}. 
+      > \end{align*}
+      > $$
+      > 从而 $\det B=(\mathrm{Adj}(A))_{1,1}$. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 4** 关于 Adj 矩阵. 
+
+1. 记 $A\in \mathbb F^{n\times (n-1)}$, 简要说明以下是线性映射: 
+   $$
+   \varphi_A:\mathbb F^n\to \mathbb F,\quad v\mapsto \det (A\mid v).
+   $$
+   请找到 $a\in \mathbb F^{n}$, 使得 $\varphi_A(v)=a^T\cdot v$. 
+
+   > 答: 按最后一行进行 Laplace 展开. 
+   
+2. 试证明, $\mathrm{Adj}(xI-A)$ 形如
+   $$
+   A_0+x \cdot A_1+x^2\cdot A_2+\cdots + x^{n-1}\cdot A_{n-1}\quad A_k\in \mathbb F^{n\times n}.
+   $$
+
+   > 答: 矩阵 $\mathrm{Adj}(xI-A)$ 的每一项都是 $(xI-A)$ 中某一 $(n-1)$-阶子式的行列式, 因此是次数不超过 $n-1$ 的多项式. 
+
+3. 沿用上一题记号, 证明 $A_k\cdot A-A_{k-1}$ 是数量矩阵 (也就是形如 $c\cdot I$ 的矩阵). 
+
+   > 答: $\mathrm{Adj}(xI-A)\cdot (xI-A)$ 是数量矩阵, 递推即可. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 5** 求 
+$$
+\sqrt[3]{\det\begin{pmatrix}
+a^{2} +d^{2} -b^{2} -c^{2} & 2( ab+cd) & 2( ac-bd)\\
+2( ab-cd) & b^{2} +d^{2} -a^{2} -c^{2} & 2( bc+ad)\\
+2( ac+bd) & 2( bc-ad) & c^{2} +d^{2} -a^{2} -b^{2}
+\end{pmatrix}}.
+$$
+
+> 答: 记原式为 $\sqrt[3]{\det A}$. 以下是三种常见的做法. 
+>
+> 1. 对第一行做初等变换 $r_1\mapsto r_1+\frac ba r_2+\frac ca r_3$, 提取公因式 $(a^2+b^2+c^2+d^2)$. 
+> 2. 依照学习四元数或正交矩阵时的经验, 可以发现 $AA^T$ 是数量矩阵. 比较符号即得答案. 
+> 3. 直接展开 (不推荐).  
+>
+> 注: 对技巧类的问题, 算出类似的答案即可. 不必纠结三次单位根的问题. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 6** 记 $J=\begin{pmatrix}O&I\\-I&O \end{pmatrix}$. 所有矩阵是实的. 
+
+1. 证明 $\det (AJ+JA)\geq 0$. 
+
+   > 答: 记 $A=\begin{pmatrix}A_1&A_2\\A_3&A_4\end{pmatrix}$, 则 
+   > $$
+   > AJ+JA=\begin{pmatrix}A_3-A_2&A_1+A_4\\-A_1-A_4&A_3-A_2\end{pmatrix}. 
+   > $$
+   > 依照矩阵初等变换, 
+   > $$
+   > \det=\begin{pmatrix}C&D\\-D&C\end{pmatrix}=\det (C+iD)\cdot \overline{\det (C+iD)}\geq 0.
+   > $$
+
+2. 若 $A^TJA=J$, 则称 $A$ 是好玩的. 证明 $\det A=1$. 
+
+   > 答: 对 $(I+A^TA)J=A^T(AJ+JA)$ 取行列式, 得
+   > $$
+   > \underbracket{\det (I+A^TA)}\limits_{>0}\cdot \underbracket{\det J}\limits_{=1}=\underbracket{\det A^T}\limits_{=\det A}\cdot \underbracket{\det (AJ+JA)}\limits_{\geq 0}
+   > $$
+   > 从而 $\det A$ 只能是正数. 
+   >
+   > * 第一处 $>0$ 说明如下: 对 $I+A^TA=\binom{I}{A}^T\cdot \binom{I}{A}$ 使用 Cauchy-Binet 公式计算行列式, 其和式中所有数非负, 且至少有一个正数. 
+
+3. 证明以下三类矩阵是好玩的: 
+
+   1. ($\mathfrak A$-类矩阵) $\begin{pmatrix}I&S\\&I\end{pmatrix}$, 其中 $S$ 是对称矩阵; 
+   2. ($\mathfrak B$-类矩阵) $\begin{pmatrix}X^T&\\&X^{-1}\end{pmatrix}$, 其中 $X$ 是可逆矩阵; 
+   3. ($\mathfrak C$-类矩阵) 满足特定条件的形如 $\begin{pmatrix}C&B\\-B&C\end{pmatrix}$ 的矩阵, 所谓的特定条件就是 $A^TJA=J$ 对应的分块矩阵等式. 
+
+4. 证明好玩矩阵构成乘法群 $\mathfrak {S}$. 试问: 对上述 $\mathfrak A$, $\mathfrak B$ 与 $\mathfrak C$ 这三个集合, 哪些集合可以视作 $\mathfrak S$ 的子群? 
+
+5. 证明岩澤分解 $\mathfrak A\cdot \mathfrak B\cdot \mathfrak C=\mathfrak S$. 换言之, 任何好矩阵形如乘积
+   $$
+   \begin{pmatrix}I&S\\&I\end{pmatrix}\cdot\begin{pmatrix}X^T&\\&X^{-1}\end{pmatrix}\cdot\begin{pmatrix}C&B\\-B&C\end{pmatrix}.
+   $$
+
+   > 答: 乘法群 $\mathfrak S$ 中满足 $M^TM=I$ 的矩阵必属于 $\mathfrak C$. 因此只需证明, 对任意 $G\in \mathfrak S$ 总有分解 $GG^T=ABB^TA^T$, 其中 $A\in \mathfrak A$, $B\in\mathfrak B$. 
+   >
+   > 之后就是待定系数, 进行构造与验证. 
+   
+6. 证明 $\mathfrak C$ 就是酉矩阵群 $U_n(\mathbb C)$. 对应方式是 
+   $$
+   \begin{pmatrix}C&B\\-B&C\end{pmatrix}\mapsto C+\sqrt{-1}\cdot B. 
+   $$
+
+7. 在熟悉酉矩阵后, 我们将借用[Siegel 上半平面模型](https://en.wikipedia.org/wiki/Siegel_upper_half-space)介绍一类特殊的矩阵变换: Cayley 变换. 
+
+<div style="page-break-after: always;"></div>
+
+**Challenges** 
+
+1. 选定数域. 将 Vandermonde 行列式修改如下: 记 $0<\lambda_1<\lambda_2<\cdots <\lambda_n$ 是正实数, $(a_i)_{i=1}^n$ 是两两不等的正实数. 证明 $\det ((a_i^{\lambda_j}))\neq 0$. 
+
+   > 答: 若这一行列式为 $0$, 则存在一个非零指数函数
+   > $$
+   > f(x)=\sum_{i=1}^n k_i \cdot a_i ^x\quad (k_i \in \mathbb R),
+   > $$
+   > 使得 $f$ 在 $\mathbb R_+$ 上有 $n$ 个零点. 依照数学归纳法, $f$ 的零点数量至多为 
+2. 若实矩阵 $A$ 各项非负, $A^{-1}$ 各项亦非负, 试求 $A$?
+
+   > 答: 这是一个脑筋急转弯. 今断言: 所有符合条件的 $A$ 必然是置换矩阵与对角矩阵的乘积, 也就是每行每列恰有一项非负, 其余项为 $0$ 的矩阵.
+   >
+   > * 若 $A$ 形如此, 则 $A$ 与 $A^{-1}$ 均是各项非负的. 
+   >
+   > * 若 $A$ 不形如此,  不妨设 $a_{1,1}a_{1,2}\neq 0$. 此时必然有
+   >   $$
+   >   A^{-1}=\begin{pmatrix}\ast &\mathbf 0^T\\\ast &\mathbf 0^T\\\vdots&\vdots \end{pmatrix}.
+   >   $$
+   >   这与 $A^{-1}$ 可逆矛盾. 

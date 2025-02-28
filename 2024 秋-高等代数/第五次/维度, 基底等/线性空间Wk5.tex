@@ -1,0 +1,688 @@
+\documentclass[11pt]{ctexart}
+\usepackage[margin=2cm,a4paper]{geometry}
+\usepackage{amsthm, amsfonts, amsmath, amssymb, mathrsfs, newclude, tikz-cd, tikz, ctex, mathtools, stmaryrd, datetime}
+
+
+%\setmainfont{Caladea}
+
+%% 也可以选用其它字库:
+% \setCJKmainfont[%
+%   ItalicFont=AR PL KaitiM GB,
+%   BoldFont=Noto Sans CJK SC,
+% ]{Noto Serif CJK SC}
+% \setCJKsansfont{Noto Sans CJK SC}
+% \renewcommand{\kaishu}{\CJKfontspec{AR PL KaitiM GB}}
+
+
+
+\usepackage[colorlinks = true,
+linkcolor = blue,
+urlcolor  = blue,
+citecolor = blue,
+anchorcolor = blue]{hyperref}
+
+% Include the x-color package for color support
+\usepackage{xcolor}
+
+% Define a new environment for red comments
+\usepackage{verbatim} % Required for the comment environment
+\usepackage{environ}
+
+\usepackage{mdframed} % Include mdframed for creating framed environments
+
+\definecolor{pinked}{RGB}{255,231,229} % Define a base color
+% Define a new environment with a background color
+\newmdenv[
+  backgroundcolor=pinked, % Set the desired background color
+  linecolor=white, % Optional: Set the border line color
+  linewidth=1pt, % Optional: Set the border line width
+  roundcorner=5pt, % Optional: Set rounded corners
+  nobreak=true % Optional: Prevent page breaks within the environment
+]{pinked}
+
+\theoremstyle{definition}
+\newtheorem{qqq}{问题}[section]
+
+\newcommand{\ExternalLink}{%
+    \tikz[x=1.2ex, y=1.2ex, baseline=-0.05ex]{%
+        \begin{scope}[x=1ex, y=1ex]
+            \clip (-0.1,-0.1)
+                --++ (-0, 1.2)
+                --++ (0.6, 0)
+                --++ (0, -0.6)
+                --++ (0.6, 0)
+                --++ (0, -1);
+            \path[draw,
+                line width = 0.5,
+                rounded corners=0.5]
+                (0,0) rectangle (1,1);
+        \end{scope}
+        \path[draw, line width = 0.5] (0.5, 0.5)
+            -- (1, 1);
+        \path[draw, line width = 0.5] (0.6, 1)
+            -- (1, 1) -- (1, 0.6);
+        }
+    }
+
+\NewEnviron{aaa}{~\\
+    \noindent {\textcolor{teal}{\textbf{解答}} \BODY }
+}
+
+\NewEnviron{llll}{
+    \noindent {~\\$\ExternalLink$ 外部链接 $\,\,\,$ \color{blue}\url{\BODY} }
+}
+
+\renewcommand{\proofname}{证明}
+\renewcommand\qedsymbol{${\boxed{\substack{\textit{完证}\\\textit{毕明}}}}$}
+\let\oldproof\proof
+\renewcommand{\proof}{\color{blue}\oldproof}
+
+% Change equation numbering to include the section number
+\usepackage{cleveref}
+\renewcommand{\theequation}{\thesection.\thesubsection.\arabic{equation}}
+\numberwithin{equation}{section}
+
+
+% 创建适合 python 语言的公式环境.
+\usepackage{pythonhighlight}
+
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem*{definition}{定义}
+\newtheorem*{proposition}{命题}
+\newtheorem*{theorem}{定理}
+\newtheorem*{notation}{记号}
+\newtheorem*{example}{例子}
+\newtheorem{exercise}{\textcolor{blue}{习题}}
+\theoremstyle{remark}
+\newtheorem*{remark}{备注}
+\newtheorem*{lemma}{引理}
+\newtheorem*{corollary}{推论}
+
+\title{零散的习题: 线性空间}
+\author{(2024-2025-1)-MATH1405H-02}
+
+\setcounter{page}{0}
+
+\setlength\parindent{0pt}
+
+\begin{document}
+
+\maketitle
+
+\vspace{5cm}
+
+\begin{center}\huge
+    请完成 \textcolor{blue}{\textbf{习题}} $2^k$ ($k\in \mathbb N_+$).
+\end{center}
+
+\newpage
+
+\section{四大基本空间}
+
+我们目前仅学习了单一矩阵的四大基本空间. 以下是一些推荐读物与参考资料:
+\begin{enumerate}
+    \item \href{https://math.mit.edu/~gs/linearalgebra/ila6/ila6_3_5.pdf}{\S 3.5, Strang 的线性代数 (第六版)},
+    \item \href{http://mlwiki.org/index.php/Four_Fundamental_Subspaces}{一张清单} (稍微涉及了奇异值分解),
+    \item \href{https://ajitmathsoft.wordpress.com/wp-content/uploads/2019/07/linalg_sage.pdf}{此文第五章} 给出 $\mathsf{Sage}$ 的计算示例 (可使用\href{https://sagecell.sagemath.org/}{临时在线窗格}),
+    \item \href{www.cfm.brown.edu/people/dobrush/cs52/Mathematica/Part3/four.html}{此网页}给出 mathematica 计算示例 (如果你习惯 mathematica).
+\end{enumerate}
+
+假若学习了奇异值分解, 则可以深入研究 $P(A)$ 与 $P(B)$ 的运算 ($P\in \{C(-),C(-^T),N(-),N(-^T)\}$).
+
+\newpage
+
+\section{示例: 通过 Sage 计算 LU 分解}
+
+\begin{exercise}[广义 $LU$-分解]
+    假定你证明了 Gauss 消元法存在性. \textcolor{teal}{尽可能简单地}证明: 任意矩阵 $A\in \mathbb F^{m\times n}$ 可以分解作 $A=LS\widetilde IDU$ 的五元乘积形式, 或是 $A=LD\widetilde ISU$ 的五元乘积形式. 此处
+    \begin{enumerate}
+        \item $L\in \mathbb F^{m\times m}$ 是主对角为 $1$ 的下三角方阵, 例如 $\begin{pmatrix}
+            1&0&0\\a&1&0\\b&c&1
+        \end{pmatrix}$;
+        \item $U\in \mathbb F^{n\times n}$ 是主对角为 $1$ 的上三角方阵, 例如 $\begin{pmatrix}
+            1&x\\0&1
+        \end{pmatrix}$;
+        \item $S$ 是置换方阵, 即先前作业提及的``$S$-类初等变换方阵'';
+        \item $D$ 是对角方阵, 即, $D$ 中非对角元都是 $0$;
+        \item $\widetilde I$ 是相抵标准型的中项.
+    \end{enumerate}
+    证明任意一种情形即可, 因为这两种分解仅相差一个转置.
+    \begin{proof}
+        以 $A = LS\widetilde I DU$ 为例, 先给出最简列阶梯形 $A=C \cdot X$. 其中可逆上三角矩阵 $X$ 可以分解为 $X=DU$. 最后使用 $S\cdot \widetilde I$ 将主元调至对角位置, 得 $A$.
+    \end{proof}
+\end{exercise}
+
+\begin{pinked}
+    自主思考: 以上分解在``何种意义下''是唯一的?
+\end{pinked}
+
+\begin{remark}
+    ``概率''地, 假定 $A$ 实数域或复数域上的``随机''方阵, 则 $S=I$ 依概率 $1$ 发生.
+\end{remark}
+
+\begin{pinked}
+    假定你已经知道了 $PA=LU$ 分解的一般方法, 但疏于计算, 不考虑以下.
+\end{pinked}
+
+\begin{example}
+    如果想多做一些题目, 可以使用计算软件进行编题与解题.
+    \begin{enumerate}
+        \item[S0] 使用 \href{https://sagecell.sagemath.org/}{$\mathsf{sage}$ 在线窗格} (或者其他方式) 创建 $\mathbb Q$-上的矩阵
+        \begin{python}
+            A = matrix(QQ, [
+                [ 1,  1,  4,  5,  1,  4,  0,  0,  1],
+                [-1,  9, -1, -9,  8, -1,  0, -7, -7],
+                [ 1,  2, -3, -4,  5,  6, -7, -8,  9],
+                [ 3,  1,  4,  1,  5,  9,  2,  6,  5],
+                [ 2,  7,  1,  8,  2,  8,  1,  8,  3]
+            ]); # Create $A\in \mathbb Q^{m\times n}$.
+                \end{python}
+                若想查看矩阵 $A$, 另起新行并键入 \verb|A|, 并点击 \verb|Evaluate| 按钮即可 (快捷键 \verb|Ctrl+Shift+Enter|).
+                \item 为查看 $A$ 的最简行阶梯形, 键入 \verb|A.rref()| 并运行即可.
+                \item 广义 $LU$-分解的形式是 $A=PLU$, 键入 \verb|P, L, U = A.LU();| 即可对 $A$ 的 $LU$-分解进行赋值.
+                \begin{itemize}
+                    \item 依照 $P^2=I$, 以上即是 $PA=LU$ 分解.
+                \end{itemize}
+                \item 若想知道主元的位置, 可键入 \verb|A.pivots()|.
+                \item 自行探索更多.
+    \end{enumerate}
+\end{example}
+
+\newpage
+
+\section{线性空间, 基的证明题}
+
+\begin{pinked}
+    如果想操练计算题, 可参考``国庆作业''.
+\end{pinked}
+
+\begin{exercise}
+    假定 $V$ 任意域 $\mathbb F$ 上的 $2024$ 维线性空间. 试构造子集 $S\subset V$ (向量组), 其同时满足
+    \begin{enumerate}
+        \item 集合 $S$ 的大小是 $2025$,
+        \item $S$ 中任意 $2024$ 个向量线性无关.
+    \end{enumerate}
+    \begin{proof}
+        记 $\{v_i\}_{i=1}^{2024}$ 是一组基, 记 $v_0:=\sum_{i=1}^{2024} v_i$.
+        \begin{enumerate}
+            \item 依照基的线性无关性, $v_0\neq 0$.
+            \item 将 $\{v_i\}_{i=1}^{2024}$ 中某一 $v_k$ 换做 $v_0$, 今断言新集合仍是线性无关的. 若存在线性组合式:
+            \begin{equation}
+                0 \quad = \sum_{(0\leq i\leq 2024)\,\text{且}\,(i\neq k)} c_i v_i \quad = c_0 v_k+\sum_{(0\leq i\leq 2024)\,\text{且}\,(i\neq k)} (c_0+c_i)v_i,
+            \end{equation}
+            则依照 $\{v_i\}_{i=1}^{2024}$ 的线性无关性, 得 $c_0=0$ 且所有 $c_i+c_0=0$. 由于线性组合式的系数只能为 $0$, 新集合必然是线性无关组.
+        \end{enumerate}
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}[Challenging]
+    若 $\mathbb F$ 是数域, 则上题的条件 1 可以放宽至无限集. (What if $\mathbb F$ is finite?)
+    \begin{proof}
+        对一切 $x\in \mathbb F$, 记 $v_x$ 为列向量 $(1,x^1,x^2,\ldots, x^{2023})$. 任意 $2024$ 个形如 $v_x$ 的相异向量一定是线性无关的: 注意到 Vandermonde 矩阵可逆.
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}[必做的证明题]
+    给定数域上的线性空间 $V$. 任意给定 $V$ 的有限个真子空间 $\{U_i\}_{i=1}^m$, 总有
+    \begin{equation}
+        \left(\bigcup_{i=1}^m U_i\right)\neq V.
+    \end{equation}
+    (若 $\mathbb F$ 非数域, 试给出 $m=3$ 的反例?\footnote{Might there be a one-line counter-example for those who are familiar with $\mathbb F_2$-field?})
+    \begin{proof}
+        (反证法) 假定存在 $m$ 使得等式成立. 若认定 $V$ 是有限维线性空间, 则可以跳过以下粉色块. 
+        \begin{pinked}
+            以下引理表明, 即便 $V$ 是无穷维线性空间, 该问题仅需放在有限维空间中考虑. 
+            
+            引理: 则存在有限维子空间 $V_0$, 使得
+            \begin{itemize}
+                \item 对所有 $1\leq i\leq m$, 总有 $(U_i\cap V_0)$ 是 $U_i$ 的真子空间.
+            \end{itemize}
+            引理的证明: 对每个 $U_i$ 配上一个向量 $u_i\in (V\setminus U_i)$, 记 $V_0=\mathrm{span}(\{u_i\}_{i=1}^{m})$ 即可.
+
+            对原等式两侧``取 $(V_0\cap -)$''; 或更直接地, 
+        \end{pinked}
+        不妨假设 $V$ 是有限维的. 定义无限子集
+        \begin{equation}
+            S := \{v_x \mid x\in \mathbb F\}\quad (\text{取定有限维空间的基, $v_x$ 为上一问所定义.}).
+        \end{equation}
+        由于 $S$ 中任意 $\dim V$ 个不同的向量都能作为 $V$ 的基底, 故 $V$ 的任意真子空间 $U_i$ 只能包含 $S$ 中有限个向量; 这和 $S\subset V = \bigcup_{i=1}^m U_i$ 矛盾.
+        \begin{itemize}
+            \item (反例) 若 $\mathbb F$ 是二元域, 则二维线性空间是四元线性空间, 其非零的线性真子空间只有三个.
+        \end{itemize}
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}[Challenging]
+    在上一习题中置 $m=2$, 则域 $\mathbb F$ 无限制;
+    \begin{proof}
+        若存在真子空间 $U_1$ 与 $U_2$ 使得 $U_1\cup U_2 =V$, 则可取 $v_i\in (V\setminus U_i)$. 之后考虑 $v_1+v_2$ 的归属:
+        \begin{enumerate}
+            \item 若 $(v_1+v_2) \in U_1$, 则
+            \begin{itemize}
+                \item 依照 $v_1\in U_2$, 此时 $v_2 = (v_1+v_2)-v_1$ 亦属于 $U_2$,
+            \end{itemize}
+            矛盾;
+            \item 若 $(v_1+v_2) \in U_1$, 则
+            \begin{itemize}
+                \item 依照 $v_2\in U_1$, 此时 $v_1 = (v_1+v_2)-v_2$ 亦属于 $U_1$,
+            \end{itemize}
+            矛盾.
+        \end{enumerate}
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}[如果先前做错了, 请重试]
+    若 $U$, $V$ 与 $W$ 是三个子空间, 证明以下等式的一侧, 并证伪另一侧
+    \begin{enumerate}
+        \item $(U+V)\cap W = (U\cap W) + (V\cap W)$;
+        \item $(U\cap V)+W = (U+W) \cap (V+W)$.
+    \end{enumerate}
+    \begin{proof}
+        \verb|by admit|.
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}[如果先前做错了, 请重试]
+    若 $U\subset V$ 与 $W$ 是三个子空间, 证明 $(U+W)\cap V = U+(W \cap V)$.
+    \begin{proof}
+        \verb|by admit|.
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}
+    根据上述习题, 证明以下两个等式. 选定 $U$, $V$ 与 $W$ 为同一线性空间的三个子空间, 试证明:
+    \begin{enumerate}
+        \item $((V \cap W) + U) \cap V = {\color{white}{ (V \cap W) + (U\cap V) }} = V \cap (W + (U\cap V))$,
+        \item $((V + W) \cap U) + V = {\color{white}{ (V + W) \cap (U + V) }} = V + (W \cap (U + V))$.
+    \end{enumerate}
+    关键步骤是中间白色处.
+    \begin{proof}
+        Apply modular identity (Ex. 7) for $2\times 2$ times:
+        \begin{enumerate}
+            \item $((V \cap W) + U) \cap V =  (V \cap W) + (U\cap V)  = V \cap (W + (U\cap V))$,
+            \item $((V + W) \cap U) + V =  (V + W) \cap (U + V) = V + (W \cap (U + V))$.
+        \end{enumerate}
+    \end{proof}
+\end{exercise}
+
+\newpage
+
+\section{\large (span : 子集 \texorpdfstring{$\to$}{PDFstring} 子空间)  (dim : 子空间 \texorpdfstring{$\to$}{PDFstring} \texorpdfstring{$\mathbb N$}{PDFstring} ) 与 (rank = dim \texorpdfstring{$\circ$}{PDFstring} span)}
+
+\begin{notation}
+    谈及 $\dim$ 与 $\mathrm{rank}$, 默认``参与关键运算''的线性空间是有限维的.
+\end{notation}
+
+\begin{pinked}
+    以下定义, 定理, 以及习题等的表述是更偏类型化的: 这兼顾了严谨性与简易性.
+\end{pinked}
+
+\begin{definition}[``\texorpdfstring{$\mathrm{rank}=\mathrm{dim}\circ \mathrm{span}$}{}'']
+    我们形式化地澄清三个记号. 以下谈论的线性空间都附带了域.
+    \begin{enumerate}
+        \item[$\mathrm{span}$] $\texttt{输入\_1}$ 是线性空间 $V$, $\texttt{输入\_2}$ 是 $V$ 的子集 $S$;
+
+        $\texttt{输出}$ 是 $V$ 中一切包含 $S$ 的线性子空间之交.
+        \begin{exercise}
+            需要证明, $\texttt{输出}$ 也是线性空间, 并恰是包含 $S$ 的 $V$-线性子空间中的极小者.
+            \begin{proof}
+                无聊地验证公理; 或使用定理``遗忘函子 $\mathrm{Mod}_{\mathbb F}\to \mathrm{Sets}$ 生一切极限''.
+            \end{proof}
+        \end{exercise}
+
+        \item[$\mathrm{dim}$] $\texttt{输入}$ 是有限维线性空间 $V$;
+
+        $\texttt{输出}$ 是自然数 $n$, 即 $V$ 中任一极大线性无关组的大小.
+        \begin{exercise}
+            需要证明, 任选定 $V$ 中任意两组极大线性无关组, 其作为集合大小相同.
+            \begin{proof}
+                提示: 记极大线性无关组 (必然是有限集) $S$ 与 $T$ 的大小为 $|S|=m$ 且 $|T|=n$.
+                \begin{itemize}
+                    \item 将 $S$ 中向量以行向量的形式排列成矩阵 $X\in \mathbb F^{m\times \star}$,
+                    \item 将 $T$ 中向量以行向量的形式排列成矩阵 $Y\in \mathbb F^{n\times \star}$.
+                \end{itemize}
+                极大线性无关组可以互相表出; 不然, 加入不可表出的向量能得到更大的线性无关组. 故存在矩阵 $A\in \mathbb F^{m\times n}$ 与 $B\in \mathbb F^{n\times m}$ 使得
+                \begin{equation}
+                    BX=Y\quad \text{且} \quad AY=X.
+                \end{equation}
+                ``右乘行满秩矩阵''这一操作可以消去, 因此 $BA=I_n$ 且 $AB=I_m$. 后略.
+                \begin{itemize}
+                    \item 把线性空间的秩 (未知) 转化成矩阵的秩 (已知).
+                \end{itemize}
+            \end{proof}
+        \end{exercise}
+
+        \item[$\mathrm{rank}$] 当且仅当 $\mathrm{span}$ 输出有限维线性空间, 方可定义 $\mathrm{rank}=\mathrm{dim}\circ \mathrm{span}$.
+    \end{enumerate}
+\end{definition}
+
+\begin{pinked}
+    固定 $\texttt{输入\_1}$, 以下研究 $\texttt{输入\_2}$ 的变化对以上的影响. 最简单的子集关系是包含.
+\end{pinked}
+
+\begin{exercise}[保序]
+    $\dim$ 与 $\mathrm{rank}$ 保持特定的序关系. 给定全空间 $V$ 与子集 $S_1, S_2\subset V$, 考虑下图:
+    \begin{equation}
+        % https://q.uiver.app/#q=WzAsOSxbMCwxLCJbU18xLFZdIl0sWzAsMiwiW1NfMixWXSJdLFsyLDEsIlxcbWF0aHJte3NwYW59X1YoU18xKSJdLFsyLDIsIlxcbWF0aHJte3NwYW59X1YoU18yKSJdLFs0LDEsIlxcbWF0aHJte3Jhbmt9KFNfMSkiXSxbNCwyLCJcXG1hdGhybXtyYW5rfShTXzIpIl0sWzAsMCwiY18xIl0sWzIsMCwiY18yIl0sWzQsMCwiY18zIl0sWzAsMl0sWzIsNF0sWzEsM10sWzMsNV0sWzAsMSwiXFxzdXBzZXQgIiwzLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsMywiXFxzdXBzZXQgIiwzLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzQsNSwiXFxzdXBzZXQgIiwzLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
+\begin{tikzcd}[ampersand replacement=\&]
+	{c_1} \&\& {c_2} \&\& {c_3} \\
+	{[S_1,V]} \&\& {\mathrm{span}_V(S_1)} \&\& {\mathrm{rank}(S_1)} \\
+	{[S_2,V]} \&\& {\mathrm{span}_V(S_2)} \&\& {\mathrm{rank}(S_2)}
+	\arrow[from=2-1, to=2-3]
+	\arrow["{\supset }"{marking, allow upside down}, draw=none, from=2-1, to=3-1]
+	\arrow[from=2-3, to=2-5]
+	\arrow["{\supset }"{marking, allow upside down}, draw=none, from=2-3, to=3-3]
+	\arrow["{\supset }"{marking, allow upside down}, draw=none, from=2-5, to=3-5]
+	\arrow[from=3-1, to=3-3]
+	\arrow[from=3-3, to=3-5]
+\end{tikzcd}.
+    \end{equation}
+    基于对称性, $\subset$ 可以表示子集的包含, 线性子空间的包含, 自然数的小于等于号. ``保序''是说,
+    \begin{itemize}
+        \item 若 $c_i$ 处的 $\subset$ 成立, 则 $c_{i+1}$ 处的 $\subset$ 亦成立.
+    \end{itemize}
+    \begin{proof}
+        ($\mathrm{span}$ 保序) 假定 $S_1\subset S_2$. $S_1$ 线性表出的向量可以被 $S_2$ 线性表出.
+
+        ($\mathrm{dim}$ 保序) 假定 $U_1\subset U_2$. 将 $U_1$ 的基扩充至 $U_2$ 即可. 上一题表明 $\dim$ 不依赖扩充的具体过程.
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}
+    证明以下问题.
+    \begin{enumerate}
+        \item 若 $c_1$ 取 $\subset$, 则 $c_3$ 取等当且仅当 $c_2$ 取等.
+        \begin{proof}
+            若 $c_1$ 取 $\subset$, 则 $c_2$ 与 $c_3$ 也取 $\subset$. $\mathrm{rank}(S_1)-\mathrm{rank}(S_2)$ 恰是 $\mathrm{span}(S_2)$ 至 $\mathrm{span}(S_1)$ 需扩充的向量数目. 依照这一等价表述 (转写), 充分性与必要性都是直接的.
+        \end{proof}
+        \item 若 $c_i$ 取等, 则 $c_{i+1}$ 亦然.
+        \begin{proof}
+            这是因为 $\mathrm{span}$ 与 $\mathrm{dim}$ 可以视作映射, 即, 一个输入对应唯一的输出.
+        \end{proof}
+        \item 若 $c_{i+1}$ 取等, 则 $c_i$ 不必取 $\subset$.
+        \begin{proof}
+           ($c_3\to c_2$ 反例) 一维子空间不必唯一; ($c_2\to c_1$ 反例) 基底不必互相包含.
+        \end{proof}
+    \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+    思考平凡情况: $S=\emptyset$ (理解作 $\mathrm{void}$) 或 $S=V$ (作为集合, 理解作 $S=V.\text{Set}$).
+    \begin{proof}
+        $\emptyset\xrightarrow{\mathrm{span}} \mathbf 0\xrightarrow{\mathrm{dim}}0$, 以及 $V_{\mathrm{Set}}\xrightarrow{\mathrm{span}} \mathbf V\xrightarrow{\mathrm{dim}}\dim V$.
+    \end{proof}
+\end{exercise}
+
+\begin{pinked}
+    下一步是建立二元运算. 暂时将 $\subset$ 区分地记作 $\subseteq$ (集合), $\subset$ (子空间), $\leq$ (自然数).
+\end{pinked}
+
+\begin{example}
+    自然的想法是下述表格 (子空间的交记作 $\wedge$, 以区别于集合的交 $\cap$):
+    \begin{equation}
+            \begin{matrix}
+                \text{名称} & \text{序} & \text{极大} & \text{极小} & \text{所谓 And} & \text{所谓 Or}\\\hline
+                \text{子集} & \subseteq  & V_{\text{Set}} & \emptyset  & \cap  & \cup \\
+                \text{子空间} & \subset  & V & \mathbf 0 & \wedge  & +\\
+                \text{秩} & \leq  & \text{NA} & 0 & \min & \max
+                \end{matrix}.
+    \end{equation}
+\end{example}
+
+\begin{exercise}
+    选用 $S_1\subseteq S_2$, 则有
+    \begin{itemize}
+        \item $\mathrm{span}(\emptyset)=0$, $\mathrm{span}(S_1\cap S_2) = \mathrm{span}(S_1)\cap \mathrm{span}(S_2)$;
+        \item $\mathrm{span}(V) = V$, $\mathrm{span}(S_1\cup S_2) = \mathrm{span}(S_1)+ \mathrm{span}(S_2)$.
+    \end{itemize}
+    选用 $U_1\subset U_2$, 则有 (容易补全 $\mathrm{rank}$-方向...)
+    \begin{proof}
+        \verb|by admit|.
+    \end{proof}
+\end{exercise}
+
+\begin{pinked}
+    若所谈论的对象构成全序 (等价地, 只看一条链), 则以上三类偏序关系是逐次的商集.
+\end{pinked}
+
+\begin{exercise}
+    给定子空间 $U_1$ 与 $U_2$.
+    \begin{enumerate}
+        \item 证明 $\mathrm{rank}(U_1\wedge U_2)\leq \min (\mathrm{rank}(U_1),\mathrm{rank}(U_2))$;
+        \item 证明 $\max (\mathrm{rank}(U_1),\mathrm{rank}(U_2))\leq \mathrm{rank}(U_1 + U_2)$.
+    \end{enumerate}
+    提示: 第一处仅使用逻辑``或'', 第二处仅使用逻辑``与''; 无关具像之选取.
+    \begin{proof}
+        $\mathrm{rank}(U_1\wedge U_2)\leq \min (\mathrm{rank}(U_1),\mathrm{rank}(U_2))$ 当且仅当
+\begin{equation}
+    \mathrm{rank}(U_1\wedge U_2)\leq \mathrm{rank}(U_1) \quad \text{且} \quad \mathrm{rank}(U_1\wedge U_2)\leq \mathrm{rank}(U_2).
+\end{equation}
+之后略.
+    \end{proof}
+\end{exercise}
+
+\begin{remark}
+    从高维的``序''降至低维的``序'', 自然省略了诸多信息.
+\end{remark}
+
+\begin{exercise}
+    给定子集 $S_1$ 与 $S_2$.
+    \begin{enumerate}
+        \item 证明 $\mathrm{span}(S_1\cap S_2)\subset \mathrm{span}(S_1)\wedge \mathrm{span}(S_2)$.
+        \item 证明 $\mathrm{span}(S_1) + \mathrm{span}(S_2)=\mathrm{span}(S_1\cup S_2)$.
+    \end{enumerate}
+    \begin{proof}
+        将第一问抽象化: 若子空间 $U\subset V$ 且 $U\subset W$, 则 $U\subset V\wedge W$. 结论由以下两点确保: 
+        \begin{enumerate}
+            \item 作为子集, $U\subseteq (V\cap W)$. 
+            \item $U$ 和 $V\cap W$ 是线性空间. 
+        \end{enumerate}
+    第二问是重点, 先将等号拆成 $\subset$ (Case 1) 和 $\supset$ (Case 2). 
+    \begin{enumerate}
+        \item[Case 1] 将问题抽象化: 若子空间 $U\subset W$ 且 $V\subset W$, 则 $(U+V)\subset W$. 写至此处可以使用``显然''. 
+        \item[Case 2] 任意 $x\in \mathrm{span}(S_1\cup S_2)$ 形如 $\sum_{\text{有限和}}c_i\cdot v_i$, 其中对每一 $i$ 均有 $v_i\in S_1$ 或 $v_i\in S_2$. 于是, 
+        \begin{equation}
+            x = \left(\sum_{v_i\in S_1}c_i\cdot v_i\right) + \left(\sum_{v_i\in (S_1\cup S_2)\setminus S_1}c_i\cdot v_i\right) \in \mathrm{span}(S_1)+\mathrm{span}(S_2). 
+        \end{equation}
+        由于 $x$ 是任取的, 故 $\mathrm{span}(S_1\cup S_2)\subset \mathrm{span}(S_1)+\mathrm{span}(S_2)$. 
+    \end{enumerate}
+    \end{proof}
+\end{exercise}
+
+\begin{remark}
+    问题出在何出? 此处的问题是下式``为何取等'', 而非上式为何不等.
+\end{remark}
+
+\begin{proposition}
+    对同一集合的三个子集 $G$, $H$ 与 $U$, 总有
+    \begin{enumerate}
+        \item $G \cup (H \cap U) = (G \cup H) \cap (G \cup U)$, 与
+        \item $(G \cap H ) \cup ( G \cap U ) = G \cap (H \cup U)$.
+    \end{enumerate}
+    \begin{proof}
+        由于 $x\in X$ 是命题, $(\star \in X)\,\text{and}\,(\star \in Y$) 当且仅当 $\star \in (X\cap Y)$, 以及 $(\star \in X)\,\text{or}\,(\star \in Y)$ 当且仅当 $\star\in X\cup Y$. 鉴于此, 我们可以在不使用 \verb|mathlib| 的情况下用 $\mathsf{L\exists \forall N}$ 进行形式化的证明, 见\href{https://live.lean-lang.org/#codez=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}{\underline{此篇个人草稿}}的 212 行与 214 行.
+\end{proof}
+\end{proposition}
+
+\begin{exercise}
+    若 $U$, $V$ 与 $W$ 是三个子空间, 证明以下等式的一侧, 并证伪另一侧
+    \begin{enumerate}
+        \item $(U+V)\wedge W = (U\wedge W) + (V\wedge W)$;
+        \item $(U\wedge V)+W = (U+W) \wedge (V+W)$.
+    \end{enumerate}
+\end{exercise}
+
+\begin{example}
+    接上题. 尽管等式不必成立, 但式 $1$ 取等号当且仅当式 $2$ 取等.
+    \begin{proof}
+        仍然给一个形式化的证明, 见\href{https://live.lean-lang.org/#codez=JYWwDg9gTgLgBAWQIYwBYBtgCMB0B5KAEwFMocAZFGYAY2LgCgGA3JKYJLdegb0EbgOAC44AFQCeYYgCoAvnADalGNTpw+AXRZsOXegAoAqnABqcAOpC1ASiYBaW3EAXNsMD9foHIDQF5egF9TA9GaBPJ0Ao60AQtzglFWIcRgZ7GNiYwGNrQHDTOJSUuwdABujAd+VhAwAaEzhAODlzOB93QAVtb0j0uEBkojKqryDAErkCwBSiRu8gwBiVGuiHQAA5QBogwAZ1AoagwAX4wHTvQAx5QAlFQHK/QHJNQDi5OHb+tGJoYhA4TgBnaCwARksjBsNNkys4AF44I0EnrDEBuD1ALO1AMBdAUMVAJ3a90q3mecEA3AaAQ7tAM2xgFO5QDQcoBfFUAGRk4T6AT+1AN9ygHhDUFeEwFCGASHNwU8jIBKIi+RgA1HdIow4IcwGB0GI4NwAPpIAB21COYhAIAYTKQLLZcGAPIAZpyudxpTARczWeyuVLpcqxaqOcROVBiNL0FrxWq9UcAK5gOWGpUMHZ7A7HU4AJkutxuDWM93JQjeH3sXz+QJBbia4Oh8ORaMxuPxhMhpKMvrpNyp3oZJp1XN5/MFwtFprglut3CzEq5BqN5fZGptNsVNd1nJLDbtgbhgCg5QAkcoBy+TgfwA9IBUfV+g7cgApYuCAB89ADrygA4VQBspoBo/X6xAAHkhwNwvqhLIAAInBpgswj4BSuX1MnTMPup9TuHovN/uuQ9pgaN8ed863vvN2vL7+p8PwAsCcCAE+6gCn7oAkHKAFRy+KwowgaUpecB0p+Txpg+qYoTeBSfIAmEoFIAJtaAG+mxKAJLegDw+khDi0qhVIYXedK/lSNzoVY6JMlAADuCioJo3F8fIAACdY0BAQpwJy0nfncglwLxCjOlA5wKUponiZJBwyTJ/7ycqGkCYZwmAAmExZWtyRwnDQ6nCWJMqchJUm6aU+R2cpWAnKpLoefIWlCpoDAblurL6HuwiHkYx6WGe4KdHo77mLe+m/tcRgAS+4LXFeyVfp6D4JU+gFwO8wHBmBUFwQhMK0eCqamIxKX0axzHJfhgZEXAZGUTRnwoYlaF5ZhKG/jhcBNVxinCcZQkKCJrbOTpskFd6fkqVgvkmfNi3abJekXmt23yLN00KOZdZINZEC2cdC2WUt+1uXk61eacZx+btgVAA}{\underline{此处}}.
+        \begin{itemize}
+            \item[P.S.] 笔者没想过其中的逻辑原因, 但还是莫名其妙地证出来了.
+        \end{itemize}
+    \end{proof}
+\end{example}
+
+\begin{remark}
+    问题出在哪儿?
+\end{remark}
+
+\begin{exercise}
+    给定自然数 $l$, $m$ 与 $n$, 证明
+    \begin{enumerate}
+        \item $\max(\min(l,m),\min(l,n))=\min(l,\max(m,n))$,
+        \item $\min(\max(l,m),\max(l,n))=\max(l,\min(m,n))$.
+    \end{enumerate}
+    提示: $a = b$ 当且仅当 $(x\leq a)\leftrightarrow (x\leq b)$, 此时 $\max$ 对应``或'', $\min$ 对应``与'', ...
+\end{exercise}
+
+
+\begin{example}[min-max 不等式]
+    (min-max 不等式) 给定任意实数 $a_1$, $b_1$, $a_2$ 与 $b_2$, 总有
+    \begin{equation}
+        \max ((\min (a_1, b_1)), (\min (a_2, b_2)) ) \leq  \min ((\max (a_1, a_2)), (\max (b_1, b_2))). 
+    \end{equation}  
+    \begin{proof}
+        \href{https://live.lean-lang.org/#codez=JYWwDg9gTgLgBAWQIYwBYBtgCMB0ARFJHAJQFMl0cAhJAZ2AGMAoJtU6UkOEYAOwH0QSAB78+pAI4BXCsBgBPOAAokgQII4WdUkBBBBt0AuOIFxCAJRxDQ4cp684ajarNKbd3Vm1nAJkTc+1kXa0PPytNPTN9AF4NeSY4OzAwdEV0UkE+WLgceMTFS34UjLis1CQAN1I4dHMfW3tQ73tI6LjspJr81JSAMxhClqQEtpT+GCgkXlpKvriBnMrUvO7elsy4EvLK6pcdPTgGgyisRVm2mw6OnunW5NTR8cn0K5ObwRF+KGAAc1Rl1efuN4FFbFMoVKoWXx1dTeUJNI7XdrDD7fX4rf7DO4TKYrGaDF6LUiXYFrUGbCG1Ny6GEHZr/M5Ir4/J54+YjMZYx44hHDPLIplAA}{形式化证明}. 
+    \end{proof}
+\end{example}
+
+\begin{remark}
+    Min-max 不等式是极其广泛的: 假定 $f:X\times X\to P$ 是集合到偏序集合任意映射 (例如 $f:X\times Y\to \mathbb R$ 是二元实函数), 则恒有 
+    \begin{equation}
+        \sup_{x\in X}\inf_{y\in Y}f(x,y)\leq \inf_{y\in Y}\sup_{x\in X}f(x,y). 
+    \end{equation}
+    \begin{proof}
+        对任意选定的 $(x_0,y_0)\in X\times Y$, 总有下式: 
+        \begin{equation}
+            \inf_{y\in Y}f(x_0,y)\leq f(x_0,y_0)\leq \sup_{x\in X}f(x,y_0).
+        \end{equation}
+        由于 $(x_0,y_0)$ 是任意的, 我们得到一族由 $(x',y')\in X\times Y$ 标记的不等式 $\{I(x',y')\}$:  
+        \begin{equation}
+            I(x',y') := [L(x')\leq R(y')] := \left[\inf_{y\in Y}f(x',y)\leq \sup_{x\in X}f(x,y')\right].
+        \end{equation} 
+        由于 $L(x')\leq R(y')$ 恒成立, 故 $\sup_{x'\in X}L(x')\leq \inf_{y'\in Y}R(y')$. 
+    \end{proof}
+    作为特例, 取 $X=Y=\mathbb N$, 以数列定义 $a_{m+n}=f(m,n)$, 则上式表示数学分析中何种的结论? 
+\end{remark}
+
+\begin{pinked}
+    未完待续 (有些待补全的内容可以在上一届习题中找到).
+    \begin{enumerate}
+        \item 目前引入 $\mathrm{span}$ 的方式还是很``牵强''的, 之后会有更自然的角度. 等课上提到了``泛性质''再话吧.
+        \item 此处未涉及线性空间的补空间.
+        \item 将``两个线性空间''换作``一族线性空间''?
+    \end{enumerate}
+\end{pinked}
+
+
+\newpage
+
+\section{思考: 无限维线性空间}
+
+\begin{exercise}[无限维的定义]
+    $\mathbb F$ 上无限维线性空间的定义如下 (选自教材之一 \href{https://linear.axler.net/LADR4e.pdf#page=45}{LADR (第四版)}):
+    \vspace{-1cm}
+    \begin{quotation}
+        \begin{definition}
+            称线性空间 $V$ 是无限维的, 若 $V$ 不是有限维的.
+        \end{definition}
+    \end{quotation}
+    请证明: $V$ 是无限维的, 当且仅当存在无限集 $S\subset V$ 使得 $S$ 是线性无关组.
+    \begin{pinked}
+        (若选择证明此题) 书写证明时, 换段地书写``充分性''与``必要性''是基本要求之一.
+        \begin{itemize}
+            \item 以上命题存在不显然之处, 请在证明完毕后指出.
+        \end{itemize}
+    \end{pinked}
+    \begin{proof} 
+        以下只证明 $\to$ 方向 ($\gets$ 方向用逆否命题即可). 回忆定义: $V$ 是有限维线性空间, 当且仅当
+        \begin{itemize}
+            \item 存在某个 $N_0\in \mathbb N$, 使得任意线性无关子集 $S\subset V$ 的大小不超过 $N_0$. 
+        \end{itemize}
+        依照 LADR 的定义, $V$ 是无限维空间 (即, 非有限维空间), 以上定义变作 (via \verb|push_neg|)
+        \begin{itemize}
+            \item 对任意 $N\in \mathbb N$, 总存在不小于 $N$ 的线性无关子集 $S\subset V$. 
+        \end{itemize}
+        值得注意的是, 以上没有出现``无限集''的概念. 试比较以下语句: 
+        \begin{enumerate}
+            \item 存在任意有限大的子集 $S$, 
+            \item 存在无限大的子集 $S$. 
+        \end{enumerate}
+        这两句话不能轻易等价, 所幸``$\mathrm{span}$ 是有限和''这一条件为这两类命题建立了等号. 
+        
+        接以上, 我们证明``存在无限集 $S \subset V$ 使得 $S$ 是线性无关组''. 
+        \begin{enumerate}
+            \item (构造 $S$: 数学归纳的第一步) 取 $S_0=\emptyset$. 由反证法知 $\mathrm{span}(S_0)$ 是 $V$ 的真子空间, 从而存在 $v_1\in (\mathrm{span}(S_0))^c$ 使得 $S_1:=S_0\cup \{v_1\}$ 是线性无关组. 
+            \item (构造 $S$: 数学归纳的第二步) 假定构造了 $k$ 元集 $S_k$. 由反证法知 $\mathrm{span}(S_k)$ 是 $V$ 的真子空间, 从而存在 $v_{k+1}\in (\mathrm{span}(S_k))^c$ 使得 $S_{k+1}:=S_k \cup \{v_{k+1}\}$ 是线性无关组. 
+            \item (构造 $S$) 取向上包含的集合的并 $S=\bigcup_{k\in \mathbb N}S_k$. 
+            \item (说明 $S$ 是线性无关组) 任取 $S$ 中线性组合式 $\sum_{\text{有限和}} c_i v_i=0$. 由于这是有限和, 从而全体 $v_i$ 属于某一 $S_n$. 换言之, 这是 $\mathrm{span}(S_n)$ 中的线性组合式. 由于 $S_n$ 是线性无关集, 故一切 $c_i$ 为零. 
+        \end{enumerate}
+        以上没有使用令人畏惧的``\href{https://en.wikipedia.org/wiki/Axiom_of_choice}{\underline{选择公理}}'', 其等价表述是``无穷维线性空间存在一组基'', 或者``有限维线性子空间都有补空间''. 这里只用了 \href{https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory}{\underline{ZF 公理}}, 以及数学分析中承认的 \href{https://en.wikipedia.org/wiki/Axiom_of_dependent_choice}{\underline{DC 公理}}. 
+    \end{proof}
+    \begin{pinked}
+        这些困难的公理有一些``妙用'', 例如检查自己是否伪证了某一命题. 以``有限域''为例, 如果习题 4 的证明过程对有限域适用 (例如没用到数域的条件), 则这个证明百分百错误. 
+    \end{pinked}
+\end{exercise}
+
+\begin{remark}
+    以上习题通常被默认作``常识''; 此处有一先决条件, 就是 $\mathrm{span}(S)$ 的定义.
+\end{remark}
+
+\begin{exercise}[Challenging]
+    如果你熟悉数学分析中的 Cantor 对角线法, 不妨尝试以下命题:
+    \begin{itemize}
+        \item 形式幂级数空间 $\mathbb F[\![x]\!]$ 不是可数维线性空间;
+    \end{itemize}
+    换言之, 对任意可数集 $S\subset \mathbb F[\![x]\!]$, 总有 $\mathrm{span}(S)\neq \mathbb F[\![x]\!]$. (以上 $\mathbb F$ 是任意域.)
+    \begin{proof}$\mathbb F[\![x]\!]$ 就是全体 $\mathbb F$ 中取值的数列, 亦即 ``$\mathbb N$ 至 $\mathbb F$ 的全体映射构成的线性空间''. 往后将 $\mathbb F[\![x]\!]$ 中的元素写作数列形式.
+    
+        假设存在可数集 $S=\{s_n\}_{n\in \mathbb N}$ 使得 $\mathrm{span}(S)=\mathbb F[\![x]\!]$, 将 $s_n$ 排列如下: 
+         \begin{equation}
+            \begin{matrix}
+                s_{0} & : & ( s_{0})_{1} & ( s_{0})_{2} & ( s_{0})_{3} & ( s_{0})_{4} & \cdots \\
+                s_{1} & : & ( s_{1})_{1} & ( s_{1})_{2} & ( s_{1})_{3} & ( s_{1})_{4} & \cdots \\
+                s_{2} & : & ( s_{2})_{1} & ( s_{2})_{2} & ( s_{2})_{3} & ( s_{2})_{4} & \cdots \\
+                s_{3} & : & ( s_{3})_{1} & ( s_{3})_{2} & ( s_{3})_{3} & ( s_{3})_{4} & \cdots \\
+                \vdots  & \vdots  & \vdots  & \vdots  & \vdots  & \vdots  & \ddots 
+                \end{matrix}.
+         \end{equation}
+         由反证法, 第一纵列存在非零项. 将这一非零项移至首行, 逐项消元得 
+         \begin{equation}
+            \begin{matrix}
+                s_{0} ' & \mid  & ( s_{0} ')_{1} & ( s_{0} ')_{2} & ( s_{0} ')_{3} & ( s_{0} ')_{4} & \cdots \\
+                s_{1} ' & \mid  & 0 & ( s_{1} ')_{2} & ( s_{1} ')_{3} & ( s_{1} ')_{4} & \cdots \\
+                s_{2} ' & \mid  & 0 & ( s_{2} ')_{2} & ( s_{2} ')_{3} & ( s_{2} ')_{4} & \cdots \\
+                s_{3} ' & \mid  & 0 & ( s_{3} ')_{2} & ( s_{3} ')_{3} & ( s_{3} ')_{4} & \cdots \\
+                \vdots  & \vdots  & \vdots  & \vdots  & \vdots  & \vdots  & \ddots 
+                \end{matrix}.
+         \end{equation}
+         最后得到无穷上三角矩阵. 
+         \begin{equation}
+            \begin{matrix}
+                s_{0}^{*} & \mid  & a_{0,1} & a_{0,2} & a_{0,3} & a_{0,4} & \cdots \\
+                s_{1}^{*} & \mid  & 0 & a_{1,2} & a_{1,3} & a_{1,4} & \cdots \\
+                s_{2}^{*} & \mid  & 0 & 0 & a_{2,3} & a_{2,4} & \cdots \\
+                s_{3}^{*} & \mid  & 0 & 0 & 0 & a_{3,4} & \cdots \\
+                 & \vdots  & \vdots  & \vdots  & \vdots  & \vdots  & \ddots 
+                \end{matrix}.
+         \end{equation}
+         由于该三角阵的每一纵列都仅有有限项非零, 从而可以将所有横行相加, 得
+         \begin{equation}
+            v = \left(\sum_{i< 1}a_{i,1},\sum_{i< 2}a_{i,2},\sum_{i< 3}a_{i,3},\ldots \right). 
+         \end{equation}
+         容易发现, $v$ 不能由有限和表示. 
+         \begin{itemize}
+            \item 此处需要说明一件事情: 无穷阵 $a_{i,j}$ 的任意一项均能在有限步之内得到, 从而 $v$ 的每一项可以在有限步内构造出. 
+         \end{itemize}
+         同 Cantor 对角线法, 以上使用了数学分析的 DC 公理, 没有选择公理. 
+    \end{proof}
+\end{exercise}
+
+\newpage
+
+\end{document}

@@ -1,0 +1,237 @@
+**Ex 1** (消歧义问题) 假定 $U$ 是 $\mathbb F$ 上的有限维线性空间. 
+
+**(1)** 称 $f:U\times U\to \mathbb F$ 是双线性的, 当且仅当对任意向量与常数, 
+$$
+f(au+v,bx+y)=abf(u,x)+af(u,y)+bf(v,x)+f(v,y).
+$$
+试证明: $\{f\mid f:U\times U\to \mathbb F\ \text{是双线性映射}\}$ 是一个 $\mathbb F$-线性空间, 其对象是一些二元函数. 求其维度与基. 
+
+**(2)** 依照集合的 Cartesian 积, 定义新的集合 $U\times U=\{(u_1,u_2)\mid u_1,u_2\in U\}$. 试证明 $U\times U$ 也是线性空间, 并求其维度与基. 
+
+**(3)** 试证明: $\{f\mid f:U\times U\to \mathbb F\ \text{是线性映射}\}$ 是一个 $\mathbb F$-线性空间, 其对象是一些一元函数. 求其维度与基. 
+
+> 为避免记号上的混乱, 往后使用 $f:U\ \&\ U \to \mathbb F$ 表示双线性映射. 
+
+****
+
+<div style="page-break-after: always;"></div>
+
+**Ex 2** 二次型的最值问题.
+
+> 实对称矩阵的结构定理: $A$ 是实对称矩阵, 当且仅当以下等价命题成立: 
+>
+> * $A$ 可对角化且特征空间两两垂直, 
+> * 存在正交矩阵 $Q$ 使得 $Q^TAQ$ 是对角矩阵. 
+>
+> 默认大家会证明这一命题. 
+
+**(1)** 记 $A$ 是实对称矩阵, 证明 $A$ 的最大特征值是 $\sup_{x\neq \mathbf 0}\frac{x^TAx}{x^Tx}$, 并考虑取达最大值的充要条件. 同时, 这也说明 $\sup$ 可以改成 $\max$. 
+
+**(2)** 记 $A$ 是实对称矩阵, 记最大特征值 $\lambda_1$ 的重数为 $1$, 相应的特征向量是 $Av=\lambda_1 v$. 证明 $A$ 的第二大特征值是 $\sup_{x\perp x_1, x\neq \mathbf 0}\frac{x^T Ax}{x^Tx}$. 此处, $x_1$ 是使得上一问取达最大值的任意向量. 
+
+**(3)** 假定 $A$ 是实对称正定矩阵, 证明 $\inf_{x\neq \mathbf 0}\frac{x^TA^{-1}x}{x^Tx}$ 和 $\sup_{x\neq \mathbf 0}\frac{x^T Ax}{x^Tx}$ 互为倒数.
+
+**(4)** 记 $\{x_i\}_{i=1}^n$ 是实数, 满足 $x_1^2+\cdots +x_n^2=1$ 与 $x_1+\cdots +x_n=0$. 求
+$$
+x_1x_2+x_2x_3+\cdots +x_{n-1}x_n+x_nx_1
+$$
+的最大值. 可以使用 **(2)** 的结论. 
+
+****
+
+<div style="page-break-after: always;"></div>
+
+**Ex 3** 中学时有个定理: 记 $R$ 与 $S$ 是两个三维空间的几何体. 定义
+$$
+R+S:=\{(x_1+x_2,y_1+y_2,z_1+z_2)\mid (x_1,y_1,z_1)\in R, (x_2,y_2,z_2)\in S\}. 
+$$
+记 $|\cdot|$ 是体积, 则 $\sqrt[3]{|R|}+\sqrt[3]{|S|}\leq \sqrt[3]{|R+S|}$ (无需证明这一命题). 
+
+> 我们可以将实对称正定矩阵 $A$ 看作旋转后的长方体, 作为线性映射, 其功效是沿坐标轴的正向拉伸. 这一长方体的各边长即 $Q^TAQ=\Lambda$ 的对角元, 体积即 $\det A$. 
+
+假定 $A$ 与 $B$ 是 $n$-阶实对称正定矩阵, 试证明:
+$$
+(\det A)^{1/n}+(\det B)^{1/n}\leq (\det (A+B))^{1/n}.
+$$
+
+> Hint: Consider $A=R^TR$. Without the loss of generality, set $A=I$. 
+
+****
+
+<div style="page-break-after: always;"></div>
+
+**Ex 4** 正定与减法. 
+
+**(1)** 记 $A\in \mathrm M_n(\mathbb R)$ 是实对称正定矩阵, $Q\in \mathbb R^{n\times m}$ 有标准正交的列向量. 证明 $Q^TA^{-1}Q-(Q^TAQ)^{-1}$ 半正定. 
+
+> Hint: Take $Q=\begin{pmatrix}I_m\\O\end{pmatrix}$ (without the loss of generality), and just do it. 
+
+**(2)** 记 $A\in \mathrm M_n(\mathbb R)$ 是正定矩阵, 的矩阵 $H\in \mathbb R^{m\times n}$. 证明: $A-H^TH$ 正定等价于 $I-HA^{-1}H^T$ 正定.
+
+> 若 $A$ 对称正定, 试证明之; 若 $A$ 亚正定 (不必对称但 $x^T Ax>0$), 试给反例. 
+
+**(3)** (谢启鸿白皮书上的亚正定矩阵) 称实矩阵 $A$ 是亚正定的, 当且仅当 $x^TAx>0$ 对一切 $x\neq \mathbf 0$ 成立. 简单地看, 亚正定是少了对称约束的正定. 若 $A$ 亚正定, $B$ 对称, 且 $A-B$ 亚正定, 试证明 $B^{-1}-A^{-1}$ 也是亚正定的.  
+
+> 亚正定矩阵 (包括亚半定矩阵) 的一般结论见谢启鸿博客 [2015S12](https://www.cnblogs.com/torsor/p/12272213.html) 与 [2020S15](https://www.cnblogs.com/torsor/p/12389147.html). 
+>
+> 亚正定矩阵的特征值实部为正, 故有且仅有一个平方根, 其特征根实部为正. 试问: 上述平方根仍是亚正定的吗? 
+
+****
+
+<div style="page-break-after: always;"></div>
+
+**Ex 5** (极分解) 以下仅谈论对称半正定实方阵. 
+
+**(1)** 若 $A$ 是对称半正定矩阵, 则存在唯一的对称半正定矩阵 $\sqrt A$ 使得 $\sqrt A^2=A$. 
+
+**(2)** 任何矩阵 $A$ 都是对称半正定矩阵与正交矩阵的乘积 (不妨假设 $A=SQ$). 若 $A$ 对称正定, 则这一分解唯一. 
+
+**(3)** 假定 $S$ 实半正定, $Q$ 正交. 若 $\det(xI-SQ)=\det(xI-S)$, 则 $S=SQ$. 
+
+> Hint: $SQ$ 在 $\mathbb R$ 中有 Jordan 型, 从而可以被正交矩阵三角化. 考虑 $(SQ)(SQ)^T$. 
+>
+> 这告诉我们: 当一个矩阵是正交的, 其上三角部分可以直接去掉. 
+
+**(4)** 证明两个半正定矩阵的乘积是可对角化的. 
+
+****
+
+<div style="page-break-after: always;"></div>
+
+**Ex 6** (正交相似的判定准则) 称矩阵对 $(A,B)$ 与 $(C,D)$ 同时相似, 当且仅当存在可逆矩阵 $P$ 使得 
+$$
+P^{-1}AP=C,\quad P^{-1}BP=D.
+$$
+**(1)** 若 $(A,A^T)$ 与 $(B,B^T)$ 同时相似, 当且仅当 $A$ 与 $B$ 正交相似. 
+
+> Hint: 对过渡矩阵 $P$ 做极分解. 
+
+**(2)** 对复矩阵而言, $(A,A^H)$ 与 $(B,B^H)$ 通过酉矩阵同时相似, 当且仅当 $A$ 与 $B$ 酉相似. 
+
+**(3)** 证明: 实矩阵 $A$ 与 $B$ 通过酉矩阵相似, 当且仅当 $A$ 与 $B$ 通过正交矩阵相似. 
+
+> 类似的问题: $A$ 与 $B$ 相似, 当且仅当他们在某个扩域上相似. 
+>
+> 思考: 假设两个 $2\times 2$ 的实矩阵通过行列式为 $1$ 的复矩阵相似, 那么它们一定通过某个行列式为 $1$ 的实矩阵相似吗? 
+
+**(4)** 若 $\begin{pmatrix}A&O\\O&A\end{pmatrix}$ 与 $\begin{pmatrix}B&O\\O&B\end{pmatrix}$ 正交相似, 证明 $A$ 与 $B$ 正交相似. 
+
+**(5)** 若 $A$ 和 $B$ 既相似, 又合同, 则是否一定正交相似? 
+
+> Hint: 王子涵会写, 可以问他. 
+
+****
+
+<div style="page-break-after: always;"></div>
+
+**Challenging Problems** 
+
+**(1)** Assume $A,B\in \mathrm M_n(\mathbb R)$ are symmetric and positive definite. Prove that 
+$$
+\underbracket{A\circ B}\limits_{\text{Hadamard Product}}:=(a_{i,j}\cdot b_{i,j})_{n\times n}
+$$
+ is also positive definite. ($A\circ B$ is also known as Stupid Matrix Product.)
+
+> Real Challenge: Prove it within 20 words. Hint: Kronecker product. 
+
+**(2)** Find the largest real number $C_n$ for each positive integer $n$, such that for any real numbers $x_1, x_2, \ldots, x_n$, the following inequality holds:
+$$
+\sum_{i=1}^n \sum_{j=1}^n(n-|j-i|) x_i x_j \geq C_n \sum_{i=1}^n x_i^2.
+$$
+
+> Hint: Taking $y_k=x_1+\cdots +x_k$, it suffices to find the second largest eigenvalue Chebyshev matrix (逆矩阵-习题 8.) Another Hint: $\lim_{n\to\infty}C_n=\frac 12$. 
+
+**(3)** Find the largest real number $C$ such that for any real numbers $x_1, x_2, \ldots, x_{2^{2024}}$ with $\sum_{i=1}^{2^{2024}}x_i=0$, the following inequality holds:
+$$
+\sum_{1\leq i<j\leq n}\delta_{(j-i)}\cdot x_ix_j\leq C\sum_{i=1}^n x_i^2.
+$$
+Here $\delta_{2^k}=1$, otherwise $\delta=0$. 
+
+> Hint: How to characterise the associated matrix? Maybe you can solve it by induction...
+
+**(4)** Prove that
+$$
+\sum_{i=1}^n\ \sum_{j=1}^n \frac{a_ia_j}{{(p_i+p_j)}^c}\ge 0
+$$
+holds for arbitrary reals $a_1,a_2,\ldots, a_n$, and positive numbers $c$, $p_1, p_2,\ldots,p_n$. 
+
+> Hint: Let $A(t)$ be symmetric positive definite with variable $t$, then so is $\int_I A(t)\operatorname dt$. 
+
+**(5)** Let $f$ be continuous in $[0,+\infty)$, such that $\int_0^\infty (f(x))^2\operatorname dx<\infty$. Suppose 
+$$
+\int_0^\infty e^{-kx}f(x)\operatorname dx =1\quad (\forall k=1,2,\ldots, n). 
+$$
+Find $\inf\int _0^\infty (f(x))^2\operatorname dx$. (Neither $\varepsilon$ nor $\delta$ appears in the solution.)
+
+> Hint: Use $\int_0^\infty fg\leq \sqrt{\int_0^\infty f^2}\cdot \sqrt{\int_0^\infty g^2}$ (CS inequality). Set $g=\sum_{1\leq k\leq n} c_ke^{-kx}$. 
+
+****
+
+<div style="page-break-after: always;"></div>
+
+**Fun Exercise: $2$-Distance Set Problem** 
+
+以下谈论的距离 (度量) 都是 $\mathbb R^n$ 上的通常距离 (度量), 即, $\|x-y\|=\sqrt{\sum(x_i-y_i)^2}$. 
+
+1. 最多能在 $\mathbb R^n$ 中找到几个点, 使得这些点是等距的? 
+
+   > 换言之, 求极大的子集 $\{v_i\}_{i=1}^N\subset \mathbb R^n$, 使得对任意 $i\neq j$, 模长 $\|v_i-v_j\|$ 是非零常数. 
+
+2. 称有限点集 $S\subset \mathbb R^n$ 是巧妙的, 当且仅当存在正数 $p,q>0$, 使得
+   $$
+   \|x-y\|\in \{p,q\}\quad (\forall x,y\in S, x\neq y).
+   $$
+   以下证明 $|S|\leq \frac{(n+1)(n+4)}{2}$. 在证明之前, 可以先自行尝试. 
+
+3. 记 $\mathbb R[t_1,t_2\ldots,t_n]$ 是全体 $n$ 元多项式. 记 $\|t\|^2=t_1^2+\cdots +t_n^2$, 试证明以下 $\frac{(n+1)(n+4)}{2}$ 个多项式是 $\mathbb R$-线性无关的: 
+   $$
+   \{(\|t\|^2)^2\}\cup \{t_i\cdot \|t\|^2\}_{i=1}^n\cup \{t_i\cdot t_j\}_{1\leq i<j\leq n}\cup \{t_i\}_{i=1}^n\cup \{1\}.
+   $$
+
+4. 记巧妙集 $S=\{v_1,\ldots , v_m\}\subset \mathbb R^n$. 定义函数
+   $$
+   f: \mathbb R^{2n}\to\mathbb R ,\quad (x,y)\mapsto (\|x-y\|^2-p^2)\cdot (\|x-y\|^2-q^2).
+   $$
+   写出矩阵 $(f(v_i,v_j))_{1\leq i,j\leq m}\in \mathrm M_m(\mathbb R)$.  
+
+5. 给定形如 $g(x,y)=g_1(x)\cdot g_2(y)$ 的函数, 证明 $(g(v_i,v_j))_{1\leq i,j\leq m}$ 的秩是 $1$. 
+
+6. 使用 3., 4., 以及 5. 以证明 2.. 
+
+****
+
+<div style="page-break-after: always;"></div>
+
+**Elementary Exercise: The Geometry of Hadamard Matrix** 
+
+给定实向量空间 $\mathbb R^n$ 及其有限子集 $S=\{v_i\}_{i=1}^k\subset \mathbb R^n$. 定义 Gram 矩阵
+$$
+G(v_1,v_2,\ldots, v_k):=(x_i^T\cdot x_j)_{k\times k}\in \mathrm M_k(\mathbb R).
+$$
+Gram 行列式 $\det (G(S))$ 是良定义的, 因为交换向量次序不改变行列式的值. 以下采用简便记号 $|S|_G:=\det (G(S))$. 
+
+1. 证明 $|S|_G=0$ 当且仅当 $S$ 是线性相关组. 
+
+2. 证明向量 $v$ 到子空间 $\mathrm{Span}(S)$ 的距离是 $\sqrt{\frac{|S\cup \{v\}|_G}{|S|_G}}$. 
+
+   > Hint: 使用唯一分解 $v=v_{\text{平行于 $\mathrm{Span}(S)$}}+v_{\text{垂直于 $\mathrm{Span}(S)$}}$. 
+
+3. 使用 Gram 行列式定义向量组的模长, 以及子空间之间的夹角. 
+
+   > 其结果应当与向量的模长, 以及方向之间的夹角统一. 
+
+4. 定义 $\sin _G(v,S):=\frac{\text{$v$ 到 $\mathrm{Span}(S)$ 的距离}}{\|v\|}=\sqrt{\frac{|S\cup \{v\}|_G}{|S|_G\cdot |\{v\}|_G}}$. 若 $S_1\subset S_2$, 试证明
+   $$
+   \sin_G(v,S_1)\geq \sin _G(v,S_2).
+   $$
+
+5. 记 $S$ 是 $A\in \mathrm M_n(\mathbb R)$ 的 $n$ 个列向量, 记 $S_{\leq i}=\{v_1, v_2,\ldots, v_i\}$. 证明, 
+   $$
+   |\det A|=\sqrt{|S|_G}=\underbracket{\|v_1\|\cdot \|v_2\|\cdots \|v_n\|}\limits_{\text{模长}}\cdot \underbracket{\sin _G(S_1,v_2)\cdot \sin _G(S_2,v_3)\cdots \sin _G(S_{n-1},v_n)}\limits_{\text{夹角部分}}.
+   $$
+
+6. 证明 Hadamard 不等式
+   $$
+   |\det A|\leq \left(\prod_{i=1}^n\|v_i\|\right)\cdot \left(\prod_{1\leq i<j\leq n}\sin^2 (v_i,v_j)\right). 
+   $$
+   并说明取等条件. 

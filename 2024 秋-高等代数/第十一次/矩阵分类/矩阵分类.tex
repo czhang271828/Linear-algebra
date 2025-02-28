@@ -1,0 +1,219 @@
+\documentclass[11pt]{ctexart}
+\usepackage[margin=2cm,a4paper]{geometry}
+\usepackage{amsthm, amsfonts, amsmath, amssymb, mathrsfs, newclude, tikz-cd, tikz, ctex, mathtools, stmaryrd, datetime}
+
+\usepackage{quiver}
+
+%\setmainfont{Caladea}
+
+%% 也可以选用其它字库:
+% \setCJKmainfont[%
+%   ItalicFont=AR PL KaitiM GB,
+%   BoldFont=Noto Sans CJK SC,
+% ]{Noto Serif CJK SC}
+% \setCJKsansfont{Noto Sans CJK SC}
+% \renewcommand{\kaishu}{\CJKfontspec{AR PL KaitiM GB}}
+
+
+
+\usepackage[colorlinks = true,
+linkcolor = blue,
+urlcolor  = blue,
+citecolor = blue,
+anchorcolor = blue]{hyperref}
+
+% Include the x-color package for color support
+\usepackage{xcolor}
+
+% Define a new environment for red comments
+\usepackage{verbatim} % Required for the comment environment
+\usepackage{environ}
+
+\usepackage{mdframed} % Include mdframed for creating framed environments
+
+\definecolor{pinked}{RGB}{255,231,229} % Define a base color 
+% Define a new environment with a background color
+\newmdenv[
+  backgroundcolor=pinked, % Set the desired background color
+  linecolor=white, % Optional: Set the border line color
+  linewidth=1pt, % Optional: Set the border line width
+  roundcorner=5pt, % Optional: Set rounded corners
+  nobreak=true % Optional: Prevent page breaks within the environment
+]{pinked}
+
+\theoremstyle{definition}
+\newtheorem{qqq}{问题}[section]
+
+\newcommand{\ExternalLink}{%
+    \tikz[x=1.2ex, y=1.2ex, baseline=-0.05ex]{% 
+        \begin{scope}[x=1ex, y=1ex]
+            \clip (-0.1,-0.1) 
+                --++ (-0, 1.2) 
+                --++ (0.6, 0) 
+                --++ (0, -0.6) 
+                --++ (0.6, 0) 
+                --++ (0, -1);
+            \path[draw, 
+                line width = 0.5, 
+                rounded corners=0.5] 
+                (0,0) rectangle (1,1);
+        \end{scope}
+        \path[draw, line width = 0.5] (0.5, 0.5) 
+            -- (1, 1);
+        \path[draw, line width = 0.5] (0.6, 1) 
+            -- (1, 1) -- (1, 0.6);
+        }
+    }
+
+\NewEnviron{aaa}{~\\
+    \noindent {\textcolor{teal}{\textbf{解答}} \BODY }
+}
+
+\NewEnviron{llll}{
+    \noindent {~\\$\ExternalLink$ 外部链接 $\,\,\,$ \color{blue}\url{\BODY} }
+}
+
+\renewcommand{\proofname}{证明}
+\renewcommand\qedsymbol{${\boxed{\substack{\textit{完证}\\\textit{毕明}}}}$}
+\let\oldproof\proof
+\renewcommand{\proof}{\color{blue}\oldproof}
+
+% Change equation numbering to include the section number
+\usepackage{cleveref}
+\renewcommand{\theequation}{\thesection.\thesubsection.\arabic{equation}}
+\numberwithin{equation}{section}
+
+\usepackage{listings}
+% Define listings style
+\lstset{
+  frame=tb,
+  language=TeX,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\theoremstyle{definition}
+\newtheorem*{definition}{\textcolor{blue}{基础定义}}
+\newtheorem*{proposition}{\textcolor{blue}{主要命题}}
+\newtheorem*{theorem}{定理}
+\newtheorem*{notation}{记号}
+\newtheorem*{example}{例子}
+\newtheorem*{trick}{\textcolor{teal}{解题技巧}}
+\newtheorem*{warning}{\textcolor{red}{常见误区}}
+\theoremstyle{remark}
+\newtheorem*{remark}{备注}
+\newtheorem*{lemma}{引理}
+\newtheorem*{corollary}{推论}
+
+\title{矩阵分解, 分类相关}
+\author{(2024-2025-1)-MATH1405H-02}
+
+\setcounter{page}{0}
+
+\setlength\parindent{0pt}
+
+\begin{document}
+
+
+\maketitle
+
+\LARGE
+
+
+\newpage
+
+\section{线性空间, 秩, 相抵}
+
+\subsection{线性空间的一般理论, 以及常见误区}
+
+\begin{definition}
+    线性空间的基础知识如下. 
+    \begin{enumerate}
+        \item (要件) 基域 $\mathbb F$, 加法交换群 $V$, 以及相容的运算. 
+        \item (检验线性空间) 必须检验``八条公理'', \textbf{缺一不可}. 
+        \item (\textbf{常见问题}: 证明线性空间 $V$ 的子集 $S$ 是子空间) 此处等价于检验 $S=\mathrm{span}(S)$. 将``线性组合式''归纳作如下三类: 
+        \begin{enumerate}
+            \item (非空) 说明 $S$ 非空集; 
+            \item (加法封闭) 任取 $u,v\in S$, 总有 $u+v\in S$; 
+            \item (数乘封闭) 任取 $u\in S$ 与 $\lambda \in \mathbb F$, 总有 $\lambda u\in S$.. 
+        \end{enumerate}
+    \end{enumerate}
+\end{definition}
+
+\begin{warning}
+    检验 $\mathrm M_n (\mathbb R)$ 的 $\mathbb R$-线性结构时, 禁止检验 $\mathrm M_n(\mathbb R)$ 对矩阵乘法封闭. 类似的错误: 
+    \begin{itemize}
+        \item 检验 $\mathbb Q[\sqrt 3]$ 的 $\mathbb Q$-线性结构时, 出现了 $(a+b\sqrt 3)\cdot (c+d\sqrt 3)$; 
+        \item 检验 $\mathbb F[x]$ 的 $\mathbb F$-线性结构时, 出现了 $f(x)\cdot g(x)$. 
+    \end{itemize}
+    如果你不知道以上错在何处, 请尽快补救. 
+\end{warning}
+
+\begin{definition}
+    本学期谈论的子空间必是子集, 因此
+    \begin{itemize}
+        \item (不规范表述) $\mathbb F^n$ 是 $\mathbb F^{n+1}$ 的线性子空间; 
+        \item (规范表述) $\{x\in \mathbb F^{n+1}\mid x_{n+1}=0\}$ 是 $\mathbb F^{n+1}$ 的线性子空间. 
+    \end{itemize}
+    运算 $\{\cap, +, \oplus\}$ 也是对子空间而言的.
+\end{definition}
+
+\begin{warning}
+    以下是补空间的常见误区. 
+    \begin{enumerate}
+        \item 对子空间 $U\subset V$, 认为存在唯一的 $W\subset V$ 使得 $U\oplus W=V$. 
+        \item 误认为 $N(A)\perp R(A)$ 是正交补空间. 此处的记号与内积, 正交性等毫无联系, 仅仅是在说明``行向量乘以列向量得 $0$''. 
+    \end{enumerate}
+\end{warning}
+
+\begin{trick}
+    可借助以下作业题复习. 
+    \begin{enumerate}
+        \item 群, 域, 以及线性空间的基本定义见\href{https://oc.sjtu.edu.cn/courses/72790/files/9519554?wrap=1}{第二次作业``自学任务''};
+        \item 线性空间的定义和基本运算见\href{https://oc.sjtu.edu.cn/courses/72790/files/9519888?wrap=1}{第二次作业``认识线性子空间''}, 以及\href{https://oc.sjtu.edu.cn/courses/72790/files/9768544?wrap=1}{第五次作业``线性空间''};
+        \item 左乘与右乘矩阵后, 四大基本空间的变化.  
+    \end{enumerate}
+\end{trick}
+
+\subsection{数域上的线性空间}
+
+\begin{definition}
+    请留意标题: 本节暂时
+\end{definition}
+
+\begin{warning}
+    不等式, ``除以 $2$'', 微扰法等, 在非数域中未必奏效. 
+    \begin{itemize}
+        \item 有限域可以帮助检查是否伪证命题. 例如, 张三在不使用数域条件的情况下证明了 $N(A)=N(A^TA)$, 那他必然是伪证了. 
+    \end{itemize}
+\end{warning}
+
+\begin{trick}
+    使用 Vandermonde 矩阵, 可以
+    \begin{enumerate}
+        \item 构造 $\mathbb F^n$ 的无穷子集 $S$, 使 $S$ 中任意 $n$ 个向量是线性无关; 
+        \begin{itemize}
+            \item 可以证明有限个真子空间的并不是全空间. 
+        \end{itemize}
+        \item (搭配求导运算) 证明的特殊函数构成线性无关组; 
+        \begin{itemize}
+            \item 例如, 证明 $\{e^{kx}\}_{k\geq 1}$ 在 $C^0(\mathbb R)$ 中线性无关. 
+        \end{itemize}
+        \item 构造一个矩阵, 其所有子式都是满秩的. 
+    \end{enumerate}
+\end{trick}
+
+
+
+
+
+
+
+\end{document}

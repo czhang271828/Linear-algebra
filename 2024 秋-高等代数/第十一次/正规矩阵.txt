@@ -1,0 +1,191 @@
+**记号说明** 约定一切 $\Lambda$ 是复对角矩阵, $(-)^H$ 是共轭转置, $U$ 是酉矩阵. 以下总结一些常见矩阵的谱分解. 
+
+> 注: 两个实矩阵正交相似等价于酉相似, 见上周作业. 因此, 以下结果与实情形是统一的. 
+
+1. 正规矩阵 (normal matrix)
+
+   > $A=U^H\Lambda U$, $\Lambda$ 是对角矩阵. 
+
+2. 自伴矩阵 (self-adjoint matrix), Hermite 矩阵 (Hermitian matrix) 
+
+   > $A=U^H\Lambda U$, $\Lambda$ 是实对角矩阵. 
+
+3. 半正定 Hermite 矩阵 (Hermitian semi-positive definite matrix)
+
+   > $A=U^H\Lambda U$, $\Lambda$ 是实半正定对角矩阵. 
+
+4. 正定 Hermite 矩阵 (Hermitian positive-definite matrix)
+
+   > $A=U^H\Lambda U$, $\Lambda$ 是实正定对角矩阵. 
+
+**自主练习** 反对称 Hermite 矩阵, 复投影矩阵, 以及酉矩阵的谱分解如何? 
+
+**自主练习** 对方阵的奇异值分解 $A=U^H\Sigma V$, 定义 $A$ 的谱分解为酉矩阵与半正定厄米矩阵的乘积 $(U^HV)\cdot (V^H\Sigma V)$. 对于上述几类矩阵, 其极分解有无特殊性质? 
+
+**注** 若术语与西文人名相关, 英文或以形容词作定语, 但**中文必然以名词作定语**. 例如
+
+* Abel 群 (Abelian group); 
+* Bool 代数 (Boolean algebra); 
+* Hermite 矩阵 (Hermitian matrix); 
+* Laplace 算符 (Laplacian); 
+* Pfaff (Pfaffian). 
+
+也有一些例外, 例如 Jacobi matrix 和 Jacobian matrix 就是两个名词. 
+
+**记号说明** 每题的相对难度用 $\star$ 的数量描述. 
+
+$\emptyset$ 直接推论, 定义默写等. 
+
+$\star$ 考试难度的上界.
+
+$\star\star$ 值得思考, 属于不难也不简单的题目. 
+
+$\star\star\star$​ 可以选择放弃.
+
+<div style="page-break-after: always;"></div>
+
+**Ex 1** 复 (半) 正定 Hermite 矩阵是**实对称 (半) 正定矩阵**在 $\mathbb C$ 上的推广. 
+
+* 称 $M$ 是复 (半) 正定 Hermite 的, 当且仅当存在酉对角化 $U^H\Lambda U=M$, 其中 $\Lambda$ 是 (半) 正定的实对角矩阵. 
+
+今假定 $M=\begin{pmatrix}S &R\\R^H&T\end{pmatrix}$ 复半正定 Hermite 矩阵. 
+
+1. ($\star$) 证明: $Mx=\mathbf 0$ 当且仅当 $x^HMx=0$. 
+2. ($\star\star$) 证明: $(S\quad R)$ 与 $S$ 有相同的列空间 (等价地, 两个矩阵的秩相同). 
+3. ($\star$) 证明: $M$ 合同于某个 $\begin{pmatrix}S&O\\O&\widetilde T\end{pmatrix}$. 
+4. ($\star\ast$) 反复利用上述打洞, 归纳地证明惯性指数公式 $\mathrm I(M)=\mathrm I(S)+\mathrm I(\widetilde T)$. 
+5. ($\star \star$) 检查上述每步, 证明: 两个实对称正定矩阵 $A$ 与 $B$ 通过某个复可逆方阵 $P$ 合同, 当且仅当它们通过某个实可逆方阵 $Q$ 合同. 即, 
+   $$
+   \exists P\in \mathrm{GL}_n(\mathbb R), \ A=P^TBP\iff \exists Q\in \mathrm{GL}_n (\mathbb C), \ A=Q^HBQ.
+   $$
+
+<div style="page-break-after: always;"></div>
+
+**Ex 2** 取定 $\mathbb R^n$ 中的单位向量 $v_0$. 定义线性变换
+$$
+\varphi: \mathbb R^n\to \mathbb R^n ,\quad v\mapsto v- \left(2\cdot v^T\cdot v_0 \right) v_0.
+$$
+
+几何意义: 关于 $v_0$ 的镜面反射. 
+
+1. ($\star$) 任取 $\mathbb R^n$ 的单位正交基. 记 $\varphi$ 在这组基下的矩阵表示为 $A$. 证明 $A$ 是正交矩阵, 且 $A^2=I$. 
+2. ($\star\star\star$) 对任意正交矩阵 $Q$, 证明 $1\in\sigma (Q)\cup \sigma (AQ)$. 
+
+   > 提示: 可以用不动点理解此题, 尽管这对解题没有太大帮助. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 3** 称 $A\in \mathrm M_n (\mathbb C)$ 是正规的, 当且仅当 $AA^H=A^HA$, 此处 $A^H$ 是共轭转置. 以下是正规的等价条件. 
+
+1. ($\emptyset$) 存在酉相似 $A=U^H\Lambda U$, $\Lambda$ 是某一对角矩阵. 
+
+2. ($\star$) 存在酉矩阵 $U$ 使得 $AU=A^H$. 
+
+3. ($\star$) $A$ 的奇异值恰好是特征值的绝对值. 
+
+4. ($\star\star\star$) $A$ 与 $[A,A^H]$ 可交换. 
+
+   > $[A,B]:=AB-BA$ 是一个惯常记号. 
+
+5. ($\star\star$) $\mathrm{tr}(AAA^HA^H)=\mathrm{tr}(AA^HAA^H)$. 
+
+   > 对任意 $k\geq 2$, $\mathrm{tr}(A^k (A^H)^k)=\mathrm{tr}((AA^H)^k)$ 均是等价条件. 证明似乎较复杂. 
+
+6.  ($\star\star$) 存在唯一的分解 $A=A_1+iA_2$, 使得 $A_1=A_1^H$, $A_2=A_2^H$, 且 $[A_1,A_2]=O$. 
+
+   > 作为类比, 若一个实矩阵可以正交对角化, 当且仅当...
+
+<div style="page-break-after: always;"></div>
+
+**Ex 4** ($\star\star\star$) 证明: $A\in \mathrm M_n (\mathbb C)$ 是两个自伴矩阵的乘积, 当且仅当 $A$ 与 $A^H$ 相似. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 5** 以下 $A$ 与 $B$ 是实对称半正定矩阵.
+
+1. ($\star$) 证明: $\mathrm{tr}(AB)\geq 0$. 若 $A$ 正定, 则取等当且仅当 $B=O$. 
+2. ($\star$) 证明: $\mathrm{tr}(A)\cdot \lambda_{\min}(B)\leq \mathrm{tr}(AB)\leq \mathrm{tr}(A)\cdot \lambda_{\max}(B)$. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 6** 任取实多项式 $f(x)=(x-x_0)(x-x_1)\cdots (x-x_n)$, 以及 $g(y)=(y-y_1)\cdots (y-y_n)$. 若有
+$$
+x_0\leq y_1\leq x_1\leq y_2\leq x_2\leq \cdots \leq x_{n-1}\leq y_n\leq x_n.
+$$
+则称 $f$ 与 $g$ 的根是交错的. 
+
+1. ($\star$) 证明: 任意实线性组合 $af+bg$ 的根都在 $\mathbb R$ 内. 
+
+2. ($\star\star$) 证明逆命题: 若 $f$ 与 $g$ 满足 $\deg f=\deg g+1$, 且任意实线性组合 $af+bg$ 的根全是实数, 则 $f$ 与 $g$ 的根交错. 
+
+   > 提示: 对 $t\in [0,1]$, $tf+(1-t)g$ 的所有实根在 $\mathbb C$ 上的轨迹如何?  
+
+3. ($\emptyset$) 若 $n$-阶复方阵满足 $A=A^H$, 记 $B$ 是任意 $(n-1)$-阶主子式 ($B$ 有 $n$ 种取法). 证明: $A$ 与 $B$ 的特征根交错. 
+
+4. ($\star\star$) 这一具有组合性质的结论可以推得 Schur–Horn 定理. 
+
+   > * (Schur–Horn) 给定 $n$ 阶Hermite 矩阵 ($A=A^H$). 若 $d_1\geq d_2\geq \cdots \geq d_n$ 是 $A$ 的所有对角元, $\lambda_1\geq \lambda_2\geq \cdots \geq \lambda_n$ 是 $A$ 的所有特征值, 则对任意 $1\leq k\leq n$, 都有
+   >   $$
+   >   d_1+d_2+\cdots +d_k \leq \lambda_1+\lambda_2+\cdots + \lambda_k.
+   >   $$
+   >   特别地, $k=n$ 时取等号 (考虑迹). 
+   >
+   > 通常的证明方法是将之视作 Atiyah 凸性定理 (一个来自辛几何的定理) 的推论. 
+
+5. ($\star$) (Courant-Fischer) 以下是谱分解的推论, 之前作业证过. Hermite 矩阵 $A\in \mathrm M_n(\mathbb C)$ 的第 $k$ 大特征值是
+   $$
+   \max_{V\subset \mathbb R^n, \dim V= k}\left( \min _{x\in V, \|x\|=1} x^H Ax\right)。 
+   $$
+   第 $k$ 小特征值表述类似. 
+
+6. ($\star\star$) 作为推论, 得 Hermite 矩阵的 Weyl 不等式 
+   $$
+   \lambda _{i+j-1}(A+B)\leq \lambda _{i}(A)+\lambda _{j}(B)\leq \lambda _{i+j-n}(A+B).
+   $$
+
+   > 提示: 将 $\min$, $\max$ 转化做 $\text{``先 $\forall$ 再 $\exists$''}$-式的逻辑命题. 若遇到不等号 $\leq$, 将不等号左侧的 $\lambda$ 改述作 $\max \min$, 将不等号右侧的 $\lambda$ 改述作 $\min \max$. 最后比较子空间维数即可. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 7** 以下是一些 Cayley 变换的例子. 
+
+> 楔: $\mathbb R^2\simeq \mathbb C$ 上的单位圆周 $S^1:=\{z\in \mathbb C\mid |z|=1\}$ 不是线性空间, 但可以舍弃一个点 $(1,0)$, 使得有双射
+> $$
+> \mathbb R\xrightarrow[\sim]{\text{双射}} (S^1\setminus \{(0,i)\}),\quad x\mapsto \frac{x-i}{x+i}
+> $$
+> 这一双射的逆映射也可以直接写出. 以上一对互逆有理映射建立了 $\mathbb R$ 与 $S^1$ 的双有理等价. 
+>
+> 类似地, 全体正交矩阵不构成线性空间. 试问: 能否舍弃一些体积为 $0$ 的正交矩阵, 使得剩下的正交矩阵通过某个有理多项式双射对应于线性空间? 
+
+1. ($\star$) 若 $A\in \mathrm M_n(\mathbb C)$ 是自伴矩阵, 则 $(A-iI)\cdot (A+iI)^{-1}$ 是酉矩阵. 
+
+2. ($\star$) 证明以上建立了全体自伴矩阵与不以 $1$ 为特征值的酉矩阵的双射对应. 试求逆映射? 
+
+3. ($\star\star$) 正交矩阵 (实矩阵) 也是酉矩阵. 试问: 以上哪类自伴矩阵的像是正交矩阵? 
+
+   > 提示: 反对称实矩阵恰好是正规矩阵的 $i$ 倍. 
+   >
+   > 推论: 反对称矩阵与不以 $1$ 为特征值的正交矩阵双射对应. 记 $M$ 是反对称矩阵, 则 $(I+M)(I-M)^{-1}$ 是正交矩阵. 
+   >
+   > 例子: $n=2$ 时, 得半角公式: 
+   > $$
+   > \begin{pmatrix}0&\tan {\frac {\theta }{2}}\\-\tan {\frac {\theta }{2}}&0\end{pmatrix}\leftrightarrow \begin{pmatrix}\cos \theta &-\sin \theta \\\sin \theta &\cos \theta \end{pmatrix}.
+   > $$
+   > 例子: $n=3$ 时, 得某次作业的行列式计算 ($w=1$): 
+   > $$
+   > \begin{pmatrix}0&z&-y\\-z&0&x\\y&-x&0\end{pmatrix}\leftrightarrow \text{常数}\cdot {\begin{pmatrix}w^{2}+x^{2}-y^{2}-z^{2}&2(xy-wz)&2(wy+xz)\\2(xy+wz)&w^{2}-x^{2}+y^{2}-z^{2}&2(yz-wx)\\2(xz-wy)&2(wx+yz)&w^{2}-x^{2}-y^{2}+z^{2}\end{pmatrix}}.
+   > $$
+
+4. ($\star\star$) 正交矩阵的行列式是 $\pm 1$. 这表明反对称矩阵也能分作两类, 如何描述这一分类? 
+
+5. ($\star\star$) 记 $\mathrm{Sp}(2n):=\{A\in \mathrm M_{2n}(\mathbb R)\mid A^TJA=J\}$ (($\star\star$)某次作业证明了 $\det A\neq -1$), 以及 $\mathrm H(2n):=\{A\in \mathrm M_{2n}(\mathbb R)\mid A^TJ+JA=O\}$ (即考试题的 $\mathrm{sp}(2n)$). 证明: 
+   $$
+   \{X\in \mathrm{Sp}(2n)\mid 1\notin \sigma (X)\}\to \mathrm{H}(2n),\quad X\mapsto (I+X)(I-X)^{-1}
+   $$
+   是双射对应. 
+
+<div style="page-break-after: always;"></div>
+
+**Ex 8** ($\star\star\star$) 若 $A^2+B^2=2AB$, 证明: $A$ 与 $B$ 的特征多项式相等. 
+
+> 这和本节作业没有关系, 但还是留做习题. 

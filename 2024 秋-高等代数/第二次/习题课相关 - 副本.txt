@@ -1,0 +1,23 @@
+### Reference: [ExampleClass-240929.pdf](https://oc.sjtu.edu.cn/courses/72790/modules/items/1265017). 
+
+<center><b><font color=green>If you find them difficult, you may skip all challenging problems.</font></b></center>
+
+**(1)** State the definition of a number field, and prove that number fields are $\mathbb Q$-linear spaces. 
+
+**(2)** Prove that the $3$-dimensional $\mathbb Q$-linear space
+$$
+V=\{a+b\cdot 2^{1/3}+c\cdot 2^{2/3}\mid a,b,c\in \mathbb Q\}
+$$
+ is a number field.  
+
+* **Challenge: generalise & prove.**
+
+**(3)** Find a field $K$ such that $\mathbb C$ is a **proper** subfield of $K$. 
+
+**(4)** Prove that $(1,e^x,e^{2x},\ldots, e^{2024 x})$ are linearly independent real-valued functions. 
+
+* Hint: take derivatives, and use the fact **[Vandermonde matrix](https://en.wikipedia.org/wiki/Vandermonde_matrix) is invertible** as a shortcut. 
+
+**(5)** **Challenge:** find $n$ such that $(\sin \frac{\pi}{2n},\sin \frac{2\pi}{2n},\ldots, \sin \frac{(n-1)\pi}{2n})$ are linearly dependent (over $\mathbb Q$). 
+
+* 此题源自著名习题集 *近世代数三百题* 的一处错误 (4.1.13). 今后学习近世代数时需要稍作留意. 

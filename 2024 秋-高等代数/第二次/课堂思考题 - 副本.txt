@@ -1,0 +1,19 @@
+整理自课堂笔记. 
+
+**(1)** To prove that any subset of $n+1$ vectors of $ \mathbb{F}^{n} $​ is linearly dependent. 
+
+* Hint: consider all possible *échelon forms*.  
+
+**(2)** 数域 (无限域) 上, 线性方程组解的个数可能有: $0$ 个, $1$​ 个, 无限个. 哪种情况概率最大? 
+
+* 如何理解: 随机选一个实数? 这需要定义与 $\mathbb R$ 上通常拓扑相容的概率空间, 其表述较繁. 
+
+* 本质上需要解决的问题: 证明 $\mathbb R^{n\times n}$ 中的可逆矩阵构成开集. 也就是证明: 任何可逆矩阵的各项允许在某个小范围内任意微扰, 使得微扰所得矩阵必是可逆的. 公式表述即
+  $$
+  \forall M=(m_{i,j})_{n\times n}\in \mathbb R^{n\times n}\,\exists \delta>0\,\,\forall N=(n_{i,j})_{n\times n}\in \mathbb R^{n\times n} \left(\sum _{i,j}|m_{i,j}-n_{i,j}|<\delta\text{ and } \det M\neq 0\neq \det N\right).
+  $$
+  可以直接证明. 或是证明多项式函数 $\det$ 是连续函数, 从而开集的原像 $\det^{-1}(\mathbb R\setminus \{0\})$ 是开集. 
+
+**(3)** 用 Dedekind 分割证明 $\mathbb R$ 满足加法交换律. 这在第一周作业中提及了. 
+
+感谢姜皓文, 刘佳霖 (按姓氏拼音排列) 提供的笔记. 

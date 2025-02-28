@@ -1,0 +1,156 @@
+**Problem 1** 同时上三角化问题. **本题只讨论复矩阵**, 约定 $[A,B]=AB-BA$. 
+
+1. (基础问题) 若 $[A,B]=O$, 则 $A$ 与 $B$ 可同时酉上三角化. 
+
+   > 同时酉上三角化: 存在酉矩阵 $U$ 使得 $U^HAU$ 与 $U^HBU$ 都是上三角矩阵. 
+
+2. (基础问题) 称 $(\lambda , v)$ 是 $A$ 的特征组, 当且仅当 $Av=\lambda v$ 且 $v\neq \mathbf 0$. 试证明 $A$ 与 $B$ 可同时上三角化的一个充分条件: 
+
+   * 若 $(\lambda, v)$ 是 $A$ 的特征组, 则存在 $\mu$ 使得 $(\mu, v)$ 是 $B$ 的特征组. 
+
+   定义三角指数为 Jordan-Chevalley 分解中幂零矩阵的秩. 以上充分条件说明 $A$ 的三角指数小于 $B$ 者. 
+
+3. (拓展问题) 结合奇异值分解以及 Schur 上三角化的过程, 证明: 对任意方阵 $A$ 与 $B$, 存在酉矩阵 $U$ 与 $V$ 使得 $UAV$ 与 $UBV$ 都是上三角矩阵. 
+
+4. (应试问题) 若 $[A,B]= c(A-B)\neq O$, 则 $A$ 与 $B$ 可同时上三角化. (特别地, 三角矩阵的对角元相同). 
+
+   > 解答示例: 取 $B$ 的特征组 $(\lambda , v)$, 此时
+   > $$
+   > [A-\lambda I, B- \lambda I]= c((A-\lambda I )-(B-\lambda I )).
+   > $$
+   > 对上式右乘 $v$, 得 
+   > $$
+   > -(B-\lambda I )(A-\lambda I)v = c(A-\lambda I)v.
+   > $$
+   > 也就是
+   > $$
+   > B\cdot \boxed{ (A-\lambda I)v} = (\lambda -c)\cdot \boxed{(A-\lambda I) v} \ .
+   > $$
+   > 由于 $\sigma (B)$ 有限, 从而可以取较好的 $\lambda$ 使得 $\lambda -c$ 不是 $B$ 的特征值. 此时 $(\lambda , v)$ 也是 $A$ 的特征组. 因此, 存在第一列为 $v$ (数乘倍) 的的酉矩阵 $U$, 使得 
+   > $$
+   > U^H AU = \begin{pmatrix}\lambda & \ast \\\mathbf 0 & A_1\end{pmatrix},\quad U^H BU = \begin{pmatrix}\lambda & \ast \\\mathbf 0 & B_1\end{pmatrix}.
+   > $$
+   > 对 $A_1$ 与 $B_1$ 继续归纳即可. 这说明 $A$ 和 $B$ 可同时酉三角化, 使得三角矩阵的对角元相同. 
+
+5. (考研名题) 若 $\mathrm{rank}([A,B])=1$, 则 $A$ 与 $B$ 可同时上三角化. 
+
+6. (应试问题) 若 $[A,B]=A+B$, 则 $A$ 与 $B$ 可同时上三角化. 
+
+7. (应试问题) 若 $[A, B]\cdot A=O=[A,B]\cdot B$, 则 $A$ 与 $B$ 可同时上三角化. 
+
+8. (拓展问题) 若 $[A,B]$ 是 $A$ 的多项式, 则 $A$ 与 $B$ 可同时上三角化. 
+
+   * 一种解法: 证明 $[A,B]$ 幂零, 再使用 Engel 定理. 
+
+9. (An Corollary of Engel's Theorem) 若 $[A,B]$ 幂零, 则 $A$ 与 $B$ 可同时上三角化. 
+
+   > Friedrich Engels (philosopher); Friedrich Engel (mathematician). 
+
+10. (应试问题) 若 $[A,[A,B]]=O$, 则 $A$ 与 $B$ 可同时上三角化. 
+
+    * 此题理应需要一些提示; 但往期作业已经给出解答, 故提示略. 
+
+11. (脑经急转弯) 若 $[A,B]=xA+yB$, 则 $[A,B]$ 是幂零的 (从而 $A$ 与 $B$ 可同时上三角化).
+
+12. (М. Левицький) 若幂零矩阵构成的集合 $S$ 关于矩阵乘法封闭, 则 $S$ 中矩阵可以同时上三角化 (这也是 Engel 定理的推论). 
+
+    > 需要注意: 幂零矩阵对乘法, Lie 括号 ($[-,-]$) 等常见运算均不封闭. 只有很少一部分幂零矩阵可以构成带乘法的线性空间. 试回想习题课问题: 即 $zA+wB$ 对一切 $(z,w)\in \mathbb C^2$ 都是幂零的, 其乘式 $A\cdot B$ 未必是幂零矩阵. 
+
+13. (Lie–Kolchin) 将上一定理的幂零矩阵换做幂幺矩阵. 若矩阵构成的集合 $S=\{I+N\mid N \ \text{幂零}\}$ 关于矩阵乘法封闭, 则 $S$ 中矩阵可以同时上三角化 (这也是 Engel 定理的推论). 
+
+14. (应试问题) 若 $A$ 与 $B$ 是 $2025$ 阶矩阵, 且 $AB+BA=A$, 则 $A$ 与 $B$ 存在公共特征向量. 
+
+    * 相似的基础题: 若 $A$ 与 $B$ 是 $2025$ 阶矩阵, 且 $AB=O$, 则 $A+A^T$ 与 $B+B^T$ 有至少一者不可逆. 
+    * 相似的基础题: 若 $A$ 与 $B$ 是 $2025$ 阶矩阵, 且 $AB+BA=O$, 则 $A$ 与 $B$ 有至少一者不可逆. 
+    * 相似的基础题: 若 $A$ 与 $B$ 是 $2025$ 阶实正交矩阵, 则 $A-B$ 与 $A+B$ 有至少一者不可逆. 
+
+15. (同时上三角化的判定准则) 给定复矩阵 $A$ 与 $B$, 以下论断等价. 
+
+    1. (矩阵表述) 存在酉矩阵 $U$, 使得 $U^HAU$ 与 $U^HBU$ 是上三角矩阵; 
+
+    2. (线性空间表述) 存在一族逐渐递增的子空间 
+       $$
+       0=V_0\subsetneqq  V_1\subsetneqq V_2\subsetneqq\cdots \subsetneqq V_n =\mathbb C^n\quad (\dim V_k =k),
+       $$
+       使得 $V_k$ 是 $A$ 的不变子空间, 同时也是 $B$ 的不变子空间. 
+
+       > Say $\{V_k\}_{k=0}^n$ is a flag variety of $\{A,B\}$-invariant subspaces. 
+
+    3. ([McCoy 定理](https://mathworld.wolfram.com/McCoysTheorem.html)) 记 $\mathbb C\braket{x,y}$ 是二元非交换多项式环. 
+
+       > 注: $x+1$, $xy-iyx$, $xy$ 与 $yx$ 是 $\mathbb C\braket{x,y}$ 中四个不同的元素. 如果加上 $xy=yx$ 这一限定, 得通常的二元多项式环 $\mathbb C[x,y]$). 
+    
+       若对一切 $p\in \mathbb C\braket{x,y}$, 矩阵 $p(A,B)$ 的特征值恰好是 $p(\lambda_i (A), \lambda_i (B))$, 则 $A$ 与 $B$ 可同时上三角化. 逆命题是直接的. 
+    
+    4. (McCoy 性质) 对一切 $p\in \mathbb C\braket{x,y}$, 矩阵 $p(A,B)\cdot [A,B]$ 都是幂零的. 
+    
+    5. (可解 Lie 代数表述) 记 $\mathfrak g$ 是集合 $\{A,B\}$ 连同运算 
+       $$
+       [,]: X \ \& \ Y\mapsto [X,Y]:=XY-YX
+       $$
+       生成的最大 $\mathbb C$ 线性空间. 归纳地定义
+       $$
+       \mathscr D^0\mathfrak g:= \mathfrak g,\quad \mathscr D^{k+1}\mathfrak g:= [\mathscr D^k \mathfrak g,\mathscr D^k \mathfrak g]=\{[X,Y]\mid X,Y\in \mathscr D^k \mathfrak g\}. 
+       $$
+       称 $\mathfrak g$ 是可解的, 当且仅当 $\mathscr D^n \mathfrak g=0$. 
+
+    6. (可解 Lie 代数等价表述, Cartan 判别准则) 上述 $\mathfrak g$ 满足如下条件: 对任意 $M,N\in[\mathfrak g, \mathfrak g]$, 都有 $\mathrm{tr}(MN) = 0$. 
+    
+****
+
+**Problem 2** 可交换矩阵相关问题. 以下假定复数域 $\mathbb C$. 
+
+> 特别注释: 以下问题的类型是求解线性方程组的零空间, 故扩域不增加解空间 (零空间) 的基. 因此, 以下涉及维数的问题对任意域都成立. 在实际操作中, 一般不对未知的域直接选取代数闭域 (依赖选择公理), 通常的做法是: 
+>
+> 1. 直接使用有理标准型 (许多教材选用有理标准型代替域扩张); 
+> 2. 用 $\mathbb F[x]\pmod{\text{不可约多项式}}$ 进行有限扩张, 使得 $\det (xI-A)$ 能分解成一次因式的乘积. 
+
+1. (基础问题) 解方程 $J_m(\lambda )X=XJ_n(\mu )$. 此处 $J$ 就是 Jordan 块. 
+
+2. (应试问题) 若 $X$ 是 $4$-阶实矩阵,  其特征多项式和最小多项式都是 $(x^2+2025)^2$. 求线性空间维数: 
+   $$
+   \dim_{\mathbb R}\{Y\mid XY=YX\}.
+   $$
+   给定 $X$, 往后使用 $Z(X)$ 表示方程 $X\cdot  M-M\cdot X=O$ 的所有解. 
+
+3. (基础问题) 记
+   $$
+   J=\begin{pmatrix}J_2(1)&&\\&J_5(2)&\\&& J_7(1)\end{pmatrix}.
+   $$
+   试求 $Z(X)$, 并计算其维数.
+
+4. (基础问题) 记 $A_{m\times m}$ 与 $B_{n\times n}$ 是对角矩阵, 且 $\sigma (M)\cap \sigma (N)=\emptyset$. 记 $C_{m\times n}=u\cdot v^T$ 是秩 $1$ 矩阵, 证明
+   $$
+   AX-XB=C
+   $$
+   的解唯一 (上周作业),  并求该解 (是 Cauchy 矩阵). 
+
+   * 关于 Cauchy 矩阵, 我们曾介绍过对称 Cauchy 矩阵及其推广形式的正定性 (使用 $\int_I u(x)\cdot u(x)^T\operatorname dx$ 积分), Cauchy 矩阵的行列式与代数余子式, 以及其逆矩阵的所有元素和 (使用了一个指标求和的技巧). 
+
+5. (拓展问题) 结合有理标准型, 或者扩域上的 Jordan 标准型, 试描述矩阵方程 $AX=XB$ 的解空间维数. 
+
+6. (基础问题) 证明: $\dim Z(X)\geq n$. 记 $P(X)=\mathrm{span}(\{I,X,X^2,\ldots \})$ 为 $X$ 的多项式空间. 依照 Hamilton-Cayley 定理, 
+   $$
+   P(X)=\mathrm{span}(\{I,X,\ldots, , X^{n-1}\})\quad (X\in \mathrm M_n (\mathbb F)).
+   $$
+   证明: $P(X)$ 是 $Z(X)$ 的子空间.
+
+7. (应试问题) 证明以下三个命题等价: 
+
+   1. $X$ 的初等因子两两互素 (也就是特征多项式等于零化多项式); 
+   2. 子空间包含式 $P(X)\subseteq Z(X)$ 取等; 
+   3. 不等式 $Z(X)\geq \dim n$ 取等. 
+
+8. (拓展问题) 若 $Y$ 与 $Z(X)$ 中的任一矩阵乘法交换,  则 $Y\in P(X)$. 换言之, 
+   $$
+   Z(X)\subseteq Z(Y)\implies Y\in P(X).
+   $$
+   这不是什么困难的题目, 只是书写比较麻烦. 
+
+9. (拓展问题) Reformuler les questions ci-dessus avec le langage des schémas (géométrie algébrique). 
+
+10. (考研名题) 假定 $A-I$ 是幂零矩阵. 若存在 $B$ 使得 $[A^{2025}, B]=O$, 则 $[A,B]=O$. 
+
+    * 提示: 证明 $A$ 是 $A^{2025}$ 的多项式. 
+    * 类似的问题: 记 $M$ 是半正定矩阵, 则 $(M)^{1/2025}$ 是 $M$ 的多项式. 
+    * 类似的问题: 记 $M$ 是本质正的矩阵 (存在唯一本质正的 $2025$-次根), 则 $(M)^{1/2025}$ 是 $M$ 的多项式. 

@@ -1,0 +1,6 @@
+\contentsline {section}{\numberline {1}符号说明}{1}{section.1}%
+\contentsline {section}{\numberline {2}第二次作业 (自学任务)}{1}{section.2}%
+\contentsline {subsection}{\numberline {2.1}第一个自学任务}{1}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}习题课相关}{2}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}线性子空间}{3}{subsection.2.3}%
+\contentsline {section}{\numberline {3}\textbf {重要: 四元数不是域!}}{5}{section.3}%

@@ -1,0 +1,68 @@
+**Problem Set for 20-Feb-2025**
+
+**Problem 1** Find two linear maps 
+$$
+\alpha, \beta : \mathbb{F}[x] \to \mathbb{F}[x],
+$$
+such that 
+$$
+\alpha(\beta(f)) - \beta(\alpha(f)) = f
+$$
+for any $f \in \mathbb{F}[x]$. 
+
+Is it possible to find such $\alpha, \beta : V \to V$ when $V$ is of finite dimension?
+
+**Problem 2** Here is a **clarification of irreducibility** over general polynomial rings. Let $\mathbb{A} \in \{\mathbb{Z}, \mathbb{Q}, \mathbb{R}, \mathbb{C}, \ldots\}$. A polynomial $f \in \mathbb{A}[x]$ is **reducible** if and only if there exists some factorisation $f = g \cdot h$ such that $g^{-1} \notin \mathbb A[x]$ and $h^{-1} \notin \mathbb A[x]$. For instance:
+
+- $2 \cdot x$ is irreducible in $\mathbb{Q}[x]$, yet reducible in $\mathbb{Z}[x]$;
+- $x^2 + 1$ is irreducible in $\mathbb{Q}[x]$, yet reducible in $\mathbb{C}[x]$.
+
+Now consider $f \in \mathbb{Z}[x]$. **Prove** the following:
+
+1. If $f$ is irreducible in $\mathbb{Z}[x]$, then it is irreducible in $\mathbb{Q}[x]$;
+2. If $f$ is irreducible in $\mathbb{R}[x]$, then it is irreducible in $\mathbb{Q}[x]$.
+
+> :warning: 规范的表述是“多项式 $f(x)$ 在 $\mathbb A[x]$ 中可约”，而非“多项式 $f(x)$ 可约”；类似地，规范地表述是“ $f$ 是 $\mathbb F$-线性映射”，而非“ $f$ 是线性映射”。若无歧义，可适当地选用后者以精简表述。
+
+In fact, one has
+$$
+(\text{domain}) \quad \underbracket{\mathbb{Z}[x] \to (\mathbb{Z}[1/2])[x] \to \cdots \to \mathbb{Q}[x]}\limits_{\text{more irreducible polynomials}} \quad (\text{fractional field}),
+$$
+and
+$$
+(\text{field}) \quad \underbracket{\mathbb{Q}[x] \to (\mathbb{Q}[\sqrt{2}])[x] \to \cdots \to \mathbb{C}[x]}\limits_{\text{less irreducible polynomials}} \quad (\text{algebraic closure}).
+$$
+
+**(Optional)** Find **Gauß's lemma** in any of the textbooks and understand both the statement and the proof. The lemma states that:
+
+> For any $f(x) \in \mathbb{Z}[x]$, $f$ is irreducible in $\mathbb{Z}[x]$ if and only if $f$ is both irreducible over $\mathbb{Q}[x]$ and $f$ is primitive (i.e., the greatest common divisor of its coefficients is 1).
+
+Let $f$ be **monic**, i.e., non-zero with leading coefficient $1$. From Gauß's lemma, we learn that for any monic $f \in \mathbb{Z}[x]$, $f$ is irreducible in $\mathbb{Z}[x]$ **if and only if** it is irreducible in $\mathbb{Q}[x]$.
+
+**Problem 3** Here are some criteria for the irreducibility of polynomials in $\mathbb C[x]$:
+
+1. Let $f \in \mathbb{Z}[x]$ be a **monic** polynomial of degree $n$. Denote the zeros of $f$ in $\mathbb{C}$ by $(z_i)_{i=1}^n$. Show that, if there is exactly one $z_i$ such that $|z_i| \geq 1$ and $f(0) \neq 0$, then $f$ is irreducible in $\mathbb{Q}[x]$.
+2. Let $f \in \mathbb{Z}[x]$ be a polynomial such that $f(0)$ is prime. Denote the zeros of $f$ in $\mathbb{C}$ by $(z_i)_{i=1}^n$. Show that, if $|z_i| > 1$ for all $i$, then $f$ is irreducible.
+3. Let $f(x) = \sum_{k=0}^n a_k \cdot x^k \in \mathbb{Z}[x]$ be a polynomial with $f(0)$ prime. Suppose that $|a_0| > \sum_{k=1}^n |a_k|$. Show that $f$​ is irreducible.
+
+**Problem 4** Find all $f(x) \in \mathbb C[x]$ such that 
+$$
+f(x) \equiv \begin{cases}
+2x\mod (x-1)^2,\\
+3x\mod (x-2)^2.
+\end{cases}
+$$
+**Exercises (optional)** The following problems are **optional** but some of the problems are very important. 
+
+1. Is there any irreducible $f (x) \in \mathbb Z[x]$ such that $f(f(x))$ is reducible? 
+
+2. Prove that $1+ \prod_{k=1}^{2025}(x-k)^2$ is irreducible in $\mathbb Z[x]$; 
+
+3. Prove that $\prod _{k=1}^n(x-x_i) +1$ is either irreducible in $\mathbb Z[x]$, or a perfect square; 
+
+   * where $x_1 < x_2 < \cdots < x_n$ are integers. 
+
+4.  ($f \in \mathbb Z[x]$) Prove that if $f(x) = 1$ has $\geq 4$ solutions in $\mathbb Z$, then $f(x) = -1$ has no solutions in $\mathbb Z$. 
+
+5. Prove that the partial sum $(e^x)_{\deg \leq n}$ is always irreducible in $\mathbb Q[x]$. 
+

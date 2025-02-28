@@ -1,0 +1,341 @@
+\documentclass[11pt]{ctexart}
+\usepackage[margin=2cm,a4paper]{geometry}
+\usepackage{amsthm, amsfonts, amsmath, amssymb, mathrsfs, newclude, tikz-cd, tikz, ctex, mathtools, stmaryrd, datetime}
+
+
+%\setmainfont{Caladea}
+
+%% 也可以选用其它字库:
+% \setCJKmainfont[%
+%   ItalicFont=AR PL KaitiM GB,
+%   BoldFont=Noto Sans CJK SC,
+% ]{Noto Serif CJK SC}
+% \setCJKsansfont{Noto Sans CJK SC}
+% \renewcommand{\kaishu}{\CJKfontspec{AR PL KaitiM GB}}
+
+
+
+\usepackage[colorlinks = true,
+linkcolor = blue,
+urlcolor  = blue,
+citecolor = blue,
+anchorcolor = blue]{hyperref}
+
+% Include the x-color package for color support
+\usepackage{xcolor}
+
+% Define a new environment for red comments
+\usepackage{verbatim} % Required for the comment environment
+\usepackage{environ}
+
+\usepackage{mdframed} % Include mdframed for creating framed environments
+
+\definecolor{pinked}{RGB}{255,231,229} % Define a base color 
+% Define a new environment with a background color
+\newmdenv[
+  backgroundcolor=pinked, % Set the desired background color
+  linecolor=white, % Optional: Set the border line color
+  linewidth=1pt, % Optional: Set the border line width
+  roundcorner=5pt, % Optional: Set rounded corners
+  nobreak=true % Optional: Prevent page breaks within the environment
+]{pinked}
+
+\theoremstyle{definition}
+\newtheorem{qqq}{问题}[section]
+
+\newcommand{\ExternalLink}{%
+    \tikz[x=1.2ex, y=1.2ex, baseline=-0.05ex]{% 
+        \begin{scope}[x=1ex, y=1ex]
+            \clip (-0.1,-0.1) 
+                --++ (-0, 1.2) 
+                --++ (0.6, 0) 
+                --++ (0, -0.6) 
+                --++ (0.6, 0) 
+                --++ (0, -1);
+            \path[draw, 
+                line width = 0.5, 
+                rounded corners=0.5] 
+                (0,0) rectangle (1,1);
+        \end{scope}
+        \path[draw, line width = 0.5] (0.5, 0.5) 
+            -- (1, 1);
+        \path[draw, line width = 0.5] (0.6, 1) 
+            -- (1, 1) -- (1, 0.6);
+        }
+    }
+
+\NewEnviron{aaa}{~\\
+    \noindent {\textcolor{teal}{\textbf{解答}} \BODY }
+}
+
+\NewEnviron{llll}{
+    \noindent {~\\$\ExternalLink$ 外部链接 $\,\,\,$ \color{blue}\url{\BODY} }
+}
+
+\renewcommand{\proofname}{证明}
+\renewcommand\qedsymbol{${\boxed{\substack{\textit{完证}\\\textit{毕明}}}}$}
+\let\oldproof\proof
+\renewcommand{\proof}{\color{blue}\oldproof}
+
+% Change equation numbering to include the section number
+\usepackage{cleveref}
+\renewcommand{\theequation}{\thesection.\thesubsection.\arabic{equation}}
+\numberwithin{equation}{section}
+
+\usepackage{listings}
+% Define listings style
+\lstset{
+  frame=tb,
+  language=TeX,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\theoremstyle{definition}
+\newtheorem*{definition}{定义}
+\newtheorem*{proposition}{命题}
+\newtheorem*{theorem}{定理}
+\newtheorem*{notation}{记号}
+\newtheorem*{example}{例子}
+\newtheorem{exercise}{\textcolor{blue}{习题}}
+\theoremstyle{remark}
+\newtheorem*{remark}{备注}
+\newtheorem*{lemma}{引理}
+\newtheorem*{corollary}{推论}
+
+\title{习题: 特殊矩阵 (1): 逆矩阵计算}
+\author{(2024-2025-1)-MATH1405H-02}
+
+\setcounter{page}{0}
+
+\setlength\parindent{0pt}
+
+\begin{document}
+
+\maketitle
+
+\vspace{5cm}
+
+\section*{前言}
+
+\begin{pinked}
+特殊矩阵是线性代数中最接地气的内容, 其来源往往是分析, 计算, 或是物理学等学科.
+\end{pinked}
+
+特殊矩阵的相关习题分作两部分: 逆矩阵的计算与行列式的计算. 本节习题系第一部分. 
+
+\begin{center}
+    \textcolor{red}{\textbf{请完成至少 4 道习题}}
+\end{center}
+
+\newpage
+
+\section{基础习题}
+
+\begin{pinked}
+    选定基域为 $\mathbb C$. 部分结论在一般数域上 (甚至是有限域上) 成立, 此处就不必考究了.
+\end{pinked}
+
+\begin{exercise}
+    将 $M$ 顺时针旋转 $90^\circ$, 得 $\widetilde M$. 试描述由 $M^{-1}$ 至 $\left(\widetilde M\right)^{-1}$ 的``运动过程''.
+\end{exercise}
+
+\begin{exercise}
+计算以下矩阵的逆矩阵
+\begin{equation}
+    M=\begin{pmatrix}
+        1 & -1 &  &  &  & \\
+        -1 & 2 & -1 &  &  & \\
+         & -1 & 2 & \ddots  &  & \\
+         &  & \ddots  & \ddots  & -1 & \\
+         &  &  & -1 & 2 & -1\\
+         &  &  &  & -1 & 2
+        \end{pmatrix}.
+\end{equation}
+\end{exercise}
+
+\begin{remark}
+    $M$ 并非``高度对称''的, 其严格表述是
+    \begin{equation}
+        M=2I-E_{1,1}-\sum_{1\leq i\neq j\leq n}E_{i,j}.
+    \end{equation}
+\end{remark}
+
+\begin{exercise}
+    计算以下矩阵的逆矩阵. 
+    \begin{equation}
+        M=\begin{pmatrix}
+            \xi ^{1\cdot 1} & \xi ^{1\cdot 2} & \xi ^{1\cdot 3} & \cdots  & \xi ^{1\cdot ( n-1)} & \xi ^{1\cdot n}\\
+            \xi ^{2\cdot 1} & \xi ^{2\cdot 2} & \xi ^{2\cdot 3} & \cdots  & \xi ^{2\cdot ( n-1)} & \xi ^{2\cdot n}\\
+            \xi ^{3\cdot 1} & \xi ^{3\cdot 2} & \xi ^{3\cdot 3} & \cdots  & \xi ^{3\cdot ( n-1)} & \xi ^{3\cdot n}\\
+            \vdots  & \vdots  & \vdots  & \ddots  & \vdots  & \vdots \\
+            \xi ^{( n-1) \cdot 1} & \xi ^{( n-1) \cdot 2} & \xi ^{( n-1) \cdot 3} & \cdots  & \xi ^{( n-1) \cdot ( n-1)} & \xi ^{( n-1) \cdot n}\\
+            \xi ^{n\cdot 1} & \xi ^{n\cdot 2} & \xi ^{n\cdot 3} & \cdots  & \xi ^{n\cdot ( n-1)} & \xi ^{n\cdot n}
+            \end{pmatrix}.
+    \end{equation}
+    以上 $\xi=e^{2\pi i/n}$ 是 $n$-次单位根. $n$ 即 $M$ 的阶数. 
+\end{exercise}
+
+\begin{remark}
+    以上矩阵在 Fourier 分析中常见. 若无思路, 不妨先计算 $M^2$. 
+\end{remark}
+
+\begin{exercise}
+    计算以下矩阵的逆矩阵
+    \setcounter{MaxMatrixCols}{14}
+    \begin{equation}
+        M=\begin{pmatrix}
+            0 & 1 & 1 & \cdots  & 1 & 1 & 1 & a & a & a & \cdots  & a & a & a\\
+            1 & 0 & 1 & \cdots  & 1 & 1 & 1 & a & a & a & \cdots  & a & a & a\\
+            1 & 1 & 0 & \cdots  & 1 & 1 & 1 & a & a & a & \cdots  & a & a & a\\
+            \vdots  & \vdots  & \vdots  & \ddots  & \vdots  & \vdots  & \vdots  & \vdots  & \vdots  & \vdots  & \ddots  & \vdots  & \vdots  & \vdots \\
+            1 & 1 & 1 & \cdots  & 0 & 1 & 1 & a & a & a & \cdots  & a & a & a\\
+            1 & 1 & 1 & \cdots  & 1 & 0 & 1 & a & a & a & \cdots  & a & a & a\\
+            1 & 1 & 1 & \cdots  & 1 & 1 & 0 & a & a & a & \cdots  & a & a & a\\
+            0 & 0 & 0 & \cdots  & 0 & 0 & 0 & 0 & 1 & 1 & \cdots  & 1 & 1 & 1\\
+            0 & 0 & 0 & \cdots  & 0 & 0 & 0 & 1 & 0 & 1 & \cdots  & 1 & 1 & 1\\
+            0 & 0 & 0 & \cdots  & 0 & 0 & 0 & 1 & 1 & 0 & \cdots  & 1 & 1 & 1\\
+            \vdots  & \vdots  & \vdots  & \ddots  & \vdots  & \vdots  & \vdots  & \vdots  & \vdots  & \vdots  & \ddots  & \vdots  & \vdots  & \vdots \\
+            0 & 0 & 0 & \cdots  & 0 & 0 & 0 & 1 & 1 & 1 & \cdots  & 0 & 1 & 1\\
+            0 & 0 & 0 & \cdots  & 0 & 0 & 0 & 1 & 1 & 1 & \cdots  & 1 & 0 & 1\\
+            0 & 0 & 0 & \cdots  & 0 & 0 & 0 & 1 & 1 & 1 & \cdots  & 1 & 1 & 0
+            \end{pmatrix}.
+    \end{equation}
+\end{exercise}
+
+\begin{remark}
+    证明应当适当地借助引理, 例如分块上三角矩阵的逆, $I+uv^T$ 的逆等等. 
+\end{remark}
+
+
+
+\begin{exercise}
+    计算以下矩阵的逆矩阵
+    \begin{equation}
+        M=\begin{pmatrix}
+            1 & 2 & 3 & \cdots  & n-1 & n\\
+            n & 1 & 2 & \cdots  & n-2 & n-1\\
+            n-1 & n & 1 & \cdots  & n-3 & n-2\\
+            \vdots  & \vdots  & \vdots  & \ddots  & \vdots  & \vdots \\
+            3 & 4 & 5 & \cdots  & 1 & 2\\
+            2 & 3 & 4 & \cdots  & n & 1
+            \end{pmatrix}.
+    \end{equation}
+\end{exercise}
+
+\begin{remark}
+    以上矩阵称作循环矩阵. 循环矩阵有一重要特性: 将 $M$ 中一切非 $2$ 的数字改作 $0$, 得矩阵 $2\cdot Z$, 此时 $M$ 是 $Z$ 的多项式. Now $M^{-1}$ is around the corner. 
+\end{remark}
+
+
+\begin{exercise}
+    计算以下矩阵的逆矩阵 
+    \begin{equation}
+        M=\begin{pmatrix}
+            1 & 1 & 1 & \cdots  & 1 & 1\\
+            1 & 2 & 2 & \cdots  & 2 & 2\\
+            1 & 2 & 3 & \cdots  & 3 & 3\\
+            \vdots  & \vdots  & \vdots  & \ddots  & \vdots  & \vdots \\
+            1 & 2 & 3 & \cdots  & n-1 & n-1\\
+            1 & 2 & 3 & \cdots  & n-1 & n
+            \end{pmatrix}.
+    \end{equation}
+\end{exercise}
+
+\begin{remark}
+    更规范的表述: $m_{i,j}=\min(i,j)$. 
+\end{remark}
+
+\begin{exercise}
+    计算以下矩阵的逆矩阵
+    \begin{equation}
+        M=\begin{pmatrix}
+            k^{0} \cdot C_{0}^{0} &  &  &  &  &  & \\[6pt]
+            k^{1} \cdot C_{1}^{0} & k^{0} \cdot C_{1}^{1} &  &  &  &  & \\[6pt]
+            k^{2} \cdot C_{2}^{0} & k^{1} \cdot C_{2}^{1} & k^{0} \cdot C_{2}^{2} &  &  &  & \\[6pt]
+            \vdots  & \vdots  & \vdots  & \ddots  &  &  & \\[6pt]
+            k^{n-2} \cdot C_{n-2}^{0} & k^{n-3} \cdot C_{n-2}^{1} & k^{n-4} \cdot C_{n-2}^{2} & \cdots  & k^{0} \cdot C_{n-2}^{n-2} &  & \\[6pt]
+            k^{n-1} \cdot C_{n-1}^{0} & k^{n-2} \cdot C_{n-1}^{1} & k^{n-3} \cdot C_{n-1}^{2} & \cdots  & k^{1} \cdot C_{n-1}^{n-2} & k^{0} \cdot C_{n-1}^{n-1} & \\[6pt]
+            k^{n} \cdot C_{n}^{0} & k^{n-1} \cdot C_{n}^{1} & k^{n-2} \cdot C_{n}^{2} & \cdots  & k^{2} \cdot C_{n}^{n-2} & k^{1} \cdot C_{n}^{n-1} & k^{0} \cdot C_{n}^{n}
+        \end{pmatrix}.
+    \end{equation}
+\end{exercise}
+
+\begin{remark}
+    以上 $C_n^k=\binom{n}{k}=\frac{n!}{k!(n-k)!}$ 是组合数\footnote{约定: 若 $n\cdot k=0$, 则 $C_n^k=0$. 更惯用且国际化的记号是 $\binom nk$. }. 
+    
+    提示: 矩阵 $A=B$ 的充要条件是 $Av=Bv$ 对一切试验向量 $v$ 成立. 这个观点\footnote{换言之, $A=B$ 当且仅当 $A$ 与 $B$ 描述了同一基底下的相同线性映射. 从类型论的观点看, 假定 $\mathtt A$ 与 $\mathtt B$ 有相同的类型 $\mathtt{\mathbb F^m\to \mathbb F^n}$, 则试验向量是所谓的 $\mathtt{\lambda (v:\mathbb F^m)}$. 从范畴论的观点看, 这是``极弱化版的''米田引理.}类似电学中的``试验电荷''. 此处的试验向量 $v$ 可以取作特殊的列向量 $(1,t,t^2,\ldots, t^n)$ (为什么?). 
+\end{remark}
+
+\newpage
+
+\section{困难习题}
+
+\begin{exercise}
+    计算以下矩阵的逆矩阵
+    \begin{equation}
+        M=\begin{pmatrix}
+            2\cos x & 1 &  &  &  & \\
+            1 & 2\cos x & 1 &  &  & \\
+             & 1 & 2\cos x & 1 &  & \\
+             &  & 1 & \ddots  & \ddots  & \\
+             &  &  & \ddots  & 2\cos x & 1\\
+             &  &  &  & 1 & 2\cos x
+            \end{pmatrix}.
+    \end{equation}
+\end{exercise}
+
+\begin{remark}
+    提示: 考虑\href{en.wikipedia.org/wiki/Chebyshev_polynomials}{切比雪夫多项式}\footnote{该俄文名存在 Chebyshev, Tchebichef, Tchebychev, Tchebycheff, Tschebyschev, Tschebyschef, Tschebyscheff, Čebyčev, Čebyšev, Chebysheff, Chebychov 或 Chebyshov 等形式的英文转写; 中文翻译统一作``切比雪夫''. 类似地, 拓扑常用的``吉洪诺夫定理''也存在多种英文表述, 需稍作留意.}. \href{www.sciencedirect.com/science/article/pii/S0024379500002895}{此文}总结了部分三对角矩阵的逆, 也可按图索骥地搜寻更多文献. 
+\end{remark}
+
+\begin{exercise}
+    计算以下矩阵的逆矩阵
+    \begin{equation}
+        M =\begin{pmatrix}
+            ( 1+1)^{-1} & ( 1+2)^{-1} & ( 1+3)^{-1} & \cdots  & ( 1+n-1)^{-1} & ( 1+n)^{-1}\\
+            ( 2+1)^{-1} & ( 2+2)^{-1} & ( 2+3)^{-1} & \cdots  & ( 2+n-1)^{-1} & ( 2+n)^{-1}\\
+            ( 3+1)^{-1} & ( 3+2)^{-1} & ( 3+3)^{-1} & \cdots  & ( 3+n-1)^{-1} & ( 3+n)^{-1}\\
+            \vdots  & \vdots  & \vdots  & \ddots  & \vdots  & \vdots \\
+            ( n-1+1)^{-1} & ( n-1+2)^{-1} & ( n-1+3)^{-1} & \cdots  & ( n-1+n-1)^{-1} & ( n-1+n)^{-1}\\
+            ( n+1)^{-1} & ( n+2)^{-1} & ( n+3)^{-1} & \cdots  & ( n+n-1)^{-1} & ( n+n)^{-1}
+            \end{pmatrix}.
+    \end{equation}
+\end{exercise}
+
+\begin{remark}
+    答案见\href{proofwiki.org/wiki/Inverse_of_Hilbert_Matrix}{此文}. 若矩阵通过两个数列和的倒数表达 (即, $m_{i,j}=(a_i+b_j)^{-1}$), 则称之 Hilbert 矩阵. Hilbert 矩阵虽然不是 $u^Tv$ 形式的秩 $1$ 矩阵, 但
+    \begin{equation}
+        M=\int_{0}^{1} \begin{pmatrix}t&t^2&\cdots &t^n\end{pmatrix}^T \cdot \begin{pmatrix}t&t^2&\cdots &t^n\end{pmatrix}\operatorname dt. 
+    \end{equation}
+    上式也是 Hilbert 引入 (1890s) 此类矩阵的动机之一; 熟悉 Hilbert 空间的读者或频繁遇见此式. 
+\end{remark}
+
+\begin{exercise}
+    计算以下矩阵的逆矩阵
+    \begin{equation}
+        M=\begin{pmatrix}
+            x_{1}^{1} & x_{1}^{2} & x_{1}^{3} & \cdots  & x_{1}^{n-1} & x_{1}^{n}\\
+            x_{2}^{1} & x_{2}^{2} & x_{2}^{3} & \cdots  & x_{2}^{n-1} & x_{2}^{n}\\
+            x_{3}^{1} & x_{3}^{2} & x_{3}^{3} & \cdots  & x_{3}^{n-1} & x_{3}^{n}\\
+            \vdots  & \vdots  & \vdots  & \ddots  & \vdots  & \vdots \\
+            x_{n-1}^{1} & x_{n-1}^{2} & x_{n-1}^{3} & \cdots  & x_{n-1}^{n-1} & x_{n-1}^{n}\\
+            x_{n}^{1} & x_{n}^{2} & x_{n}^{3} & \cdots  & x_{n}^{n-1} & x_{n}^{n}
+            \end{pmatrix}.
+    \end{equation}
+\end{exercise}
+
+\begin{remark}
+    答案见\href{proofwiki.org/wiki/Inverse_of_Vandermonde_Matrix}{此文}. 以上矩阵称作 Vandermonde 矩阵, 其主要用途是构造可逆矩阵或是线性无关组. Vandermonde 矩阵的种种性质不依赖基的选取, 有限域上的 Vandermonde 矩阵与编码理论紧密关联. 
+\end{remark}
+
+
+
+\end{document}

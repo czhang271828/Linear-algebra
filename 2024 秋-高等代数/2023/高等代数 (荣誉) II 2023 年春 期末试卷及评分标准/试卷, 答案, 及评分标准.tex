@@ -1,0 +1,268 @@
+\documentclass{MainStyle}
+
+\usepackage{amsthm, amsfonts, amsmath, amssymb, quiver, mathrsfs, newclude, tikz-cd, ctex, mathtools}
+
+% Customise href Colours.
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+
+
+\usepackage{comment}
+\usepackage{color}
+
+\usepackage{versions}
+    %\includeversion{prop}
+    %\excludeversion{evaluation}
+
+\specialcomment{evaluation}{%
+  \begingroup\noindent  \color{red} $\star$ 评分标准:}{%
+  \endgroup} 
+% \excludecomment{Notes}
+
+
+\newcommand{\changeurlcolor}[1]{\hypersetup{urlcolor=#1}}       
+
+\newcommand*{\name}{MATH1406H}
+\newcommand*{\examtime}{2024 年 6 月 12 日, 15:40 至 17:40}
+\newcommand*{\course}{\LARGE 高等代数 (荣誉) II 期末测试}
+\newcommand*{\assignment}{试卷内容+参考答案+评分标准}
+
+\theoremstyle{definition}
+\newtheorem{problem}{问题}
+\newtheorem{solution}{解答}
+% \newtheorem{evaluation}{评分标准} 
+
+
+\allowdisplaybreaks
+
+\begin{document}\large
+\maketitle
+
+\begin{problem}[30 points]
+Fill-in-the-Blank Questions (No need to write the process)
+\begin{enumerate}
+    \item For any vector space $V$, what is the relation between $V^{\ast\ast}$ and $V$.
+    \item Is $(x-1)^2(x-2)^2\cdots (x-2024)^2+1$ irreducible over $\mathbb Q$?
+    \item What is the \emph{Fundamental Theorem of Algebra}?
+    \item Let $V$ be an $n$-dimensional Euclidean space and $v_1\neq v_2\in V$ with $\|v_1\|=\|v_2\|$. Find a $v$ such that the linear transformation
+          \begin{equation*}
+              \varphi :V\to V,\quad u\mapsto u-2(u,v)v
+          \end{equation*}
+          maps $v_1$ to $v_2$.
+    \item Write down the definition of tensor product of $V\otimes U$ of vector spaces.
+    \item Give the construction of the tensor product $V\otimes U$.
+    \item Find $\dim_{\mathbb C}(\mathbb C\otimes_{\mathbb R} \mathbb C)$, that is, the dimension of $\mathbb C\otimes _{\mathbb R}\mathbb C$ over $\mathbb C$.
+    \item Find $\dim _{\mathbb R}(\mathbb C\otimes _{\mathbb R}\mathbb C)$.
+    \item For matrices $A\in \mathbb C^{2\times 2}$ and $B\in \mathbb C^{3\times 3}$ with $\det (A)=2$ and $\det (B)=4$, find $\det (A\otimes B)$.
+    \item Let $A:=\mathrm{diag}(0,1,1,2,2)\in \mathbb C^{5\times 5}$. Define
+          \begin{equation*}
+              \varphi:\mathbb C^{5\times 5}\to \mathbb C^{5\times 5},\quad X\mapsto AX-XA^T.
+          \end{equation*}
+          Find $\dim _{\mathbb C}(\ker \varphi)$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+    解答如下.
+    \begin{enumerate}
+        \item 写出不依赖坐标的典范态射
+              \begin{equation*}
+                  \theta_V: V\to V^{\ast\ast},\quad v\mapsto \{f\mapsto v(f)\}_{f\in V^{\ast}}.
+              \end{equation*}
+              特别地, $\dim V<\infty$ 时 $\theta_V$ 是线性同构.
+
+              若 $V$ 是无限维: 在承认公理``$\forall v\in V\exists f\in V^\ast (f(v)\neq 0)$''时 $\theta_V$ 是单射, 在承认选择公理时 $\theta_V$ 是严格的单射.
+        \item 不可约. 下采用反证法证明. 若该多项式在 $\mathbb Q[x]$ 意义下可约, 则该多项式在 $\mathbb Z[x]$ 意义下可约 (Gauss 引理). 因此存在因式 $g(x)\in \mathbb Z[x]$ 满足 $1\leq \deg g\leq 2024$. 由于 $\{g(i)\}_{i=1}^{2024}\subset \{\pm 1\}$, 且 $g$ 没有零点, 因此 $g(x)-1$ 或者 $g(x)+1$ 有 $2024$ 个相异零点. 遂有
+              \begin{equation*}
+                  g(x)=\lambda\cdot (x-1)(x-2)\cdots (x-2024)\pm 1 \quad (\lambda\in \mathbb Q).
+              \end{equation*}
+              容易检验, 此时 $g$ 与原多项式互素, 故矛盾.
+        \item 代数闭域 (或 $\mathbb C$) 上的非常值多项式存在该域上的根.
+        \item $\|v_1-v_2\|^{-1}\cdot (v_1-v_2)$. 几何地, $v$ 是单位反射向量, 其方向是 $v_2$ 指向 $v_1$.
+        \item $V\otimes U$ 即双线性映射 $\iota: V\times U\to V\otimes U$, 定义作如下普适映射问题的解: 对任意线性空间 $W$, 所有双线性映射 $F:V\times U\to W$ 双射对应于所有线性映射 $f:V\otimes U\to W$, 对应方式是 $F=f\circ \iota$.
+        \item $V\otimes U$ 是集合的 Cartesian 积 $V\times U$ 在约束 $R$ 下的自由化线性空间. $R$ 取遍如下三类式子:
+              \begin{align*}
+                   & (u_1+u_2,v_1)-(u_1,v_1)-(u_2,v_1),\quad (u_1,v_1+v_2)-(u_1,v_1)-(u_1,v_2),                                       \\[6pt]
+                   & (u_1,\lambda v_1)-(\lambda u_1,v_1)\qquad\qquad\qquad\quad (\forall u_i\in U,\,v_i\in V,\,\lambda\in \mathbb F).
+              \end{align*}
+              注: 集合 $X$ 的自由化 $k$-线性空间 ($FX$) 的一种定义是 $i(X)$ 的线性张成, 此处
+              \begin{equation}
+                  i: X\hookrightarrow (\mathrm{Hom}_{\mathrm{Sets}}(X,k))^\ast ,\quad x\mapsto [f\mapsto f(x)].
+              \end{equation}
+              此时 $V\otimes U:=F(V\times U)/N$, 子空间 $N\subset F(V\times U)$ 由以上三类线性组合式张成.
+        \item $2$. 考虑 $\mathbb C\otimes _{\mathbb R}\mathbb C\cong \mathbb C\otimes_{\mathbb R}(\mathbb R\oplus \mathbb Ri)$. 依照张量积与直和的分配律得 $\mathbb C\otimes_{\mathbb R}\mathbb C\cong (\mathbb C\otimes_{\mathbb R}\mathbb R)^{\oplus 2}\cong \mathbb C^{\oplus 2}$.
+        \item $4$. 将 $\mathbb C$ 视作二维 $\mathbb R$-线性空间, 再依照 $\dim \mathcal (U,V)=(\dim U)\cdot (\dim V)$ 即可.
+        \item $128$. 依照 $\det(A_{m\times m}\otimes B_{n\times n})=(\det A)^n\cdot (\det B)^m$ 即可.
+        \item $9$. 即, 求 $25$-阶对角映射 $A\otimes I-I\otimes A$ 的零空间维数. 观察得 $1^2+2^2+2^2=9$.
+    \end{enumerate}
+\end{solution}
+
+\begin{evaluation}
+    基准分 $10$ 分, 每题满分两分. 详情如下.
+    \begin{enumerate}
+        \item 出现以下情形之一则得 $2$ 分: (1) 写明典范态射的元素对应方式, (2) 同时写出``有限维同构'', 以及``无穷维情况不同于有限维''. 出现以下情形之一得 $1$ 分: (1) 仅考虑有限维情形; (2) 将同构写作等号, 或者将单射写作子集的包含. 对上述未提及的作答酌情给分.
+        \item 依照判断题或简答题标准给 $2$ 分或 $0$ 分.
+        \item 遗漏代数闭域 (或 $\mathbb C$) 条件扣 $1$ 分, 遗漏多项式非常值扣 $1$ 分, 偏题扣 $2$ 分. 扣完为止.
+        \item 未化简不扣分. 整体相差一个负号扣 $1$ 分. 其余情形扣 $2$ 分.
+        \item 遗漏``双线性映射''或者``线性映射''等限定这扣 $1$ 分, 采用其他定义酌情给分.
+        \item 遗漏``有限和''扣 $1$ 分. 误表述``自由化''者扣 $1$ 分. 扣完为之. 其余构造酌情给分.
+        \item 依照判断题或简答题标准给 $2$ 分或 $0$ 分.
+        \item 依照判断题或简答题标准给 $2$ 分或 $0$ 分.
+        \item 依照判断题或简答题标准给 $2$ 分或 $0$ 分.
+        \item 依照判断题或简答题标准给 $2$ 分或 $0$ 分.
+    \end{enumerate}
+\end{evaluation}
+
+\begin{problem}[20 points]
+Suppose $\sigma\in \mathrm{Hom}(V,W)$ and $U$ is a subspace of $V$. Let $\pi$ denote the quotient map from $V$ onto $V/U$. Prove that there exists $\tau\in \mathrm{Hom}(V/U,W)$ such that $\sigma=\tau\pi$ if and only if $U\subseteq \ker\sigma$.
+\end{problem}
+
+\begin{solution}
+    本题考察余核泛性质之刻画. 式``$\sigma=\tau\pi$''意即 $\sigma(v)=\tau(v+U)$ 恒成立. 依照线性性, 上式亦等价于 $\sigma(u)=\sigma(0)$ ($\forall u\in U$), 即 $U\subseteq \ker(\sigma)$.
+\end{solution}
+
+\begin{evaluation}
+    指出该题本质是 $\mathrm{coker}$ 的泛性质, 商空间的泛性质, 或 $\mathrm{Hom}(-,W)$ 左正合性者得满分. 若分别证明充分性与必要性, 每部分得 $10$ 分. 若作答出现常识性错误, 需适当扣分.
+\end{evaluation}
+
+\begin{problem}
+Proof or disproof: if an orthogonal transformation $\mathscr A$ on an $n$-dimensional Euclidean space $V$ has two different eigenvalues, then the eigenvectors of $\mathscr A$ corresponding to different eigenvalues are orthogonal.
+\end{problem}
+
+\begin{solution}
+    记 $(-,-)$ 为内积, $\mathscr Av_i=\lambda_i v_i$ 是特征向量 ($i=1,2$), 满足 $\lambda_1\neq \lambda _2$. 由于 $\|\mathscr A v_i\|=\|v_i\|$, 从而 $\lambda_i\in \{\pm 1\}$. 此时
+    \begin{equation*}
+        (v_1,v_2)=(\mathscr Av_1,\mathscr Av_2)=\lambda_1\lambda_2 (v_1,v_2)=-(v_1,v_2).
+    \end{equation*}
+    遂有 $(v_1,v_2)=0$.
+\end{solution}
+
+\begin{evaluation}
+    若出现``不加说明地采用 $\mathscr A$ 的矩阵形式''``混淆 $\mathscr A$ 与 $\mathscr A^\ast$''等错误, 应适当扣分. 对滥用复化条件, 行文冗余严重的作答扣 $1$ 分.
+\end{evaluation}
+
+\begin{problem}
+Set $V:=\mathbb R[x]$ and $V_0:=\{f\in \mathbb R[x]\mid f(0)=f(1)\}$.
+\begin{enumerate}
+    \item Prove that $V\times V\to \mathbb R,\quad (f,g)\mapsto \int_0^1 f(x)g(x)\operatorname dx$ is an inner product.
+    \item Set $\mathscr D:V_0\to V,\quad f(x)\mapsto f^\prime (x)$. Find $\dim\ker(\mathscr D)$ and $\dim\operatorname{coker}(\mathscr D)$.
+    \item Define the inner product restricted on the subspace
+          \begin{equation*}
+              (\cdot ,\cdot )_0:V_0\times V_0\to \mathbb R,\quad (f,g)\mapsto \int_0^1 f(x)g(x)\operatorname d x.
+          \end{equation*}
+          Is there any linear map $\mathscr D^\ast:V\to V_0$ such that for any $h\in V_0$ and $g\in V$,
+          \begin{equation*}
+              (\mathscr D^\ast g,h)_0=(g,\mathscr Dh)?
+          \end{equation*}
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+    解答如下.
+    \begin{enumerate}
+        \item 容易验证双线性性, 等式 $(f,g)=(g,f)$, 以及 $(f,f)\geq 0$. 正定性之证明: 若 $(f,f)=0$, 则 $f$ 是定义区间 $[0,1]$ 上恒零的多项式, 从而是 $\mathbb R[x]$ 中的零元.
+        \item 记 $D:V\to V$ 为 $V$ 上导数, $i:V_0\to V$ 为子集的包含映射, 故 $Di=\mathscr D$.
+              \begin{itemize}
+                  \item 往证 $\dim \ker (\mathscr D)=1$. 由于 $i$ 是单射, 从而 $\dim \ker (Di)\leq \dim \ker (D)=1$. 由于常函数属于 $\ker (\mathscr D)$, 故上式取等.
+                  \item 往证 $\dim \mathrm{coker} (\mathscr D)=1$. 由于 $D$ 是满射, 从而 $\dim \mathrm{coker}  (Di)\leq \dim \mathrm{coker}  (i)=1$. 由于常函数不属于 $\mathrm{im} (\mathscr D)$, 故上式取等.
+              \end{itemize}
+        \item $\mathscr D^\ast$ 不存在. 下采用反证法证明: 若 $\mathscr D^\ast$ 存在, 限定多项式 $h$ 满足 $h(0)=h(1)=0$, 则
+              \begin{equation*}
+                  (\mathscr D^\ast, h)=(g,\mathscr Dh)=(-g^\prime ,h).
+              \end{equation*}
+              若能证明 $\mathscr D^\ast g +g^\prime$ 恒零, 则 $g^\prime \in V_0$ 与假设矛盾. 故只需证明
+              \begin{equation*}
+                  V_1:\{h\in \mathbb R[x]\mid h(0)=h(1)=0\}=\{x(1-x)f(x)\mid f\in \mathbb R[x]\}
+              \end{equation*}
+              在 $V$ 中的正交补是 $0$. 对任意 $p(x)\in V_1^\perp$, 考虑
+              \begin{equation*}
+                  0=(x(1-x)p(x),p(x))=\int_0^1 x(1-x) p(x)^2\operatorname{d}x
+              \end{equation*}
+              从而 $p(x)=0$. 因此, $V_1$ 在 $V$ 中补空间是 $0$.
+    \end{enumerate}
+\end{solution}
+
+\begin{evaluation}
+    凡遗漏或误答以下者, 每处各扣 $2$ 分: ``未证明内积的正定性''``未证明内积的对称性''``$\dim \ker\mathscr D$''``$\dim \operatorname{coker}\mathscr D$''. 对最后一问酌情扣 $0$ 至 $3$ 分.
+\end{evaluation}
+
+\begin{problem}
+The vector spaces in this problem are all finite dimensional.
+\begin{enumerate}
+    \item Given linear maps $\varphi_i\in \mathrm{Hom}(U_i,V_i)$ ($i=1,2$), show that the following map is well-defined.
+          \begin{equation*}
+              \varphi_1\otimes \varphi_2:U_1\otimes U_2\to V_1\otimes V_2,\quad \sum_{\text{finite}}u_1^{(i)}\otimes u_2^{(i)}\mapsto \sum_{\text{finite}}\varphi_1(u_1^{(i)})\otimes \varphi_2(u_2^{(i)})
+          \end{equation*}
+    \item Let $p:U\to V$ be a surjective linear map. Show that for any linear space $W$,
+          \begin{equation*}
+              p\otimes \mathrm{id}_W:U\otimes W\to V\otimes W,\quad \sum_{\text{finite}}u^{(i)}\otimes w^{(i)}\mapsto \sum_{\text{finite}}p(u^{(i)})\otimes w^{(i)}
+          \end{equation*}
+          is also surjective.
+    \item Let $i:U\to V$ be an injective linear map. Show that for any linear space $W$,
+          \begin{equation*}
+              p\otimes \mathrm{id}_W:U\otimes W\to V\otimes W,\quad \sum_{\text{finite}}u^{(i)}\otimes w^{(i)}\mapsto \sum_{\text{finite}}i(u^{(i)})\otimes w^{(i)}
+          \end{equation*}
+          is also injective.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+    解答如下.
+    \begin{enumerate}
+        \item 张量积 $\iota_V:V_1\times V_2\to V_1\otimes V_2$ 是良定义的双线性型, 因此, 双线性型的拉回
+              \begin{equation*}
+                  U_1\times U_2\to V_1\otimes V_2,\quad (u_1,u_2)\mapsto \iota_V(\varphi_1(u_1),\varphi_2(u_2))
+              \end{equation*}
+              也是良定义的双线性型. 依照泛性质定义 $\varphi_1\otimes \varphi_2$, 并检验简单张量的像
+              \begin{equation*}
+                  \varphi_1\otimes \varphi_2:u_1\otimes u_2\mapsto \varphi_1(u_1)\otimes \varphi_2(u_2).
+              \end{equation*}
+              依照线性性, 如上良定义的 $\varphi_1\otimes \varphi_2$ 满足题干条件.
+        \item 任意 $v^{(i)}\in V$ 有原像 $u^{(i)}$, 从而
+              \begin{equation*}
+                  \sum_{\text{finite}}v^{(i)}\otimes w^{(i)}
+              \end{equation*}
+              有 $p\otimes \mathrm{id}_W$ 下的原像
+              \begin{equation*}
+                  \sum_{\text{finite}}u^{(i)}\otimes w^{(i)}\quad (p(u^{(i)})=v^{(i)}).
+              \end{equation*}
+        \item 由于 $i\otimes \mathrm{id}_W$ 的良定义性, 不妨设定义域中的加和项数等于张量的秩, 亦即 $\{u^{(i)}\}$ 与 $\{w^{(i)}\}$ 是线性无关组. 由于单射保持线性无关组, 故 $\{i(u^{(i)})\}$ 也是线性无关的. 最后依照课堂引理或是如下方法证明 $0$ 的原像也是 $0$. 取一族与 $\{w^{i}\}$ 适配的示性对偶映射 $\{f_{(i)}\in W^\ast\}$, 满足 $f_{(i)}(w^{(j)})=\delta_{i,j}$. 当 $\sum_{\text{finite}}u^{(i)}\otimes w^{(i)}=0$ 时, 有
+              \begin{equation*}
+                  \mathrm{id}_V\otimes f_{(j)}: \sum_{\text{finite}}i(u^{(i)})\otimes w^{(i)}=i(u^{(i)})=0.
+              \end{equation*}
+              这表明所有 $i(u^{(i)})$ 为零. 依照 $i$ 是单射, 故所有 $u^{(i)}$ 为零. 这表明 $i\otimes \mathrm{id}_W$ 是单的.
+    \end{enumerate}
+\end{solution}
+
+\begin{evaluation}
+    每问 $4$ 分. 第 $1$ 小问: 未使用泛性质说理者扣 $1$ 至 $4$ 分. 第 $2$ 小问: 将张量混同作简单张量者扣 $2$ 至 $4$ 分. 第 $3$ 小问: 将张量混同作简单张量者扣 $2$ 至 $4$ 分. 对完成度较低的问题再作适当扣分.
+\end{evaluation}
+
+\begin{problem}
+Let $V$ be an $n$-dimensional Euclidean space and the set of vectors $\{\alpha_1,\alpha_2,\ldots ,\alpha_m\}$ satisfy the following condition: if there exists non-negative real numbers $\lambda_1,\lambda_2,\ldots, \lambda_m$ such that $\lambda_1\alpha_1+\lambda_2\alpha_2+\cdots +\lambda_m\alpha_m=0$, then it must be that $\lambda_1=\lambda_2=\cdots =\lambda_m=0$. Prove: there exists a vector $\alpha\in V$ such that $(\alpha,\alpha_i)>0$ for all $1\leq i\leq m$.
+\end{problem}
+
+\begin{solution}
+    本题系凸集分离定理的弱化版本. 将向量族 $\{\alpha_i\}$ 的正项系数线性组合单位化成凸组合:
+    \begin{equation*}
+        \lambda_1\alpha_1+\lambda_2\alpha_2+\cdots +\alpha_n\alpha_n\quad \mapsto \quad \frac{\lambda_1\alpha_1+\lambda_2\alpha_2+\cdots +\alpha_n\alpha_n}{\lambda_1+\lambda_2 +\cdots +\lambda_n}.
+    \end{equation*}
+    定义 $\{\alpha_i\}$ 的凸包为有界闭集 (紧集)
+    \begin{equation*}
+        S:=\{\lambda_1\alpha_1+\lambda_2\alpha_2+\cdots +\lambda_n\alpha_n\mid 0\leq \lambda_i\leq 1,\lambda_1+\lambda_2+\cdots +\lambda_n=1\}.
+    \end{equation*}
+    显然 $0\notin S$, 故 $S$ 中存在模长极小元 $x_m$ (紧集上的连续映射取达最值). 下证明 $x_m$ 唯一: 若存在不同于 $x_m$ 的 $y_m$ 使得 $\|x_m\|=\|y_m\|$, 则依照 $S$ 的构造知存在模长更小的元素 $\frac{1}{2}(x_m+y_m)\in S$, 矛盾. 最后断言不存在 $x\in S$ 使得 $(x,x_m)<(x_m,x_m)$; 若不然,
+    \begin{align*}
+        \frac{\operatorname d}{\operatorname d\lambda}\|\lambda x+(1-\lambda)x_m\|^2 & =2\lambda (x,x)+2(1-2\lambda)(x,x_m)+2(\lambda-1)(x_m,x_m)
+    \end{align*}
+    在 $\lambda=0$ 处的导数小于 $0$, 与 $x_m$ 模长最小矛盾. 由于 $\alpha_i\in S$, 故 $\alpha=x_m$ 即为所求.
+\end{solution}
+
+\begin{evaluation}
+    基准分 $4$ 分. 酌情给分.
+\end{evaluation}
+
+\end{document}

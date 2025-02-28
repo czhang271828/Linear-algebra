@@ -1,0 +1,203 @@
+\documentclass[11pt]{ctexart}
+\usepackage[margin=2cm,a4paper]{geometry}
+\usepackage{amsthm, amsfonts, amsmath, amssymb, mathrsfs, newclude, tikz-cd, tikz, ctex, mathtools, stmaryrd, datetime}
+
+%\setmainfont{Caladea}
+
+%% 也可以选用其它字库:
+% \setCJKmainfont[%
+%   ItalicFont=AR PL KaitiM GB,
+%   BoldFont=Noto Sans CJK SC,
+% ]{Noto Serif CJK SC}
+% \setCJKsansfont{Noto Sans CJK SC}
+% \renewcommand{\kaishu}{\CJKfontspec{AR PL KaitiM GB}}
+
+
+
+\usepackage[colorlinks = true,
+linkcolor = blue,
+urlcolor  = blue,
+citecolor = blue,
+anchorcolor = blue]{hyperref}
+
+% Include the x-color package for color support
+\usepackage{xcolor}
+
+% Define a new environment for red comments
+\usepackage{verbatim} % Required for the comment environment
+\usepackage{environ}
+
+\usepackage{mdframed} % Include mdframed for creating framed environments
+
+\definecolor{pinked}{RGB}{255,231,229} % Define a base color 
+% Define a new environment with a background color
+\newmdenv[
+  backgroundcolor=pinked, % Set the desired background color
+  linecolor=white, % Optional: Set the border line color
+  linewidth=1pt, % Optional: Set the border line width
+  roundcorner=5pt, % Optional: Set rounded corners
+  nobreak=true % Optional: Prevent page breaks within the environment
+]{pinked}
+
+\theoremstyle{definition}
+\newtheorem{qqq}{问题}[section]
+
+\newcommand{\ExternalLink}{%
+    \tikz[x=1.2ex, y=1.2ex, baseline=-0.05ex]{% 
+        \begin{scope}[x=1ex, y=1ex]
+            \clip (-0.1,-0.1) 
+                --++ (-0, 1.2) 
+                --++ (0.6, 0) 
+                --++ (0, -0.6) 
+                --++ (0.6, 0) 
+                --++ (0, -1);
+            \path[draw, 
+                line width = 0.5, 
+                rounded corners=0.5] 
+                (0,0) rectangle (1,1);
+        \end{scope}
+        \path[draw, line width = 0.5] (0.5, 0.5) 
+            -- (1, 1);
+        \path[draw, line width = 0.5] (0.6, 1) 
+            -- (1, 1) -- (1, 0.6);
+        }
+    }
+
+\NewEnviron{aaa}{~\\
+    \noindent {\textcolor{teal}{\textbf{解答}} \BODY }
+}
+
+\NewEnviron{llll}{
+    \noindent {~\\$\ExternalLink$ 外部链接 $\,\,\,$ \color{blue}\url{\BODY} }
+}
+
+\renewcommand{\proofname}{证明}
+\renewcommand\qedsymbol{${\boxed{\substack{\textit{完证}\\\textit{毕明}}}}$}
+\let\oldproof\proof
+\renewcommand{\proof}{\color{blue}\oldproof}
+
+% Change equation numbering to include the section number
+\usepackage{cleveref}
+\renewcommand{\theequation}{\thesection.\thesubsection.\arabic{equation}}
+\numberwithin{equation}{section}
+
+\usepackage{listings}
+% Define listings style
+\lstset{
+  frame=tb,
+  language=TeX,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\theoremstyle{definition}
+\newtheorem*{definition}{定义}
+\newtheorem*{proposition}{命题}
+\newtheorem*{theorem}{定理}
+\newtheorem*{notation}{记号}
+\newtheorem*{example}{例子}
+\newtheorem{exercise}{\textcolor{blue}{习题}}
+\theoremstyle{remark}
+\newtheorem*{remark}{备注}
+\newtheorem*{lemma}{引理}
+\newtheorem*{corollary}{推论}
+
+\title{习题: 对称矩阵 (\LaTeX 重排)}
+\author{(2024-2025-1)-MATH1405H-02}
+
+\setcounter{page}{0}
+
+\setlength\parindent{0pt}
+
+\begin{document}
+
+\maketitle
+
+\vspace{5cm}
+
+\section*{前言}
+
+\begin{pinked}
+\begin{theorem}[相抵标准型]
+    对任意 $A\in \mathbb F^{m\times n}$, 存在 $P\in \mathrm{GL}_m(\mathbb F)$ 与 $Q\in \mathrm{GL}_n(\mathbb F)$ 使得 
+\begin{equation}
+    PAQ=\begin{pmatrix}I_r&O\\O&O\end{pmatrix}\qquad( r=\mathrm{rank}(A)).
+\end{equation}
+\end{theorem}
+\end{pinked}
+
+\begin{remark}
+    注: $r$ 唯一确定. $P$ 和 $Q$ 不必唯一. 
+\end{remark}
+
+\begin{remark}
+    域是任意的. 
+\end{remark}
+
+\begin{remark}
+$\mathrm{GL}_n(\mathbb F)$ 代表 $\mathbb F$ 上 $n$-阶可逆矩阵全体 (一般作为乘法群). 
+\end{remark}
+
+\begin{remark}
+    矩阵的行列不必等长. 方阵的行列等长. 
+\end{remark}
+
+\begin{remark}
+    记 $r(A)$ 为矩阵 $A$ 的秩. 
+\end{remark}
+
+\begin{pinked}
+    请不要盲目使用 Jordan 标准型. 在完整地引入域扩张, 初等因子等理论之前, Jordan 标准型仅对 $\mathbb C$ 上的矩阵有效. 此处的 $\mathbb F$ 是任意域. 
+\end{pinked}
+
+\newpage
+
+\section{第一部分习题}
+
+\begin{exercise}[同时相抵化] 对相同规格的矩阵 $A$ 与 $B$. 若
+    \begin{equation}
+        \mathrm{rank}(A+B)=\mathrm{rank}(A)+\mathrm{rank}(B),
+    \end{equation}
+    则存在 $P\in \mathrm{GL}_m(\mathbb F)$ 与 $Q\in \mathrm{GL}_n(\mathbb F)$ 使得 
+    \begin{equation}
+        PAQ=\begin{pmatrix}I_{\mathrm{rank}(A)}&O&O\\O&O&O\\O&O&O\end{pmatrix},\quad PBQ=\begin{pmatrix}O&O&O\\O&O&O\\O&O&I_{\mathrm{rank}(B)}\end{pmatrix}.
+    \end{equation}
+\end{exercise}
+
+\begin{exercise}[分块上三角化] 
+    记矩阵 (各分块不必是方阵)
+\begin{equation}
+    M=\begin{pmatrix}A&C\\O&B\end{pmatrix}.
+\end{equation} 
+证明 $r(M)=r(A)+r(B)$ 的充要条件如下: 
+\begin{itemize}
+    \item 存在矩阵 $X$ 与 $Y$ 使得 $AX+YB=C$.
+\end{itemize}
+\end{exercise}
+
+\begin{exercise}[何时能砍掉无用的行列空间]
+    所有矩阵不必是方阵. 证明: 
+    \begin{equation}
+        r\left(\begin{pmatrix}
+            A&B\\C&D
+            \end{pmatrix}\right)=r(A)
+    \end{equation}
+    的充要条件是存在 $X$ 与 $Y$, 使得以下三个等式同时成立
+\begin{equation}
+    AX=B,\quad YA=C,\quad YAX=D.
+\end{equation}
+\end{exercise}
+
+\section{第二部分习题}
+
+
+
+
+\end{document}

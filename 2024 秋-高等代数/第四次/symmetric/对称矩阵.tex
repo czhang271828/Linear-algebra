@@ -1,0 +1,303 @@
+\documentclass[11pt]{ctexart}
+\usepackage[margin=2cm,a4paper]{geometry}
+\usepackage{amsthm, amsfonts, amsmath, amssymb, mathrsfs, newclude, tikz-cd, tikz, ctex, mathtools, stmaryrd, datetime}
+
+%\setmainfont{Caladea}
+
+%% 也可以选用其它字库:
+% \setCJKmainfont[%
+%   ItalicFont=AR PL KaitiM GB,
+%   BoldFont=Noto Sans CJK SC,
+% ]{Noto Serif CJK SC}
+% \setCJKsansfont{Noto Sans CJK SC}
+% \renewcommand{\kaishu}{\CJKfontspec{AR PL KaitiM GB}}
+
+
+
+\usepackage[colorlinks = true,
+linkcolor = blue,
+urlcolor  = blue,
+citecolor = blue,
+anchorcolor = blue]{hyperref}
+
+% Include the x-color package for color support
+\usepackage{xcolor}
+
+% Define a new environment for red comments
+\usepackage{verbatim} % Required for the comment environment
+\usepackage{environ}
+
+\usepackage{mdframed} % Include mdframed for creating framed environments
+
+\definecolor{pinked}{RGB}{255,231,229} % Define a base color 
+% Define a new environment with a background color
+\newmdenv[
+  backgroundcolor=pinked, % Set the desired background color
+  linecolor=white, % Optional: Set the border line color
+  linewidth=1pt, % Optional: Set the border line width
+  roundcorner=5pt, % Optional: Set rounded corners
+  nobreak=true % Optional: Prevent page breaks within the environment
+]{pinked}
+
+\theoremstyle{definition}
+\newtheorem{qqq}{问题}[section]
+
+\newcommand{\ExternalLink}{%
+    \tikz[x=1.2ex, y=1.2ex, baseline=-0.05ex]{% 
+        \begin{scope}[x=1ex, y=1ex]
+            \clip (-0.1,-0.1) 
+                --++ (-0, 1.2) 
+                --++ (0.6, 0) 
+                --++ (0, -0.6) 
+                --++ (0.6, 0) 
+                --++ (0, -1);
+            \path[draw, 
+                line width = 0.5, 
+                rounded corners=0.5] 
+                (0,0) rectangle (1,1);
+        \end{scope}
+        \path[draw, line width = 0.5] (0.5, 0.5) 
+            -- (1, 1);
+        \path[draw, line width = 0.5] (0.6, 1) 
+            -- (1, 1) -- (1, 0.6);
+        }
+    }
+
+\NewEnviron{aaa}{~\\
+    \noindent {\textcolor{teal}{\textbf{解答}} \BODY }
+}
+
+\NewEnviron{llll}{
+    \noindent {~\\$\ExternalLink$ 外部链接 $\,\,\,$ \color{blue}\url{\BODY} }
+}
+
+\renewcommand{\proofname}{证明}
+\renewcommand\qedsymbol{${\boxed{\substack{\textit{完证}\\\textit{毕明}}}}$}
+\let\oldproof\proof
+\renewcommand{\proof}{\color{blue}\oldproof}
+
+% Change equation numbering to include the section number
+\usepackage{cleveref}
+\renewcommand{\theequation}{\thesection.\thesubsection.\arabic{equation}}
+\numberwithin{equation}{section}
+
+\usepackage{listings}
+% Define listings style
+\lstset{
+  frame=tb,
+  language=TeX,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\theoremstyle{definition}
+\newtheorem*{definition}{定义}
+\newtheorem*{proposition}{命题}
+\newtheorem*{theorem}{定理}
+\newtheorem*{notation}{记号}
+\newtheorem*{example}{例子}
+\newtheorem{exercise}{\textcolor{blue}{习题}}
+\theoremstyle{remark}
+\newtheorem*{remark}{备注}
+\newtheorem*{lemma}{引理}
+\newtheorem*{corollary}{推论}
+
+\title{习题: 对称矩阵 (\LaTeX 重排)}
+\author{(2024-2025-1)-MATH1405H-02}
+
+\setcounter{page}{0}
+
+\setlength\parindent{0pt}
+
+\begin{document}
+
+\maketitle
+
+\vspace{5cm}
+
+\section*{前言}
+
+\textbf{只需完成习题 1 与习题 2}. 若想提升个人实力, 建议完成剩下的题目. 
+
+\begin{itemize}
+    \item 习题 3 与习题 4 的唯一作用是提升计算能力, 同时熟悉一些特殊矩阵的结构.
+    \item 习题 5 是脑经急转弯, 请勿擅自点拨他人.
+    \item 习题 6 是去年的考试题, 可以挑战在 15 分钟内完成.   
+\end{itemize}
+
+\begin{pinked}
+\LaTeX 重排版修改了部分题目以及提示. 并未改动习题 1 或习题 2. 
+\end{pinked}
+
+\newpage
+
+\section*{习题内容}
+
+\begin{exercise}
+对称矩阵的判断题. 不必证明真命题, 但需要对假命题举出反例.
+\begin{enumerate}
+    \item 线性空间 $\mathbb F^{n\times n}$ 中的对称矩阵构成 $\binom{n+1}{2}=\frac{n^2+n}{2}$-维子空间. 
+    \begin{proof}
+        正确. 基底可取 $\{E_{i,i}\}_{i=1}^n\cup \{E_{i,j}+E_{j,i}\}_{1\leq i<j\leq n}$. 
+    \end{proof}
+    \item 分块矩阵 $\begin{pmatrix}A&B\\C&D\end{pmatrix}$ 是对称的, 当且仅当 $B=C^T$. 
+    \begin{proof}
+        错误. $A$ 与 $D$ 不必是对称矩阵. 
+    \end{proof}
+    \item 给定阶数相同的对称方阵 $A$ 与 $B$, 则 $A\cdot B$ 亦对称. 
+    \begin{proof}
+        错误. 例如 $\binom{0\,\,1}{1\,\,0}\cdot \binom{1\,\,0}{0\,\,0}=\binom{0\,\,1}{0\,\,0}$. 
+    \end{proof}
+    \item 给定阶数相同的方阵 $A$ 与 $B$, 若 $A\cdot B=B\cdot A$ 对称, 则 $A$ 与 $B$ 必有一者对称.
+    \begin{proof}
+        错误. 例如 $A$ 不对称, $B=O$. 
+    \end{proof}
+    \item 若 $A^2$ 是对称矩阵, 则 $A$ 对称. 
+    \begin{proof}
+        错误. 例如 $A=\binom{0\,\,1}{0\,\,0}$. 
+    \end{proof}
+\end{enumerate} 
+\end{exercise}
+
+\begin{exercise}
+    若 $X$ 与线性空间 $\mathbb F^{n\times n}$ 中一切对称矩阵乘积可交换, 试求 $X$. 
+    \begin{proof}
+        假定 $A$ 与所有对称矩阵交换. $A$ 的存在性是显然的, 例如 $A=O$. 
+        \begin{itemize}
+            \item $A$ 是对角矩阵. 对所有形如 $E_{i,i}$ 的矩阵, 均有 $E_{i,i}A=AE_{i,i}$, 此时 $A$ 对角. 
+            \item $A$ 是数乘矩阵. 记 $A=\sum c_i E_{i,i}$, 由 $A(E_{i,j}+E_{j,i})=(E_{i,j}+E_{j,i})A$ 可知 $c_i=c_j$. 
+        \end{itemize}
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}
+    给出以下方程的一个解: 
+\begin{equation}
+    L\cdot L^T=\begin{pmatrix}3&2&1\\2&2&1\\1&1&1\end{pmatrix}. 
+\end{equation}
+其中, 要求 $L$ 为下三角矩阵
+\begin{equation}
+    \begin{pmatrix}a&\\b&c\\d&e&f\end{pmatrix}. 
+\end{equation}
+\begin{itemize}
+    \item 以上是数值分析中常见的 Cholesky 分解. 这一个分解对所有 (半) 正定矩阵奏效.
+\end{itemize} 
+\begin{proof}
+    直接地, $a^2=9$. 取 $a=\sqrt 3$, 则得 $L$ 的第一纵列
+    \begin{equation}
+        L=\begin{pmatrix}\sqrt 3&\\{2}/{\sqrt 3}&c\\{1}/{\sqrt 3}&e&f\end{pmatrix}. 
+    \end{equation}
+    此时 $\frac 43+c^2=2$. 不妨取 $c=\frac{\sqrt 2}{\sqrt 3}$, 则得 $L$ 的第二纵列
+    \begin{equation}
+        L=\begin{pmatrix}\sqrt 3&\\{2}/{\sqrt 3}&{\sqrt 2}/{\sqrt 3}\\{1}/{\sqrt 3}&{\sqrt 2}/{2\sqrt 3}&{\sqrt 2}/{2}\end{pmatrix}=\begin{pmatrix}\sqrt 3&\\\frac{2\sqrt 3}{3}&\frac{\sqrt 6}{3}\\\frac{\sqrt 3}{3}&\frac{\sqrt 6}{6}&\frac{\sqrt 2}{2}\end{pmatrix}. 
+    \end{equation}
+\end{proof}
+\end{exercise}
+
+\begin{exercise}
+    给定 $(a_1,a_2,a_3,a_4)$, 求解以下方程中的 $(x_1,x_2,x_3)$. 
+\begin{equation}
+    \begin{pmatrix}
+        &&&1\\&&1&x_1\\&1&x_1&x_2\\1&x_1&x_2&x_3
+        \end{pmatrix}
+        \cdot 
+        \begin{pmatrix}
+        &&&a_4\\1&&&a_3\\&1&&a_2\\&&1&a_1
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+        &1&&\\&&1&\\&&&1\\a_4&a_3&a_2&a_1
+        \end{pmatrix}
+        \cdot 
+        \begin{pmatrix}
+        &&&1\\&&1&x_1\\&1&x_1&x_2\\1&x_1&x_2&x_3
+        \end{pmatrix}.
+\end{equation}
+空缺位置的元素都是 $0$. 
+\begin{itemize}
+    \item 结合有理标准型, 以上构造间接解答了以下问题: 任意域上的方阵 $A$ 通过对称矩阵与其转置相似, 即, 存在对称矩阵 $S$ 使得 $S^{-1}AS=A^T$.
+\end{itemize}
+\begin{proof}
+    直接地, 上述方程有解, 当且仅当以下矩阵是对称的
+    \begin{equation}
+        \begin{pmatrix}
+            0 & 0 & 1 & a_{1}\\
+            0 & 1 & x_{1} & a_{2} +x_{1} a_{1}\\
+            1 & x_{1} & x_{2} & a_{3} +x_{1} a_{2} +x_{2} a_{1}\\
+            x_{1} & x_{2} & x_{3} & a_{4} +x_{1} a_{3} +x_{2} a_{2} +x_{3} a_{1}
+            \end{pmatrix}.
+    \end{equation}
+    解得
+    \begin{equation}
+        x_1=a_1,\quad x_2=a_2+a_1^2,\quad x_3=a_3+2a_1a_2+a_1^3. 
+    \end{equation}
+\end{proof}
+\end{exercise}
+
+\begin{exercise}
+    (这是一道脑经急转弯, 无需计算) 将以下两个实矩阵分解作 $2$ 个实对称矩阵的乘积. 
+\begin{equation}
+    \begin{pmatrix}
+        \lambda&1\\&\lambda &1\\&&\lambda
+        \end{pmatrix},\quad \begin{pmatrix}
+        a&b\\-b&a&1\\&&a&b\\&&-b&a\\
+        \end{pmatrix}. 
+\end{equation}
+\begin{itemize}
+    \item 依照复矩阵的 Jordan 型与实矩阵的旋转-反射标准型, 任意实方阵 (相应地, 复方阵) 一定是两个实对称矩阵 (相应地, 复对称矩阵) 的乘积. 
+    \item 作为推论, 两个对称矩阵的乘积不必对称. 
+\end{itemize}
+\begin{proof}
+    考虑矩阵 $\begin{pmatrix}
+        &&1\\&1&\\1&&
+        \end{pmatrix}$. 
+\end{proof}
+\end{exercise}
+
+\begin{exercise}
+    (去年的一道期中考题, 大约占分 $15/100$) 若实方阵 $A$ 满足 $A(A-A^T)=O$, 证明 $A=A^T$. 
+    \begin{proof}
+        若 $A^2=AA^T$, 则 $\mathrm{tr}(A^2)=\mathrm{tr}(AA^T)$. 展开得 
+        \begin{equation}
+            \sum_{i,j=1}^n a_{i,j}a_{j,i}=\sum_{i,j=1}^n a_{i,j}^2. 
+        \end{equation}
+        配凑完全平方式, 得 $\sum_{i,j=1}^n(a_{i,j}-a_{j,i})^2=0$. 此时 $A=A^T$. 
+    \end{proof}
+    \begin{itemize}
+        \item 若认为考试题比较简单, 可以尝试由 $A(A-A^T)A=O$ 推导 $A=A^T$. 此处可以借用实矩阵的正交标准型: 
+\begin{equation}
+    A=Q^T\cdot \begin{pmatrix} S&R\\O&O\\\end{pmatrix}\cdot Q.
+\end{equation}
+        其中, $(S\quad R)$ 是行满秩矩阵, $S$ 是方阵. \textcolor{red}{$S$ 未必可逆, 反例如 $\begin{pmatrix}0 & 1\\0 & 0 \end{pmatrix}$}\footnote{QR 分解只能保证行满秩, ``$S$ 可逆''仅对本题等特殊情况成立. 这一反例由王子涵同学提供.}. 
+    \end{itemize}
+    \begin{proof}
+        假定 $A^3=AA^TA$. 对 $A^3A^T=AA^TAA^T$ 使用上述标准型, 得
+        \begin{equation}
+            \begin{pmatrix} S^3S^T+S^2RR^T&O\\O&O\\\end{pmatrix}=\begin{pmatrix} (SS^T+RR^T)^2&O\\O&O\\\end{pmatrix}. 
+        \end{equation}
+        比较分块矩阵的左上处得 $S^2(SS^T+RR^T)=(SS^T+RR^T)^2$. 由于 $(S\quad R)$ 行满秩, 
+        \begin{equation}
+            \det (SS^T+RR^T)=\det \left(\begin{pmatrix} S\quad R\end{pmatrix}\cdot \begin{pmatrix} S\quad R\end{pmatrix}^T\right) >0. 
+        \end{equation}
+        比较分块矩阵左上角的行列式, 得 $(\det S)^2\cdot \det (SS^T+RR^T)=\det (SS^T+RR^T)^2$, 即
+        \begin{equation}
+            \det (SS^T)=\det (SS^T+RR^T).
+        \end{equation}
+        依照 Cauchy-Binet 公式, 只能有 $R=O$. 依照行满秩条件, 此时 $S$ 可逆, 故 $S=S^T$. 
+    \end{proof}
+\end{exercise}
+
+
+
+
+
+
+
+\end{document}

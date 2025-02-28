@@ -1,0 +1,221 @@
+**Problem 1** 记 $f(x)=x^3+bx^2+cx+d$ 是有理系数三次多项式 ($b,c,d\in \mathbb Q$​). 
+
+> 视个人情况完成 $\{1,2\}$. 完成 $\{3,5,7\}$ 或 $\{4,6,8\}$, 这两组题是对称的. 
+
+1. (如果不会, 请写一遍) 数域是什么? 
+
+2. (这与先前的某道题目非常类似, 如果做错了, 请重写一遍.) 假设 $f(x)$ 在 $\mathbb Q$ 上无法因式分解. 任取多项式的一根 $x_0\in \mathbb C$, 证明 $3$ 维 $\mathbb Q$-线性空间 
+   $$
+   V=\{r+sx_0+tx_0^2\mid r,s,t\in \mathbb Q\}
+   $$
+   是一个数域. 
+
+3. (接上一问) 取定 $V$ 的一组 $\mathbb Q$-基 $B=(v_1,v_2,v_3)$. 对任意 $\lambda \in V$, 存在矩阵 $M^B_\lambda\in \mathbb Q^{3\times 3}$ 使得
+   $$
+   \lambda\cdot \begin{pmatrix}v_1\\v_2\\v_3\end{pmatrix}=M^B_\lambda\cdot \begin{pmatrix}v_1\\v_2\\v_3\end{pmatrix};
+   $$
+   若取另一组基 $B'=(v_1',v_2',v_3')$, 同样可定义 $\lambda\mapsto M_\lambda^{B'}$. 
+
+   试证明: $\det M_\lambda^B=\det M_\lambda^{B'}$. 换言之, $\det M_\lambda$​ 不依赖基的选取.
+
+   > 注释: 将等式解释如下: 
+   > $$
+   > \underset{\text{属于 $V$}}{\underbracket{\lambda}}\cdot \underset{\text{属于 $V^{3\times 1}$}}{\underbracket{\begin{pmatrix}v_1\\v_2\\v_3\end{pmatrix}}}=\underset{\text{属于 $\mathbb Q^{3\times 3}$, 因此属于 $V^{3\times 3}$}}{\underbracket{M^B_\lambda}}\cdot \underset{\text{属于 $V^{3\times 1}$}}{\underbracket{\begin{pmatrix}v_1\\v_2\\v_3\end{pmatrix}}}
+   > $$
+   > 是 $V$ 中的运算. 例如 $f=x^3-2$, 取 $B=(1,\sqrt[3]2,\sqrt[3]4)$, $\lambda=1+2\sqrt[3]2+3\sqrt[3]4$, 则 
+   > $$
+   > (1+2\sqrt[3]2+3\sqrt[3]4)\cdot \begin{pmatrix}1\\\sqrt[3]{2}\\\sqrt[3]{4}\end{pmatrix}=\begin{pmatrix}1&2&3\\6&1&2\\4&6&1\end{pmatrix}\cdot \begin{pmatrix}1\\\sqrt[3]{2}\\\sqrt[3]{4}\end{pmatrix}.
+   > $$
+   
+4. 证明 $\mathrm{tr}(M_\lambda)$ 也不依赖基的选取. 
+
+5. 仍假定 $f(x)$ 在 $\mathbb Q$ 上无法因式分解. 记 $\{x_1,x_2,x_3\}$ 是 $f$ 在 $\mathbb C$ 上的根. 证明 $\det M_{x_1}=\det M_{x_2}=\det M_{x_3}$.
+
+6. 仍假定 $f(x)$ 在 $\mathbb Q$ 上无法因式分解. 记 $\{x_1,x_2,x_3\}$ 是 $f$ 在 $\mathbb C$ 上的根. 证明 $\mathrm{tr} (M_{x_1})=\mathrm{tr} (M_{x_2})=\mathrm{tr} (M_{x_3})$. 
+
+7. 证明: 若 $f(x)$ 在 $\mathbb C$ 上的某两个根的比值是非零有理数, 则 $f(x)$ 的三个根都是有理数. 
+
+8. 证明: 若 $f(x)$ 在 $\mathbb C$ 上的某两个根的差是有理数, 则 $f(x)$ 的三个根都是有理数. 
+
+<div style="page-break-after: always;"></div>
+
+**Problem for Fun** (图与特征多项式. **本题不涉及特征根与特征向量.**) 图是一个**实对称**矩阵 $A$, 其主对角线为 $0$, 所有 $a_{i,j}\in\{0,1\}$​​. 
+
+1. (定义: 图的几何实现) 假设图 $A$ 是 $n$-阶矩阵, 以下是将图 $A$ 画在纸上的方式: 
+
+   1. 选定互不相同的 $n$ 个点 $\{v_1,\ldots, v_n\}$, 
+   2. 记 $v_i$ 与 $v_j$ 存在一条连边, 当且仅当 $a_{i,j}=1$. 
+
+   例如, $\begin{pmatrix}0&1&1&0\\1&0&0&1\\1&0&0&1\\0&1&1&0\end{pmatrix}$ 的几何实现是四边形 (的外周). 
+
+2. (一个简单的事实) 反之, 若给定图的几何实现, 则图的矩阵形式不必唯一 (假定可以变更顶点的编号). 实际上, $A$ 与 $A'$ 有相同的几何实现, 当且仅当存在置换矩阵 $S$ 使得 $S^TAS=A'$. 
+
+3. (定义: 图的特征多项式) 给定图 $A$, 记 $\chi_A:=\det (xI-A)$ 为图的特征多项式. 例如, 三角形的特征多项式是 
+   $$
+   \det \begin{pmatrix}x&-1&-1\\-1&x&-1\\-1&-1&x\end{pmatrix}=\cdots \text{(略)}.
+   $$
+   试计算以下几类特殊图的特征多项式. 
+
+   * $n$-边形. 可选取如下矩阵: $a_{i,j}=1$ 当且仅当 $(i-j)=\pm 1 \mod n$; 不然 $a_{i,j}=0$. 
+   * $n$ 个顶点的路, 也就是 $n$-边形删去任意一条边. 可选取如下矩阵: $a_{i,j}=1$ 当且仅当 $(i-j)= \pm 1$​. 
+   * 完全二部图 $K_{m,n}$. 该图的矩阵形式是 $\begin{pmatrix}O&J\\J^T&O\end{pmatrix}$, 其中 $J\in \mathbb R^{m\times n}$ 是全 $1$​ 矩阵. 
+
+4. (挑战题) 若 $A$ 与 $A'$​ 有相同的几何实现, 则其特征多项式相同; 反之, 未必 (试给出一个不同于附录的构造?). 
+
+5. (分块矩阵) 若 $A$ 与 $B$ 是图, 则分块对角矩阵 $\begin{pmatrix}A&O\\O&B\end{pmatrix}$​ 的几何实现是 $A$ 与 $B$ 几何实现的无交并. 
+
+6. (特征多项式的系数) 记 $\chi_A=x^n+c_1x^{n-1}+c_2x^{n-2}+\cdots +c_n$. 
+
+   1. 证明 $c_1=0$. 提示: $c_1=\mathrm{tr}(A)$.
+   2. 证明 $c_2\leq 0$, 且 ${|c_2|}$ 是图中边的数量. 提示: 使用 $A^2$ 的特征多项式, 或直接计算 $\mathrm{tr}(A^2)$. 
+   3. 证明 $c_3\leq 0$, 且 $\frac{|c_3|}{2}$ 是图中三角形数量. 提示: 使用 $A^3$ 的特征多项式, 或直接计算 $\mathrm{tr}(A^3)$. 
+   4. 特征多项式不能反映图中四边形的数量. 反例见 **Problem 2-4**. 
+
+7. (删去顶点) 将图删去第 $i$ 个顶点, 等价于将矩阵 $A$ 同时删去第 $i$ 行与 $i$ 列, 记新的矩阵为 $A_{(i)}$. 
+
+   1. 证明, 若 $A$ 有 $n$ 个顶点, 则 
+      $$
+      \frac{\operatorname d}{\operatorname dx}\chi_A(x) = \sum_{1\leq i\leq n}\chi_{A_{(i)}}(x).
+      $$
+
+   2. ([Ulam 重建猜想](https://en.wikipedia.org/wiki/Reconstruction_conjecture)) 若给定所有 $A_{(i)}$ 的几何实现 (不含顶点编号), 能否**唯一地**复原 $A$? 
+
+      > 对特殊的图 (例如无环图, 也称树) 而言, Ulam 重建猜想成立. 今假定 Ulam 重建猜想成立, 则 $\chi_A$ 的常数项由其他项唯一决定. 
+      > 
+
+8. (添加一条边) 给定图的几何实现 $G$. 选定顶点 $i$, 定义删点图 $G_{(i)}$ 与添边图 $G_{(i)-}$ 如下: 
+
+   ![diagram-20241122](https://cdn.jsdelivr.net/gh/czhang271828/imgs/test/diagram-20241122.png)
+
+   记 $G$ 的矩阵形式为 $A$, 试描述 $A_{(i)}$ 与 $A_{(i)-}$ 的矩阵形式. 使用行列式的 Laplace 展开证明
+   $$
+   \chi_{A_{(i)-}}(x)+\chi_{A_{(i)}}(x)=x\cdot \chi_A(x).
+   $$
+
+9. (图的对点粘合) 给定图的几何实现 $G$ 与 $H$, 点 $i\in G$ 与 $j\in H$, 定义 $(G,H,i,j)$ 的对点粘合 $G_{(i)(j)}H$ 为
+
+   ![diagram-20241122 (1)](https://cdn.jsdelivr.net/gh/czhang271828/imgs/test/diagram-20241122 (1).png)
+
+   记 $G$ 的矩阵形式为 $A$, $H$ 的矩阵形式为 $B$, 试描述 $A_{(i)(j)}B$. 使用行列式的 Laplace 展开证明
+   $$
+   \chi_{A_{(i)(j)}B}+x\cdot \chi _{A_{(i)}}\chi_{B_{(j)}}=\chi _{A}\cdot \chi_{B_{(j)}}+\chi _{A_{(i)}}\cdot \chi_{B}.
+   $$
+
+10. (图的连边粘合) 给定图的几何实现 $G$ 与 $H$, 点 $i\in G$ 与 $j\in H$, 定义 $(G,H,i,j)$ 的连边粘合 $G_{(i)-(j)}H$ 为
+
+    ![diagram-20241122 (2)](https://cdn.jsdelivr.net/gh/czhang271828/imgs/test/diagram-20241122 (2).png)
+
+    记 $G$ 的矩阵形式为 $A$, $H$ 的矩阵形式为 $B$, 试描述 $A_{(i)-(j)}B$​. 使用行列式的 Laplace 展开证明
+    $$
+    \chi_{A_{(i)-(j)}B}=\chi_A\cdot \chi_B-\chi_{A_{(i)}}\cdot \chi_{B_{(j)}}. 
+    $$
+
+11. (自行思考) 设计一个算法, 使用 8-10 的公式降解图的多项式. 如果你觉得特征多项式过于复杂, 可以改用染色多项式或是 Tutte 多项式等. 
+
+12. (Laplace 矩阵) 给定图 $A$. 记 $\mathbf 1$ 是全 $1$ 列向量, 定义向量 $d:=A\cdot \mathbf 1$. 从几何实现的层面看, $d$ 的第 $i$ 个分量是顶点 $i$ 的连边数. 定义对角矩阵 $D=\mathrm{diag}(d)$, 即, $D_{i,i}=d_i$​. 
+
+    1. 证明 $\det (D-A)=0$. 提示: $(D-A)\cdot \mathbf 1=\mathbf 0$. 
+
+    2. 证明完全平方式
+       $$
+       x^T\cdot (D-A)\cdot x=\sum_{i<j} a_{i,j}\cdot (x_i-x_j)^2.
+       $$
+
+    3. 当你学完数值分析或是数值代数, 你会发现这一矩阵是离散的 Laplace 算子. 
+
+<div style="page-break-after: always;"></div>
+
+**Problem for Fun** (Friezes from cluster category) 以下趣题仅供各位熟悉 $2$-阶矩阵行列式计算. 
+
+1. (Cluster-tilting objects in $\mathcal F_{2,n}$) 你需要做这样一件事: 若存在图案 $\begin{bmatrix}a&\text{空}\\c&d\end{bmatrix}$, 则将之补全做行列式为 $1$ 的矩阵 $\begin{bmatrix}a&b\\c&d\end{bmatrix}$. 为了排版方便, 将以上矩阵旋转作
+   $$
+   \begin{bmatrix}
+    & \text{空} & \\
+   a &  & d\\
+    & c & 
+   \end{bmatrix},\quad  \begin{bmatrix}
+    & b & \\
+   a &  & d\\
+    & c & 
+   \end{bmatrix}.
+   $$
+   请一直向上补全以下横向周期为 $7$ 的无穷图表
+   $$
+   \begin{matrix}
+   \cdots  &  & \text{空} &  & \text{空} &  & \text{空} &  & \text{空} &  & \text{空} &  & \text{空} &  & \text{空} &  & \text{空} &  & \cdots \\
+   \cdots  & 1 &  & \textcolor[rgb]{0.82,0.01,0.11}{3} &  & \textcolor[rgb]{0.82,0.01,0.11}{1} &  & \textcolor[rgb]{0.82,0.01,0.11}{4} &  & \textcolor[rgb]{0.82,0.01,0.11}{1} &  & \textcolor[rgb]{0.82,0.01,0.11}{2} &  & \textcolor[rgb]{0.82,0.01,0.11}{3} &  & \textcolor[rgb]{0.82,0.01,0.11}{1} &  & 3 & \cdots \\
+   \cdots  &  & 1 &  & 1 &  & 1 &  & 1 &  & 1 &  & 1 &  & 1 &  & 1 &  & \cdots \\
+   \cdots  & 0 &  & 0 &  & 0 &  & 0 &  & 0 &  & 0 &  & 0 &  & 0 &  & 0 & \cdots 
+   \end{matrix},
+   $$
+   直至你意识到到可以停止了. 
+
+2. ([[CC37]](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=80e59fb13f7afdedf9559a327d443f0f295ef7fa)) 以上序列来自正七边形的三角剖分
+
+   <img src="https://cdn.jsdelivr.net/gh/czhang271828/imgs/test/image-20241013003703744.png" alt="image-20241013003703744" style="zoom:33%;" />
+
+   . 可以尝试对一般多边形进行三角分割, 仍有第 1 问的现象. (实际上, 这是充要的.) 
+
+3. 若舍去周期性条件. 证明以下无穷图表的补全必为整数表格: 
+   $$
+   \begin{matrix}
+   \cdots  &  & \text{空} &  & \text{空} &  & \text{空} &  & \text{空} &  & \text{空} &  & \text{空} &  & \text{空} &  & \text{空} &  & \cdots \\
+   \cdots  & a &  & b &  & c &  & d &  & e &  & f &  & g &  & h &  & i & \cdots \\
+   \cdots  &  & 1 &  & 1 &  & 1 &  & 1 &  & 1 &  & 1 &  & 1 &  & 1 &  & \cdots \\
+   \cdots  & 0 &  & 0 &  & 0 &  & 0 &  & 0 &  & 0 &  & 0 &  & 0 &  & 0 & \cdots 
+   \end{matrix},
+   $$
+   并尝试归纳其通项.  
+
+4. 补全以下图案:
+   $$
+   \begin{matrix}
+   \cdots  & 0 &  & 0 &  & 0 &  & 0 &  & 0 &  & 0 &  & 0 &  & 0 &  & 0 & \cdots \\
+   \cdots  &  & 1 &  & 1 &  & 1 &  & 1 &  & 1 &  & 1 &  & 1 &  & 1 &  & \cdots \\
+   \cdots  & ? &  & ? &  & \textcolor[rgb]{0.82,0.01,0.11}{c} &  & ? &  & ? &  & ? &  & ? &  & ? &  & ? & \cdots \\
+   \cdots  &  & ? &  & \textcolor[rgb]{0.82,0.01,0.11}{b} &  & ? &  & ? &  & ? &  & ? &  & ? &  & ? &  & \cdots \\
+   \cdots  & ? &  & \textcolor[rgb]{0.82,0.01,0.11}{a} &  & ? &  & ? &  & ? &  & ? &  & ? &  & ? &  & ? & \cdots \\
+   \cdots  &  & 1 &  & 1 &  & 1 &  & 1 &  & 1 &  & 1 &  & 1 &  & 1 &  & \cdots \\
+   \cdots  & 0 &  & 0 &  & 0 &  & 0 &  & 0 &  & 0 &  & 0 &  & 0 &  & 0 & \cdots 
+   \end{matrix}。
+   $$
+   试问: 每一项的分母都是 $a^lb^mc^n$​​ 形式的单项式? 这称作 [Laurent 现象](https://ncatlab.org/nlab/show/Laurent+phenomenon). 
+
+   > 依照这一现象, 可以证明以下数列是整的: 
+   >
+   > 1. (Somos 4) $a_0=a_1=a_2=a_3=1$, 以及 $a_{n}a_{n+4}=a_{n+1}a_{n+3}+a_{n+2}^2$; 
+   > 2. (Somos 5) $b_0=b_1=b_2=b_3=b_4=1$, 以及 $b_{n}b_{n+5}=b_{n+1}b_{n+4}+b_{n+2}b_{n+3}$​. 
+   >
+   > 中学的证明方法是构造若干同余式. 
+
+5. (自行思考) 尝试将以上区块推广至 $3\times 3$​ 矩阵的行列式? 
+
+<div style="page-break-after: always;"></div>
+
+#### 附录: Problem 2-4 的一个例子
+
+$A$ 是四边形与一个离散点的无交并, $A'$ 是十字图. 以下是使用 [Sage](https://sagecell.sagemath.org/) 的计算图特征多项式的示例: 
+
+```python
+# 计算 \chi_A.
+e = {1:[2,4], 2:[3], 3:[4]}
+# 给出连边的关系: 1-2, 1-4, 2-3, 3-4. 
+H = Graph(e)
+# 画出图 (正方形). 
+H.add_vertices([5])
+# 添加离散的顶点 {5} 
+H.characteristic_polynomial()
+```
+
+
+
+```python
+# 计算 \chi_{A^\prime}.
+e = {1:[2,3,4,5]}
+# 给出连边的关系: 1-其他所有点.
+H = Graph(e)
+# 画出图 (十字形). 
+H.characteristic_polynomial()
+```
+
+可以发现, 两个不同的图可能会有相同的特征多项式. 
