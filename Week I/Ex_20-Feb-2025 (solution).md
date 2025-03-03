@@ -89,7 +89,7 @@ $$
 
    > 答: 若可约, 则存在次数 $\leq 2025$ 的子式 $f \in \mathbb Z[x]$. 对 $1\leq k \leq 2025$, $f(k)$ 是 $1$ 的约数. 由于原多项式无零点, 其因子 $f$ 亦无零点. 此时, 不妨设假设 $f-1$ 以 $\{k\}_{k=1}^{2025}$ 为零点. 比较次数, 只能有 $f = \prod_{k=1}^{2025}(x-k)+1$, 矛盾. 
 
-3. Prove that $\prod _{k=1}^n(x-x_i) +1$ is either irreducible in $\mathbb Z[x]$, or a perfect square; 
+3. Prove that $\prod _{i=1}^n(x-x_i) +1$ is either irreducible in $\mathbb Z[x]$, or a perfect square; 
 
    * where $x_1 < x_2 < \cdots < x_n$​ are integers. 
 
