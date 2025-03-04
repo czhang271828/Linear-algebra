@@ -89,15 +89,15 @@ $$
 
    > 答: 若可约, 则存在次数 $\leq 2025$ 的子式 $f \in \mathbb Z[x]$. 对 $1\leq k \leq 2025$, $f(k)$ 是 $1$ 的约数. 由于原多项式无零点, 其因子 $f$ 亦无零点. 此时, 不妨设假设 $f-1$ 以 $\{k\}_{k=1}^{2025}$ 为零点. 比较次数, 只能有 $f = \prod_{k=1}^{2025}(x-k)+1$, 矛盾. 
 
-3. Prove that $\prod _{k=1}^n(x-x_i) +1$ is either irreducible in $\mathbb Z[x]$, or a perfect square; 
+3. Prove that $\prod _{i=1}^n(x-x_i) +1$ is either irreducible in $\mathbb Z[x]$, or a perfect square; 
 
-   * where $x_1 < x_2 < \cdots < x_n$​ are integers. 
+   * where $x_1 < x_2 < \cdots < x_n$ are integers. 
 
-   > 答: 若可约, 则 $f^2 = g^2 h^2$. 不妨设 $\deg g^2 \leq n$. 由零点数量知 $(g^2-1) = (f-1)$. 从而 $f$​​ 是完全平方式. 
+   > 答: 若可约, 则 $f^2 = g^2 h^2$. 不妨设 $\deg g^2 \leq n$. 由零点数量知 $(g^2-1) = (f-1)$. 从而 $f$ 是完全平方式. 
    >
    > 由初等数学, $f$ 是平方式当且仅当 $x_i$ 是长度为 $2$ 或 $4$ 的等差数列, 公差为 $1$. 
 
-4. ($f \in \mathbb Z[x]$) Prove that if $f(x) = 1$ has $\geq 4$ solutions in $\mathbb Z$, then $f(x) = -1$ has no solutions in $\mathbb Z$​. 
+4. ($f \in \mathbb Z[x]$) Prove that if $f(x) = 1$ has $\geq 4$ solutions in $\mathbb Z$, then $f(x) = -1$ has no solutions in $\mathbb Z$. 
 
    > 答: 也就是是说明 $(x-a)(x-b)(x-c)(x-d)g(x)=2$ 无解. 显然. 
 
