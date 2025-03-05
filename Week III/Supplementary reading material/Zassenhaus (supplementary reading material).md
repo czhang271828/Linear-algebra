@@ -106,13 +106,13 @@ Prove the following (when we write $f_\ast X$,it is assumed that the linear spac
 3. $f_\ast f^\ast f_\ast = f_\ast$,
 4. $f^\ast f_\ast f^\ast = f^\ast$, 
 5. $f_\ast (U + V) = f_\ast U + f_\ast V$; 
-6. $f^\ast (U \cap V) = f^\ast U \cap F^\ast V$;  
+6. $f^\ast (U \cap V) = f^\ast U \cap f^\ast V$;  
 7. if $f_\ast (U \cap V) = f_\ast U \cap f_\ast V$ always holds, then $f$ is surjective, does the converse hold?
 8. if $f^\ast (U + V) = f^\ast U + f^\ast V$ always holds, then $f$ is injective, does the converse hold?
 9. $f_\ast ((f^\ast U) \cap V) = U \cap (f_\ast V)$; 
 10. $f^\ast ((f_\ast U) + V) = U + (f^\ast V)$. 
 
-> The final two identities come from basic logical facts (guess what they are). There is an analogue known as the **projection formula** if you are familiar with sheaf theory.
+> The final two identities come from basic logical facts (guess what they are). There is an analogue known as the **projection formula** if you are familiar with sheaf theory. 
 
 **Theorem** (Zassenhaus lemma with a linear map) The following are identities and isomorphisms
 
