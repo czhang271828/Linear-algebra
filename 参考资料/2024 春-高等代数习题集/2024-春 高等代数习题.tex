@@ -1,0 +1,1125 @@
+\documentclass{MainStyle}
+
+\usepackage{amsthm, amsfonts, amsmath, amssymb, quiver, mathrsfs, newclude, tikz-cd, ctex, mathtools}
+
+% Customise href Colours.
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+
+\newcommand{\changeurlcolor}[1]{\hypersetup{urlcolor=#1}}       
+
+\newcommand*{\name}{ZCC}
+\newcommand*{\id}{空白模板}
+\newcommand*{\course}{2023-2024 春季学期习题集 (高等代数 100 题)}
+\newcommand*{\assignment}{课后习题, 思考题总结}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\allowdisplaybreaks
+
+\begin{document}
+\maketitle
+\noindent 本习题集供复习时使用. 依照惯例, 需要明确公理体系.
+\begin{itemize}
+    \item  允许 ZF 公理与 Dependent Choice (等价于 Baire-纲定理, 稍强于命题``可数个可数集之并仍可数''), 通俗地说, 允许将带有独立关系的可数个集合合并为一个集合. DC 公理强于 ZF 但符合直觉, 因此承认.
+    \item 使用延拓公理 (Hahn-Banach 公理) 时需额外申明. 例如以下情形之一.
+          \begin{itemize}
+              \item 对子集子空间 $U\subset V$, 映射 $f:U\to W$ 不必通过 $V$ 分解. 换言之, $f$ 的定义域不能轻易扩大 (除非能明确写出映射的定义式).
+              \item 将上一条中的 $U$ 视作一维空间, 则对任意 $u\in U$ 总存在 $f\in U^\ast$ 使得 $f(u)\neq 0$. 若承认有别于 HB 的公理, 存在对偶为零空间的无穷维线性空间 (见 H. Läuchli, \textit{Auswahlaxiom in der Algebra} 一文)
+              \item 接上一条, 总存在单射 $V\hookrightarrow V^{\ast\ast}$. HB 无法证明该单射在一般情形下是严格单的, 但 $C^0([0,1];\mathbb R)$ 是 HB-可证明的反例.
+              \item 张量积的构造契合``普适映射问题的唯一解''.
+              \item 线性空间是平坦模, 线性单射是纯子模 ($U\otimes-$ 保持单射与满射).
+          \end{itemize}
+    \item HB 公理已经足够应对无穷维线性空间的常见问题. 我们不轻易使用更强的选择公理, 其等价形式包括:
+          \begin{itemize}
+              \item 任何线性空间有基;
+              \item 任何子集子空间有直和补 (任何单射可裂); 何满射可裂;
+              \item 对任意 $U$, $\mathcal L(U,-)$ 保持满射; 对任意 $U$, $\mathcal L(-,U)$ 将满射映至单射.
+          \end{itemize}
+\end{itemize}
+
+\noindent 请结合自身情况, 合理参考该习题集.
+
+\tableofcontents
+
+\newpage
+
+\section{线性空间}
+
+\begin{problem}
+给定任意域 $k$ 上的线性空间 $V$, 试证明以下论断等价:
+\begin{enumerate}
+    \item $V$ 不是有限维的;
+    \item 存在无穷集 $S\subset V$, 使得 $S$ 是线性无关组.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+假定线性空间与线性映射都是任意的. 试证明以下关于线性映射 $T:U\to V$ 的说法是等价的 (这种性质叫单):
+\begin{enumerate}
+    \item $T$ 作为集合间的映射是单射, 换言之, $T(u_1)=T(u_2)$ 当且仅当 $u_1=u_2$;
+    \item $T(u)=0$ 当且仅当 $u=0$;
+    \item $T$ 将线性无关组映至线性无关组;
+    \item 对任意线性映射 $S_1,S_2\in \mathcal L(W,U)$, 则 $S_1=S_2$ 当且仅当 $T\circ S_1=T\circ S_2$;
+    \item 对任意线性映射 $S\in \mathcal L(W,U)$, 则 $S=0$ 当且仅当 $T\circ S=0$.
+\end{enumerate}
+若线性空间是有限维的, 或是承认选择公理, 以上性质等价于
+\begin{itemize}
+    \item 存在线性映射 $S:V\to U$ 使得复合映射 $U\xrightarrow{ T} V\xrightarrow{S} U$ 是恒同映射.
+\end{itemize}
+\end{problem}
+
+
+\begin{problem}
+假定线性空间与线性映射都是任意的. 试证明以下关于线性映射 $T:U\to V$ 的说法是等价的 (这种性质叫满):
+\begin{enumerate}
+    \item $T$ 作为集合间的映射是满射, 换言之, 对任意 $v\in V$ 总有 $u$ 使得 $T(u)=v$;
+    \item 对任意线性映射 $S_1,S_2\in \mathcal L(W,U)$, 则 $S_1=S_2$ 当且仅当 $S_1\circ T=S_2\circ T$;
+    \item 对任意线性映射 $S\in \mathcal L(W,U)$, 则 $S=0$ 当且仅当 $S\circ T=0$.
+\end{enumerate}
+若线性空间是有限维的, 或是承认选择公理, 以上性质等价于以下任意一条:
+\begin{itemize}
+    \item 存在线性映射 $S:V\to U$ 使得复合映射 $V\xrightarrow{ S} U\xrightarrow{T} V$ 是恒同映射;
+    \item 对 $U$ 的任意一组基 $S$, $\mathrm{span}(T(S))=V$.
+\end{itemize}
+\end{problem}
+
+\begin{problem}
+证明: 对有限维线性空间的自同态 $\varphi:U\to U$, 以下三点等价:
+\begin{equation}
+    \varphi\text{ 是满的 }\leftrightarrow\varphi\text{ 是同构 }\leftrightarrow\varphi\text{ 是单的}.
+\end{equation}
+作为对比, 请在无穷维空间中给出不满的单射, 以及不单的满射.
+\end{problem}
+
+\begin{problem}
+对有限生成的 Abel 群的自同态 $\varphi:G\to G$, 有
+\begin{equation}
+    \varphi\text{ 是满的 }\leftrightarrow\varphi\text{ 是同构 }\rightarrow \varphi\text{ 是单的}.
+\end{equation}
+\end{problem}
+
+\begin{problem}
+以下假定 $k$ 是任意域, 所有线性空间都是 $k$-线性空间.
+\begin{enumerate}
+    \item 给定线性空间 $V$, 如何定义非空子集 $S$ 是一个 $V$ 的线性无关组?
+    \item 给定线性空间 $V$, 请写出一个一元子集 $S$, 使得 $S$ 不是线性无关组.
+    \item 给定有限维线性空间 $U$ 与 $V$, 用 $\dim U$ 与 $\dim V$ 表示 $\mathcal L(U,V)$ 的维数.
+    \item 接上一问: 取定 $U$ 与 $V$ 的的一组基, 如何以此表示 $\mathcal L(U,V)$ 的一组基?
+    \item 给定有限维线性空间 $U$ 与 $V$, 用 $\dim U$ 与 $\dim V$ 表示 Cartesian 积 $U\times V$ 的维数.
+    \item 接上一问: 取定 $U$ 与 $V$ 的的一组基, 如何以此表示 $U\otimes V$ (外直和) 的一组基?
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+类比以下集合的运算与自然数运算, 并按照提示推广. 以下记 $\mathrm{Card}(S)$ 为有限集合 $S$ 的大小.
+\begin{enumerate}
+    \item (有限集) 记 $X\sqcup Y$ 是 $X$ 与 $Y$ 的无交并, 则 $\mathrm{Card}(X\sqcup Y)=\mathrm{Card}(X)+\mathrm{Card}(Y)$;
+    \item (有限集) 记 $X\times Y$ 是 $X$ 与 $Y$ 的笛卡尔积, 则 $\mathrm{Card}(X\times Y)=\mathrm{Card}(X)\cdot \mathrm{Card}(Y)$;
+    \item (有限集) 记 $Y^X$ 是 $X$ 到 $Y$ 的全体映射, 则 $\mathrm{Card}(Y^X)=\mathrm{Card}(Y)^{\mathrm{Card}(X)}$. 这里约定 $0^0=1$;
+    \item 证明: $Y^{X_1\sqcup X_2}\cong Y^{X_1}\times Y^{X_2}$, 并写出相应的元素间对应. 证明 $a^{m+n}=a^m\cdot a^n$;
+    \item 将上一问推广至任意指标集所示的对象 $\{X_\alpha\}_{\alpha\in I}$;
+    \item 证明: $(Y_1\times Y_2)^{X}\cong Y_1^X\times Y_2^X$, 并写出相应的元素间对应. 证明 $a^{m\cdot n}=(a^m)^n$;
+    \item 将上一问推广至任意指标集所示的对象 $\{Y_\beta\}_{\beta\in I}$;
+    \item 证明: $Z^{X\times Y}\cong (Z^X)^Y$, 并写出相应的元素间对应. 证明 $a^{m\cdot n}=(a^m)^n$;
+    \item 上一问表明 $X\times -$ 与 $\mathrm{Hom}_{\mathrm{Sets}}(X,-)$ 互为伴随. 将上一问从二元映射推广至多元映射.
+\end{enumerate}
+将以上结论推广至线性映射.
+\end{problem}
+
+\begin{problem}
+给定域 $k$. 假定 $U$ 是有限维非零线性空间, $V$ 是任意非零线性空间.
+\begin{enumerate}
+    \item 请证明: 对任意给定的 $u\in U$, 如下是 $k$-线性映射:
+          \begin{equation}
+              \mathcal L(U,V)\to V,\quad f\mapsto f(u).
+          \end{equation}
+          我们把这个线性映射记作 $\Phi_u$.
+    \item 请证明: $\Phi$ 可以看作这样一个 $k$-线性映射:
+          \begin{equation}
+              \Phi: U\to \mathcal L(\mathcal L(U,V) ,V),\quad u\mapsto \Phi_u.
+          \end{equation}
+          并证明 $\Phi$ 是单射.
+    \item 作为推论, 若 $U$ 是有限维的, $V$ 是一维的, 那么有同构
+          \begin{equation}
+              U\cong \mathcal L(\mathcal L\mathcal (U,V),V),\quad u\mapsto [f\mapsto f(u)].
+          \end{equation}
+    \item 假定 $U$ 是能写出一组基的非零线性空间, $V$ 是任意非零线性空间. 证明 $\Phi$ 仍旧是单射.
+    \item 假定 $U$ 是能写出一组基的非零线性空间, 其一组基是集合 $S$ (可能是无限集). 若 $V$ 是一维线性空间, 请写出 $\mathcal L(U,V)$ 中所有线性映射. 作为推论:
+          \begin{equation}
+              \mathcal L(k[x],k)\cong k[\![x]\!].
+          \end{equation}
+          这表明, 幂级数与形式幂级数之间存在一个配对. 更一般地, 有限和的对偶是形式和. 有限数列空间的对偶空间是数列全空间.
+    \item 若假设基的存在性 (选择公理), $V$ 是有限维线性空间. 那么形如 $\mathcal L(U,V)$ 的线性空间不可能是可数维的 (要么是有限维的, 要么是不可数维的). 作为推论, $\Phi$ 永远是单射. $\Phi$ 是同构当且仅当 $U$ 是有限维的.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+对任意给定线性映射 $f:U\to V$, 请证明以下事实:
+\begin{enumerate}
+    \item 若对线性空间任意 $W$, 线性
+          \begin{equation}
+              f\circ-:\mathcal L(W,U)\to \mathcal L(W,V),\quad \varphi \mapsto f\circ \varphi
+          \end{equation}
+          总是单射, 则 $f$ 是单射. 反之亦然.
+    \item 若对线性空间任意 $W$, 线性
+          \begin{equation}
+              -\circ g:\mathcal L(V,W)\to \mathcal L(U,W),\quad \varphi \mapsto  \varphi\circ f
+          \end{equation}
+          总是单射, 则 $f$ 是满射. 反之亦然.
+\end{enumerate}
+当且仅当承认直和补的存在性 (等价于选择公理), 有如下事实:
+\begin{enumerate}
+    \item 若对线性空间任意 $W$, 线性
+          \begin{equation}
+              f\circ-:\mathcal L(W,U)\to \mathcal L(W,V),\quad \varphi \mapsto f\circ \varphi
+          \end{equation}
+          总是满射, 则 $f$ 是满射. 反之亦然.
+    \item 若对线性空间任意 $W$, 线性
+          \begin{equation}
+              -\circ g:\mathcal L(V,W)\to \mathcal L(U,W),\quad \varphi \mapsto  \varphi\circ f
+          \end{equation}
+          总是满射, 则 $f$ 是单射. 反之亦然.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+设 $V$ 是 $k$-线性空间, 请证明
+\begin{equation}
+    \mathcal L( V,k)\overset {\Phi^\sharp }\to \mathcal L(\mathcal L(\mathcal L( V,k),k),k) \overset{\Phi^\flat}\longrightarrow \mathcal L(V,k)
+\end{equation}
+的复合是恒等映射, 且该复合先单后满. 因此 $\mathcal L(V,k)$ 同构于 $\mathcal L(\mathcal L(\mathcal L(V,k),k),k)$ 的直和项. 以上
+\begin{align}
+    \Phi^\sharp : & \,\mathcal L(V,k)\to \mathcal L(\mathcal L(\mathcal L(V,k),k),k), \quad f\mapsto \Phi_f,                          \\[4pt]
+    \Phi^\flat :  & \,\mathcal L(\mathcal L(\mathcal L(V,k),k),k)\to \mathcal L(V,k), \quad \mathfrak F\mapsto \mathfrak F\circ \Phi.
+\end{align}
+\end{problem}
+
+\begin{problem}
+若承认延拓公理, 试证明 $V$ 是 $\mathcal L(\mathcal L(V,k),k)$ 的直和项.
+\end{problem}
+
+\begin{problem}
+数学史告诉我们, 由自然数集 $\mathbb N$ 构造有理数域 $\mathbb Q$ 的方式非常朴素, 但实数域 $\mathbb R$ 的构造却是费解的. 幸运地是, 我们可以借助高等代数描述实数. 以下仅讨论 $\mathbb Q$-线性空间.
+\begin{enumerate}
+    \item 记 $V$ 是有理数列空间, 子集 $V_c$ 由收敛的有理数列组成, 是 $V_0$ 由收敛至零有理数列组成. 请证明 $V_0\subsetneq V_c\subsetneq V$ 是真包含的线性空间.
+    \item 我们尝试给出 $\mathcal L(V_0,\mathbb Q)$ 中的部分元素. 一种自然的想法是将 $V$ 中元素与线性映射 $a\in \mathcal L(V_0,\mathbb Q)$ 都写作无穷矩阵, 线性映射定义作逐点相乘求和:
+          \begin{equation}
+              a:V_0\to \mathbb Q,\quad \begin{pmatrix}u_0\\u_1\\u_2\\\vdots\end{pmatrix}\mapsto (a_0\,a_1\,a_2\cdots )\cdot \begin{pmatrix}u_0\\u_1\\u_2\\\vdots\end{pmatrix}=\sum_{n\geq 0}a_iu_i.
+          \end{equation}
+          请验证, $\mathcal L(V_0,\mathbb Q)$ 中形如无穷矩阵的元素构成了一个线性空间 (记作 $V_{00}$), 并给出该空间的一组基. 注意: 需要着重证明, 为什么符合条件的 $a$ 有且仅有有限项非零?
+    \item 上一问的构造的可数维线性空间是 $\mathcal L(V_0,\mathbb Q)$ 的真子空间. 证明 $\mathcal L(V_0,\mathbb Q)$ 是不可数维的, 并尝试找出一些 $\mathcal L(V_0,\mathbb Q)$ 中的其他元素. 注意: 这表明延拓公理在某种程度上是反直觉的.
+    \item 请证明: $V_{00}\subsetneq V_0\subsetneq V_c\subsetneq V$ 中相邻两项的商都是不可数维的线性空间.
+    \item 用分析语言解释自然的商映射 $L:V_c\to V_c/V_0$ 中的 $L$ 与 $V_c/V_0$.
+    \item 依照惯例, 我们将 $V_c/V_0$ 中的元素记作 $v+V_0$, 此处数列 $v$ 是商空间的代表元. 定义数列的逐点乘法
+          \begin{equation}
+              (v+V_0)\cdot (u+V_0)=v\cdot u+V_0.
+          \end{equation}
+          请证明: 该种乘法与代表元的选取无关, 因此是良定义的.
+    \item 验证 $(V_c/V_0,+,0+V_0,\cdot,1+V_0)\simeq (\mathbb R,+,0,\times ,1)$ 是通常的实数域. 这里 $0$ 是全零数列, $1$ 是全一数列.
+    \item 给定函数 $f:\mathbb Q\to \mathbb Q$. 同以往定义, $f$ 在数列上的定义是逐点的, 故将数列映作数列. 请证明, $f$ 在 $0$ 处连续, 当且仅当对任意 $u\in V_0$, 总有
+          \begin{equation}
+              \{f(u_n)\}_{n\geq 1}\in V_c.
+          \end{equation}
+          此处 $V_0$ 可视作无穷小量. 形象地说, 连续映射是保持收敛数列的映射.
+    \item 证明连续函数 $f:\mathbb Q\to \mathbb R$ 可以被唯一地提升作连续函数 $\widetilde f:\mathbb R\to \mathbb R$, 使得 $\widetilde f|_{\mathbb Q}=f$.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+假定 $k$ 是无限域.
+\begin{enumerate}
+    \item 证明, 任意 $k$-线性空间一定不是有限个线性真子空间的并.
+    \item 若线性映射 $f\in \mathcal L(k^n, k)$ 使得 $f(A)$ 总是 $A$ 的某项, 求所有可能的 $f$.
+    \item 若 $\{T_i\}_{i=1}^n\subset \mathcal L(U,V)$ 是两两不同的映射, 试证明存在 $v\in U$ 使得 $\{T_i(v)\}_{i=1}^n$ 两两不同.
+    \item 证明, 若线性映射 $f:k^{n\times n}\to k^{n\times n}$ 满足 $f(AB)\in \{f(A)\cdot f(B),f(B)\cdot f(A)\}$, 则恒有 $f(AB)=f(A)f(B)$ 或恒有 $f(AB)=f(B)f(A)$.
+    \item 若 Abel 加群 $G$ 上有相容的乘法运算 (仅满足乘法封闭性, 乘法结合律, 以及分配律), 且加法自同态 $f:G\to G$ 满足
+          \begin{equation}
+              f(ab)\in \{f(a)\cdot f(b), f(b)\cdot f(a)\}, \quad (\forall a,b\in G).
+          \end{equation}
+          则恒有 $f(ab)=f(a)f(b)$ 或恒有 $f(ab)=f(b)f(a)$.
+    \item 证明, 若 $f:k^{n\times n}\to k^{n\times n}$ 对一切矩阵 $A$ 都有 $f(A^{-1})=f(A)^{-1}$, 则 $f$ 形如以下两者之一:
+          \begin{equation}
+              \exists \,C\in \mathrm{GL}_n(k):\,f(A)= C^{-1}AC,\quad \exists \,C\in \mathrm{GL}_n(k):\,f(A)= C^{-1}A^TC,\quad
+          \end{equation}
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+给定域 $k$, 选定线性性空间 $\mathbb V$, 以下将研究 $\mathbb C$ 的所有线性子空间, 并以此表述线性空间的各种同构定理 (该问题对 Abel 群, 模等仍适用).
+\begin{enumerate}
+    \item 定义偏序关系 $(\mathrm{Sub}(\mathbb V),\leq )$, 其中
+          \begin{itemize}
+              \item $\mathrm{Sub}(\mathbb V)$ 是 $\mathbb V$ 的全体线性子空间构成的集合,
+              \item 称 $U\leq V$ 当且仅当 $U$ 是 $V$ 的子空间,
+              \item 依通常定义加入子空间的二元运算 $+$ 与 $\cup$, 分别表示子空间的和与交.
+          \end{itemize}
+    \item 请验证 $(\mathrm{Sub}(\mathbb V),+,0)$ 构成一个有结合律的交换幺半群, $(\mathrm{Sub}(\mathbb V),\cap,\mathbb V)$ 亦然.
+    \item 给定 $U\leq V$, 定义闭区间 $[U,V]:=\{W\mid U\leq W\leq V\}$. 子空间对应定理的表述是: 对任意子空间 $U$, 有同构的偏序集
+          \begin{equation}
+              (\mathrm{Sub}(\mathbb V/U),\leq)\overset{\sim}\longrightarrow ([U,\mathbb V],\leq ).
+          \end{equation}
+          换用自然语言描述之 (请证明该命题):
+          \begin{equation}
+              (\mathbb V/U)\text{ 的全体子空间}\overset{\text{对应}}\longrightarrow \mathbb V\text{ 中包含 }U\text{ 的子空间},\quad V/U\mapsto V.
+          \end{equation}
+          以上对应方式也保持子空间的从属关系. 另一个等价的表述是区间同构
+          \begin{equation}
+              [V_0,V_1]\cong [V_0/U,V_1/U]\quad\text{ 此处 } 0\leq U\leq V_0\leq V_1\leq \mathbb V.
+          \end{equation}
+          后者是 $\mathrm{Sub}(\mathbb V/U)$ 的区间.此处应证明, 存在集合间的双射 $\varphi: [V_0,V_1]\to  [V_0/U,V_1/U]$, 使得 $\varphi(X)\leq \varphi(Y)$ 当且仅当 $Y\leq X$.
+    \item 以上对应关系蕴含了如下事实: 商空间的子空间恰是子空间的商空间.
+          \begin{equation}
+              \begin{matrix}
+                  V_0/U  & \overset \sim\to & V_0    \\
+                  \wedge &                  & \wedge \\
+                  V_1/U  & \overset\sim \to & V_1
+              \end{matrix}.
+          \end{equation}
+          请以此证明第二同构定理: 对任意 $U,V\in \mathrm{Sub}(\mathbb V)$, 有同构
+          \begin{equation}
+              \dfrac{U+V}{U}\cong \dfrac{V}{U\cap V}.
+          \end{equation}
+          另一个等价的表述是区间同构
+          \begin{equation}
+              [U\cap V,U]\cong [V,U+V],\quad W\mapsto W+V.
+          \end{equation}
+    \item 给定 $0\leq U\leq V_0\leq V_1\leq \mathbb V$, 证明 $\dfrac{V_1/U}{V_0/U}\cong \dfrac{V_1}{V_0}$.
+    \item 称区间 $[U,W]$ 中的两个线性空间 $V_1$ 与 $V_2$ 是相对该区间互补的, 若以下条件满足:
+          \begin{equation}
+              V_1\cap V_2=U,\quad V_1+V_2=W.
+          \end{equation}
+          请证明: 若 $V^\sharp$ 与 $V^\flat$ 都是 $V$ 的补空间 (相对于区间 $[U,W]$), 满足 $V^\flat\leq V^\sharp$, 则 $V^\flat=V^\sharp$. 通俗地说: 一个空间的两个补空间不可能是真包含关系.
+    \item 请证明如下恒等式: 对任意 $V,U^\sharp, U^\flat\in \mathrm{Sub}(\mathbb V)$, 满足 $U^\flat\leq U^\sharp$, 则
+          \begin{equation}
+              U^\sharp\cap (V+U^\flat)=(U^\sharp\cap V)+U^\flat.
+          \end{equation}
+    \item 请尝试以下替换, 证明以上全部命题
+          \begin{equation}
+              (\mathbb V, \text{Sub}(\mathbb V),\leq , +,\cap ,0)\overset{\text{替换}}\longrightarrow (n,\text{正因数}(n), \text{整除}, \text{最小公倍数},\text{最大公因数},1).
+          \end{equation}
+    \item 对任意 $V^\sharp ,V^\flat,U^\sharp,U^\flat\in \text{Sub}(\mathbb V)$, 满足 $U^\flat\leq U^\sharp$, $V^\flat\leq V^\sharp$, 以下四段区间是同构的:
+          \begin{equation}
+              \begin{matrix}
+                   & \dfrac{U^{\flat } +(V^{\sharp } \cap U^{\sharp } )}{U^{\flat } +(V^{\flat } \cap U^{\sharp } )} & \xleftrightarrow{\text{子空间对应}} & \dfrac{U^{\sharp } \cap V^{\sharp }}{(V^{\flat } \cap U^{\sharp } )+(V^{\sharp } \cap U^{\flat } )} & \\[4pt]
+                   & \updownarrow                                                                                    &                                     & \updownarrow                                                                                        & \\[4pt]
+                   & \dfrac{(V^{\sharp } \cap U^{\sharp } )+V^{\flat }}{(V^{\sharp } \cap U^{\flat } )+V^{\flat }}   & \xleftrightarrow{\text{子空间对应}} & \dfrac{(U^{\sharp } \cap V^{\flat } )+(U^{\flat } \cap V^{\sharp } )}{U^{\flat } +V^{\flat }}       &
+              \end{matrix}.
+          \end{equation}
+    \item 我们借用平面几何对上述公式进行简单的表示: 对整数 $n$, 记线性空间 $U^n$ 对应区域 $\{(x,y)\mid x\leq n\}$, $V^m$ 对应区域 $\{(x,y)\mid y\leq m\}$, 此时
+          \begin{equation}
+              \cdots \leq U^{-1}\leq U^0\leq U^1\leq \cdots
+          \end{equation}
+          是线性空间依包含关系所成的链, $V^\bullet$ 的情形亦然. 再令线性空间的和 $+$ 对应区域的并, 交 $\cap$ 对应区域的交. 以上的习题表明, 此种几何对应是良定义的. 特别地, 我们将商空间 $A/B$ 表示为 $A$ 对应的区域减去 $B$ 对应的区域. 我们用对上一题的符号进行替换: $(\sharp,\flat)\mapsto (1,0)$. 请写出四段区间同构的无字证明.
+\end{enumerate}
+\end{problem}
+
+\newpage
+
+\section{线性映射}
+
+\begin{problem}
+以下给定域 $k$, 记 $n$-阶矩阵环为 $M_n(k)$.
+\begin{enumerate}
+    \item 称 $\mathrm d\in \mathcal L(M_n(k),M_n(k))$ 为导子, 当且仅当对任意​ $P,Q\in M_n(k)$, 总有
+          \begin{equation}
+              \mathrm d(PQ)=P\cdot \mathrm d(Q)+\mathrm d(P)\cdot Q.
+          \end{equation}
+    \item 我们将导子全体记作 $\mathcal D(M_n(k),M_n(k))$. 请分别计算
+          \begin{itemize}
+              \item $\mathrm{d}(f(P))$, 此处 $f$ 是多项式;
+              \item $\mathrm{d}(P\cdot Q^{-1})$, 此处 $Q$ 是可逆矩阵;
+              \item 证明 $X\cdot \mathrm d(X)=\mathrm d(X)\cdot X$, 或给出反例.
+          \end{itemize}
+    \item 请证明: 对于导子 $\mathrm d^1$ 与 $\mathrm d^2$, Lie 括号 $[\mathrm d^1,\mathrm d^2]$ 也是导子. 此处定义
+          \begin{equation}
+              [\mathrm d^1,\mathrm d^2](P)=\mathrm d^1(\mathrm d^2 (P))-\mathrm d^2(\mathrm d^1(P)).
+          \end{equation}
+    \item 这表明 $[\mathrm d^1,\mathrm d^2]$ 有自然的 Lie 代数结构.
+    \item 下考虑 $\mathcal D(M_n(k),M_n(k))$ 上一类特殊的导子. 记线性映射
+          \begin{equation}
+              \mathrm{ad}_\bullet :M_n(k)\to \mathcal D(M_n(k),M_n(k)),\quad A\mapsto \mathrm{ad}_A,
+          \end{equation}
+          其中 $\mathrm{ad}_A(X):=[A,X]=AX-XA$. 我们将 $\mathrm{ad}_A$ 称作内导子. 请验证
+          \begin{itemize}
+              \item $\mathrm{ad}_A\in \mathcal D(M_n(k),M_n(k))$,
+              \item $\mathrm{ad}_{[A,B]}=[\mathrm{ad}_A,\mathrm{ad}_B]$,
+              \item $\mathrm{ad}_{\mathrm dA}=[\mathrm d,\mathrm{ad}_A]$.
+          \end{itemize}
+          从而全体内导子构成子-Lie 代数.
+    \item 请计算 $\mathcal D(M_n(k),M_n(k))$ 中全体内导子 (作为线性子空间) 的维数, 以此说明 $\mathcal D(M_n(k),M_n(k))$ 的导子都是内导子. 提示: 可以先证明导子与内导子的商等于某个上同调 (例如群上同调 $H^1(M_n(k),M_n(k))$, 或者 Hochschild 上同调等.), 再使用 Morita 等价 $M_n(k)\sim k$.
+    \item 请计算 $\mathcal D(k[x],k[x])$.
+    \item 考虑实数域 $\mathbb R$. 记 $C(I)$ 是开区间 $I$ 上连续函数全体, 则 $\mathcal D(C(I),C(I))=0$. 这表明我们无法对连续函数定义非平凡的导数!
+    \item 证明以上结论对可微次数小于等于 $n$ 的函数全体仍适用; 对该结论光滑函数而言有何不同?
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+给定任意域 $k$. 请使用线性映射的语言解释方阵的相似变换是什么, 矩阵的相抵变换又是什么?
+\end{problem}
+
+\begin{problem}
+若 $S,T\in \mathcal L(V,V)$ 满足 $S^2=T^2=0_V$ 以及 $ST+TS=\mathrm{id}_V$, 则存在直和分解 $V=U\oplus V$, 使得 $S:U\to W$ 与 $T:W\to U$ 是同构.
+\end{problem}
+
+\begin{problem}
+给定任意域 $k$. 请使用线性映射的语言解释同时相抵化: 给定 $A,B\in k^{m\times n}$, 则 $\operatorname{rank}(A+B)=\operatorname{rank}(A)+\operatorname{rank}(B)$ 当且仅当存在 $P\in \mathrm{GL}_m(k)$ 与 $Q\in \mathrm{GL}_n(k)$ 使得
+\begin{equation}
+    PAQ=\begin{pmatrix}I_{\mathrm{rank}(A)}&O&O\\O&O&O\\O&O&O\end{pmatrix},\quad PBQ=\begin{pmatrix}O&O&O\\O&O&O\\O&O&I_{\mathrm{rank}(B)}\end{pmatrix}.
+\end{equation}
+注意: 该结论当然能推广至任意有限个矩阵.
+\end{problem}
+
+\begin{problem}
+以下域 $k$ 是任意的.
+\begin{enumerate}
+    \item 取同阶方阵 $A$ 与 $B$, 若 $\mathrm{rank}(B)=\mathrm{rank}(ABA)$, 证明 $AB$ 与 $BA$ 相似.
+    \item 取同阶方阵 $A$ 与 $B$, 若 $\mathrm{rank}(A)=\mathrm{rank}(ABA)$, 证明 $AB$ 与 $BA$ 相似.
+    \item 取 $A\in k^{m\times n}$ 与 $B\in k^{n\times m}$, 若对任意 $d\in \mathbb N_+$ 总有 $\mathrm{rank}((AB)^d)=\mathrm{rank}((BA)^d)$, 则存在行满秩或列满秩的矩阵 $C$ 使得 $ABC=CBA$.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+给定任意域 $k$. 请使用线性映射的语言解释幂零标准型: 幂零矩阵一定相似于某个矩阵, 其 $(i,i+1)$ 坐标处的元素是 $0$ 或 $1$, 其余坐标处的元素是 $0$. 换言之, 幂零矩阵在任意域上都有 Jordan 标准型.
+\end{problem}
+
+\begin{problem}
+给定任意域 $k$. 请使用线性映射的语言证明 Fitting 引理: 给定有限维空间和线性映射 $T\in \mathrm{Hom}_k(V,V)$, 请证明内直和关系:
+\begin{equation}
+    V=\underset{\text{零空间增长极限}}{\underbrace{\left(\bigcup_{n\geq 1}\mathrm{null}(T^n)\right)}}\quad \oplus \quad \underset{\text{像空间消减极限}}{\underbrace{\left(\bigcap_{n\geq 1}\mathrm{range}(T^n)\right)}}.
+\end{equation}
+这一事实表明, 任意域上的矩阵相似于一个分块对角矩阵 ($2\times 2$-分块), 其左上分块是可逆的, 右下分块是幂零的. 试问: Fitting 引理对无限维空间是否成立?
+\end{problem}
+
+\begin{problem}
+使用简洁的语言证明, 若线性自同态 $T$ 在某域上的特征多项式能分解作一次因式的乘积, 则 $T$ 在某组基下为 Jordan 标准型 (在相差一个行列置换或转置的意义下唯一).
+\end{problem}
+
+\begin{problem}
+证明, 若域的特征为零, $[A,[A,B]]=O$, 则 $[A,B]$ 幂零.
+\end{problem}
+
+\begin{problem}
+写出有限维线性自同态可上三角化的定义, 并在特征为零的域上证明以下问题.
+\begin{enumerate}
+    \item $\mathrm{rank}([A,B])\leq 1$, 则 $A$ 与 $B$ 可同时上三角化.
+    \item 两个交换的幂零矩阵可同时上三角化.
+    \item 若 $[A,B]$ 是 $A$ 的多项式, 则该多项式常数项必定为零. 并证明 $A$ 与 $B$ 可同时上三角化.
+    \item 若 $[A,[A,B]]=[B,[A,B]]=O$, 则 $A$, $B$, $[A,B]$ 可同时上三角化.
+    \item 若 $[A,B]=aA+bB$, 则 $A$ 与 $B$ 可同时上三角化.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+仍给定任意域 $k$. 定义线性子空间为一个单射 $i:U\to V$. 定义相应的商映射 $\pi:V\to V/U$. 假定以下线性映射复合为零
+\begin{equation}
+    \underset{\text{复合为零}}{\underbrace{W\overset T\longrightarrow V\overset \pi\longrightarrow V/U}},
+\end{equation}
+则 $T$ 被 $U$ 以唯一的方式分解. 换言之, 存在唯一的线性映射 $\widetilde T:W\to U$ 使得 $i\circ \widetilde T=T$. 简而言之, 某映射被商映射 $\pi$ 湮没, 当且仅当其经由子映射 $i$.
+\end{problem}
+
+\begin{problem}
+假定以下线性映射复合为零
+\begin{equation}
+    \underset{\text{复合为零}}{\underbrace{U\overset i\longrightarrow V\overset S\longrightarrow Q}},
+\end{equation}
+则 $S$ 被 $V/U$ 以唯一的方式分解. 换言之, 存在唯一的线性映射 $\widetilde S:V/U\to Q$ 使得 $\widetilde S\circ \pi=S$. 简而言之, 某映射无法分辨子空间 $U$, 当且仅当其能定义在商空间 $V/U$ 上.
+\end{problem}
+
+\begin{problem}
+请证明: 任何线性映射 $T$ 总能唯一地分解做先满后单的两个映射的复合. 换言之, 若线性映射 $i,j$ 是单射, $p,q$ 是满射, 且满足 $i\circ p=j\circ q$, 则 $\mathrm{im}(q)\cong \mathrm{im}(p)$.
+\end{problem}
+
+\begin{problem}
+设 $U,V,W$ 是给定域上的线性空间. $\alpha:U\to V$ 与 $\beta:V\to W$ 是线性映射且满足 $\beta\circ \alpha=0$. 若对任何一个线性空间 $X$ 和线性映射 $f:V\to X$ 使得 $f\circ \alpha=0$, 都存在一个唯一的线性映射 $\mu:W\to X$ 使得 $f=\mu \circ \beta$, 证明 $\beta$ 是满射, 且有线性同构 $W\cong V/\mathrm{range}(\alpha)$. 注意: 许多网传的解答都假定了有限维空间或是选择公理, 实际上该题只需简单应用泛性质.
+\end{problem}
+
+\begin{problem}
+使用积的泛性质表述典范同构 $\mathcal L(U,\prod_\lambda V_\lambda)\cong \prod_\lambda\mathcal L(U, V_\lambda)$, 并写出元素的对应. 此处 $\lambda$ 取遍某一指标集.
+\end{problem}
+
+\begin{problem}
+使用余积的泛性质表述典范同构 $\coprod_{\lambda}\mathcal L (U,V_\lambda)\to \mathcal L (U,\coprod_\lambda V_\lambda )$, 并写出元素的对应. 此处 $\lambda$ 取遍某一指标集.
+\end{problem}
+
+\begin{problem}
+给出典范单射 $\coprod_{\lambda}\mathcal L (U,V_\lambda)\to \mathcal L (U,\coprod_\lambda V_\lambda)$, 并写出元素的对应, 此处 $\lambda$ 取遍某一指标集. 并说明该单射取等当且仅当 $\dim U<\infty$.
+\end{problem}
+
+\begin{problem}
+给出典范单射 $\coprod_{\lambda}\mathcal L (U_\lambda ,V)\to \mathcal L (\prod _{\lambda }U_\lambda ,V)$ 并写出元素的对应, 此处 $\lambda$ 取遍某一指标集. 并给出该单射不取等的例子.
+\end{problem}
+
+\begin{problem}
+请使用以下步骤, 说明由泛性质定义的直和 $\coprod_{\lambda\in \Lambda} U_\lambda$ 恰为直积 $\prod_{\lambda\in \Lambda} U_\lambda$ 中仅有限项指标非零的元素.
+\begin{enumerate}
+    \item 使用投影映射的左逆元, 将所有 $U_\lambda$ 视同直积 $\coprod_{\lambda\in \Lambda} U_\lambda$ 的子空间. 若 $\mu\neq \lambda$, 则 $U_\lambda\cap U_\mu=0$.
+    \item 任意给定线性空间 $W$. 证明任意一族线性映射 $\{f_\lambda:U_\lambda \to W\}_{\lambda\in \Lambda}$ 唯一地对应一个保持线性组合的集合间的映射 $f:\bigcup_{\lambda\in \Lambda}U_\lambda \to W$.
+    \item 同时, 以上保持线性组合的映射 $f$ 唯一地对应一个 $\mathrm{Hom}_k(\mathrm{span}(\bigcup_{\lambda \in\Lambda}U_\lambda), W)$ 中的映射 $F$.
+    \item 从而得出 $\coprod_{\lambda\in \Lambda} U_\lambda\cong \mathrm{span}(\bigcup_{\lambda\in \Lambda}U_\lambda)$.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+记 $[0,1]$ 区间上连续实值函数全体为 $V$. 定义积分变换为实线性映射
+\begin{equation}
+    \mathcal I:V\to V,\quad f\mapsto \mathcal I(f).
+\end{equation}
+其中, $(\mathcal I(f))(x)=\int_0^x f(t)\operatorname dt$.
+\begin{enumerate}
+    \item 求 $\mathcal I$ 的所有特征值及其对应的特征空间 (或特征向量).
+    \item 找到 $V$ 的一族不变子空间 $\{V_x\}_{x\in \mathbb R}$, 使得 $V_x\subsetneq V_y$ 当且仅当 $x<y$.
+    \item 证明: $\{f_i\}_{i=1}^n\subseteq V$ 是线性无关的当且仅当 $\det \left(\int_0^1f_if_j\operatorname dx\right)_{1\leq i,j\leq n}\neq 0$.
+    \item 证明: $\{f_i\}_{i=1}^n\subseteq V$ 是线性无关的, 当且仅当存在 $\{x_i\}_{i=1}^n\subset I$ 使得 $\det(f_i(x_j))_{1\leq i,j\leq n}\neq 0$.
+    \item 证明: 若存在 $V$ 中函数的等式 $\sum_{i=1}^m a_i(x)b_i(y)=\sum_{i=1}^m c_i(x)d_i(y)$, 且 $m$ 是该二元函数写作 $\sum f(x)g(y)$ 的最小数目, 则 $\mathrm{span}(\{a_i\}_{i=1}^m)=\mathrm{span}(\{c_i\}_{i=1}^m)$ ($y$-项同理). 此处可以采用张量积说明.
+    \item 证明: $\{f_i\}_{i=1}^n\subseteq V$ 是线性无关的收敛幂级数, 当且仅当 $\det \left(\frac{\operatorname d^j}{\operatorname dx^j}f_i (x)\right)_{1\leq i,j\leq n}$ 是非恒零的函数.
+    \item 试给出反例: $\{f_i\}_{i=1}^n\subseteq V$ 是线性相关的光滑函数, 但 $\det \left(\frac{\operatorname d^j}{\operatorname dx^j}f_i (x)\right)_{1\leq i,j\leq n}$ 是非恒零的函数.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+求以下线性映射的所有特征值及其对应的特征空间 (或特征向量):
+\begin{enumerate}
+    \item $\varphi_{a,b}:\mathbb R[x]\to \mathbb R[x],\quad f(x)\mapsto f(ax+b)$, 此处 $a,b\in \mathbb R$ 是给定的;
+    \item $\mathcal R:\mathbb R[\![X]\!]\to \mathbb R[\![X]\!],\quad f(X)\mapsto X\cdot f(X)$, 这也叫右移运算;
+    \item $\mathcal L:\mathbb R[\![X]\!]\to \mathbb R[\![X]\!],\quad f(X)\mapsto  (f(X)-f(0))/X$, 这也叫左移运算;
+    \item 记 $[0,1]$ 区间上连续实值函数全体为 $V$, 求以下线性算子的特征值与特征空间:
+          \begin{equation}
+              V\to V,\quad f(x)\mapsto \int_0^1 K(x,y)f(y)\operatorname dy,
+          \end{equation}
+          此处选取 $K(x,y)=\min(x,y)-x\cdot y$.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+给定复线性变换 $T:V\to V$ 与复系数非常值多项式 $f$, 证明: $f(T)$ 的特征值是 $\{f(\lambda)\mid \lambda \text{ 是 }T\text{ 的特征值.}\}$. 注意: 复数域可换做代数闭域.
+\end{problem}
+
+\begin{problem}
+对复线性空间的自同态 $T:V\to V$ 定义 $\sigma(T)=\{z\in \mathbb C\mid (z\cdot\mathrm{id}-T)^{-1}\text{ 不存在}\}$. 请给出 $\sigma(T)=\mathbb C$ 但 $T$ 没有特征值的例子. 习惯地, 当 $T$ 满足某些连续性条件时, 称 $\sigma(T)$ 为 $T$ 的谱.
+\end{problem}
+
+\begin{problem}
+举例, $S,T\in \mathcal L(V,V)$ 满足 $S\circ T= \mathrm{id}_V$, 但 $\mathrm{null}(T\circ S)$ 是无穷维的.
+\end{problem}
+
+\begin{problem}
+由数学分析, 我们可以找到两个 $\mathbb R\to \mathbb R$ 的函数, 使得一者单但不满, 另一者满但不单, 同时两者之和为恒等映射. 下将以上事实代入线性空间.
+\begin{enumerate}
+    \item 给定集合 $S$ 与线性空间 $V$, 证明集合间的全体映射 $\mathrm{Hom}_{\mathrm{Sets}}(S,V)$ 有自然的线性结构 (函数的线性组合是逐点赋予的). 另一种写法是 $V^S$, 表示 $S$-个 $V$ 的直积 ($\prod_{s\in S}V$).
+    \item 考虑集合间映射
+          \begin{equation}
+              -\circ f:\mathrm{Hom}_{\mathrm{Sets}}(\mathbb R,\mathbb R)\to \mathrm{Hom}_{\mathrm{Sets}}(\mathbb R,\mathbb R),\quad \varphi \mapsto \varphi\circ f,
+          \end{equation}
+          并证明这也是线性映射.
+    \item 试说明: 以上定义的 $(-\circ f)$ 单当且仅当 $f$ 满; $(-\circ f)$ 满当且仅当 $f$ 单.
+    \item 寻找单且不满的映射 $f_1\in \mathbb {Hom}_{\mathrm{Sets}}(\mathbb R,\mathbb R)$ 与满且不单的 $f_2\in \mathbb {Hom}_{\mathrm{Sets}}(\mathbb R,\mathbb R)$, 使得 $f_1+f_2=\mathrm{id}_{\mathbb R}$.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+以下给出一种从集合构造以之为基的线性空间的方法. 给定集合 $X$ 与域 $k$, 定义 $k$-线性空间 $V:=\mathrm{Hom}_{\mathrm{Sets}}(X,k)$. 证明单射
+\begin{equation}
+    i:X\hookrightarrow V^\ast ,\quad x\mapsto [f\mapsto f(x)].
+\end{equation}
+往后考虑 $V^\ast$ 中的 $\mathrm{span}(i(X))$ 即可.
+\end{problem}
+
+\begin{problem}
+以下问题用于研究代数数.
+\begin{enumerate}
+    \item 称 $r\in \mathbb C$ 是代数整数, 当且仅当存在首一整系数多项式 $f\in \mathbb Z[x]$ 使得 $f(r)=0$. 记 $\mathbb Q(r)$ 为包含 $r$ 的最小数域. 证明 $\mathbb Q(r)$ 是有限维 $\mathbb Q$-线性空间, 其一组基是 $\{1,r,r^2,\ldots, r^{d-1}\}$ ($d=\dim_{\mathbb Q}\mathbb Q(r)-1$).
+    \item 取代数整数 $r\in \mathbb C$. 写出以下 $\mathbb Q$-线性自同态的矩阵形式
+          \begin{equation}
+              m_r:\mathbb Q(r)\to \mathbb Q(r),\quad x\mapsto rx,
+          \end{equation}
+          其中选取基底为 $\{1,r,\ldots, r^{d-1}\}$ 是基底. 同时写出 $m_r$ 的特征多项式.
+    \item 给出例子: $m_r$ 在 $\mathbb Q(r)$ 中没有 Jordan 标准型.
+    \item 若 $r,s\in \mathbb C$ 是代数整数, 试通过线性映射的矩阵表述证明 $r+s$ 和 $r\cdot s$ 均是代数整数.
+    \item 置 $g(x)=x^{2024}+x+1$. 对任意首一多项式 $f\in \mathbb Z[x]$, 根据代数基本定理分解得
+          \begin{equation}
+              f(x)=(x-z_1)(x-z_2)\cdots (x-z_n)\quad (\text{over }\mathbb C).
+          \end{equation}
+          试证明:
+          \begin{equation}
+              (x-g(z_1))(x-g(z_2))\cdots (x-g(z_n))\in \mathbb Z[x].
+          \end{equation}
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+本题用于探究一类几乎是同构的线性映射. 在处理无限维线性空间时, 我们时常遇到一些复合的恒等映射 $S\circ T$, 但 $T\circ S$ 与恒等仅相差一个 range-有限维的映射 (可思考多项式空间上的求导映射, 或是平移映射). 以下习题的目的是将所有 $\mathcal L(U,V)$ 替换做某个 $\mathcal L(U,V)$ 的商空间, 使得上述求导, 平移映射成为商空间中的同构. 简而言之, 有限维线性空间构成原空间的 Serre 子范畴.
+\begin{enumerate}
+    \item 称 $T\in \mathcal L(V, W)$ 是拟同构, 当且仅当 $\mathrm{null}(T)$ 与 $W/\mathrm{range}(T)$ 均是有限维的. 显然有限维空间间的线性映射都是拟同构.请证明: 若 $T\in \mathcal L(V, W)$ 与 $S\in \mathcal L(U,V)$ 都是拟同构, 则 $T\circ S$ 亦然.
+    \item 称 $S\in \mathcal L(U,V)$ 与 $T\in \mathcal L(V,U)$ 互为拟逆, 当且仅当 $(S\circ T-\mathrm{id}_V)$ 与 $(T\circ S-\mathrm{id}_U)$ 的 range 均是有限维的. 请证明: 实多项式空间中通常的求导运算有拟逆. 一般多项式空间如何?
+    \item 证明: $T$ 存在拟逆, 当且仅当对任意 range 有限维的线性映射 $F$, 映射 $(F+T)$ 也具有拟逆. 此处, 映射的来源与去向相同.
+    \item 采用 1. 的记号. 请证明: 若 $T$ 与 $S$ 均有拟逆, 则 $T\circ S$ 亦然.
+    \item 请证明: 某映射具有拟逆, 当且仅当它是拟同构. 此时, 应当承认选择公理.
+    \item 给定拟同构 $T\in \mathcal L(U,V)$, 定义其指标
+          \begin{equation}
+              \mathfrak S(T):=\dim (\mathrm{null}(T))-\dim (V/\mathrm{range}(T)).
+          \end{equation}
+          给定拟同构 $T$ 与 range 有限的映射 $F$, 请证明 $\mathfrak S(T+F)=\mathfrak S(T)$. 此处, 映射的来源与去向相同.
+    \item 请证明: $\mathfrak S(T)+\mathfrak S(S)=\mathfrak S(T\circ S)$. 特别地, 互为拟逆的映射有互为相反数的指标.
+    \item 给定由 $S, T$ 与 $T\circ S$ 诱导的三条正合列, 则有诱导的长正合列
+          \begin{equation}
+              0\to \ker (S)\to \ker (T\circ S)\to \ker (T)\to \mathrm{coker}(S)\to \mathrm{coker}(T\circ S)\to \mathrm{coker}(T)\to 0.
+          \end{equation}
+    \item 给定拟同构 $T\in \mathcal L(U,V)$. 若限制在子空间上的映射 $T^\flat:U^\flat\to V^\flat$ 也是拟同构, 则 $T_\flat: \frac{U}{U^\flat}\to \frac{V}{V^\flat}$ 也是良定义的拟同构. 特别地, $\mathfrak S(T)=\mathfrak S(T^\flat)+\mathfrak S(T_\flat)$.
+    \item 定义商空间 $\mathcal H(U,V):={\mathcal L(U,V)}/{\mathcal L^0(U,V)}$, 其中 $\mathcal L^0(U,V)$ 由 $\mathcal L(U,V)$ 中所有 range-有限的映射组成, 记商空间中的对象 $[T]:=T+\mathcal L^0(U,V)$. 试证明: $[\mathrm{id}_V]=[0]$ 当且仅当 $\dim V<\infty$, 这说明有限维空间等价于零对象.
+    \item 证明复合运算 $[S\circ T]=[S]\circ [T]$ 是良定义的, 即结果不依赖代表元之选取.
+    \item 假定域的特征为零. 证明导函数映射
+          \begin{equation}
+              \mathcal D :k[X]\to k[X],\quad X^n\mapsto n\cdot X^{n-1}
+          \end{equation}
+          与原函数映射
+          \begin{equation}
+              \mathcal I :k[X]\to k[X],\quad X^n\mapsto \frac{1}{n+1} X^{n+1}
+          \end{equation}
+          在商空间中互逆, 即 $[\mathcal D]\circ [\mathcal I]= [\mathcal I]\circ [\mathcal D]=[\mathrm{id}_{k[X]}]$.
+\end{enumerate}
+\end{problem}
+
+\newpage
+
+\section{对偶空间}
+
+\begin{problem}
+称偏序集 $(S,\leq_S)$ 与 $(T,\leq _T)$ 间保持偏序结构的映射
+\begin{equation}
+    f:(S,\leq _S)\to (T,\leq _T),\quad g:(T,\leq _T)\to (S,\leq _S)
+\end{equation}
+构成一个 Galois 连接, 当且仅当以下性质恒成立:
+\begin{equation}
+    f(s)\leq_T t\quad \Longleftrightarrow \quad s\leq_S g(t)\quad (\forall s\in S, \forall t\in T).
+\end{equation}
+\begin{enumerate}
+    \item 证明: $f\dashv g$ 是 Galois 连接当且仅当 $s\leq _S g(f(s))$ 对一切 $s\in S$ 成立, 且 $f(g(t))\leq _Tt$ 对一切 $t\in T$ 成立.
+    \item 给定线性子空间的偏序集 $(\mathrm{Sub}(V),\leq )$, 对偶地定义偏序集 $(\mathrm{Sub}(V^\ast),\leq ^\ast)$, 其中 $A\leq ^\ast B$ 当且仅当 $B\subset A$ 是子空间的包含关系. 注意: 在对偶空间的取反包含运算是非常合理的. 请证明: $\mathrm{ann}(U) \leq ^\ast B$ 与 $U\leq \ker(B)$ 均等价于命题
+          \begin{equation}
+              f(u)=0\,(\forall f\in B,\forall u\in U).
+          \end{equation}
+          从而 $(\mathrm{ann}\dashv \ker )$ 是一个 Galois 连接.
+    \item 试问: 找一个 $\mathrm{ann}(\ker (B))\neq B$ 的例子. 并在承认延拓公理时证明 $U=\ker (\mathrm{ann}(U))$ 恒取等.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+令 $S$ 是 $\mathbb R^2$ 上全体开集, $U\leq _SV$ 当且仅当 $U$ 是 $V$ 的子集; $T$ 是 $\mathbb R^2$ 上全体闭集, $B\leq_TD$ 当且仅当 $B$ 是 $D$ 的子集. 再令 $f$ 是取闭包, $g$ 是取内部.
+\begin{enumerate}
+    \item 证明以上 $f$ 与 $g$ 是保持偏序关系的映射, 且是一个 Galois 连接.
+    \item 给定 $\mathbb R^2$ 中的子集. 今仅提供取闭包以及取内部两种运算. 请证明: 最多会出现 $7$ 种不同的集合 (包括 $S$ 自身). 并给一个取等的例子. 该结论对一般的拓扑空间也成立.
+    \item 给定 $\mathbb R^2$ 中的子集. 今仅提供取闭包以及取补集两种运算. 请证明: 最多会出现 $7$ 种不同的集合 (包括 $S$ 自身). 并给一个取等的例子. 该结论对一般的拓扑空间也成立.
+    \item 映射 $f:X\to Y$ 的本质是子集的对应, 原像函数 $f^{-1}$ 亦然. 鉴于集合的子集是偏序集, 试问: $(f,f^{-1})$ 是否构成 Galois 连接? 同时判断以下语句的正误:
+          \begin{enumerate}
+              \item $f(X\cap Y)=f(X)\cap f(Y)$,
+              \item $f(X\cup Y)=f(X)\cup f(Y)$,
+              \item $f^{-1}(X\cap Y)=f^{-1}(X)\cap f^{-1}(Y)$,
+              \item $f^{-1}(X\cup Y)=f^{-1}(X)\cup f^{-1}(Y)$.
+          \end{enumerate}
+    \item 请证明, 函数 $f:\mathbb R^m\to \mathbb R^n$ 是连续的, 当且仅当 $f^{-1}$ 保持 Galois 连接 (开集闭集模型). 换言之, 证明以下几条等价:
+          \begin{enumerate}
+              \item $f$ 是连续函数 (使用极限记号或 $\varepsilon$-$\delta$ 语言定义, 两者的等价性见数学分析);
+              \item 开集的原像恒为开集 (这是连续函数的普适性定义, 对一般的拓扑空间均适用);
+              \item 闭集的原像恒为闭集.
+          \end{enumerate}
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+证明以下结论对有限维对偶空间均正确, 对承认延拓公理与否有下表.注意: 永远正确的等式适合作为证明题, 通常公理内不正确的等式适合作为反例.
+\vspace{6mm}
+\begin{center}
+    \setlength{\tabcolsep}{6pt} % Default value: 6pt
+    \renewcommand{\arraystretch}{1.5} % Default value: 1
+    \begin{tabular}{||l|l|c|c|c||}
+        \hline
+        编号 & 定理名称                                                                          & 通常情形     & 承认延拓公理 & 备注 \\ [0.5ex]
+        \hline\hline
+        G1   & $\ker(\mathrm{ann}(V))\overset ?=V$                                               & 仅 $\supset$ & 成立         &      \\
+        \hline
+        G2   & $\mathrm{ann}(\ker(B))\overset ?=B$                                               & 仅 $\supset$ & 仅 $\supset$ & 反例 \\
+        \hline
+        E1   & $\mathrm{ann}(V_1+V_2)\overset ?=\mathrm{ann}(V_1)\cap \mathrm{ann}(V_2)$         & 成立         & 成立         & 证明 \\
+        \hline
+        E2   & $\mathrm{ann}(V_1\cap V_2)\overset ?=\mathrm{ann}(V_1)+ \mathrm{ann}(V_2)$        & 仅 $\supset$ & 成立         &      \\
+        \hline
+        E3   & $\mathrm{ker}(B_1+ B_2)\overset ?=\mathrm{ker}(B_1)\cap \mathrm{ker}(B_2)$        & 成立         & 成立         & 证明 \\
+        \hline
+        E4   & $\mathrm{ker}(B_1\cap B_2)\overset ?=\mathrm{ker}(B_1)+ \mathrm{ker}(B_2)$        & 仅 $\supset$ & 仅 $\supset$ & 反例 \\
+        \hline
+        Z1   & $\ker(\varphi^\ast)\overset ?=\mathrm{ann}(\mathrm{im}(\varphi))$                 & 成立         & 成立         & 证明 \\
+        \hline
+        Z2   & $\ker(\varphi)\overset ?=\mathrm{ker}(\mathrm{im}(\varphi^\ast))$                 & 仅 $\supset$ & 成立         &      \\
+        \hline
+        Z3   & $\mathrm{im}(\varphi^\ast)\overset ?=\mathrm{ann}(\mathrm{ker}(\varphi))$         & 仅 $\supset$ & 成立         &      \\
+        \hline
+        Z3'  & $\mathrm{im}(\pi^\ast)\overset ?=\mathrm{ann}(\mathrm{ker}(\pi)),\,\pi\text{ 满}$ & 成立         & 成立         & 证明 \\
+        \hline
+        Z4   & $\mathrm{im}(\varphi)\overset ?=\mathrm{ker}(\mathrm{ker}(\varphi^\ast))$         & 仅 $\supset$ & 成立         &      \\
+        \hline
+        Z5   & $f$ 满推得 $f^\ast$ 单                                                            & 成立         & 成立         & 证明 \\
+        \hline
+        Z6   & $f$ 单推得 $f^\ast$ 满                                                            & 不成立       & 成立         &      \\
+        \hline
+        L1   & $V^\ast /\mathrm{ann}(S) \overset ?\to S^\ast$                                    & 单           & 同构         &      \\
+        \hline
+        L2   & $(V/S)^\ast\overset ?\to \mathrm{ann}(S)$                                         & 同构         & 同构         & 证明 \\ [1ex]
+        \hline
+    \end{tabular}
+\end{center}
+\vspace{6mm}
+\end{problem}
+
+\newpage
+
+\section{多项式}
+
+\begin{problem}
+对任意多项式 $f\in \mathbb Z[X]$, 证明有以下命题的推导关系 (未标注的箭头均不取达):
+\begin{equation}
+    f\text{ 在 }\,\mathbb Z[X]\,\text{ 中不可约}\implies f\text{ 在 }\,\mathbb Q[X]\,\text{ 中不可约}\Longleftarrow f\text{ 在 }\,\mathbb C[X]\,\text{ 中不可约}.
+\end{equation}
+对整系数首一多项式而言, 以上关系作何变化?
+\end{problem}
+
+\newpage
+
+\section{内积空间}
+
+\begin{problem}
+以下, 实内积空间 $V$ 不必是有限维的, $\varphi \in \mathrm{Hom}_{\mathbb R}(V,V)$ 总是可逆的, 伴随映射 $\varphi^\ast$ 总是存在的.
+\begin{enumerate}
+    \item 证明 $\varphi ^\ast$ 是单射, 且 $(\mathrm{im}(\varphi^\ast ))^\perp=0$.
+    \item 证明: 若 $\varphi^\ast$ 是满射, 则 $(\varphi^{-1})^{\ast}$ 存在, 且 $(\varphi^{-1})^\ast=(\varphi^\ast)^{-1}$.
+    \item 证明: 若 $(\varphi^{-1})^\ast$ 存在, 则 $\varphi^\ast$ 可逆, 且 $(\varphi^{-1})^\ast=(\varphi^\ast)^{-1}$.
+    \item 置 $V$ 为仅有限项非零的实数列空间 (同构于 $\mathbb R[x]$), 其上的内积定义作
+          \begin{equation}
+              V\times V\to \mathbb R,\quad (a_i)_{i\geq 1},(b_i)_{i\geq 1}\mapsto \sum_{i\geq 1}a_ib_i.
+          \end{equation}
+          定义左移映射 $L:V\to V,\quad (a_i)_{i\geq 1}\mapsto (a_{i+1})_{i\geq 1}$, 试求 $(\mathrm{id}+L)$ 的伴随.
+    \item 举例说明 $\varphi^{-1}$ 不必有伴随.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+依照内积的 Cauchy-Schwartz 不等式, 求出使得不等式
+\begin{equation}
+    \left(\sum_{j\geq 1} |a_j|\right)^4\leq C\cdot \left(\sum_{j\geq 1} |a_j|^2\right)\cdot \left(\sum_{j\geq 1} j^2|a_j|^2\right)
+\end{equation}
+成立的的最佳常数 $C$.
+\end{problem}
+
+\begin{problem}
+给定实内积空间或复内积空间上的范数. 证明: 该范数诱导内积, 当且仅当平行四边形法则.
+\end{problem}
+
+\begin{problem}
+找一个内积空间及其线性真子空间 $U\subsetneq V$, 使得某些 $x\in V\setminus U$ 不存在 $U$ 上的最近投影.
+\end{problem}
+
+\begin{problem}
+给定 $[0,1]$ 区间上实多项式空间 $\mathbb R[x]$ 的线性无关组 $\{1,x^1,x^2,x^3\ldots\}$, 请对以下三种内积分别进行 Gram-Schmidt 正交化过程:
+\begin{equation}
+    (f,g):=\int_{-1}^1 fg\mathrm{d}x,\quad [f,g]:=\int_{-1}^1\frac{fg}{\sqrt{1-x^2}}\mathrm{d}x,\quad \langle f,g\rangle:=\int_0^\infty fg e^{-x}\mathrm{d}x.
+\end{equation}
+其结果分别是 Legendre 多项式, Chebyshev 多项式, 以及 Laguerre 多项式.
+\end{problem}
+
+\begin{problem}
+说明完备的内积空间既不可能是可数维线性空间, 更不可能是可数集.
+\end{problem}
+
+\begin{problem}
+若实或复线性空间 $V$ 有一组基, 请请定义一种 $V$ 上的一种内积. 你能给 $\mathbb R$ 上全体连续实值函数定义一个内积吗?
+\end{problem}
+
+\begin{problem}
+称有限维实或复线性空间 $V$ 上的两个范数 $\|-\|_{a}$ 与 $\|-\|_{b}$ 等价, 当且仅当 $\sup_{x\neq 0}\frac{\|x\|_a}{\|x\|_b}\in (0,+\infty)$. 请证明这是一个等价关系, 并说明任意两种范数等价.
+\end{problem}
+
+\begin{problem}
+给定实或复矩阵空间 $\mathbb F^{m\times n}$, 请证明最大奇异值 $\sqrt{\lambda_{\max}(A^\ast A)}$ 是范数. 并说明矩阵空间上任何范数与最大奇异值范数等价.
+\end{problem}
+
+\begin{problem}
+给定闭区间上的连续实值多项式空间 $V:=\mathbb R[x]$, 以及二元运算
+\begin{equation}
+    V\times V\to \mathbb R,\quad  f,g\mapsto \int_{-1}^1 f(t)g(t)w(t)\operatorname dt.
+\end{equation}
+此处 $w$ 在开区间 $(-1,1)$ 上连续. 请证明: 以上双线性型是内积, 当且仅当 $w\geq 0$ 且瑕积分 $\int_{-1}^1w(t)\operatorname dt$ 存在.
+\end{problem}
+
+\begin{problem}
+给定正数数列 $\{a_i\}_{i=1}^n$ 与 $c\geq 1$, 证明
+阶方阵 $b_{i,j}:=(a_i+a_j)^{-c}$ 是正定的.
+\end{problem}
+
+\begin{problem}
+依照 Fourier 变换 (或常微分方程等任意方法) 证明
+\begin{equation}
+    \sqrt{|x+y|}-\sqrt{|x-y|}=\sqrt{\frac{2}{\pi}}\int_0^\infty\frac{\sin xt\sin yt}{t\sqrt t}\operatorname dt.
+\end{equation}
+对相应的内积构造 Gram 矩阵, 证明不等式
+\begin{equation}
+    \sum_{1\leq i,j\leq n}\sqrt{|x_i+x_j|}\geq \sum_{1\leq i,j\leq n}\sqrt{|x_i-x_j|}.
+\end{equation}
+\end{problem}
+
+\begin{problem}
+请按照以下提示证明数学分析中一类积分不等式问题: 若平方可积的连续函数 $f$ 满足
+\begin{equation}
+    \int_0^\infty e^{-kx}f(x)\operatorname dx=1\quad (1\leq k\leq n),
+\end{equation}
+试求下确界
+\begin{equation}
+    \inf\int_0^\infty f(x)^2\operatorname dx.
+\end{equation}
+\begin{enumerate}
+    \item 选定内积空间为 $[0,+\infty)$ 上平方可积的连续函数, 内积为 $(f,g):=\int_0^\infty f(x)g(x)\operatorname dx$.
+    \item 取 $f(x)$ 为题干所述, $g(x)=\sum_{k=1}^n a_k e^{-kx}$, 采用平方积分的 Cauchy 不等式.
+    \item 移项, 整理得形如 $\int_0^\infty f(x)^2\operatorname dx\geq \frac{a^T Aa}{a^T Ba}$ 的式子, $a=(a_1,\ldots, a_n)$ 为列向量, $A$ 与 $B$ 是相应的矩阵.
+    \item 求出二次型的最小值, 考虑取等条件.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+定义正项数列 $\{u_i\}_{i=1}^n$ 与 $\{v_i\}_{i=1}^n$ 的极大-极小值如下:
+\begin{equation}
+    K_{\min}(u,v):=\sum_{i=1}^n\min(u_i,v_i),\quad K_{\max}(u,v):=\sum_{i=1}^n\max(u_i,v_i).
+\end{equation}
+证明, 对点列 $\{\vec x^k\}_{k=1}^N\subset (\mathbb R_+)^n$,
+\begin{enumerate}
+    \item $n$ 阶方阵 $a_{i,j}:=K_{\min}(\vec x^i,\vec x^j)$ 是半定的, 且依概率 $1$ 正定;
+    \item $n$ 阶方阵 $b_{i,j}:=1/(K_{\max}(\vec x^i,\vec x^j))$ 是半定的, 且依概率 $1$ 正定;
+    \item 以上两个矩阵的 Hadamard 积是半定的, 且依概率 $1$ 正定.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+给定阶数相同的实矩阵矩阵 $A$ 与 $B$. 证明 $AB=O$ 的充要条件是
+\begin{equation}
+    \det (I_n-xA)\cdot \det (I_n-yB)=\det (I_n-xA-yB)\quad (\forall x,y\in \mathbb R).
+\end{equation}
+由此, 对均值为 $0$ 的 $\mathbb R^n$-正态分布 $X$, 随机变量 $X^TAX$ 与 $X^TBX$ 独立的充要条件是 $AB=O$.
+\end{problem}
+
+\begin{problem}
+是否存在一种形如 $(f,g)=\int_{\mathbb R}f(x)g(x)w(x)\operatorname dx$ 的实多项式空间中的内积, 使得 $\{1,x,x^2,\ldots\}$ 经标准正交化后的结果是 $\{1,x+f_0(x),x^2+f_1(x),x^3+f_2(x),\ldots\}$, 此处 $f_k$ 是次数不超过 $k$ 的多项式.
+\end{problem}
+
+\begin{problem}
+判断以下关于实内积空间 $(V,(-,-))$ 的正误. 注意: 承认延拓公理与否并不影响结果.
+\begin{enumerate}
+    \item 存在 $V$ 到 $V^\ast$ 的单射;
+    \item $f\in V^\ast$ 一定形如 $(v,-)$;
+    \item 对子集 $S_1,S_2\subset V$, 总有 $(S_1\cup S_2)^\perp= S_1^\perp \cap S_2^\perp$;
+    \item 对子空间 $V_1,V_2\subset V$, 总有 $(V_1\cap V_2)^\perp =V_1^\perp +V_2^\perp$;
+    \item 对子集 $S\subset V$, 总有 $(S^\perp )^\perp =\mathrm{span}(S)$;
+    \item 对子集 $S\subset V$, 总有 $S^\perp =((S^\perp)^\perp)^\perp$;
+    \item 若子空间 $U\subset V$ 满足 $(U^\perp)^\perp=U$, 则有内直和 $U^\perp \oplus U=V$.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+假设 $(V,(-,-))$ 是实内积空间. 任取单位向量 $v_0\in V$, 定义反射
+\begin{equation}
+    R:V\to V,\,x\mapsto x-2(x,v_0)v_0.
+\end{equation}
+今取等距自同构 $A:V\to V$, 满足 $(Au,Av)=(u,v)$. 请证明: 若 $V$ 是有限维的, 则 $1$ 是 $A$ 或 $RA$ 的特征值. $V$ 无限维时情况如何?
+\end{problem}
+
+\begin{problem}
+给定有限维非零内积空间 $V$ 及其有限个非零线性真子空间 $\{V_i\}_{i=1}^n$, 证明 $V\setminus\bigcup_{i=1}^nV_i$ 包含一组正交基 (大小为 $\dim V$). 同时对 Hilbert 空间的完备正交基做类似的证明.
+\end{problem}
+
+\begin{problem}
+以下取复矩阵 $A$, 正规即 $AA^\ast =A^\ast A$. 试证明以下条件均与正规等价.
+\begin{enumerate}
+    \item $[A,[A,A^\ast]]=O$, 此处 $[P,Q]:=PQ-QP$ 是通常意义下的 Lie 括号.
+    \item $A$ 的奇异值恰是特征值的绝对值.
+    \item $\mathrm{tr}(A^2A^\ast\,^2 )=\mathrm{tr}((AA^\ast)^2)$. 注: 将 $(-)^2$ 换成 $(-)^k$ ($k=3,4,\ldots$), 均是等价条件.
+    \item 有唯一分解 $A=A_1+iA_2$, 其中 $A_1$ 与 $A_2$ 是自伴 (即 Hermite) 的, 且 $[A_1,A_2]=O$.
+\end{enumerate}
+\end{problem}
+
+
+\begin{problem}
+考虑通常的复内积空间 $V=\mathbb C^n$.
+\begin{enumerate}
+    \item 证明, 对线性自同态 $\varphi\in\mathcal L(V)$, 存在自同态 $\mathcal U$ 与唯一的 $\mathcal S$ 使得 $\varphi=\mathcal U\mathcal S$. 此处
+          \begin{itemize}
+              \item $\mathcal U$ 是酉的 (或等距的), 即, $(\mathcal U x,\mathcal Uy)=(x,y)$ 对一切 $x,y\in V$ 成立;
+              \item $\mathcal S$ 是正定 Hermite 的, 即, $\mathcal S=\mathcal S^\ast$ 且 $(\mathcal Sx,x)\geq 0$ ($\forall x\in V$).
+          \end{itemize}
+    \item 证明, $\mathcal U$ 均是 $\mathcal S$ 唯一的, 当且仅当 $\varphi$ 可逆.
+    \item 证明 $\varphi$ 是正规算子 ($\varphi\varphi ^\ast =\varphi^\ast\varphi$) 当且仅当 $\mathcal S$ 与 $\mathcal U$ 交换.
+    \item 定义 $\Delta (\mathcal U\mathcal S):=\sqrt{\mathcal S}\mathcal U\sqrt{\mathcal S}$, 此处 $\sqrt{S}$ 半正定 Hermite 算子的唯一半正定平方根 (记作 $\sqrt{\mathcal S}^2=\mathcal S$). 今取 $x,y\in V$, 并定义线性变换
+          \begin{equation}
+              (x\otimes y):V\to V,\quad v\mapsto (x,v)\cdot y.
+          \end{equation}
+          请求解 $\Delta (x\otimes y)$, 并证明 $\Delta (\Delta (x\otimes y))=\Delta (x\otimes y)$.
+\end{enumerate}
+\end{problem}
+
+
+\begin{problem}
+给定矩阵全体 $\mathbb C^{n\times n}$, 试探讨以下关于 Cayley 变换的问题.
+\begin{enumerate}
+    \item 自伴矩阵一一对应 (双射) 于不以 $-1$ 为特征值的酉矩阵, 对应方式为 $\varphi:A\mapsto (I-iA)(I+iA)^{-1}$. 请写出其逆变换.
+    \item 自伴矩阵满对应 (满射) 于酉矩阵, 对应方式为 $\psi: A\mapsto \exp (iA)$. 请写出其逆变换 (也就是原像, 或称作多值函数).
+    \item 鉴于以上探讨的均是可对角化矩阵 (对应复半单线性算子), 我们只需追踪矩阵的谱. 请分别将以上两题中的自伴矩阵换作复数域, 用通俗的语言描述复函数 $\varphi,\varphi:\mathbb C\to \mathbb C$. 注: 请特别留意实轴的像.
+    \item 已知实正交矩阵是酉矩阵. 试问: 前两题中实正交矩阵的原像分别是什么?
+    \item 试考虑转换 $\sqrt{-1}\mapsto  J:=\begin{pmatrix}O&I\\-I&O\end{pmatrix}$, 则 1. 也有如下等价表述: 变换 $X\mapsto (I+X)\cdot (I-X)^{-1}$ 将 $\mathrm{Sp}(2n)$ 中特征值不为 $1$ 的矩阵一一对应至 Hamilton 矩阵全体 $H(2n)$. 此处:
+          \begin{itemize}
+              \item 辛矩阵 $\mathrm{Sp}(2n):=\{A\in \mathbb R^{2n\times 2n}\mid A^TJA=J\}$ (特别地, $\det (A)=1$),
+              \item Hamilton 矩阵 $\mathrm{H}(2n):=\{A\in \mathbb R^{2n\times 2n}\mid A^TJ+JA=O\}$ (特别地, $JA$ 是对称矩阵).
+          \end{itemize}
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+称有限维实线性空间上 $V$ 的双线性型 $B$ 是反对称的, 当且仅当 $B[u,v]+B[v,u]=0$ 恒成立. 试探讨以下问题.
+\begin{enumerate}
+    \item 请证明 $B$ 在某组基下的矩阵为 $\begin{pmatrix}O&I&O\\-I&O&O\\O&O&O\end{pmatrix}$, 换言之, 任何反对称矩阵均合同于此类矩阵.
+    \item 请设计一个算法, 将 $V$ 的一组基依次转化作 $\{e_1,\ldots, e_k,f_1,\ldots, f_k,u_1,\ldots u_s\}$, 其中 $B[e_i,f_j]=\delta_{i,j}$, 以及 $B[e_i,u_j]=B[f_i,u_j]=B[u_i,u_j]=0$.
+          \begin{itemize}
+              \item 注意: 算法 (伪代码) 的输入是基 $S:=\{v_1,\ldots, v_{n=\dim V}\}$, 输出是基 $\widetilde S:=\{\widetilde {v_1},\ldots,\widetilde {v_n}\}$, 使得 $\widetilde S$ 中元素 (经过重排) 形如 $\{e_1,\ldots, e_k,f_1,\ldots, f_k,u_1,\ldots u_s\}$ 且满足题设条件. 此处 $2k+s=n=\dim V$, 参数 $(k,s)$ 由双线性型的秩决定 ($r=2k$).
+          \end{itemize}
+    \item 构造或证伪: 若 $n=\dim V\geq 4$, 则存在列向量 $(v_3,\ldots ,v_n)$, 使得 $B[u,v]=\det (u,v,v_3,\ldots, v_n)$.
+    \item 若 $B$ 非退化. 对任意线性子空间 $U\subset V$ 定义 $U^B:=\{ v\in V: B[v,-]\in  \mathrm{ann}(U)\}$. 证明 $(U^B)^B=U$.
+    \item 若 $B$ 非退化. 证明: 限制在子空间上的双线性型 $(U,B|_{U\times U})$ 是非退化的, 当且仅当 $V=U\oplus U^B$.
+    \item 若 $B$ 非退化. 称子空间 $U$ 是 Lagrange 的, 若 $U^B=U$.
+    \item 请举例的非退化子空间与 Lagrange 子空间.
+    \item 若 $B$ 非退化. 试证明: 若子空间 $U$ 满足 $U^B\subset U$, 且子空间 $W$ 是 Lagrange 子空间, 则 $\frac{(U^B+W)\cap U}{U^B}$ 是 $\frac{U}{U^B}$ 的 Lagrange 子空间. 注意: 此处需先说明 $B$ 能视作 $U/U^B$ 上的非退化反对称双线性型 (通过商空间的泛性质说明其良定义).
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+考虑两组非退化有限维反双线性型 $(V_1,B_1)$ 与 $(V_2,B_2)$. 称线性同构 $\varphi : (V_1,B_1)\to (V_2,B_2)$ 是辛同构, 当且仅当 $B_2[\varphi(u),\varphi(v)]=B_1[u,v]$ 恒成立. 简而言之, $B_2$ 关于线性映射 $\varphi$ 的拉回是 $B_1$.
+
+今给定非退化反对称双线性型 $(\mathbb R^{2n}, B[-,-])$, 将向量记作 $(u,v)\in \mathbb R^{2n}$, 定义
+\begin{equation}
+    B:\mathbb R^{2n}\times\mathbb R^{2n}\to \mathbb R,\quad ((u,f),(v,g))\mapsto g^Tu-f^Tv.
+\end{equation}
+请证明以下是辛自同态, 且任意辛自同态形如以下三者之复合:
+\begin{enumerate}
+    \item $\mathbb R^{2n}\to \mathbb R^{2n},\quad (u,v)\mapsto (-v,u)$;
+    \item $\mathbb R^{2n}\to \mathbb R^{2n},\quad (u,v)\mapsto (u,Su+v)$, 此处 $S$ 是实对称的;
+    \item $\mathbb R^{2n}\to \mathbb R^{2n},\quad (u,v)\mapsto (A^{-1}u,A^Tv)$, 此处 $A$ 是可逆的.
+\end{enumerate}
+最后由群同态基本定理, 证明 $\mathbb R^{2n}$ 上全体非退化反对称双线性型同构于商群 $\mathrm{GL}(2n,\mathbb R)/\mathrm{Sp}(2n)$.
+\end{problem}
+
+\newpage
+
+\section{张量积}
+
+\begin{problem}
+使用张量的内蕴构造, 或是课堂定义在延拓公理下的转化, 有结论: $u\otimes v=0$ 当且仅当 $u=0$ 或 $v=0$. 例如, 在承认命题 $\exists f\in U^\ast, (f(u)\neq 0)$ 时证明容易. 以此为引理, 证明 $\sum_{i=1}^nu_i\otimes v_i=0$ 且 $\mathrm{rank}(\{v_i\}_{i=1}^n)=n$ 时, 所有 $u_i$ 为零.
+\end{problem}
+
+\begin{problem}
+说明以下论断的错误之处. 考虑 $3$ 维 $k$ 线性空间 $U=k^3$, 我们知道张量积 $U\otimes_k U$ 由商关系 $U\otimes _k U:=(U\times U)/ \sim$ 构造得到. 由于商空间的维数小于原空间的维数, 遂有矛盾
+\begin{equation}
+    9=\dim (U\otimes_k U)<\dim (U\times U)=6.
+\end{equation}
+\end{problem}
+
+\begin{problem}
+以下 $V$ 为 $n$-维线性空间.
+\begin{enumerate}
+    \item 证明双线性映射
+          \begin{equation}
+              V^\ast \times V\to k,\quad (f,v)\mapsto f(v)
+          \end{equation}
+          非退化. 记诱导的线性映射为 $\varphi :V^\ast \otimes V\to k$.
+    \item 记 $\{e_i\}_{i=1}^n$ 为 $V$ 的基, $\{f_i\}_{i=1}^n\subset V$ 为对偶基 ($f_i(e_j)=\delta_{i,j}$). 试构造同构
+          \begin{equation}
+              \psi: (V^\ast \otimes V)^\ast \xrightarrow \sim V^\ast\otimes V.
+          \end{equation}
+          若 $x\in (V^\ast\otimes V)^\ast$ 由 $\{f_i\otimes e_j\mapsto c_{i,j}\}_{1\leq i,\leq j}$ 决定, 请描述 $\psi(x)$.
+    \item 记 $\mathscr A\in \mathrm{Hom}_k (V,V)$ 为线性自同态. 证明, 复合映射
+          \begin{equation}
+              k\xrightarrow{\varphi^\ast}(V^\ast \otimes V)^\ast\xrightarrow{\textup{(b)}} V^\ast\otimes V\xrightarrow{\mathrm{id}_{V^\ast}\otimes\mathscr A} V^\ast \otimes V\xrightarrow{\varphi} k
+          \end{equation}
+          恰为纯量乘积映射 $\mathrm{id}_k\cdot \mathrm{tr}(\mathscr A)$.
+\end{enumerate}
+
+\end{problem}
+
+
+\begin{problem}
+证明 $\mathrm{id}_U\otimes -$ 保持单射和满射, 即,
+\begin{enumerate}
+    \item 若 $i:V\to W$ 是线性单射, 则 $\mathrm{id}_U\otimes i:U\otimes V\to U\otimes W$ 也是线性单射;
+    \item 若 $p:V\to W$ 是线性单射, 则 $\mathrm{id}_U\otimes p:U\otimes V\to U\otimes W$ 也是线性单射.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+证明线性方程组零解维数不随域扩张改变.
+\end{problem}
+
+\begin{problem}
+证明线性方程组零解维数不随域扩张改变.
+\end{problem}
+
+\begin{problem}
+使用初等因子法证明矩阵相似与否与扩域无关.
+\end{problem}
+
+\begin{problem}
+构造 $k$ 的有限扩域使得线性自同态 $\varphi :k^n\to k^n$ 有 Jordan 标准型, 并以此刻画有理标准型.
+\end{problem}
+
+\begin{problem}
+给定有限维 $k$-线性自同态 $\mathscr A$, 则存在唯一的分解 $\mathscr A=\mathscr A_D+\mathscr A_N$, 使得
+\begin{enumerate}
+    \item 若 $\mathscr A_D$ 存在两个不变子空间 $U_1\subsetneq  U_2$, 则存在不变子空间 $V$ 使得 $U_2=U_1\oplus V$;
+    \item $\mathscr A_N$ 是幂零算子;
+    \item $[\mathscr A_D,\mathscr A_N]=\mathscr O$, 即, $\mathscr A_D$ 与 $\mathscr A_N$ 交换.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+给定 $k$ 上的方阵 $A\in k^{m\times m}$ 与 $B^{n\times n}$ (阶数不必相等).
+\begin{enumerate}
+    \item 证明:
+          \begin{equation}
+              \varphi: k^{m\times n}\to k^{m\times n},\quad X\mapsto AX-XB
+          \end{equation}
+          是单射 (等价地, 是同构; 再等价地, 是满射) 当且仅当 $A$ 与 $B$ 的特征多项式没有重因式.
+    \item 若 $\varphi$ 不是同构, 请依照特征多项式计算零空间维数.
+    \item 若 $\varphi$ 是同构, 请依照像的相抵分解 (低秩逼近) 写出 $AX-XB=C$ 的解.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+对任意域, 线性变换 $k^{n\times n}\to k^{n\times n},\quad X\mapsto AX-XA^T$ 的零空间维度至少为多少? 描述取得最小值的充要条件.
+\end{problem}
+
+\begin{problem}
+证明: 记 $A$ 的所有可交换矩阵构成线性空间 $C_A$, 则与 $C_A$ 中所有可交换的矩阵一定是 $A$ 的多项式.
+\end{problem}
+
+\begin{problem}
+证明: 对特征值为正实数的复矩阵 $A$ 与 $B$, 总有 $A=B$ 当且仅当 $A^k=B^k$ (存在 $k\geq 1$). 以此定义此类矩阵的任意实数次方.
+\end{problem}
+
+\begin{problem}
+称实矩阵是``好的'', 当且仅当其满足 $|a_{i,i}|>2\cdot \sum_{j\neq i}|a_{j,i}|$. 试证明, 对任意``好的''矩阵 $A$ 与 $B$, 则 $A=B$ 当且仅当 $A^3=B^3$. 实际上, 本题中所有矩阵的非对角部分可以是复数.
+\end{problem}
+
+\begin{problem}
+证明多项式的友矩阵通过某对称矩阵与其转置相似, 并由此证明任意任意域上的方阵 $A$ 通过对称矩阵与 $A^T$ 相似.
+\end{problem}
+
+\begin{problem}
+证明 $\underset{n\text{ 个}}{\underbrace{A\oplus \cdots \oplus A}}$ 与 $\underset{n\text{ 个}}{\underbrace{B\oplus \cdots \oplus B}}$ 相似当且仅当 $A$ 与 $B$ 相似. 在特定域中, 将相似换做正交相似或是酉相似均可行.
+\end{problem}
+
+\begin{problem}
+定义同阶数方阵的张量和 $A\boxplus B:=A\otimes I+I\otimes B$. 证明
+\begin{enumerate}
+    \item 依照幂级数的收敛性定义 $\exp(X)$. 证明 $\exp(A\boxplus B)=\exp(A)\otimes \exp(B)$.
+    \item 依照幂级数的收敛性定义 $\sin(X)$ 与 $\cos(X)$. 给出类似的和差化积以及积化和差公式.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+找出任意域上的两个非方阵, 使得 $A\otimes B$ 与 $B\otimes A$ 是不相似的方阵.
+\end{problem}
+
+\begin{problem}
+使用 $A$ 与 $B$ 特征多项式的结式 (resultant) 描述 $\det (xI-A\otimes B)$.
+\end{problem}
+
+\begin{problem}
+给定 $X\in k^{(mn)^2}$. 若对任意 $A\in k^{n\times n}$ 总有 $[A\otimes I_m,O]$, 则存在 $B\in k^{m\times m}$ 使得 $X=I_n\otimes B$.
+\end{problem}
+
+\begin{problem}
+我们知道, 简单图对应一个主对角为零的对称 $\{0,1\}$-矩阵. 试问: 两个图的 $\oplus$ (外直和), $\boxplus$ (张量和) 与 $\otimes$ (张量积) 运算分别对应什么?
+\end{problem}
+
+\newpage
+
+\section{张量的秩}
+
+\begin{problem}
+定义 $x\in V_1\otimes \cdots \otimes V_n$ 的秩为 $x$ 能写作简单张量和的最小数量. 自然可定义 $\mathrm{rank}(0)=0$. 对证明以下对 $n=2$ 成立的事实.
+\begin{enumerate}
+    \item 若 $i:W\hookrightarrow V$ 是子空间, 则不妨设 $\mathrm{id}_U\otimes i:U\otimes W\hookrightarrow U\otimes V$ 为子集子空间. 对任意给定的 $x\in U\otimes W\subset U\otimes V$, 写作 $x=\sum_{i=1}^s u_i\otimes v_i$. 若 $\{u_i\}_{i=1}^s$ 是线性无关组, 则 $\mathrm{span}(v_i)\subset W$.
+    \item 假定 $x\in U\otimes V$ 的秩为 $r$, 则对任意 $x=\sum_{i=1}^r u_i\otimes v_i$, 线性空间 $\mathrm{span}(\{u_i\}_{i=1}^r)$ 的维数是 $r$. 该空间与简单张量和的选取方式无关 (但凡数量为 $r$).
+    \item 假定 $x\in U\otimes V$, 则 $\mathrm{rank}(x)$ 在域扩张下不变.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+假定 $\dim U=m$ 以及 $\dim V=n$. 今任取 $x\in U\otimes V$, 求 $\mathrm{rank}(x)$ 的所有可能取值.
+\end{problem}
+
+\begin{problem}
+假定 $V$ 有一组基 $\{e_i\}_{i=1}^n$, 考虑 $\underset{k\text{ 个 }V}{\underbrace{V\otimes \cdots\otimes V}}$, 求 $\sum_{i=1}^r e_i\otimes e_i\otimes \cdots \otimes e_i$ 的秩.
+\end{problem}
+
+\begin{problem}
+以下事实对任意阶张量均成立.
+\begin{enumerate}
+    \item $\mathrm{rank}(x)=\mathrm{rank}(\lambda x)$, 此处 $\lambda\in k\setminus \{0\}$.
+    \item $\mathrm{rank}(x+y)\leq \mathrm{rank}(x)+\mathrm{rank}(y)$, 并给一个不取等的例子. 可以选取 $x=y$ 为复张量
+          \begin{equation}
+              \binom10\otimes \binom10\otimes \binom01+\binom10\otimes \binom01\otimes \binom10+\binom01\otimes \binom10\otimes \binom10.
+          \end{equation}
+    \item $\mathrm{rank}(x)$ 在域扩张下不会增加, 并给一个减少的例子. 可以考虑如下张量关于扩域 $\mathbb R\hookrightarrow \mathbb C$ 的秩
+          \begin{equation}
+              \binom10\otimes \binom10\otimes \binom01+\binom10\otimes \binom01\otimes \binom10+\binom01\otimes \binom10\otimes \binom10-\binom01\otimes \binom01\otimes \binom01.
+          \end{equation}
+\end{enumerate}
+
+\end{problem}
+
+\begin{problem}
+求以下 $(\mathbb R^2)^{\otimes 3}$ 中张量的秩,
+\begin{equation}
+    \sum_{\text{cyc}}\binom10\otimes \binom10\otimes \binom01+t\sum_{\text{cyc}}\binom10\otimes \binom01\otimes \binom01+t^2\binom01^{\otimes 3},
+\end{equation}
+并证明 $(\mathbb R^2)^{\otimes 3}$ 中秩为 $2$ 的张量不能由有限个多项式的零点集决定.
+\end{problem}
+
+\begin{problem}
+证明在通常拓扑下, $(\mathbb R^2)^{\otimes 3}$ 中秩为 $2$ 的张量全体包含一个开集, 秩为 $3$ 的张量全体亦然.
+\end{problem}
+
+\begin{problem}
+称 $(\mathbb C^2)^{\otimes 3}$ 上两个张量 $\tau_1$ 与 $\tau_2$ 是等价的, 当且仅当存在三个 $\mathbb C^2$ 的同构使得 $(\varphi_1\otimes \varphi_2\otimes \varphi_3)(\tau_1)=\tau_2$. 这自然是一个等价关系. 请求等价类数量以及代表元, 并证明 $(\mathbb C^2)^{\otimes 3}$ 中秩不为 $2$ 的张量全体被某个没有内点的闭集 (某些多项式的零点集) 覆盖.
+\end{problem}
+
+\begin{problem}
+以下问题将联系张量积于计算复杂度.
+\begin{enumerate}
+    \item 证明 $\mathbb C\otimes _{\mathbb R}\mathbb C$ 是 $\mathbb C$-线性空间, 并写出 $\dim_{\mathbb C}(\mathbb C\otimes _{\mathbb R}\mathbb C)$.
+    \item 证明以下映射良定义
+          \begin{equation}
+              \Phi: V\otimes U^\ast\to \mathrm{Hom}_k(U,V),\quad v\otimes f\mapsto [u\mapsto v\cdot f(u)].
+          \end{equation}
+    \item 证明 $\Phi$ 是同构若 $U$ 或 $V$ 是有限维的, 并依此同构证明下述同构 $\theta: V^\ast \otimes_k U^\ast \cong (V\otimes_k U)^\ast$, 并简要描述简单张量 $f\otimes g$ 在 $\theta$ 下的像.
+    \item 已知乘积运算 $\mathbb C\times \mathbb C\to \mathbb C$ 是非退化对称 $\mathbb R$-双线性型. 请说明该乘积运算何以视作 $(\mathbb C\otimes _{\mathbb R}\mathbb C)^\ast\otimes _{\mathbb R}\mathbb C$ 中的元素? 特别地, 该 $3$-张量空间同构于 $\mathbb C^{\otimes_{\mathbb R} 3}$.
+    \item 计算乘积运算 (视作上述 $3$-张量) 的秩 $r$. 证明: 任何计算 $\mathbb C\times \mathbb C\to \mathbb C$ 的通用算法将不可避免地计算 $r$ 次实数乘法.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+已知 $k^{p\times q}\times k^{q\times r}\to k^{p\times r}$ 中的一般乘法至少需要 $C(p,q,r)$ 次 $k$ 中的乘法运算. 求张量的
+\begin{equation}
+    \sum_{1\leq i\leq p,\,1\leq j\leq q,\,1\leq k\leq r}E_{i,j}\otimes E_{j,k}\otimes E_{i,k}\in k^{p\times q}\otimes k^{q\times r}\otimes k^{p\times r}
+\end{equation}
+的秩. 特别地, $C(2,2,2)=7$.
+\end{problem}
+
+\end{document}
