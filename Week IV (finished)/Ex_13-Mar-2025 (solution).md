@@ -17,12 +17,19 @@
    > \dim f^{-1}(E) &\xlongequal{\text{rank-null}} \dim \ker f_E+ \dim \operatorname{im} f_E \\ 
    > &\xlongequal{\ker f= \ker f_E} \dim \ker f+ \dim \operatorname{im} f_E \\ 
    > &\xlongequal{\text{rank-null}} (\dim U - \dim \operatorname{im}f)+ \dim \operatorname{im} f_E \\ 
-   > &\xlongequal{f_E(f^{-1}E)=E} (\dim U - \dim \operatorname{im}f)+ \dim E \\[6pt]
-   > &\geq\qquad\qquad  (\dim U - \dim V)+ \dim E. 
+   > &\overset \ast \geq\qquad\qquad  (\dim U - \dim V)+ \dim E. 
    > \end{align*}
    > $$
-   > 取等当且仅当 $\dim \operatorname {im}f = \dim V$, 也就是 $f$ 满. 
+   > $\color{red}\text{特别提示}$ $\mathrm{im}(f_E)$ 是 $E$ 的子空间 (不必取等), 因为 $f$ 未必是满射. 
+   >
+   > 最后 $\ast$ 解释如下: 将 $\mathrm{im}(f_E)$ 扩充成 $E$ 的子空间, 需要额外添加线性无关组 $\mathscr B \subset V \setminus \mathrm{im}(f)$. 使用该 $\mathscr B$ 扩充 $\mathrm{im}(f)$, 得 $V$ 的子空间. 从而
+   > $$
+   > \dim V - \dim \mathrm{im}(f) \geq \dim E - \dim \mathrm{im}(f_E).
+   > $$
    
 2. When $f$ is surjective, the equality holds. 
 
-   > 见上. 
+   > 答: $f$ 满时, 
+   > $$
+   > \dim V - \dim \mathrm{im}(f) = 0 = \dim E - \dim \mathrm{im}(f_E).
+   > $$
