@@ -4,7 +4,7 @@
 
 **Example** Let $U$ and $V$ be linear subspaces. Determine (guess) what the following diagram represents.
 
-![image-20250225185732038](https://cdn.jsdelivr.net/gh/czhang271828/imgs/test/image-20250225185732038.png)
+![image-20250225185732038](https://raw.githubusercontent.com/czhang271828/imgs/New_img//n_imgimage-20250225185732038.png)
 
 **Exercise** Prove the following identities of subspaces 
 

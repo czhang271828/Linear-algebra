@@ -50,7 +50,7 @@ has an irreducible factor with $\deg > k$ if:
 
 **Definition** I call it $\bmod 3$-convex hull of polynomials, guess what it means? 
 
-<img src="https://cdn.jsdelivr.net/gh/czhang271828/imgs/test/image-20250220202039123.png" alt="image-20250220202039123" style="zoom:50%;" />
+![image-20250220205516181](https://raw.githubusercontent.com/czhang271828/imgs/New_img//n_imgimage-20250220205516181.png)
 
 **Problem (optional)** Create the corresponding $\bmod 3$-convex hull for the product polynomial $f(x) \cdot g(x)$​, and count the number of integer points where the **bottom polygonal chain** passes through. 
 
@@ -62,9 +62,8 @@ then the polynomial is irreducible in $\mathbb Q[x]$.
 
 **Problem (optional)** Prove Eisenstein Criterion **without words**. 
 
-<img src="https://cdn.jsdelivr.net/gh/czhang271828/imgs/test/image-20250220210324017.png" alt="image-20250220210324017" style="zoom: 50%;" />
+![image-20250220210324017](https://raw.githubusercontent.com/czhang271828/imgs/New_img//n_imgimage-20250220210324017.png)
 
 **Example** (某年南开 (?) 考研压轴题) Create a criterion (Eisenstein-analogue) according to the following diagram, and make the problem difficult: 
 
-<img src="https://cdn.jsdelivr.net/gh/czhang271828/imgs/test/image-20250220210740804.png" alt="image-20250220210740804" style="zoom: 30%;" />
-
+![image-20250220210740804](https://raw.githubusercontent.com/czhang271828/imgs/New_img//n_imgimage-20250220210740804.png)
