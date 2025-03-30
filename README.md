@@ -1,6 +1,6 @@
 This repository contains the files for [Advanced Algebra (Honour) II](https://oc.sjtu.edu.cn/courses/75773), such as every-week homework assignments, exercise solutions, references, and sample problems. 
 
-<!-- 此 repository 𤰃于存𰕆[髙等代𢿘（榮譽）II](https://oc.sjtu.edu.cn/courses/75773) 𡳿課程檔案，諸如𡴋𠄗作𪴨、習題解荅、曑𰕃𦘠目，㠯及題樣。>
+**** 
 
 #### 仓库地址 : https://github.com/czhang271828/Linear-algebra
 
@@ -48,3 +48,5 @@ This repository contains the files for [Advanced Algebra (Honour) II](https://oc
     > 特别注释: 此讲义几乎不涉及线性映射, 对本学期学习帮助不大. 
 
 <font color = teal, size = 5> 不定期更新中. </font>
+
+<!-- 此 repository 𤰃于存𰕆[髙等代𢿘（榮譽）II](https://oc.sjtu.edu.cn/courses/75773) 𡳿課程檔案，諸如𡴋𠄗作𪴨、習題解荅、曑𰕃𦘠目，㠯及題樣。>
