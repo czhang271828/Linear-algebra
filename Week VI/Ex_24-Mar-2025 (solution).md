@@ -5,7 +5,7 @@ $$
 is an isomorphism. Demonstrate *step-by-step* that the quotient map satisfies the following properties:
 
 1. It is well-defined: $\varphi (u)=0$ only if $[u] = [0]$; 
-2. It is injective: $\varphi (u) = 0$ is $[u] = [0]$; 
+2. It is injective: $\varphi (u) = 0$ if $[u] = [0]$; 
 3. It is surjective: every $y \in \operatorname{im}\varphi$ is the image of some $[u]$. 
 
 **Example**  We shall apply **Isomorphism Theorem A** to establish **Isomorphism Theorem B**, which asserts that for any linear subspaces $U$ and $V$:
