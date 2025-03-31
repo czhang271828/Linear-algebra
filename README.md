@@ -1,17 +1,3 @@
-#### ReadMe
-
-This repository contains the files for [Advanced Algebra (Honour) II](https://oc.sjtu.edu.cn/courses/75773), such as every-week homework assignments, exercise solutions, references, and sample problems. 
-
-****
-
-#### GitHub
-
-GitHub Page: [https://czhang271828.github.io/Linear-algebra/](https://czhang271828.github.io/Linear-algebra/)
-
-Repository: [https://github.com/czhang271828/Linear-algebra/](https://github.com/czhang271828/Linear-algebra/) 
-
-****
-
 #### 作业 (仅 PDF 文件)
 
 |  Wk  | Mon.                                                         |                             Mon.                             |                             Mon.                             |                            Thur.                             |                            Thur.                             |                            Thur.                             |                             More                             |
@@ -35,6 +21,20 @@ Repository: [https://github.com/czhang271828/Linear-algebra/](https://github.com
 **N**: Course notes. **We extend our profound gratitude to Yu Lexi for generously providing her course notes.** 
 
 * *Furth'rm're, we warmly encourageth oth'rs to contribute their notes.  Shouldst thee wisheth to doth so, prithee doth not hesitate to contact me.* 
+
+****
+
+#### ReadMe
+
+This repository contains the files for [Advanced Algebra (Honour) II](https://oc.sjtu.edu.cn/courses/75773), such as every-week homework assignments, exercise solutions, references, and sample problems. 
+
+****
+
+#### GitHub
+
+GitHub Page: [https://czhang271828.github.io/Linear-algebra/](https://czhang271828.github.io/Linear-algebra/)
+
+Repository: [https://github.com/czhang271828/Linear-algebra/](https://github.com/czhang271828/Linear-algebra/) 
 
 ****
 
