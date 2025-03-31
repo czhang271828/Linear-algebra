@@ -2,7 +2,11 @@ This repository contains the files for [Advanced Algebra (Honour) II](https://oc
 
 ****
 
-#### GitHub Page: https://czhang271828.github.io/Linear-algebra/
+#### GitHub
+
+Page: https://czhang271828.github.io/Linear-algebra/
+
+Repository: https://github.com/czhang271828/Linear-algebra
 
 ****
 
