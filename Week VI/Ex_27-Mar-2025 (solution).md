@@ -1,6 +1,8 @@
-**Problem Set for 24 March 2025**
+**Problem Set for 27 March 2025**
 
-**Exercise 0** Explain (without proving) the *implicit expressions*. 
+**Exercise 0** Explain 
+
+(without proving) the *implicit expressions*. 
 
 1. $\ker g$ as a subspace of $\ker fg$. 
 
