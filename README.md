@@ -1,4 +1,6 @@
-#### 作业 (仅 PDF 文件)
+# Course Page: MATH1406H (2025 Spring)
+
+## 作业 (仅 PDF 文件)
 
 |  Wk  | Mon.                                                         |                             Mon.                             |                             Mon.                             |                            Thur.                             |                            Thur.                             |                            Thur.                             |                             More                             |
 | :--: | ------------------------------------------------------------ | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
@@ -28,13 +30,9 @@
 
 ****
 
-#### ReadMe
+## ReadMe
 
 This repository contains the files for [Advanced Algebra (Honour) II](https://oc.sjtu.edu.cn/courses/75773), such as every-week homework assignments, exercise solutions, references, and sample problems. 
-
-****
-
-#### GitHub
 
 GitHub Page: [https://czhang271828.github.io/Linear-algebra/](https://czhang271828.github.io/Linear-algebra/)
 
@@ -42,7 +40,9 @@ Repository: [https://github.com/czhang271828/Linear-algebra/](https://github.com
 
 ****
 
-#### 以下是一些正在更新的推荐读物. 
+## Refs
+
+### 以下是一些正在更新的推荐读物. 
 
 1. [Sheldon Axler](https://linear.axler.net/) 的 [Linear Algebra Done Right](https://linear.axler.net/LADR4e.pdf), 以及中文译本 [线性代数应该这样学](https://linear.axler.net/LADR4eChinese.pdf). 
 2. [谢启鸿的博客](https://www.cnblogs.com/torsor). 
@@ -51,7 +51,7 @@ Repository: [https://github.com/czhang271828/Linear-algebra/](https://github.com
 
 ***
 
-#### 以下是课程资料. 
+### 以下是课程资料. 
 
 1. 2024 春季学期的[习题课讲义](https://czhang271828.github.io/Linear-algebra/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/%E9%AB%98%E4%BB%A3%E4%B9%A0%E9%A2%98%E8%AF%BE_%E5%BC%BA%E5%9F%BA.pdf). 
 2. [矩阵理论教程](https://czhang271828.github.io/Linear-algebra/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/(%E6%96%B0%E7%89%88)%20%E7%9F%A9%E9%98%B5%E7%90%86%E8%AE%BA%E6%95%99%E7%A8%8B.pdf) ([张跃辉](https://space.bilibili.com/691509037)).
@@ -59,7 +59,7 @@ Repository: [https://github.com/czhang271828/Linear-algebra/](https://github.com
 
 ***
 
-#### 以下是若干经典教材. 
+### 以下是若干经典教材. 
 
 1. 高等代数学 (张贤科与许甫华, 第二版) [教材](https://czhang271828.github.io/Linear-algebra/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0%E5%AD%A6%E7%AC%AC%E4%BA%8C%E7%89%88%C2%B7%E5%BC%A0%E8%B4%A4%E7%A7%91.pdf)与[习题集](https://czhang271828.github.io/Linear-algebra/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/%E8%B6%85%E6%B8%85%E6%99%B0%E7%89%88%EF%BC%81%EF%BC%81%E5%BC%A0%E8%B4%A4%E7%A7%91%20%E8%AE%B8%E7%94%AB%E5%8D%8E%20%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0%E8%A7%A3%E9%A2%98%E6%96%B9%E6%B3%95%EF%BC%882ed%EF%BC%89(1).pdf). 
 2. 高等代数 (丘维声) [上册](https://czhang271828.github.io/Linear-algebra/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B01(%E4%B8%98%E7%BB%B4%E5%A3%B0).pdf), [下册](https://czhang271828.github.io/Linear-algebra/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B02(%E4%B8%98%E7%BB%B4%E5%A3%B0).pdf). 
