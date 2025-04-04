@@ -10,6 +10,8 @@ is an isomorphism. Demonstrate *step-by-step* that the quotient map satisfies th
 2. It is injective: $\varphi (u) = 0$ if $[u] = [0]$; 
 3. It is surjective: every $y \in \operatorname{im}\varphi$ is the image of some $[u]$. 
 
+<div style="page-break-after: always;"></div>
+
 **Example**  We shall apply **Isomorphism Theorem A** to establish **Isomorphism Theorem B**, which asserts that for any linear subspaces $U$ and $V$:
 $$
 \frac{U + V}{U} \simeq \frac{V}{U \cap V}. 
@@ -26,6 +28,8 @@ $$
 > \frac{V}{\ker \ell} = \frac{V}{U \cap V} \simeq \operatorname{im}\varphi = \frac{U + V}{U}.
 > $$
 
+<div style="page-break-after: always;"></div>
+
 **Exercise** Use **Isomorphism Theorem A** to prove **Isomorphism Theorem C**, which asserts that for inclusions of subspaces $U \subset V \subset W$, there exists an isomorphism:
 $$
 \frac{W}{V} \simeq \frac{W / U}{V / U}.
@@ -40,6 +44,8 @@ $$
 >
 > 依照**同构定理 A**, $W/V = \operatorname{im}\Phi \simeq \frac{\operatorname{domain}\Phi}{\ker \Phi} = \frac{W / U}{V / U}$. 
 
+<div style="page-break-after: always;"></div>
+
 **Exercise** Use **Isomorphism Theorem A** to prove **Exercise 3.2** (见去年习题课讲义): Let $U_i \subset V_i$​ be subspaces, prove the isomorphism
 $$
 \frac{V_1 \times V_2}{U_1 \times U_2} \simeq \frac{V_1}{U_1} \times \frac{V_2}{U_2}.
@@ -50,6 +56,8 @@ $$
 > $$
 > 最后例行公事: 判断满射, 找到 ker, 使用**同构定理 A**. 
 
+<div style="page-break-after: always;"></div>
+
 **Exercise** Let $f : V \to V$ be a linear map. Use **Isomorphism Theorem A** to show that 
 $$
 \frac{\operatorname {im} f}{\operatorname {im}f \cap \ker f} = \operatorname {im}f\circ f = \frac{\operatorname {im}f+\ker f}{\ker f}.
@@ -59,6 +67,8 @@ $$
 > \Phi: \operatorname{im}f + \ker f \to \operatorname{im} f \circ f,\quad v \mapsto f(v). 
 > $$
 > 最后例行公事: 判断满射, 找到 ker, 使用**同构定理 A**. 
+
+<div style="page-break-after: always;"></div>
 
 **Optional Exercise** Explain the following identity:
 $$
@@ -103,6 +113,8 @@ Then prove Fitting lemma:
    > 2. $f: \ker f^\infty \to \ker f^\infty$ 幂零, 
    >
    > 这分别对应 $D$ 可逆, 以及 $N$ 幂零. 
+
+<div style="page-break-after: always;"></div>
 
 **Exercise** Let be $X \xrightarrow f Y \xrightarrow g Z$ linear maps with no additional assumptions. Show that
 

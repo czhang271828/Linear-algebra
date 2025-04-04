@@ -5,6 +5,8 @@
 1. (the image) $f_\ast U = \{f(u) \mid u \in U\}$, where $U$ is the subspace of the domain (domain: where $f$ starts/maps from/originates); 
 2. (the inverse image) $f^\ast V = \{u \mid f(u) \in V\}$, where $V$ is the subspace of the codomain (codomain: where $f$ ends/maps to/terminates). 
 
+<div style="page-break-after: always;"></div>
+
 **Exercise** The most elementary part of linear algebra is to study the operations $\{f_\ast, f^\ast, +, \cap\}$. It is an enjoyable time to observe how these simple operations generate identities.
 
 Prove the following (whenever we write $f_\ast X$,it is assumed that the linear space $X$ is a subspace of the domain, and similarly for $f^\ast Y$): 
@@ -95,6 +97,8 @@ Prove the following (whenever we write $f_\ast X$,it is assumed that the linear 
 12. **(optional)** $f^\ast ((f_\ast U) + V) = U + (f^\ast V)$. 
 
     > 答: 证明类似. 
+
+<div style="page-break-after: always;"></div>
 
 **Problem** This exercise (**without Axiom of Choice**) show that how $\mathbb F[x]$ and $\mathbb F[\![x]\!]$ differs. 
 

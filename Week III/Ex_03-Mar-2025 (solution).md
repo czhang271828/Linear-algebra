@@ -12,6 +12,8 @@ $$
 >
 > 此时, $L \circ R$ 是恒等映射, 但 $R \circ L$ 不是恒等映射. 
 
+<div style="page-break-after: always;"></div>
+
 **Problem**: Let $\mathbb{F}$ denote the ground field, and let $S$ be any finite set.
 
 1. Demonstrate that $\mathrm{Hom}_{\mathrm{Sets}}(S, \mathbb{F})$ forms a vector space.

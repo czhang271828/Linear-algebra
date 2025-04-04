@@ -16,6 +16,8 @@ form a basis of $P_n$.
 > $$
 > 今取遍所有 $\varphi _j$, 上述线性组合式为 $0$ 当且仅当一切 $c_i$ 为 $0$. 这说明了线性无关性. 
 
+<div style="page-break-after: always;"></div>
+
 **Exercise 4.1** Assume $f(x) = x^3 + px + q \in \Bbb Z [x]$ is irreducible and $\alpha \in \Bbb C$ is a root of $f$. 
 
 1. Prove that $\Bbb Q [\alpha ] := \{g(\alpha ) \mid g(x) \in \Bbb Q[x]\}$ is a linear space over $\Bbb Q$ and $1,\alpha, \alpha^2$ form a basis. 

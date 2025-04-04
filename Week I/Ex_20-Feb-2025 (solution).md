@@ -18,6 +18,8 @@ Is it possible to find such $\alpha, \beta : V \to V$ when $V$​ is of finite d
 > $$
 > 有限维无解, 因为不存在 $AB-BA=I$ 的矩阵 (两侧取 $\mathrm{tr}$). 
 
+<div style="page-break-after: always;"></div>
+
 **Problem 2** Here is a **clarification of irreducibility** over general polynomial rings. Let $\mathbb{A} \in \{\mathbb{Z}, \mathbb{Q}, \mathbb{R}, \mathbb{C}, \ldots\}$. A polynomial $f \in \mathbb{A}[x]$ is **reducible** if and only if there exists some factorisation $f = g \cdot h$ such that $g^{-1} \notin \mathbb A[x]$ and $h^{-1} \notin \mathbb A[x]$. For instance:
 
 - $2 \cdot x$ is irreducible in $\mathbb{Q}[x]$, yet reducible in $\mathbb{Z}[x]$;
@@ -43,11 +45,15 @@ $$
 (\text{field}) \quad \underbracket{\mathbb{Q}[x] \to (\mathbb{Q}[\sqrt{2}])[x] \to \cdots \to \mathbb{C}[x]}\limits_{\text{less irreducible polynomials}} \quad (\text{algebraic closure}).
 $$
 
-**(Optional)** Find **Gauß's lemma** in any of the textbooks and understand both the statement and the proof. The lemma states that:
+<div style="page-break-after: always;"></div>
+
+**Exercise (Optional)** Find **Gauß's lemma** in any of the textbooks and understand both the statement and the proof. The lemma states that:
 
 > For any $f(x) \in \mathbb{Z}[x]$, $f$ is irreducible in $\mathbb{Z}[x]$ if and only if $f$ is both irreducible over $\mathbb{Q}[x]$ and $f$ is primitive (i.e., the greatest common divisor of its coefficients is 1).
 
 Let $f$ be **monic**, i.e., non-zero with leading coefficient $1$. From Gauß's lemma, we learn that for any monic $f \in \mathbb{Z}[x]$, $f$ is irreducible in $\mathbb{Z}[x]$ **if and only if** it is irreducible in $\mathbb{Q}[x]$.
+
+<div style="page-break-after: always;"></div>
 
 **Problem 3** Here are some criteria for the irreducibility of polynomials in $\mathbb C[x]$:
 
@@ -60,6 +66,8 @@ Let $f$ be **monic**, i.e., non-zero with leading coefficient $1$. From Gauß's 
 3. Let $f(x) = \sum_{k=0}^n a_k \cdot x^k \in \mathbb{Z}[x]$ be a polynomial with $f(0)$ prime. Suppose that $|a_0| > \sum_{k=1}^n |a_k|$. Show that $f$​​ is irreducible.
 
    > 答: 三角不等式 $|a_0| > \sum_{k=1}^n |a_k|$ 说明所有根模长大于 $1$, 往后同上一问. 
+
+<div style="page-break-after: always;"></div>
 
 **Problem 4** Find all $f(x) \in \mathbb C[x]$ such that 
 $$
@@ -75,6 +83,8 @@ $$
 > $$
 > -3x^3+14x^2-17x+8 \quad + P(x)(x-1)^2(x-2)^2.
 > $$
+
+<div style="page-break-after: always;"></div>
 
 **Exercises (optional)** The following problems are **optional** but some of the problems are very important. 
 

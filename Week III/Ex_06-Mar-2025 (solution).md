@@ -9,6 +9,8 @@
 
 * $U\xrightarrow f V$ 是满射, 当且仅当 $f(U) = V$. 
 
+<div style="page-break-after: always;"></div>
+
 **Exercise 1** Here is the composition rules for linear maps $U \xrightarrow f V \xrightarrow g W$. Show that
 
 1. if $f$ and $g$ are linear injections, then so is $g \circ f$; 
@@ -43,6 +45,8 @@
    > $$
    > 知上述 $\supset$ 取等, 从而 $g$ 满. 
    >
+
+<div style="page-break-after: always;"></div>
 
 **Exercise 2** Assume you can prove the following isomorphisms yourself: 
 $$
@@ -88,6 +92,8 @@ Show that
 
    > 答: 随便写个例子都是反例. 
 
+<div style="page-break-after: always;"></div>
+
 **Exercise 3** **(optional)** We know that the composition map 
 $$
 \begin{align*}
@@ -126,6 +132,8 @@ $$
    >
    > 将 $U = V^{\mathrm{sub}}$ 视同 $V$ 的子空间, $f$ 是自然的包含映射. 由 flasque 的定义知 $h:V^{\mathrm{sub}} \to W$ 可以提升至 $V \to W$, 这就给出了分解. 
 
+<div style="page-break-after: always;"></div>
+
 **Definition**
 
 * Say $Y$ is flasque, if any linear map from its subspace $Y^{\text{sub}} \to X$ extends to $Y \to X$. 
@@ -133,6 +141,8 @@ $$
 * Say $Y$ is coflasque, if any linear map to its quotient space $X \to Y^{\text{quot}}$ extends to $X \to Y$. 
 
 Finite dimensional vector spaces are both flasque and co-flasque. 
+
+<div style="page-break-after: always;"></div>
 
 **Exercise 4 (optional)** Equivalent definition of being injective or surjection. 
 
