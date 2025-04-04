@@ -30,6 +30,27 @@
 
 ****
 
+## Games
+
+Game for math or logics: 
+
+- [L∃∀N Game Centre](https://adam.math.hhu.de/). 
+- [Simon Tatham's Portable Puzzle Collection](https://www.chiark.greenend.org.uk/~sgtatham/puzzles/). 
+
+- [Hyperbolic Minesweeper](https://cdn.warpedmines.com/), and the analysis for solvability from [arXiv](https://arxiv.org/abs/2002.09534). 
+- [Games for linear algebra?](https://arxiv.org/pdf/2306.09280)
+
+- [The hardest Тетрис](https://harddrop.com/wiki/Hatetris). 
+
+Games for English learning:
+
+- [Wordle](https://www.nytimes.com/games/wordle/index.html), and [Wordle-solver](https://www.thewordfinder.com/wordle-solver/). 
+- Other word games from [nytimes](https://www.nytimes.com/crosswords). 
+
+- [Cryptograms](https://github.com/kirakirakira/cryptogram), and [solver](https://quipqiup.com/). 
+
+****
+
 ## ReadMe
 
 This repository contains the files for [Advanced Algebra (Honour) II](https://oc.sjtu.edu.cn/courses/75773), such as every-week homework assignments, exercise solutions, references, and sample problems. 
