@@ -2,7 +2,7 @@
 
 **Exercise 1** For $U \xrightarrow f V \xrightarrow g U$ ($\dim  < \infty$), show that 
 $$
-\dim \mathrm{im}(f)+\dim \mathrm{im}(g) \leq \dim \mathrm{im}(g\circ f) + \dim V.\tag{{\color{red}Sylvester Inequality}}
+\dim \mathrm{im}(f)+\dim \mathrm{im}(g) \leq \dim \mathrm{im}(g\circ f) + \dim V.
 $$
 The equality holds if and only if $\ker(g) \subset \mathrm{im}(f)$. 
 
