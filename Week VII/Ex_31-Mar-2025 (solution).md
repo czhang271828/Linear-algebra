@@ -97,6 +97,8 @@ is an surjection.
    > $$
    > \det A = \det P \cdot \det g_i(x_j) \neq 0.
    > $$
+   
+   <font color = red>**特别说明**</font> 这是上学期的[原题](https://czhang271828.github.io/Linear-algebra/2024%20%E7%A7%8B-%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/%E7%AC%AC%E4%B9%9D%E6%AC%A1/%E8%A1%8C%E5%88%97%E5%BC%8F%E7%9A%84%E9%81%97%E7%95%99%E9%97%AE%E9%A2%98.pdf), 但似乎只有 $5$ 个人意识到正确的解法. 
 
 <div style="page-break-after: always;"></div>
 
