@@ -20,6 +20,8 @@
 
 * No HW for week IX; 
 * [HA5](https://czhang271828.github.io/Linear-algebra/Week%20IV/Supplementary%20reading%20material/Homework%205.pdf) 与 [HA6](https://czhang271828.github.io/Linear-algebra/Week%20V/Supplementary%20Reading%20Material/Homework_6%20part%202.pdf) 是其他两个教学班在[教材](https://linear.axler.net/LADR4eChinese.pdf)范围外布置的作业 (无解答), 建议认真完成. 
+* 部分上学期的习题未必过时, 例如[相抵标准型](https://czhang271828.github.io/Linear-algebra/2024%20秋-高等代数/第三次/相抵.pdf), [秩不等式](https://czhang271828.github.io/Linear%20algebra/2024%20秋-高等代数/第四次/rank/秩不等式.pdf), [逆矩阵](https://czhang271828.github.io/Linear%20algebra/2024%20秋-高等代数/第五次/逆矩阵/逆矩阵.pdf), [行列式](https://czhang271828.github.io/Linear%20algebra/2024%20秋-高等代数/第七次/行列式.pdf), [二次型](https://czhang271828.github.io/Linear%20algebra/2024%20秋-高等代数/第十次/Bilinear/bilinear.pdf), [Jordan 标准型](https://czhang271828.github.io/Linear%20algebra/2024%20秋-高等代数/第十次/Jordan/Deduce%20Jordan%20froms.pdf), [正规矩阵](https://czhang271828.github.io/Linear%20algebra/2024%20秋-高等代数/第十一次/正规矩阵.pdf), [三角化](https://czhang271828.github.io/Linear%20algebra/2024%20秋-高等代数/第十一次/零散的习题.pdf)等等. 
+* [去年期中考试卷](https://czhang271828.github.io/Linear%20algebra/2024%20秋-高等代数/2023/mess%20-%20副本/小测试卷.pdf). 
 
 **S**: Solutions to home assignments;  
 

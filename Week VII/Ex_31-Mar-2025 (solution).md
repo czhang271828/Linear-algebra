@@ -103,7 +103,7 @@ is an surjection.
 **Exercise 4 (optional)** (2023 年上海交通大学考研) 设 $U$, $V$, $W$ 是给定域上的线性空间. $U\xrightarrow \alpha V$ 与 $V \xrightarrow \beta W$ 是线性映射且满足 $U\xrightarrow {\beta \circ \alpha} W$ 是零映射. 若对任何一个线性空间 $X$ 和线性映射 $V\xrightarrow f X$ 使得 $U\xrightarrow{f\circ \alpha} X$ 为零, 都存在一个唯一的线性映射 $W\xrightarrow \mu X$ 使得 $f = \mu \circ \beta$, 证明
 
 1. $\beta$ 是满射 (in few sentences). 
-   * 提示: $\beta$ 是满射当且仅当对任意 $X$, 线性映射 $\mathrm{Hom}_{\mathbb F}(W, X) \xrightarrow{- \circ f} \mathrm{Hom}_{\mathbb F}(V, X)$ 总是单射. 
+   * 提示: $\beta$ 是满射当且仅当对任意 $X$, 线性映射 $\mathrm{Hom}_{\mathbb F}(W, X) \xrightarrow{- \circ \beta} \mathrm{Hom}_{\mathbb F}(V, X)$ 总是单射. 
    
    > 答: 先作图
    > $$
