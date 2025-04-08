@@ -68,7 +68,7 @@ $$
 
 - $v$ is an eigenvector of $f$, if and only if $v \in \ker (\lambda \cdot \mathrm{id} - f)$.
 
-> 答: 反例 **Exercise 1**. 
+> 答: $v=0$. 特征向量不能是 $0$. 
 
 **Exercise 5 (Optional)** Let $V = C^0([0,1])$, i.e., the space of continuous real-valued functions over the closed interval $[0,1]$. Determine all eigenpairs of the operator:
 $$
