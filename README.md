@@ -16,7 +16,10 @@
 |  九  | NoHW                                                         |                             NoHW                             |                            N14Apr                            |                             NoHW                             |                             NoHW                             |                            N17Apr                            |                                                              |
 |  十  | T21Apr                                                       |                            S21Apr                            |                             None                             |                                                              |                                                              |                                                              |                                                              |
 
-* No HW for week IX. 
+注:
+
+* No HW for week IX; 
+* [HA5](https://czhang271828.github.io/Linear-algebra/Week%20IV/Supplementary%20reading%20material/Homework%205.pdf) 与 [HA6](https://czhang271828.github.io/Linear-algebra/Week%20V/Supplementary%20Reading%20Material/Homework_6%20part%202.pdf) 是其他两个教学班在[教材](https://linear.axler.net/LADR4eChinese.pdf)范围外布置的作业 (无解答), 建议认真完成. 
 
 **S**: Solutions to home assignments;  
 
