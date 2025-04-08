@@ -10,6 +10,8 @@ we say:
 - $\lambda$ is an eigenvalue of $f$; and
 - $(\lambda, v)$ is an eigenpair.
 
+<div style="page-break-after: always;"></div>
+
 **Exercise 1** Determine all eigenvalues of the linear endomorphism:
 $$
 \mathbb{R}[x] \to \mathbb{R}[x],\quad f(x) \mapsto \int_0^x f(t) \operatorname{d} t.
@@ -19,6 +21,8 @@ $$
 > f = \lambda f' ,\quad 0 = \lambda f(0). 
 > $$
 > 归纳地, $f^{(k)}(0) = 0$, 从而 $f$ 是零多项式. 鉴于特征向量不能是 $0$, 自同态 $\varphi$ 没有特征根. 
+
+<div style="page-break-after: always;"></div>
 
 **Exercise 2** Given $a, b \in \mathbb{R}$, determine all eigenpairs of the linear endomorphism:
 $$
@@ -35,6 +39,8 @@ $$
 >    对任意 $k$, $\varphi$ 在不变子空间 $\mathrm{span}(\{1,x,\ldots, x^k\})$ 上表现作三角矩阵, 对角元分别是 $(1,a,\ldots, a^k)$. 这说明 $\varphi$ 的所有特征值形如 $a^k$, 对应的特征空间自然是一维的. 
 >
 > 3. 特别地, 若 $a=0$ 或 $a=-1$, 则需要合并部分特征空间. 
+
+<div style="page-break-after: always;"></div>
 
 **Exercise 3** Let $V$ the space of smooth, bounded, and real valued functions over $\mathbb{R}$, which means that $f \in V$ maps $\mathbb R$ to some $[a,b] \subseteq \mathbb R$, and $\frac{\operatorname d^{\forall k \geq 1}}{\operatorname d x} f(x)$ exists. Determine all eigenpairs of the linear endomorphism: 
 $$
@@ -64,11 +70,15 @@ $$
 >    1. $\lambda = 0$, 则特征向量是非零常函数; 
 >    2. $\lambda = a^k$, 则特征向量是 $\mathrm{span}(\cos ax, \sin ax)$ 中非零函数. 
 
+<div style="page-break-after: always;"></div>
+
 **Exercise 4** Let $f : V \to V$ be an $\mathbb{F}$-linear endomorphism. Prove or disprove the following statement:
 
 - $v$ is an eigenvector of $f$, if and only if $v \in \ker (\lambda \cdot \mathrm{id} - f)$.
 
 > 答: $v=0$. 特征向量不能是 $0$. 
+
+<div style="page-break-after: always;"></div>
 
 **Exercise 5 (Optional)** Let $V = C^0([0,1])$, i.e., the space of continuous real-valued functions over the closed interval $[0,1]$. Determine all eigenpairs of the operator:
 $$
@@ -107,6 +117,8 @@ $$
 > \lambda _n = (n\pi)^{-2}\quad (n \in \mathbb N_+).
 > $$
 >  对应的特征向量是 $c\cdot \sin n\pi x$ ($c \neq 0$). 
+
+<div style="page-break-after: always;"></div>
 
 **Exercise 6 (optional)** Let $V$ be the space of absolutely integrable functions from $\mathbb{R}$ to $\mathbb{C}$. Define the Fourier transform:
 $$
