@@ -4,8 +4,9 @@
 
 **Definition.** Let $V$ be a vector space over a field $\mathbb{F}$. The dual space is defined as
 
-$V^\ast := \mathrm{Hom}_{\mathbb{F}}(V, \mathbb{F}).$
-
+$$
+V^\ast := \mathrm{Hom}_{\mathbb{F}}(V, \mathbb{F}).
+$$
 **Example.** For $\dim V = n < \infty$, with basis ${u_i}_{1\leq i\leq n}$, the dual space $V^\ast$ is also $n$-dimensional with basis (dual basis)
 $$
 \{f_i\}_{1 \leq i \leq n},\quad f_i : V \to \mathbb{F},\quad u_j \mapsto \delta_{i,j}.
@@ -14,7 +15,7 @@ From the perspective of bilinear forms, the pairing
 $$
 V \times V^\ast \to \mathbb{F},\quad (u,f) \mapsto f(u)
 $$
-has matrix form $I_{n \times n}$ under the bases ${u_i}*{1\leq i\leq n}$ and ${f_i}*{1\leq i\leq n}$.
+has matrix form $I_{n \times n}$ under the bases $\{u_i\}_{1\leq i\leq n}$ and $\{f_i\}_{1\leq i\leq n}$.
 
 **Note.** The isomorphism $V \simeq V^\ast$ is artificial. An informal but illustrative analogy: assume $V$ has unit kilometre ($\mathrm{km}$), then $V^\ast$ has unit $\mathrm{km}^{-1}$. The linear isomorphism $V \simeq V^\ast$ is never natural.
 
@@ -52,7 +53,7 @@ where $\pi$ is the natural quotient map $V \twoheadrightarrow V / U$.
 
 ### Dual Spaces and Galois Correspondence
 
-**Definition.** (Kernels and Annulators). For convenience, let $U_i$ denote subspaces of $V$, and $B_i$ subspaces of $V^\ast$.
+**Definition.** (Kernels and Annulateurs). For convenience, let $U_i$ denote subspaces of $V$, and $B_i$ subspaces of $V^\ast$.
 
 - $\operatorname{ann} U := {f \in V^\ast \mid f(U) = 0}$, a subspace of $V^\ast$;
 - $\ker B := {u \in V \mid f(u) = 0 \ (\forall f\in B)} = \bigcap_{f \in B} \ker f$, a subspace of $V$.
