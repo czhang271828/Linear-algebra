@@ -89,3 +89,5 @@ Repository: [https://github.com/czhang271828/Linear-algebra/](https://github.com
 3. [高等代数与解析几何](https://czhang271828.github.io/Linear-algebra/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/(%E6%9C%B1%E5%AF%8C%E6%B5%B7%20%E9%99%88%E6%99%BA%E5%A5%87%20%E7%BC%96%E8%91%97)%20(Z-Library).pdf) ([朱富海](https://space.bilibili.com/509086270)与陈智奇).  
 4. [高等线性代数学](https://czhang271828.github.io/Linear-algebra/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/%E9%AB%98%E7%AD%89%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%AD%A6%20%E9%BB%8E%E6%99%AF%E8%BE%89%20%E7%99%BD%E6%AD%A3%E7%AE%80%20%E5%91%A8%E5%9B%BD%E6%99%96.pdf) (黎景辉, 白正简, 周国晖).  
 5. [USTC 线性代数 (A) 课程讲义 (2021 版)](http://home.ustc.edu.cn/~richardzheng/math/LAwxm.pdf), 以及[解答](http://home.ustc.edu.cn/~richardzheng/math/LA.pdf). 此讲义几乎不涉及线性映射, 对本学期学习帮助不大.  
+
+[线上图书馆](https://cjhb.site/Files.php/Books/).  

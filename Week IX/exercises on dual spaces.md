@@ -1,0 +1,122 @@
+## Supplementary Reading Material: On Dual Spaces
+
+### Finite-Dimensional Vector Spaces and Dual Spaces
+
+**Definition.** Let $V$ be a vector space over a field $\mathbb{F}$. The dual space is defined as
+
+$V^\ast := \mathrm{Hom}_{\mathbb{F}}(V, \mathbb{F}).$
+
+**Example.** For $\dim V = n < \infty$, with basis ${u_i}_{1\leq i\leq n}$, the dual space $V^\ast$ is also $n$-dimensional with basis (dual basis)
+$$
+\{f_i\}_{1 \leq i \leq n},\quad f_i : V \to \mathbb{F},\quad u_j \mapsto \delta_{i,j}.
+$$
+From the perspective of bilinear forms, the pairing
+$$
+V \times V^\ast \to \mathbb{F},\quad (u,f) \mapsto f(u)
+$$
+has matrix form $I_{n \times n}$ under the bases ${u_i}*{1\leq i\leq n}$ and ${f_i}*{1\leq i\leq n}$.
+
+**Note.** The isomorphism $V \simeq V^\ast$ is artificial. An informal but illustrative analogy: assume $V$ has unit kilometre ($\mathrm{km}$), then $V^\ast$ has unit $\mathrm{km}^{-1}$. The linear isomorphism $V \simeq V^\ast$ is never natural.
+
+**Example.** The canonical linear map $\eta_V: V \to V^{\ast\ast}$ is a natural isomorphism.
+
+- The term "natural" signifies that for any linear map $f : U \to V$, the compositions $U \xrightarrow f V \xrightarrow{\eta_V} V^{\ast\ast}$ and $U \xrightarrow{\eta_U} U^{\ast\ast} \xrightarrow{f^{\ast\ast}} V^{\ast\ast}$ coincide.
+
+### Exotic Examples in Linear Algebra Without the Axiom of Choice
+
+**Example.** ($\dim V = \infty$, yet $V^\ast = 0$). *If the axiom of choice is not assumed*, then there do exist infinite-dimensional vector spaces $V$ with dual space $V^\ast = 0$. The [example](https://eudml.org/doc/139241) by H. Läuchli presents an infinite-dimensional vector space $V$ whose proper subspaces are all finite-dimensional.
+
+**Example.** (When $V^\ast$ is strictly larger than $V$, yet $V \simeq V^{\ast\ast}$). *In ZF set theory with dependent choice*, it takes effort to verify $\mathbb{R}[[x]]^\ast \simeq \mathbb{R}[x]$. However, $\mathbb{R}[[x]]$ does not possess a countable basis.
+
+**Proposition.** The canonical linear map $V \to V^{\ast\ast}$ is injective if and only if $V$ is a subspace of some product space $\prod_X \mathbb{F}$. For instance, $\mathbb{F}[x]$ and $\mathbb{F}[[x]]$ both embed into their double dual spaces.
+
+*Proof.* See [this article](https://czhang271828.github.io/Linear-algebra/Week VI/supplementary reading material/When V is a subspace of DDV.pdf).
+
+### Axiom of Extension
+
+**Axiom.** (Axiom of Extension, also known as the Hahn-Banach Axiom (HB)).
+
+- For any linear subspace $U \subseteq V$, every linear map $f : U \to W$ extends to a map $\widetilde{f}: V \to W$ such that $\widetilde{f}|_U = f$.
+
+**Remark.** The Hahn-Banach Axiom is independent of the usual axioms (ZF + DC), which are assumed in the study of tensor products of infinite-dimensional vector spaces.
+
+**Exercise.** The Hahn-Banach Axiom is equivalent to the assertion that $\mathrm{Hom}_{\mathbb{F}}(-, W)$ always maps injections to surjections.
+
+**Exercise.** By HB, for any $v_1 ,v_2 \in V$ with $v_1 \neq v_2$, there exists $f \in V^\ast$ such that $f(v_1) \neq f(v_2)$. Hence, the canonical linear map $V \to V^{\ast\ast}$ is always injective.
+
+**Exercise.** By HB, show that for $U \hookrightarrow V$, the following map is an isomorphism
+$$
+\frac{V^{\ast\ast}}{U^{\ast\ast}} \to (V/U)^{\ast\ast},\quad [x]_{U^{\ast\ast}} \mapsto \pi^{\ast\ast}(x),
+$$
+where $\pi$ is the natural quotient map $V \twoheadrightarrow V / U$.
+
+### Dual Spaces and Galois Correspondence
+
+**Definition.** (Kernels and Annulators). For convenience, let $U_i$ denote subspaces of $V$, and $B_i$ subspaces of $V^\ast$.
+
+- $\operatorname{ann} U := {f \in V^\ast \mid f(U) = 0}$, a subspace of $V^\ast$;
+- $\ker B := {u \in V \mid f(u) = 0 \ (\forall f\in B)} = \bigcap_{f \in B} \ker f$, a subspace of $V$.
+
+These notions are defined for subsets in general. By the closure property:
+
+- $\operatorname{ann}(X) = \operatorname{ann}(\mathrm{span}(X))$, for $X \subseteq V$;
+- $\ker(S) = \ker(\mathrm{span}(S))$, for $S \subseteq V^\ast$.
+
+**Remark.** $\ker f$ and $\ker {f}$ are identical.
+
+**Exercise.** Show that for any finite-dimensional vector space $V$, the map $\operatorname{ann} : \text{Subsets of } V \to \text{Subsets of } V^\ast$ is a bijection with inverse map $\ker$.
+
+**Proposition.** One has $\operatorname{ann}(\ker B) \supseteq B$. Equality does not generally hold.
+
+*Proof.* The formula $\operatorname{ann}(\ker B) \supseteq B$ involves logic more than algebra. For a counterexample, take $V$ as the space of continuous functions over $\mathbb{R}$, and $B = \mathrm{span}(\{\delta_r\}_{r \in \mathbb{Q}})$.
+
+**Exercise.** (Galois Connection)
+
+1. $\operatorname{ann}(\ker B) \supseteq B$,
+2. $\ker(\operatorname{ann}U) \supseteq U$,
+3. $\operatorname{ann}(\ker(\operatorname{ann} B)) = \operatorname{ann}(B)$,
+4. $\ker(\operatorname{ann}(\ker B)) = \ker B$.
+
+The pair $(\ker , \operatorname{ann})$ defines a Galois correspondence.
+
+**Example.** For a set map $f : X \to Y$, the image and preimage maps $(f_\ast, f^\ast)$ form a Galois connection between $\mathrm{Subset}(X)$ and $\mathrm{Subset}(Y)$.
+
+**Definition.** Let $Op(\mathbb{R}^2)$ denote the set of open subsets of $\mathbb{R}^2$, and $Cl(\mathbb{R}^2)$ the set of closed subsets. Define:
+
+1. $k : Op(\mathbb{R}^2) \to Cl(\mathbb{R}^2),\quad U \mapsto \overline{U}$ (closure);
+2. $i : Cl(\mathbb{R}^2) \to Op(\mathbb{R}^2),\quad K \mapsto K^\circ$ (interior).
+
+**Exercise.** Show that $ikik = ik$ and $kiki = ki$; hence, $(k,i)$ form a Galois connection.
+
+**Exercise.** Given $X \subseteq \mathbb{R}^2$, show that at most seven distinct sets (including $X$) can be obtained by applying $k$ and $i$ repeatedly.
+
+**Exercise.** Show that one can obtain at most 14 distinct sets (including $X$ itself) by applying $i$ and $(-)^c$ repeatedly.
+
+### The Yoga of Dual Spaces
+
+**Theorem.** In the following table, FD denotes finite-dimensional cases, G denotes general cases, and HB refers to cases where the Hahn-Banach Axiom is assumed.
+
+For a linear map $\varphi : U \to V$, define the dual map as
+$$
+\varphi^\ast : V^\ast \to U^\ast,\quad [V \to \mathbb{F},\ v \mapsto f(v)]\mapsto [U \to \mathbb{F},\ u \mapsto f(\varphi (u))].
+$$
+
+| No.  | Formula                                                      | FD       | G                 | HB          |
+| ---- | ------------------------------------------------------------ | -------- | ----------------- | ----------- |
+| G1   | $\operatorname{ann}(\ker B) \overset ?= B$                   | $=$      | $\supseteq$       | $\supseteq$ |
+| G2   | $\ker(\operatorname{ann} V) \overset ? = V$                  | $=$      | $\supset$         | $=$         |
+| E1   | $\operatorname{ann}(V_1 + V_2) \overset ? = \operatorname{ann}(V_1) \cap \operatorname{ann}(V_2)$ | $=$      | $=$               | $=$         |
+| E2   | $\operatorname{ann}(V_1 \cap V_2) \overset ? = \operatorname{ann}(V_1) + \operatorname{ann}(V_2)$ | $=$      | $\supseteq$       | $=$         |
+| E3   | $\ker(B_1 + B_2) \overset ? = \ker B_1 \cap \ker B_2$        | $=$      | $=$               | $=$         |
+| E4   | $\ker(B_1 \cap B_2) = \ker B_1 + \ker B_2$                   | $=$      | $\supseteq$       | $\supseteq$ |
+| Z1   | $\ker \varphi^\ast \overset ?= \operatorname{ann}(\operatorname{im} \varphi)$ | $=$      | $=$               | $=$         |
+| Z2   | $\ker \varphi \overset ? = \ker(\operatorname{im} \varphi^\ast)$ | $=$      | $\subseteq$       | $=$         |
+| Z3   | $\operatorname{im} \varphi^\ast \overset ? = \operatorname{ann}(\ker \varphi)$ | $=$      | $\subseteq$       | $=$         |
+| Z3'  | $\operatorname{im} \pi^\ast \overset ? = \operatorname{ann}(\ker \pi)$, with $\pi$ surj. | $=$      | $=$               | $=$         |
+| Z4   | $\operatorname{im} \varphi = \ker(\ker \varphi^\ast)$        | $=$      | $\subseteq$       | $=$         |
+| Z5   | If $f$ is surj., then $f^\ast$ is inj.                       | true     | true              | true        |
+| Z6   | If $f$ is inj., then $f^\ast$ is surj.                       | true     | NaN               | true        |
+| L1   | $S^\ast \overset ? \to V^\ast / \operatorname{ann}(S)$       | $\simeq$ | $\hookrightarrow$ | $\simeq$    |
+| L2   | $(V/S)^\ast \overset ? \to \operatorname{ann}(S)$            | $\simeq$ | $\simeq$          | $\simeq$    |
+
+**Remark.** When the general case (G) coincides with the HB case, the proposition is provable without additional axioms. When the FD case differs from the G case, the FD part is proved using dimension arguments. Nonexamples disprove the HB part of statements G1 and E4.
