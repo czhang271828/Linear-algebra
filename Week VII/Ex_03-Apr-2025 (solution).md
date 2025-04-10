@@ -82,17 +82,12 @@ $$
 
 **Exercise 5 (Optional)** Let $V = C^0([0,1])$, i.e., the space of continuous real-valued functions over the closed interval $[0,1]$. Determine all eigenpairs of the operator:
 $$
-V \to V,\quad f(x) \mapsto \int_0^1 K(x,y) \operatorname{d}y,
+V \to V,\quad f(x) \mapsto \int_0^1 K(x,y) \cdot f(y)\operatorname{d}y,
 $$
 where the kernel function is defined as:
 $$
 K(x,y) := \min(x,y) - x \cdot y.
 $$
-
-* Hint: Under appropriate conditions,
-  $$
-  \frac{\operatorname{d}}{\operatorname{d}x} \int_{f(x)}^{g(x)} H(x,y)\operatorname{d}y = H(x,g(x)) - H(x,f(x)) + \int_{f(x)}^{g(x)} H_x(x,y) \operatorname{d}y.
-  $$
 
 > 答: 若 $\lambda$​ 是特征值, 则化简得
 > $$
