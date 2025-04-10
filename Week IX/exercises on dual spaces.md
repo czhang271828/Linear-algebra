@@ -65,7 +65,7 @@ These notions are defined for subsets in general. By the closure property:
 
 **Remark.** $\ker f$ and $\ker {f}$ are identical.
 
-**Exercise.** Show that for any finite-dimensional vector space $V$, the map $\operatorname{ann} : \text{Subsets of } V \to \text{Subsets of } V^\ast$ is a bijection with inverse map $\ker$.
+**Exercise.** Show that for any finite-dimensional vector space $V$, the map $\operatorname{ann} : \text{Subspaces of } V \to \text{Subspaces of } V^\ast$ is a bijection with inverse map $\ker$.
 
 **Proposition.** One has $\operatorname{ann}(\ker B) \supseteq B$. Equality does not generally hold.
 
