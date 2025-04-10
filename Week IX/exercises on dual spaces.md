@@ -120,3 +120,8 @@ $$
 | L2   | $(V/S)^\ast \overset ? \to \operatorname{ann}(S)$            | $\simeq$ | $\simeq$          | $\simeq$    |
 
 **Remark.** When the general case (G) coincides with the HB case, the proposition is provable without additional axioms. When the FD case differs from the G case, the FD part is proved using dimension arguments. Nonexamples disprove the HB part of statements G1 and E4.
+
+* G1-G2 come from Galois connection,  
+* E1-E4 are elementary,  
+* Z1-Z6 are taken from the [textbook of 张贤科](https://czhang271828.github.io/Linear-algebra/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0%E5%AD%A6%E7%AC%AC%E4%BA%8C%E7%89%88%C2%B7%E5%BC%A0%E8%B4%A4%E7%A7%91.pdf),  
+* L1-L2 are taken from the [textbook of 黎景辉等](https://czhang271828.github.io/Linear-algebra/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/%E9%AB%98%E7%AD%89%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%AD%A6%20%E9%BB%8E%E6%99%AF%E8%BE%89%20%E7%99%BD%E6%AD%A3%E7%AE%80%20%E5%91%A8%E5%9B%BD%E6%99%96.pdf).  
