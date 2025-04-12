@@ -1,5 +1,22 @@
 ## Supplementary Reading Material: On Dual Spaces
 
+* 阅读提示: 无限维线性空间的对偶空间是一个含糊的概念. 通常的教材上有如下三类处理方式: 
+
+  1. (右倾) 仅考虑可构造的对偶空间, 例如 $(\mathbb R[x])^\ast \simeq \mathbb R[\![x]\!]$, 但对一般情形避而不谈; 
+  2. (折中) 明面上不使用甚至不承认选择公理, 但在背地里默认了一些反直觉的公理: 例如默认非零空间存在非零的对偶空间, 但从不给出证明; 
+  3. (左倾) 直接使用选择公理. 
+
+  有探索欲的读者不会接受右倾的处理方式, 而选择公理不在教学范围内. 本节习题将折中派的做法进行公理化, 用一条表述简单的额外公理为教材打上恰当的补丁. 我们最终承认通常公理与额外的 HB 公理. 
+
+  * (通常公理). [ZF](https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory) 与 [DC](https://en.wikipedia.org/wiki/Axiom_of_dependent_choice), 也就是矩阵论和数学分析承认的东西. 特别地, [DC](https://en.wikipedia.org/wiki/Axiom_of_dependent_choice) 用于证明可数个可数集的并仍可数, 以及无限维线性空间存在无穷大的线性无关组, 其严格独立于 [ZF](https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory). 
+  * (HB 公理). 对任意的子空间 $U \hookrightarrow V$, 映射 $f : U \to W$ 的定义域总能被扩大至 $V$. 换言之, 总能找到 $\widetilde f : V \to W$ 使得 $\widetilde f|_U = f$. 
+
+  可以发现, [张贤科](https://czhang271828.github.io/Linear-algebra/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0%E5%AD%A6%E7%AC%AC%E4%BA%8C%E7%89%88%C2%B7%E5%BC%A0%E8%B4%A4%E7%A7%91.pdf)等教材的公理体系严格等价于通常公理 + HB 公理. 
+
+  若不承认 HB, 我们无法排除 Exotic Examples (见习题) 的存在性. 可使用这些例子自查是否伪证了某些命题, 类似地, 有限域的重要作用也是自查伪证与否. 
+
+  习题目录: 有限维对偶空间一瞥, 不承认 HB 的后果, 承认 HB 的好处, 对偶空间的 Galois 对应, 对偶空间的所有基本结论. 
+
 ### Finite-Dimensional Vector Spaces and Dual Spaces
 
 **Definition.** Let $V$ be a vector space over a field $\mathbb{F}$. The dual space is defined as
