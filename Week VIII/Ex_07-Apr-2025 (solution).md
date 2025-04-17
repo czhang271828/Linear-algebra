@@ -84,7 +84,7 @@ Now finish the following.
    > 由 $\dim \ker g_q \leq \dim \frac{V}{\mathrm{im} (f)} < \infty$, 左式是有限的. 
 7. Demonstrate that if any two elements of $\{f,g,g\circ f\}$ belong to $\mathrm{AI}(V)$, then so does the third.
 
-   > *Hint:* For $\Phi (f) := \dim \ker f + \dim \frac{V}{\mathrm{im}(f)} < \infty$, show that $\Phi (f\circ g) = \Phi(f) + \Phi (g)$.
+   > *Hint:* for $f \in \mathrm{AI}$, set $\Phi (f) := \dim \ker f - \dim \frac{V}{\mathrm{im}(f)}$, show that $\Phi (f\circ g) = \Phi(f) + \Phi (g)$.
    >
    > Hint 中的等式成立, 当且仅当上述
    > $$
