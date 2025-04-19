@@ -84,8 +84,8 @@ where $\pi$ is the natural quotient map $V \twoheadrightarrow V / U$.
 
 **Definition.** (Kernels and Annulateurs). For convenience, let $U_i$ denote subspaces of $V$, and $B_i$ subspaces of $V^\ast$.
 
-- $\operatorname{ann} U := {f \in V^\ast \mid f(U) = 0}$, a subspace of $V^\ast$;
-- $\ker B := {u \in V \mid f(u) = 0 \ (\forall f\in B)} = \bigcap_{f \in B} \ker f$, a subspace of $V$.
+- $\operatorname{ann} U :=\{f \in V^\ast \mid f(U) = 0\}$, a subspace of $V^\ast$;
+- $\ker B := \{u \in V \mid f(u) = 0 \ (\forall f\in B)\} = \bigcap_{f \in B} \ker f$, a subspace of $V$.
 
 These notions are defined for subsets in general. By the closure property:
 
