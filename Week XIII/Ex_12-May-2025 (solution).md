@@ -109,6 +109,27 @@ Show that for isometric transform $\psi$ (i.e., $(\psi(u), \psi (v)) = (u,v)$), 
 > $$
 > 由 $\varphi ^2 = \mathrm{id}$, 得 $1 \in\sigma (\psi \circ \varphi)$.
 
+> 作为 Euclidean 空间的特例, 即内积形式为 $(u,v) := u^T v$ 的有限维实内积空间, 有以下引理.
+>
+> **Corollary (Minamomo's 1/2 theorem)** For orthogonal matrix $Q$ with $1 \notin \sigma (Q)$, the matrix $(I-Q)^{-1}$ has all $\frac{1}{2}$ on its diagonal.
+>
+> - We present the original proof as follows. For arbitrary index $i$, 
+>   $$
+>   k_i := e_i ^T (I - Q)^{-1}e_i\tag 1
+>   $$
+>    is exactly the $(i,i)$-th entry of $(I - Q)^{-1}$. We see that
+>   $$
+>   k_i = e_i^T(I - Q^T)^{-1} (Q^{-1}Q) e_i = e_i^T(I - Q)^{-1}( - Q)e_i.\tag 2
+>   $$
+>   Hence, $\mathrm{(1)} + \mathrm{(2)}$ yields
+>   $$
+>   2 k_i = e_i^T (I - Q)^{-1}(I - Q)e_i = 1.
+>   $$
+>
+> The theorem also holds for unitary matrices.
+>
+> - Historical remark: Minamomo is one of our classmates who discovered this amazing theorem last night, where Minamomo is his/her wechat name written in Hiragana.
+
 **Exercise 4** Set $V:=\mathbb R[x]$ and $V_0:=\{f\in \mathbb R[x]\mid f(0)=f(1)\}$.
 
 1. Prove that $V\times V\to \mathbb R,\quad (f,g)\mapsto \int_0^1 f(x)g(x)\operatorname dx$ is an inner product.
