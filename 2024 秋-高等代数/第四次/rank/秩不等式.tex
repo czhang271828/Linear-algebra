@@ -147,27 +147,27 @@ anchorcolor = blue]{hyperref}
         \item 对任意可乘的向量 $x$, $x^TA=0$ 当且仅当 $x=0$. 
         \item 存在矩阵 $B$ (有时 $B=\varnothing$) 使得 $\binom{A}{B}$ 是可逆矩阵. 
     \end{enumerate}
-    \begin{proof}
-        证明顺序 
-        \begin{equation}
-            1\implies 2\implies 3\implies 4\implies 5\implies 1.
-        \end{equation}
-        \begin{enumerate}
-            \item ($1\implies 2$) 假定 $A$ 行满秩. 依照阶梯形主元分布, 存在列变换 $C$ 使得 $AC$ 能写作分块矩阵
-            \begin{equation}
-                AC = (S \quad T)\quad S\,\text{可逆}. 
-            \end{equation} 
-            此时取 $B=C\cdot \binom{S^{-1}}{O}$ 即可. 
-            \item ($2\implies 3$) 假定 $A$ 有右逆元 $B$, 则有推导链: 
-            \begin{equation}
-                (X=Y)\implies (XA=YA)\implies (XAB=YAB). 
-            \end{equation}
-            从而 $X=Y$ 当且仅当 $XA=YA$.
-            \item ($3\implies 4$) 直接地, $x^T A= 0^T A$ 当且仅当 $x^T=0^T$.  
-            \item ($4\implies 5$) 翻译 $4$ 为自然语言: 行线性组合为零当切记当线性组合系数为 $0$. 此时 $A$ 行线性无关. $A$ 能补全作可逆矩阵, 当且仅当其行阶梯形亦然. 
-            \item ($5\implies 1$) 直接的. 
-        \end{enumerate}
-    \end{proof}
+    % \begin{proof}
+    %     证明顺序 
+    %     \begin{equation}
+    %         1\implies 2\implies 3\implies 4\implies 5\implies 1.
+    %     \end{equation}
+    %     \begin{enumerate}
+    %         \item ($1\implies 2$) 假定 $A$ 行满秩. 依照阶梯形主元分布, 存在列变换 $C$ 使得 $AC$ 能写作分块矩阵
+    %         \begin{equation}
+    %             AC = (S \quad T)\quad S\,\text{可逆}. 
+    %         \end{equation} 
+    %         此时取 $B=C\cdot \binom{S^{-1}}{O}$ 即可. 
+    %         \item ($2\implies 3$) 假定 $A$ 有右逆元 $B$, 则有推导链: 
+    %         \begin{equation}
+    %             (X=Y)\implies (XA=YA)\implies (XAB=YAB). 
+    %         \end{equation}
+    %         从而 $X=Y$ 当且仅当 $XA=YA$.
+    %         \item ($3\implies 4$) 直接地, $x^T A= 0^T A$ 当且仅当 $x^T=0^T$.  
+    %         \item ($4\implies 5$) 翻译 $4$ 为自然语言: 行线性组合为零当切记当线性组合系数为 $0$. 此时 $A$ 行线性无关. $A$ 能补全作可逆矩阵, 当且仅当其行阶梯形亦然. 
+    %         \item ($5\implies 1$) 直接的. 
+    %     \end{enumerate}
+    % \end{proof}
 \end{exercise}
 
 \begin{example}
@@ -213,20 +213,20 @@ anchorcolor = blue]{hyperref}
 
 \begin{exercise}
     固定数域上的矩阵 $A$. 称 $B$ 为``好矩阵'', 若 $B$ 是有限个 $A$ 与 $A^H$ 的交错积. 证明任意两个好矩阵的秩相同. 
-    \begin{proof}
-        以上例子表明 $r(A)=r(AA^H)=r((AA^H)^2)= \cdots$. 依照事实 $r(XY)\leq r(X)$ 与 $r(A)=r(A^H)$, 任何好矩阵的秩介于 $r(A)$ 与某一 $r((AA^H)^{2^k})$ 间. 从而好矩阵的秩恒等于 $r(A)$. 
-    \end{proof}
+    % \begin{proof}
+    %     以上例子表明 $r(A)=r(AA^H)=r((AA^H)^2)= \cdots$. 依照事实 $r(XY)\leq r(X)$ 与 $r(A)=r(A^H)$, 任何好矩阵的秩介于 $r(A)$ 与某一 $r((AA^H)^{2^k})$ 间. 从而好矩阵的秩恒等于 $r(A)$. 
+    % \end{proof}
 \end{exercise}
 
 \begin{remark}
     $A(A-A^H)=O$ 当且仅当 $A=A^H$. 这是另一份文件的习题, 也是 2023 年的第一次小测题. 
-    \begin{proof}
-        转化条件为 $\mathrm{tr}(A^2)=\mathrm{tr}(AA^H)$. 此时 
-        \begin{equation}
-            \sum_{i,j=1}^n a_{i,j}a_{j,i}=\sum_{i,j=1}^n |a_{i,j}|^2. 
-        \end{equation}
-        相减得完全平方式 $0=|a_{i,j}-\overline{a_{j,i}}|^2$, 即, $A=A^H$. 
-    \end{proof}
+    % \begin{proof}
+    %     转化条件为 $\mathrm{tr}(A^2)=\mathrm{tr}(AA^H)$. 此时 
+    %     \begin{equation}
+    %         \sum_{i,j=1}^n a_{i,j}a_{j,i}=\sum_{i,j=1}^n |a_{i,j}|^2. 
+    %     \end{equation}
+    %     相减得完全平方式 $0=|a_{i,j}-\overline{a_{j,i}}|^2$, 即, $A=A^H$. 
+    % \end{proof}
 \end{remark}
 
 \begin{proposition}
@@ -239,35 +239,35 @@ anchorcolor = blue]{hyperref}
         \item 我们将这一原理及其推广留至内积空间的重要应用: Hodge 分解. 
     \end{itemize}
     这一结论是``几何的'', 毕竟有限域上处处存在反例. 
-    \begin{proof}
-        考虑初等变换 
-        \begin{equation}
-            \begin{pmatrix}
-                A+A^{T} & O\\
-                O & O
-                \end{pmatrix} \rightsquigarrow \begin{pmatrix}
-                A+A^{T} & O\\
-                A\left( A^{T} +A\right) & O
-                \end{pmatrix} =\begin{pmatrix}
-                A+Q^T & O\\
-                AA^{T} & O
-                \end{pmatrix} \overset{\star}\rightsquigarrow \begin{pmatrix}
-                A+A^T & AA^{T}\\
-                AA^{T} & O
-                \end{pmatrix},
-        \end{equation}
-        以上 $\star$ 处的初等变换是``将第一列右乘 $A^T$ 再加之第二列''. 
-\begin{itemize}
-    \item 依照不等式 $r\begin{pmatrix}
-        A&O\\B&C
-    \end{pmatrix}\geq r(A)+r(C)$, 得 $r(A+A^T)\geq 2r(AA^T)$; 
-    \item 直接地, $r(A+A^T)\leq r(A)+r(A^T)$. 
-\end{itemize}
-数域的条件表明 $r(A^TA)=r(A)$, 以上两式即 $r(A+A^T)=2r(A)$. 
-        \begin{itemize}
-            \item \href{https://mp.weixin.qq.com/s/3UI9ahZTcZlr9gRF2Rg3Vw}{\underline{听豌豆说}}, 这是复旦这几天的考试题. 
-        \end{itemize}
-    \end{proof}
+%     \begin{proof}
+%         考虑初等变换 
+%         \begin{equation}
+%             \begin{pmatrix}
+%                 A+A^{T} & O\\
+%                 O & O
+%                 \end{pmatrix} \rightsquigarrow \begin{pmatrix}
+%                 A+A^{T} & O\\
+%                 A\left( A^{T} +A\right) & O
+%                 \end{pmatrix} =\begin{pmatrix}
+%                 A+Q^T & O\\
+%                 AA^{T} & O
+%                 \end{pmatrix} \overset{\star}\rightsquigarrow \begin{pmatrix}
+%                 A+A^T & AA^{T}\\
+%                 AA^{T} & O
+%                 \end{pmatrix},
+%         \end{equation}
+%         以上 $\star$ 处的初等变换是``将第一列右乘 $A^T$ 再加之第二列''. 
+% \begin{itemize}
+%     \item 依照不等式 $r\begin{pmatrix}
+%         A&O\\B&C
+%     \end{pmatrix}\geq r(A)+r(C)$, 得 $r(A+A^T)\geq 2r(AA^T)$; 
+%     \item 直接地, $r(A+A^T)\leq r(A)+r(A^T)$. 
+% \end{itemize}
+% 数域的条件表明 $r(A^TA)=r(A)$, 以上两式即 $r(A+A^T)=2r(A)$. 
+%         \begin{itemize}
+%             \item \href{https://mp.weixin.qq.com/s/3UI9ahZTcZlr9gRF2Rg3Vw}{\underline{听豌豆说}}, 这是复旦这几天的考试题. 
+%         \end{itemize}
+%     \end{proof}
 \end{proposition}
 
 \newpage
@@ -301,9 +301,9 @@ anchorcolor = blue]{hyperref}
 \end{tikzcd}.
     \end{equation}
     注: 可以在另一份练习题中找到部分箭头的取等的充要条件. 如有兴趣, 可以继续总结探究. 
-    \begin{proof}
-        略. 
-    \end{proof}
+    % \begin{proof}
+    %     略. 
+    % \end{proof}
 \end{exercise}
 
 \begin{proposition}[同时相抵化]
@@ -324,29 +324,29 @@ anchorcolor = blue]{hyperref}
             PAQ=\begin{pmatrix}I_{r(A)}&O\\O&O\end{pmatrix},\quad Q^{-1}BP^{-1}=\begin{pmatrix}O&O\\O&I_{r(B)}\end{pmatrix}.
         \end{equation}
     \end{itemize}
-    \begin{proof}
-        只证明必要性. 若 $AB$ 与 $BA$ 是零方阵, 取 $P_0AQ_0$ 为 $A$ 的相抵化, 记同规格的分块矩阵
-        \begin{equation}
-            P_0AQ_0=\begin{pmatrix}
-            I&O\\O&O
-            \end{pmatrix},\quad Q_0^{-1}BP_0^{-1}=\begin{pmatrix}
-                B_1&B_2\\B_3&B_4
-            \end{pmatrix}. 
-        \end{equation}
-        此时 $AB=O$ 等价于 $B_1=O$ 且 $B_2=O$; $BA=O$ 等价于 $B_1=O$ 且 $B_3=O$. 再取
-        \begin{equation}
-            SB_4T=\begin{pmatrix}O&O\\O&I\end{pmatrix}. 
-        \end{equation}
-        以下相抵化即为所求: 
-        \begin{align}
-            \begin{pmatrix}I&O\\O&T^{-1}\end{pmatrix}\cdot P_0\cdot A\cdot Q_0\cdot \begin{pmatrix}I&O\\O&S^{-1}\end{pmatrix}& =\begin{pmatrix}
-                I_{r(A)}&O\\O&O
-                \end{pmatrix},\\[6pt]
-                \begin{pmatrix}I&O\\O&S\end{pmatrix}\cdot Q_0^{-1}\cdot B\cdot P_0^{-1}\cdot \begin{pmatrix}I&O\\O&T\end{pmatrix}&=\begin{pmatrix}
-                    O&O\\O&I_{r(B)}
-                \end{pmatrix}.
-        \end{align}
-    \end{proof}
+    % \begin{proof}
+    %     只证明必要性. 若 $AB$ 与 $BA$ 是零方阵, 取 $P_0AQ_0$ 为 $A$ 的相抵化, 记同规格的分块矩阵
+    %     \begin{equation}
+    %         P_0AQ_0=\begin{pmatrix}
+    %         I&O\\O&O
+    %         \end{pmatrix},\quad Q_0^{-1}BP_0^{-1}=\begin{pmatrix}
+    %             B_1&B_2\\B_3&B_4
+    %         \end{pmatrix}. 
+    %     \end{equation}
+    %     此时 $AB=O$ 等价于 $B_1=O$ 且 $B_2=O$; $BA=O$ 等价于 $B_1=O$ 且 $B_3=O$. 再取
+    %     \begin{equation}
+    %         SB_4T=\begin{pmatrix}O&O\\O&I\end{pmatrix}. 
+    %     \end{equation}
+    %     以下相抵化即为所求: 
+    %     \begin{align}
+    %         \begin{pmatrix}I&O\\O&T^{-1}\end{pmatrix}\cdot P_0\cdot A\cdot Q_0\cdot \begin{pmatrix}I&O\\O&S^{-1}\end{pmatrix}& =\begin{pmatrix}
+    %             I_{r(A)}&O\\O&O
+    %             \end{pmatrix},\\[6pt]
+    %             \begin{pmatrix}I&O\\O&S\end{pmatrix}\cdot Q_0^{-1}\cdot B\cdot P_0^{-1}\cdot \begin{pmatrix}I&O\\O&T\end{pmatrix}&=\begin{pmatrix}
+    %                 O&O\\O&I_{r(B)}
+    %             \end{pmatrix}.
+    %     \end{align}
+    % \end{proof}
 \end{exercise}
 
 \begin{definition}[广义逆]
@@ -366,33 +366,33 @@ anchorcolor = blue]{hyperref}
 
 \begin{exercise}
     $A$ 与 $B$ 互为广义逆, 当且仅当 $ABA=A$ 且 $BAB=B$. 
-    \begin{proof}
-        只需证明 $\gets$ 方向. 假定 $A=P\cdot \widetilde I\cdot Q$ 是相抵标准型, 则考虑分块
-        \begin{equation}
-            B=Q^{-1}\cdot \begin{pmatrix}B_{11}&B_{12}\\B_{21}&B_{22}\end{pmatrix}\cdot P^{-1}. 
-        \end{equation}
-        由题设, $ABA=A$ 且 $BAB=B$. 
-        \begin{enumerate}
-            \item 依分块矩阵计算 $ABA=A$, 得 $B_{11}=O$; 
-            \item 依分块矩阵计算 $BAB=B$, 得 
-            \begin{equation}
-                \begin{pmatrix}
-                    B_{11}^2& B_{11}B_{12}\\B_{21}B_{11}&B_{21}B_{12}
-                \end{pmatrix}=\begin{pmatrix}
-                    B_{11}& B_{12}\\B_{21}&B_{22}
-                \end{pmatrix}. 
-            \end{equation}
-            此时为 $B$ 追加一次相抵标准化, 得 
-            \begin{equation}
-                \begin{pmatrix}
-                    I& O\\ -B_{21}& I
-                \end{pmatrix}\cdot Q\cdot B\cdot P\cdot \begin{pmatrix}
-                    I& -B_{12}\\ O& I
-                \end{pmatrix}. 
-            \end{equation}
-            对 $A$ 使用新的相抵化, $\widetilde I$ 不改变. 检验略. 
-        \end{enumerate}
-    \end{proof}
+    % \begin{proof}
+    %     只需证明 $\gets$ 方向. 假定 $A=P\cdot \widetilde I\cdot Q$ 是相抵标准型, 则考虑分块
+    %     \begin{equation}
+    %         B=Q^{-1}\cdot \begin{pmatrix}B_{11}&B_{12}\\B_{21}&B_{22}\end{pmatrix}\cdot P^{-1}. 
+    %     \end{equation}
+    %     由题设, $ABA=A$ 且 $BAB=B$. 
+    %     \begin{enumerate}
+    %         \item 依分块矩阵计算 $ABA=A$, 得 $B_{11}=O$; 
+    %         \item 依分块矩阵计算 $BAB=B$, 得 
+    %         \begin{equation}
+    %             \begin{pmatrix}
+    %                 B_{11}^2& B_{11}B_{12}\\B_{21}B_{11}&B_{21}B_{12}
+    %             \end{pmatrix}=\begin{pmatrix}
+    %                 B_{11}& B_{12}\\B_{21}&B_{22}
+    %             \end{pmatrix}. 
+    %         \end{equation}
+    %         此时为 $B$ 追加一次相抵标准化, 得 
+    %         \begin{equation}
+    %             \begin{pmatrix}
+    %                 I& O\\ -B_{21}& I
+    %             \end{pmatrix}\cdot Q\cdot B\cdot P\cdot \begin{pmatrix}
+    %                 I& -B_{12}\\ O& I
+    %             \end{pmatrix}. 
+    %         \end{equation}
+    %         对 $A$ 使用新的相抵化, $\widetilde I$ 不改变. 检验略. 
+    %     \end{enumerate}
+    % \end{proof}
 \end{exercise}
 
 \begin{proposition}
@@ -407,17 +407,17 @@ anchorcolor = blue]{hyperref}
 
 \begin{exercise}
     给定 $A\in \mathbb F^{m\times n}$, $B\in \mathbb F^{p\times q}$, 以及 $C\in \mathbb F^{m\times q}$. 若 $AY=C$ 与 $ZB=C$ 有解, 则 $AXB=C$ 有解. 
-    \begin{proof}
-        考虑 $C$ 的相抵标准型为 $P\widetilde IQ$. 此时
-        \begin{equation}
-            AY=P\begin{pmatrix}I_r&O\\O&O\end{pmatrix}Q=ZB.
-        \end{equation}
-        因此有 
-        \begin{equation}
-            A\left(YQ^{-1}\begin{pmatrix}I_r&O\\O&O\end{pmatrix}P^{-1}Z\right)B=P\begin{pmatrix}I_r&O\\O&O\end{pmatrix}^3Q=P\begin{pmatrix}I_r&O\\O&O\end{pmatrix}Q.
-        \end{equation}
-        本质上, 此处使用广义逆进行了类似 $MM^{(-1)}M=M$ 的操作. 
-    \end{proof}
+    % \begin{proof}
+    %     考虑 $C$ 的相抵标准型为 $P\widetilde IQ$. 此时
+    %     \begin{equation}
+    %         AY=P\begin{pmatrix}I_r&O\\O&O\end{pmatrix}Q=ZB.
+    %     \end{equation}
+    %     因此有 
+    %     \begin{equation}
+    %         A\left(YQ^{-1}\begin{pmatrix}I_r&O\\O&O\end{pmatrix}P^{-1}Z\right)B=P\begin{pmatrix}I_r&O\\O&O\end{pmatrix}^3Q=P\begin{pmatrix}I_r&O\\O&O\end{pmatrix}Q.
+    %     \end{equation}
+    %     本质上, 此处使用广义逆进行了类似 $MM^{(-1)}M=M$ 的操作. 
+    % \end{proof}
 \end{exercise}
 
 \newpage
@@ -459,9 +459,9 @@ anchorcolor = blue]{hyperref}
     以下是广义逆加上 Schur 打洞的一则应用: 给定分块矩阵 (不必是方阵) $M=\begin{pmatrix}
         A&B\\C&D
     \end{pmatrix}$, 其中 $r(M)=r(A)$; 若已知 $(A,B,C)$, 则 $D$ 可以唯一确定. 
-    \begin{proof}
-        求解 Schur 补的每一步都可以进行, 最后 $r(M)=r(A)+r(D-CA^{\dagger}B^{-1})$. 此处 $A^\dagger$ 是 $A$ 的任意广义逆. 依照题设, $r(D-CA^{\dagger}B^{-1})=0$ 是恒成立的, $D=CA^{\dagger}B^{-1}$ 也与 $A^\dagger$ 的取值无关, 自然是唯一确定的. 
-    \end{proof}
+    % \begin{proof}
+    %     求解 Schur 补的每一步都可以进行, 最后 $r(M)=r(A)+r(D-CA^{\dagger}B^{-1})$. 此处 $A^\dagger$ 是 $A$ 的任意广义逆. 依照题设, $r(D-CA^{\dagger}B^{-1})=0$ 是恒成立的, $D=CA^{\dagger}B^{-1}$ 也与 $A^\dagger$ 的取值无关, 自然是唯一确定的. 
+    % \end{proof}
 \end{proposition}
 
 \begin{example}
@@ -501,9 +501,9 @@ anchorcolor = blue]{hyperref}
 \end{tikzcd}.
     \end{equation}
     假定 $\square $ 与 $\#$ 是给定的, 数字处是未知的, 且所有 $\#$ 的秩与大矩阵相同, 则大矩阵唯一确定. 
-    \begin{proof}
-        使用上述引理依次补全 $1\to 2\to 3\to 4 \to 5$ 即可. 
-    \end{proof}
+    % \begin{proof}
+    %     使用上述引理依次补全 $1\to 2\to 3\to 4 \to 5$ 即可. 
+    % \end{proof}
 \end{example}
 
 \begin{proposition}
@@ -542,24 +542,24 @@ anchorcolor = blue]{hyperref}
     \begin{itemize}
         \item 此时能否求出 $A+BC$ 的逆? 可以类比\href{https://oc.sjtu.edu.cn/courses/72790/files/9615737?module_item_id=1272886}{第三次习题课第二题}. 
     \end{itemize}
-    \begin{proof}
-        草稿: Taylor 展开, 错位相减. 正式证明: 先猜后证. 既然是草稿, 改用小写字母表示``矩阵'': 
-        \begin{align}
-            (a+bc)^{-1}&=a^{-1}(1+bca^{-1})^{-1}\\[6pt]
-            &=a^{-1}(1-bca^{-1}+bca^{-1}bca^{-1}-\cdots)\\[6pt]
-            &=a^{-1}-a^{-1}(bca^{-1}-bca^{-1}bca^{-1}+\cdots)\\[6pt]
-            &=a^{-1}-a^{-1}b(1-ca^{-1}b+ca^{-1}bca^{-1}b-\cdots)ca^{-1}\\[6pt]
-            &=a^{-1}-a^{-1}b(1+ca^{-1}b)^{-1}ca^{-1}.
-        \end{align}
-    此时仅需验证 $(A+BC)^{-1}=A^{-1}-A^{-1}B(I+CA^{-1}B)^{-1}CA^{-1}$. 左逆验证如下: 
-    \begin{align}
-        &\quad \,\,(A+BC)(A^{-1}-A^{-1}B(I+CA^{-1}B)^{-1}CA^{-1})\\[6pt]
-        &=I+BCA^{-1}-B(I+CA^{-1}B)^{-1}CA^{-1}+BCA^{-1}B(I+CA^{-1}B)^{-1}CA^{-1}\\[6pt]
-        &=I+BCA^{-1}-B(I-CA^{-1}B)(I+CA^{-1}B)^{-1}CA^{-1}\\[6pt]
-        &=I+BCA^{-1}-BCA^{-1}\qquad =I.
-    \end{align}
-    后略. 
-    \end{proof}
+    % \begin{proof}
+    %     草稿: Taylor 展开, 错位相减. 正式证明: 先猜后证. 既然是草稿, 改用小写字母表示``矩阵'': 
+    %     \begin{align}
+    %         (a+bc)^{-1}&=a^{-1}(1+bca^{-1})^{-1}\\[6pt]
+    %         &=a^{-1}(1-bca^{-1}+bca^{-1}bca^{-1}-\cdots)\\[6pt]
+    %         &=a^{-1}-a^{-1}(bca^{-1}-bca^{-1}bca^{-1}+\cdots)\\[6pt]
+    %         &=a^{-1}-a^{-1}b(1-ca^{-1}b+ca^{-1}bca^{-1}b-\cdots)ca^{-1}\\[6pt]
+    %         &=a^{-1}-a^{-1}b(1+ca^{-1}b)^{-1}ca^{-1}.
+    %     \end{align}
+    % 此时仅需验证 $(A+BC)^{-1}=A^{-1}-A^{-1}B(I+CA^{-1}B)^{-1}CA^{-1}$. 左逆验证如下: 
+    % \begin{align}
+    %     &\quad \,\,(A+BC)(A^{-1}-A^{-1}B(I+CA^{-1}B)^{-1}CA^{-1})\\[6pt]
+    %     &=I+BCA^{-1}-B(I+CA^{-1}B)^{-1}CA^{-1}+BCA^{-1}B(I+CA^{-1}B)^{-1}CA^{-1}\\[6pt]
+    %     &=I+BCA^{-1}-B(I-CA^{-1}B)(I+CA^{-1}B)^{-1}CA^{-1}\\[6pt]
+    %     &=I+BCA^{-1}-BCA^{-1}\qquad =I.
+    % \end{align}
+    % 后略. 
+    % \end{proof}
 \end{exercise}
 
 \begin{remark}
@@ -592,40 +592,40 @@ anchorcolor = blue]{hyperref}
     证明 $r\left(\begin{pmatrix}
         A&B\\B&A
     \end{pmatrix}\right)=r(A+B)+r(A-B)$. 此处 $A,B\in \mathbb F^{m\times n}$.  
-    \begin{proof}
-        (假定域的特征不为 $2$, 也就是存在 $x\in \mathbb F$ 使得 $x+x=1$.) 考虑初等变换
-        \begin{align*}
-            &\begin{pmatrix}
-                A&B\\B&A
-            \end{pmatrix}\rightsquigarrow\begin{pmatrix}
-                A+B&B+A\\B&A
-            \end{pmatrix}\overset{2\neq 0}\rightsquigarrow\begin{pmatrix}
-                A+B&A+B\\2B&2A
-            \end{pmatrix}\rightsquigarrow\\[6pt]
-            &\begin{pmatrix}
-                A+B&A+B\\-(A-B)&A-B
-            \end{pmatrix}\rightsquigarrow\begin{pmatrix}
-                2(A+B)&A+B\\O&A-B
-            \end{pmatrix}\overset{2\neq 0}\rightsquigarrow\begin{pmatrix}
-                2(A+B)&O\\O&A-B
-            \end{pmatrix}. 
-        \end{align*}     
-        若域的特征为 $2$, 则 $\begin{pmatrix}
-            A&B\\B&A
-        \end{pmatrix}\rightsquigarrow\begin{pmatrix}
-            A+B&O\\B&A-B
-        \end{pmatrix}$. 因此, 左式大于 $r(A+B)+r(A-B)$. 取 $A=B=1$ 为 $1$-阶方阵, 则左式为 $1$, 右式为 $0$. 
-    \end{proof}
+    % \begin{proof}
+    %     (假定域的特征不为 $2$, 也就是存在 $x\in \mathbb F$ 使得 $x+x=1$.) 考虑初等变换
+    %     \begin{align*}
+    %         &\begin{pmatrix}
+    %             A&B\\B&A
+    %         \end{pmatrix}\rightsquigarrow\begin{pmatrix}
+    %             A+B&B+A\\B&A
+    %         \end{pmatrix}\overset{2\neq 0}\rightsquigarrow\begin{pmatrix}
+    %             A+B&A+B\\2B&2A
+    %         \end{pmatrix}\rightsquigarrow\\[6pt]
+    %         &\begin{pmatrix}
+    %             A+B&A+B\\-(A-B)&A-B
+    %         \end{pmatrix}\rightsquigarrow\begin{pmatrix}
+    %             2(A+B)&A+B\\O&A-B
+    %         \end{pmatrix}\overset{2\neq 0}\rightsquigarrow\begin{pmatrix}
+    %             2(A+B)&O\\O&A-B
+    %         \end{pmatrix}. 
+    %     \end{align*}     
+    %     若域的特征为 $2$, 则 $\begin{pmatrix}
+    %         A&B\\B&A
+    %     \end{pmatrix}\rightsquigarrow\begin{pmatrix}
+    %         A+B&O\\B&A-B
+    %     \end{pmatrix}$. 因此, 左式大于 $r(A+B)+r(A-B)$. 取 $A=B=1$ 为 $1$-阶方阵, 则左式为 $1$, 右式为 $0$. 
+    % \end{proof}
 \end{exercise}
 
 \begin{exercise}
     证明 $r(AD-BC)\leq r(A-B)+r(C-D)$. 其中 $A,B\in \mathbb F^{m\times n}$, 以及 $C,D\in \mathbb F^{n\times l}$. 
-    \begin{proof}
-        直接使用秩不等式: 
-        \begin{equation}
-            r(AD-BC)=r((A-B)D-B(C-D))\leq r((A-B)D)+r(B(C-D))\leq r(A-B)+r(C-D).
-        \end{equation}  
-    \end{proof}
+    % \begin{proof}
+    %     直接使用秩不等式: 
+    %     \begin{equation}
+    %         r(AD-BC)=r((A-B)D-B(C-D))\leq r((A-B)D)+r(B(C-D))\leq r(A-B)+r(C-D).
+    %     \end{equation}  
+    % \end{proof}
 \end{exercise}
 
 \begin{example}
@@ -648,26 +648,26 @@ anchorcolor = blue]{hyperref}
     \begin{itemize}
         \item 提示: 考虑 $A-B=A(A-B)-(B-A)B$, 并对 $A(A-B)B=O$ 使用 Silverster-秩不等式. 
     \end{itemize}
-    \begin{proof}
-        一方面, $r(A-AB)+r(AB-B)\geq r(A-B)$. 另一方面, 考虑 $A(A-B)B=O$, 则有
-        \begin{equation}
-            0+r(A-B)\geq r(A(A-B))+r((A-B)B)=r(A-AB))+r(AB-B)
-        \end{equation}
-        结合 $A^2=A$ 与 $B^2=B$, 
-    \end{proof}
+    % \begin{proof}
+    %     一方面, $r(A-AB)+r(AB-B)\geq r(A-B)$. 另一方面, 考虑 $A(A-B)B=O$, 则有
+    %     \begin{equation}
+    %         0+r(A-B)\geq r(A(A-B))+r((A-B)B)=r(A-AB))+r(AB-B)
+    %     \end{equation}
+    %     结合 $A^2=A$ 与 $B^2=B$, 
+    % \end{proof}
 \end{exercise}
 
-\begin{example}[特征为 $2$ 的``魔咒'']
-    称域的特征为 $2$, 当且仅当 $1+1=0$. 例如二元域. 
-    \begin{itemize}
-        \item 在\href{https://oc.sjtu.edu.cn/courses/72790/assignments/305307?module_item_id=1271981}{相抵标准型的习题}中, 对合矩阵 ($A^2=I$) 的相似标准型一般是 $\binom{I\quad }{\quad -I}$; 在特征为 $2$ 的域上, 总有 $(A-I)^2=O$, 因此相似标准型需要做出``适当的调整''. 
-    \end{itemize}
-    秩理论的普适性是一把双刃剑: 一方面, 由秩决定的定理无关域的选取; 另一方面, 请思考以下命题. 
-\begin{enumerate}
-    \item 假定 $A^2=I_n$, 则 $r(A-I)+r(A+I)\leq n$. 
-    \item 假定 $A^3=I_n$, 则 $r(A-I)+r(A)+r(A+I)\leq 2n$. 
-\end{enumerate}
-以上不等式取等, 当且仅当域的特征不为 $2$ (特别地, 数域). 
-\end{example}
+% \begin{example}[特征为 $2$ 的``魔咒'']
+%     称域的特征为 $2$, 当且仅当 $1+1=0$. 例如二元域. 
+%     \begin{itemize}
+%         \item 在\href{https://oc.sjtu.edu.cn/courses/72790/assignments/305307?module_item_id=1271981}{相抵标准型的习题}中, 对合矩阵 ($A^2=I$) 的相似标准型一般是 $\binom{I\quad }{\quad -I}$; 在特征为 $2$ 的域上, 总有 $(A-I)^2=O$, 因此相似标准型需要做出``适当的调整''. 
+%     \end{itemize}
+%     秩理论的普适性是一把双刃剑: 一方面, 由秩决定的定理无关域的选取; 另一方面, 请思考以下命题. 
+% \begin{enumerate}
+%     \item 假定 $A^2=I_n$, 则 $r(A-I)+r(A+I)\leq n$. 
+%     \item 假定 $A^3=I_n$, 则 $r(A-I)+r(A)+r(A+I)\leq 2n$. 
+% \end{enumerate}
+% 以上不等式取等, 当且仅当域的特征不为 $2$ (特别地, 数域). 
+% \end{example}
 
 \end{document}

@@ -1,9 +1,9 @@
 # Fdb version 4
-["pdflatex"] 1744123845.34034 "d:/GitHub/Linear algebra/2024 秋-高等代数/第五次/逆矩阵/逆矩阵.tex" "逆矩阵.pdf" "逆矩阵" 1744123849.73286 0
-  "c:/Windows/Fonts/msyh.ttc" 1740720162 19704352 1e10e74402e59d54499af795caf0b135 ""
-  "c:/Windows/Fonts/simhei.ttf" 1651842600 9753388 6abc0fcfbaa40600f9cecca3afeb3aa7 ""
-  "c:/Windows/Fonts/simkai.ttf" 1651842600 11787328 76179557c160634a761c845ea111c893 ""
-  "c:/Windows/Fonts/simsun.ttc" 1740720163 18070492 992f2bdc407dde6953c5ed83ceac9a91 ""
+["pdflatex"] 1760421129.98679 "d:/GitHub/Linear algebra/2024 秋-高等代数/第五次/逆矩阵/逆矩阵.tex" "逆矩阵.pdf" "逆矩阵" 1760421136.12444 0
+  "c:/Windows/Fonts/msyh.ttc" 1756300068 19704352 1e10e74402e59d54499af795caf0b135 ""
+  "c:/Windows/Fonts/simhei.ttf" 1711630440 9755440 983b60188a8e5a7c29c06c674f428b3d ""
+  "c:/Windows/Fonts/simkai.ttf" 1711630440 11789376 868a8b82664dfab00a95e3e30eaa705a ""
+  "c:/Windows/Fonts/simsun.ttc" 1756300068 18070492 992f2bdc407dde6953c5ed83ceac9a91 ""
   "c:/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1740726853 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2024/texmf-dist/fonts/sfd/ttf2pk/UGBK.sfd" 1740728699 182544 bcd31d5d273400b38612a969fcab55f9 ""
   "c:/texlive/2024/texmf-dist/fonts/sfd/ttf2pk/Unicode.sfd" 1740728699 103212 c249c63d38b8b55408aee52d643b0c18 ""
@@ -351,8 +351,8 @@
   "c:/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1740729281 8221522 b5ac96e195beacb90b4cf4ee8159bd82 ""
   "c:/texlive/2024/texmf.cnf" 1740729061 713 e69b156964470283e0530f5060668171 ""
   "d:/GitHub/Linear algebra/2024 秋-高等代数/第五次/逆矩阵/逆矩阵.tex" 1744123832 13808 34108d68808c9adfc12ab5097bc34afa ""
-  "逆矩阵.aux" 1744123848 415 e0fc58ac2a730504daf33ddcb3d533dd "pdflatex"
-  "逆矩阵.out" 1744123848 150 ed9afabe6a822dce917087158babcc0c "pdflatex"
+  "逆矩阵.aux" 1760421134 415 e0fc58ac2a730504daf33ddcb3d533dd "pdflatex"
+  "逆矩阵.out" 1760421134 150 ed9afabe6a822dce917087158babcc0c "pdflatex"
   "逆矩阵.tex" 1744123832 13808 34108d68808c9adfc12ab5097bc34afa ""
   (generated)
   "逆矩阵.aux"
